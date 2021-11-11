@@ -113,13 +113,19 @@
               <div class="text-center text-muted mb-4">
                 <small>Or sign in with credentials</small>
               </div>
-              <form role="form">
+              <form role="form"  method="POST" action="{{ route('login') }}">
+                @csrf
                 <div class="form-group mb-3">
                   <div class="input-group input-group-merge input-group-alternative">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Email" type="email">
+                    <input class="form-control @error('email') is-invalid @enderror" placeholder="Email" type="email" name="email" value="{{ old('email')}}" required  autocomplete="email" autofocus>
+                    @error('email')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
                   </div>
                 </div>
                 <div class="form-group">
@@ -127,24 +133,34 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Password" type="password">
-                  </div>
+                    <input placeholder="Password" type="password"  class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                    @error('password')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror  
+                </div>
                 </div>
                 <div class="custom-control custom-control-alternative custom-checkbox">
-                  <input class="custom-control-input" id=" customCheckLogin" type="checkbox">
+                  <input class="custom-control-input" type="checkbox" name="remember" id="rem" {{ old('remember') ? 'checked' : '' }}>
                   <label class="custom-control-label" for=" customCheckLogin">
                     <span class="text-muted">Remember me</span>
                   </label>
                 </div>
                 <div class="text-center">
-                  <button type="button" class="btn btn-primary my-4">Sign in</button>
+                  <button type="submit" class="btn btn-primary my-4"> {{ __('Login') }}</button>
                 </div>
               </form>
             </div>
           </div>
           <div class="row mt-3">
             <div class="col-6">
-              <a href="#" class="text-light"><small>Forgot password?</small></a>
+
+                @if (Route::has('password.request'))
+                <a class="btn btn-link" href="{{ route('password.request') }}">
+                    {{ __('Forgot Your Password?') }}
+                </a>
+            @endif
             </div>
             <div class="col-6 text-right">
               <a href="#" class="text-light"><small>Create new account</small></a>
@@ -154,4 +170,33 @@
       </div>
     </div>
   </div>
+
+    <!-- Footer -->
+    <footer class="py-5" id="footer-main">
+        <div class="container">
+          <div class="row align-items-center justify-content-xl-between">
+            <div class="col-xl-6">
+              <div class="copyright text-center text-xl-left text-muted">
+                &copy; 2021 <a href="https://www.creative-tim.com" class="font-weight-bold ml-1" target="_blank">jovialcore team</a>
+              </div>
+            </div>
+            <div class="col-xl-6">
+              <ul class="nav nav-footer justify-content-center justify-content-xl-end">
+                <li class="nav-item">
+                  <a href="https://www.creative-tim.com" class="nav-link" target="_blank">Creative Tim</a>
+                </li>
+                <li class="nav-item">
+                  <a href="https://www.creative-tim.com/presentation" class="nav-link" target="_blank">About Us</a>
+                </li>
+                <li class="nav-item">
+                  <a href="http://blog.creative-tim.com" class="nav-link" target="_blank">Blog</a>
+                </li>
+                <li class="nav-item">
+                  <a href="https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md" class="nav-link" target="_blank">MIT License</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </footer>
 @endsection
