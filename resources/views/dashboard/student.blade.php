@@ -1,8 +1,6 @@
-      <!-- Header -->
-      <!-- Header -->
 
       <!-- Page content -->
-      
+     
         <div class="row">
           <div class="col-xl-4 order-xl-2">
             <div class="card card-profile">
@@ -150,5 +148,3 @@
             </div>
           </div>
         </div>
-
-     
