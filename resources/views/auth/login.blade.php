@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
+{{-- <div class="container"> --}}
+    {{-- <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Login') }}</div>
@@ -68,8 +68,8 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    </div> --}}
+{{-- </div> --}}
 
   <!-- Main content -->
   <div class="main-content">
@@ -79,8 +79,8 @@
         <div class="header-body text-center mb-7">
           <div class="row justify-content-center">
             <div class="col-xl-5 col-lg-6 col-md-8 px-5">
-              <h1 class="text-white">Welcome!</h1>
-              <p class="text-lead text-white">Use these awesome forms to login or create new account in your project for free.</p>
+              <h1 class="text-white">Welcome to explore school!</h1>
+              <p class="text-lead text-white">Use the form to enter your details</p>
             </div>
           </div>
         </div>
