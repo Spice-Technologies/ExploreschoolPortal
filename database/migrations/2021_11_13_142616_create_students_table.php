@@ -15,6 +15,14 @@ class CreateStudentsTable extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('parent_id');
+            $table->unsignedBigInteger('class_id');
+            $table->enum('gender', ['male', 'female']);
+            $table->string('phone');
+            $table->date('dateofbirth');
+            $table->string('current_address');
+            $table->string('permanent_address');
             $table->timestamps();
         });
     }
