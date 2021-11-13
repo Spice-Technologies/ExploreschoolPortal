@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,7 +28,10 @@ class HomeController extends Controller
 
         $user = Auth::user();
         if ($user->hasRole('Student')) {
-            return view('home');
+
+            $student = Student::all();
+
+            return view('home', compact('student'));
         } else {
             return "user is not permitted to access this page";
         }

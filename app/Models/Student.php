@@ -20,5 +20,10 @@ class Student extends Model
         'permanent_address',
     ];
 
-    
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+
 }
