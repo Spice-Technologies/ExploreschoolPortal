@@ -29,7 +29,7 @@ class HomeController extends Controller
         $user = Auth::user();
         if ($user->hasRole('Student')) {
 
-            $student = Student::all();
+            $student = Student::with('user')->findOrFail($user->student->id);
 
             return view('home', compact('student'));
         } else {

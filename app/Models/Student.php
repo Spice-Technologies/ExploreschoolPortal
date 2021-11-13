@@ -20,6 +20,9 @@ class Student extends Model
         'permanent_address',
     ];
 
+    protected $dates = [
+        'dateofbirth' 
+    ];
     public function user()
     {
         return $this->belongsTo(User::class);
