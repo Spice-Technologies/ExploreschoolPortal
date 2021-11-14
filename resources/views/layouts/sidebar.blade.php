@@ -1,29 +1,33 @@
-
-    <nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
-        <div class="scrollbar-inner">
-            <!-- Brand -->
-            <div class="sidenav-header  align-items-center">
-                <a class="navbar-brand" href="javascript:void(0)">
-                    <img src="../assets/img/brand/blue.png" class="navbar-brand-img" alt="...">
-                </a>
-            </div>
-            <div class="navbar-inner">
-                <!-- Collapse -->
-                <div class="collapse navbar-collapse" id="sidenav-collapse-main">
-                    <!-- Nav items -->
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="dashboard.html">
-                                <i class="ni ni-tv-2 text-primary"></i>
-                                <span class="nav-link-text">Dashboard</span>
-                            </a>
-                        </li>
+<nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
+    <div class="scrollbar-inner">
+        <!-- Brand -->
+        <div class="sidenav-header  align-items-center">
+            <a class="navbar-brand" href="javascript:void(0)">
+                <img src="../assets/img/brand/blue.png" class="navbar-brand-img" alt="...">
+            </a>
+        </div>
+        <div class="navbar-inner">
+            <!-- Collapse -->
+            <div class="collapse navbar-collapse" id="sidenav-collapse-main">
+                <!-- Nav items -->
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard.html">
+                            <i class="ni ni-tv-2 text-primary"></i>
+                            <span class="nav-link-text">Dashboard</span>
+                        </a>
+                    </li>
                     @role('Admin')
                         <li class="nav-item">
                             <a class="nav-link" href="icons.html">
                                 <i class="ni ni-planet text-orange"></i>
-                                <span class="nav-link-text">Icons</span>
+                                <span class="nav-link-text">Students</span>
                             </a>
+                            <ul style="display: block;" class="">
+                                <li><a href="/email/list">Add Students</a></li>
+                                <li><a href="/email/add-contact">Add contacts</a></li>
+                                <li><a href="/email/msgs/list">Sent Messages</a></li>
+                            </ul>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="map.html">
@@ -62,9 +66,9 @@
                             </a>
                         </li>
                     @endrole
-                    </ul>
+                </ul>
 
-                    @role('Admin')
+                @role('Admin')
                     <!-- Divider -->
                     <hr class="my-3">
                     <!-- Heading -->
@@ -113,7 +117,7 @@
                         </li>
                     </ul>
                 @endrole
-                </div>
             </div>
         </div>
-    </nav>
+    </div>
+</nav>
