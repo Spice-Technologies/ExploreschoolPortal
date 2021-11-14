@@ -24,7 +24,7 @@
                                 <span class="nav-link-text">Students</span>
                             </a>
                             <ul style="display: block;" class="">
-                                <li><a href="/email/list">Add Students</a></li>
+                                <li><a href="{{route('student.create')}}">Add Students</a></li>
                                 <li><a href="/email/add-contact">Add contacts</a></li>
                                 <li><a href="/email/msgs/list">Sent Messages</a></li>
                             </ul>

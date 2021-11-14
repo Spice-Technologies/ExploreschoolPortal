@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -13,7 +14,9 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $
+        $students = Student::latest()->get();
+        return view('backend.students.index', compact('student'));
+        
     }
 
     /**
@@ -23,7 +26,9 @@ class StudentController extends Controller
      */
     public function create()
     {
-        //
+      
+        return view('backend.students.create');
+        
     }
 
     /**

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,5 +23,5 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::group(['middleware' => ['auth', 'role:Admin']], function(){
-    Route::resource('student', 'StudentController');
+    Route::resource('student', 'App\Http\Controllers\StudentController'); 
 });
