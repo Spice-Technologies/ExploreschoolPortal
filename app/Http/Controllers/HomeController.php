@@ -27,8 +27,12 @@ class HomeController extends Controller
     {
 
         $user = Auth::user();
-        if ($user->hasRole('Student')) {
+        if ($user->hasRole('Admin')) {
 
+            $student = Student::latest()->get();
+            
+            return view('home', compact('student'));
+        } elseif ($user->hasRole('Student')) {
             $student = Student::with('user')->findOrFail($user->student->id);
 
             return view('home', compact('student'));
