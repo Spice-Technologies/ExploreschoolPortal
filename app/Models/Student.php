@@ -18,6 +18,7 @@ class Student extends Model
         'dateofbirth',
         'current_address',
         'permanent_address',
+        'reg_num'
     ];
 
     protected $dates = [

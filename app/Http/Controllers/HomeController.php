@@ -27,7 +27,7 @@ class HomeController extends Controller
     {
 
         $user = Auth::user();
-       // $user->assignRole('Admin');
+        //$user->assignRole('Admin');
         if ($user->hasRole('Admin')) {
             $student = Student::latest()->get();
 

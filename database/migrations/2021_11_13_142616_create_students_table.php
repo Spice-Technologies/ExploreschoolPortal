@@ -23,6 +23,7 @@ class CreateStudentsTable extends Migration
             $table->date('dateofbirth');
             $table->string('current_address');
             $table->string('permanent_address');
+            $table->string('reg_num');
             $table->timestamps();
         });
     }
