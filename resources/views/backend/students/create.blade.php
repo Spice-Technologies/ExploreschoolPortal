@@ -96,13 +96,13 @@
                                 <div class="form-group mt-lg-5">
                                     <div class="form-check-inline">
                                         <label class="form-check-label">
-                                            <input type="radio" name="gender" class="form-check-input" name="optradio">Male
+                                            <input type="radio" name="gender" class="form-check-input" value="Male"> Male
                                         </label>
                                     </div>
                                     <div class="form-check-inline">
                                         <label class="form-check-label">
                                             <input type="radio" name="gender" class="form-check-input"
-                                                name="optradio">Female
+                                                value="Female">Female
                                         </label>
                                     </div>
                                 </div>
@@ -114,7 +114,7 @@
                         <div class="form-group col-lg-6">
                             <label for="exampleFormControlSelect1">Asign Class</label>
                             <select name="class_id" value="1" class="form-control" id="exampleFormControlSelect1">
-                                <option>Primary one</option>
+                                <option>1</option>
                                 <option>Primary Two</option>
                                 <option>Primary Three</option>
                                 <option>Primary Four</option>
@@ -128,10 +128,20 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="input-address">Address</label>
+                                        <label class="form-control-label" for="input-address">Current Address</label>
                                         <input id="input-address" name="current_address" class="form-control"
                                             placeholder="Home Address"
                                             value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-address">Permanent Address</label>
+                                        <input id="input-address" name="permanent_address" class="form-control"
+                                            placeholder="Home Address"
+                                            value="amaudara umualumkau " type="text">
                                     </div>
                                 </div>
                             </div>
@@ -157,6 +167,9 @@
                             </div>
                         </div>
                         <hr class="my-4" />
+                        <div class="">
+                            <button class="btn btn-primary" type="submit">Submit </button>
+                        </div>
                 </form>
             </div>
         </div>

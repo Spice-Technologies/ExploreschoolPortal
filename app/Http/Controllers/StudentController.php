@@ -41,30 +41,29 @@ class StudentController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email'             => 'required|string|email|max:255|unique:users',
-            'password'          => 'required|string|min:8',
-            'parent_id'         => 'required|numeric',
             'class_id'          => 'required|numeric',
-            'reg_num'       => 'required|numeric|unique:students',
             'gender'            => 'required|string',
             'dateofbirth'       => 'required|date',
             'current_address'   => 'required|string',
             'permanent_address' => 'required|string',
 
         ]);
-
+       // $request->email = "admin@explore.com"; 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password)
+            'password' => Hash::make($request->password = '123456')
         ]);
-        // this is how the user_id vaue in the students model is being inserted  
+        // this is how the user_id value in the students model is being inserted  
         $user->student()->create([
             'class_id' => $request->class_id,
             'parent_id' => 1,
-            'reg_num' => $request->reg_num,
+            'reg_num' => 'EXP/21/0001',
             'gender' => $request->gender,
             'dateofbirth' => $request->date,
+            'lga' => $request->lga,
+            'state' => $request->state,
+            'country' => $request->country,
             'current_address' => $request->current_address,
             'permanent_address' => $request->permanent_address
         ]);

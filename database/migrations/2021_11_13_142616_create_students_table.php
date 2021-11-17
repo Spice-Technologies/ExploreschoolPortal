@@ -19,7 +19,6 @@ class CreateStudentsTable extends Migration
             $table->unsignedBigInteger('parent_id');
             $table->unsignedBigInteger('class_id');
             $table->enum('gender', ['male', 'female']);
-            $table->string('phone');
             $table->date('dateofbirth');
             $table->string('lga');
             $table->string('state');
