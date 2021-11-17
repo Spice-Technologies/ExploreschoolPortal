@@ -17,7 +17,7 @@ class StudentController extends Controller
     public function index()
     {
         $students = Student::latest()->get();
-        return view('backend.students.index', compact('student'));
+        return view('backend.students.index', compact('students'));
     }
 
     /**
@@ -48,6 +48,8 @@ class StudentController extends Controller
             'permanent_address' => 'required|string',
 
         ]);
+
+        //dd($request->all());
        // $request->email = "admin@explore.com"; 
         $user = User::create([
             'name' => $request->name,
@@ -60,7 +62,7 @@ class StudentController extends Controller
             'parent_id' => 1,
             'reg_num' => 'EXP/21/0001',
             'gender' => $request->gender,
-            'dateofbirth' => $request->date,
+            'dateofbirth' => $request->dateofbirth,
             'lga' => $request->lga,
             'state' => $request->state,
             'country' => $request->country,
@@ -69,7 +71,7 @@ class StudentController extends Controller
         ]);
         $user->assignRole('Student');
 
-        return redirect()->route('student');
+        return redirect()->route('student.index');
     }
 
     /**

@@ -88,8 +88,7 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-last-name">Date Of Birth</label>
-                                    <input type="date" id="dateofbirth" name="dateofbirth" class="form-control"
-                                        placeholder="Last name">
+                                    <input type="date" id="dateofbirth" name="dateofbirth" class="form-control">
                                 </div>
                             </div>
                             <div class="col-lg-6">
