@@ -14,10 +14,12 @@ class Student extends Model
         'parent_id',
         'class_id',
         'gender',
-        'phone',
         'dateofbirth',
         'current_address',
         'permanent_address',
+        'state',
+        'lga',
+        'country',
         'reg_num'
     ];
 

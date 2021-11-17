@@ -21,8 +21,11 @@ class CreateStudentsTable extends Migration
             $table->enum('gender', ['male', 'female']);
             $table->string('phone');
             $table->date('dateofbirth');
-            $table->string('current_address');
+            $table->string('lga');
+            $table->string('state');
+            $table->string('country');
             $table->string('permanent_address');
+            $table->string('current_address');
             $table->string('reg_num');
             $table->timestamps();
         });

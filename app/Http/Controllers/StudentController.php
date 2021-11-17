@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Student;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class StudentController extends Controller
 {
@@ -16,7 +18,6 @@ class StudentController extends Controller
     {
         $students = Student::latest()->get();
         return view('backend.students.index', compact('student'));
-        
     }
 
     /**
@@ -26,9 +27,8 @@ class StudentController extends Controller
      */
     public function create()
     {
-      
+
         return view('backend.students.create');
-        
     }
 
     /**
@@ -40,9 +40,37 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'firstname' => 'required'
+            'name' => 'required|string|max:255',
+            'email'             => 'required|string|email|max:255|unique:users',
+            'password'          => 'required|string|min:8',
+            'parent_id'         => 'required|numeric',
+            'class_id'          => 'required|numeric',
+            'reg_num'       => 'required|numeric|unique:students',
+            'gender'            => 'required|string',
+            'dateofbirth'       => 'required|date',
+            'current_address'   => 'required|string',
+            'permanent_address' => 'required|string',
+
         ]);
-        
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password)
+        ]);
+        // this is how the user_id vaue in the students model is being inserted  
+        $user->student()->create([
+            'class_id' => $request->class_id,
+            'parent_id' => 1,
+            'reg_num' => $request->reg_num,
+            'gender' => $request->gender,
+            'dateofbirth' => $request->date,
+            'current_address' => $request->current_address,
+            'permanent_address' => $request->permanent_address
+        ]);
+        $user->assignRole('Student');
+
+        return redirect()->route('student');
     }
 
     /**
