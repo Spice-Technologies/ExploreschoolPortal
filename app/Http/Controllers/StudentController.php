@@ -17,6 +17,7 @@ class StudentController extends Controller
     public function index()
     {
         $students = Student::latest()->get();
+
         return view('backend.students.index', compact('students'));
     }
 
@@ -50,11 +51,24 @@ class StudentController extends Controller
         ]);
 
         //dd($request->all());
-       // $request->email = "admin@explore.com"; 
+        // $request->email = "admin@explore.com"; 
+
+        function secure_random_string($length)
+        {
+            $random_string = '';
+            for ($i = 0; $i < $length; $i++) {
+                $number = random_int(0, 36);
+                $character = base_convert($number, 10, 36);
+                $random_string .= $character;
+            }
+
+            return $random_string;
+        }
+
+        echo secure_random_string(12);
         $user = User::create([
             'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password = '123456')
+            'password' => Hash::make($request->password = secure_random_string(10))
         ]);
         // this is how the user_id value in the students model is being inserted  
         $user->student()->create([
