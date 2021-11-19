@@ -17,7 +17,6 @@ class StudentController extends Controller
     public function index()
     {
         $students = Student::latest()->get();
-
         return view('backend.students.index', compact('students'));
     }
 
@@ -72,10 +71,20 @@ class StudentController extends Controller
             'password' => Hash::make($request->password = secure_random_string(10))
         ]);
         // this is how the user_id value in the students model is being inserted  
+
+        function reg_number($id)
+        {
+            $regNum = '';
+            $uniqueId = str_pad($id, 4, '0', STR_PAD_LEFT);
+            $date = date('y');
+            $regNum = "EXP" . '\\' . $date . '\\' . $uniqueId;
+
+            return $regNum;
+        };
+
         $user->student()->create([
             'class_id' => $request->class_id,
             'parent_id' => 1,
-            'reg_num' => 'EXP/21/0001',
             'gender' => $request->gender,
             'dateofbirth' => $request->dateofbirth,
             'lga' => $request->lga,
@@ -85,10 +94,12 @@ class StudentController extends Controller
             'permanent_address' => $request->permanent_address
         ]);
         $user->assignRole('Student');
+        dd($user->student()->id);
+        $user->student()->reg_num = reg_number($user->student()->id);
 
         return redirect()->route('student.index');
     }
-//so cards can be used to login but validates depending on the number of times used...if the students buys new card, the card login will be changed
+    //so cards can be used to login but validates depending on the number of times used...if the students buys new card, the card login will be changed
     /**
      * Display the specified resource.
      *
