@@ -25,7 +25,7 @@ class CreateStudentsTable extends Migration
             $table->string('country');
             $table->string('permanent_address');
             $table->string('current_address');
-            $table->string('reg_num');
+            $table->string('reg_num')->nullable();
             $table->timestamps();
         });
     }
