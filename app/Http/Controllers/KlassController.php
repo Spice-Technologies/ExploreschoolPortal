@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Klass;
 use Illuminate\Http\Request;
 
 class KlassController extends Controller
@@ -40,6 +41,15 @@ class KlassController extends Controller
             'class_desc'    => 'required|string|max:255'
 
         ]);
+
+        $klass = new Klass();
+        $klass->class_name = $request->class;
+        $klass->class_description = $request->class_desc;
+        $klass->save();
+
+        $klass->subClasses = $request->subclass;
+        $klass->subClasses->save();
+        
     }
 
     /**
