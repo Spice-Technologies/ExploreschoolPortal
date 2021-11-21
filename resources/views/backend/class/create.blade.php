@@ -56,26 +56,27 @@
                 </div>
             </div>
             <div class="card-body">
-                <form action="{{ route('student.store') }}" method="POST">
+                <form action="{{ route('class.store') }}" method="POST">
                     @csrf
                     <h6 class="heading-small text-muted mb-4">User information</h6>
-                  
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="input-username">Class</label>
-                                    <input type="text"  name="class" class="form-control"
-                                        placeholder="e.g JSS...">
 
-                                </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-control-label">Class</label>
+                                <input type="text" name="class" class="form-control" placeholder="e.g JSS...">
+
                             </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="input-email">Sub-Class</label>
-                                    <input type="text"  name="subclass" class="form-control"
-                                        placeholder="e.g, 1A...">
-                                </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-control-label">Sub-Class</label>
+                                <input type="text" name="subclass" class="form-control" placeholder="e.g, 1A...">
                             </div>
+                        </div>
+                        <div class="form-group col-lg-5">
+                            <label for="exampleFormControlTextarea1">Class Description</label>
+                            <textarea class="form-control" name="class_desc" id="exampleFormControlTextarea1" rows="2"></textarea>
                             {{-- <div class="form-group col-lg-4">
                                 <label for="exampleFormControlSelect1">Asign Teacher</label>
                                 <select name="class_id" value="1" class="form-control" id="exampleFormControlSelect1">
@@ -87,10 +88,11 @@
                                 </select>
                             </div> --}}
                         </div>
-                        <hr class="my-4" />
-                        <div class="">
-                            <button class="btn btn-primary" type="submit">Submit </button>
-                        </div>
+                    </div>
+                    <hr class="my-4" />
+                    <div class="">
+                        <button class="btn btn-primary" type="submit">Submit </button>
+                    </div>
                 </form>
             </div>
         </div>

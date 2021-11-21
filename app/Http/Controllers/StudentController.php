@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Klass;
 use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -27,8 +28,8 @@ class StudentController extends Controller
      */
     public function create()
     {
-
-        return view('backend.students.create');
+        $class =  Klass::get('class_name');
+        return view('backend.students.create', compact('class'));
     }
 
     /**

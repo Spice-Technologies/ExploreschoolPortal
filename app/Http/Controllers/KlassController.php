@@ -34,7 +34,12 @@ class KlassController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'class' => 'required|string|max:255',
+            'subclass'          => 'required|string|max:1',
+            'class_desc'    => 'required|string|max:255'
+
+        ]);
     }
 
     /**
