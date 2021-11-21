@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Klass;
 use App\Models\Student;
+use App\Models\SubKlass;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -29,7 +30,8 @@ class StudentController extends Controller
     public function create()
     {
         $classes=  Klass::get();
-        return view('backend.students.create', compact('classes'));
+        $subclasses=  SubKlass::get();
+        return view('backend.students.create', compact('classes','subclasses'));
     }
 
     /**

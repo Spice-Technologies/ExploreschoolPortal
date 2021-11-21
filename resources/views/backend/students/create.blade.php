@@ -64,23 +64,23 @@
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-username">Firstname</label>
-                                    <input type="text" id="lname" value="{{ old('name') }}" name="name" class="form-control"
-                                        placeholder="firstname">
+                                    <input type="text" id="lname" value="{{ old('name') }}" name="name"
+                                        class="form-control" placeholder="firstname">
 
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-email">Last Name</label>
-                                    <input type="text" id="input-email" value="{{ old('lname') }}" name="lname" class="form-control"
-                                        placeholder="last name">
+                                    <input type="text" id="input-email" value="{{ old('lname') }}" name="lname"
+                                        class="form-control" placeholder="last name">
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-email">Other Name</label>
-                                    <input type="text" id="input-email" value="{{ old('lname') }}" name="lname" class="form-control"
-                                        placeholder="last name">
+                                    <input type="text" id="input-email" value="{{ old('lname') }}" name="lname"
+                                        class="form-control" placeholder="last name">
                                 </div>
                             </div>
                         </div>
@@ -88,7 +88,8 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-last-name">Date Of Birth</label>
-                                    <input type="date" id="dateofbirth" value="{{ old('dateofbirth') }}" name="dateofbirth" class="form-control">
+                                    <input type="date" id="dateofbirth" value="{{ old('dateofbirth') }}"
+                                        name="dateofbirth" class="form-control">
                                 </div>
                             </div>
                             <div class="col-lg-6">
@@ -100,7 +101,7 @@
                                     </div>
                                     <div class="form-check-inline">
                                         <label class="form-check-label">
-                                            <input type="radio"  name="gender" class="form-check-input" value="Female">Female
+                                            <input type="radio" name="gender" class="form-check-input" value="Female">Female
                                         </label>
                                     </div>
                                 </div>
@@ -109,13 +110,23 @@
                         <hr class="my-4" />
                         <!--Class details -->
                         <h6 class="heading-small text-muted mb-4">Class details</h6>
-                        <div class="form-group col-lg-6">
-                            <label for="exampleFormControlSelect1">Asign Class</label>
-                            <select name="class_id" value="1" class="form-control" id="exampleFormControlSelect1">
-                                @foreach ($classes as $class)
-                                    <option value="{{ $class->id }}" >{{ $class->class_name}}</option>
-                                @endforeach
-                            </select>
+                        <div class="row">
+                            <div class="form-group col-lg-6">
+                                <label for="exampleFormControlSelect1">Asign Class</label>
+                                <select name="class_id" value="1" class="form-control" id="exampleFormControlSelect1">
+                                    @foreach ($classes as $class)
+                                        <option value="{{ $class->id }}">{{ $class->class_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <label for="exampleFormControlSelect1">Asign  Sub Class</label>
+                                <select name="class_id" value="1" class="form-control" id="exampleFormControlSelect1">
+                                    @foreach ($subclasses as $subclass)
+                                        <option value="{{ $subclass->id }}">{{ $subKlass_name->class_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
                         <hr class="my-4" />
                         <!-- Address -->
@@ -144,19 +155,22 @@
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label class="form-control-label" for="input-city">State of Origin </label>
-                                        <input type="text" name="state" value="{{ old('state') }}"  class="form-control" placeholder="Country">
+                                        <input type="text" name="state" value="{{ old('state') }}" class="form-control"
+                                            placeholder="Country">
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label class="form-control-label" for="input-country">LGA</label>
-                                        <input type="text" name="lga" value="{{ old('lga') }}"  class="form-control" placeholder="LGA">
+                                        <input type="text" name="lga" value="{{ old('lga') }}" class="form-control"
+                                            placeholder="LGA">
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label class="form-control-label" for="input-country">Country</label>
-                                        <input type="text" name="country" value="{{ old('country') }}"  class="form-control" placeholder="Postal code">
+                                        <input type="text" name="country" value="{{ old('country') }}"
+                                            class="form-control" placeholder="Postal code">
                                     </div>
                                 </div>
                             </div>
