@@ -13,7 +13,7 @@ class KlassController extends Controller
      */
     public function index()
     {
-        
+        return view('backend.class.index');
     }
 
     /**
@@ -23,7 +23,7 @@ class KlassController extends Controller
      */
     public function create()
     {
-        return view('backend.students.create');
+        return view('backend.class.create');
     }
 
     /**

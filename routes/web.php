@@ -24,4 +24,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::group(['middleware' => ['auth', 'role:Admin']], function(){
     Route::resource('student', 'App\Http\Controllers\StudentController'); 
+    Route::resource('class','App\Http\Controllers\KlassController');
 });

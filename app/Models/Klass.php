@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Klass extends Model
 {
+    // questions to ask chisom: can you assign class teacher to each class ?
     //when do you make a table, you need a table in situations when youhave to keep adding more default attributes...or somethngn lik ethat
     //one class has many students;  one class has many subclasses; one subclass has many students ;
     use HasFactory;
@@ -31,7 +32,7 @@ class Klass extends Model
         return $this->hasMany(Student::class, 'class_id');
     }
 
-    public function subClass()
+    public function subClasses()
     {
         return $this->hasMany(SubKlass::class, 'class_id');
     }

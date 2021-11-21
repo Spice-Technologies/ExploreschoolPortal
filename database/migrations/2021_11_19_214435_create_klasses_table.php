@@ -16,7 +16,6 @@ class CreateKlassesTable extends Migration
         Schema::create('klasses', function (Blueprint $table) {
             $table->id();
             $table->string('class_name');
-            $table->string('sub_class');
             $table->string('teacher_id')->nullable();
             $table->string('class_description');
             $table->timestamps();

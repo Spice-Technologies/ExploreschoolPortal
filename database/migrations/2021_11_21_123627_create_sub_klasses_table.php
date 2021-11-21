@@ -15,6 +15,10 @@ class CreateSubKlassesTable extends Migration
     {
         Schema::create('sub_klasses', function (Blueprint $table) {
             $table->id();
+            $table->string('subKlass_name');
+            $table->string('class_id');
+            $table->string('teacher_id')->nullable();
+            $table->string('sub_class_description');
             $table->timestamps();
         });
     }

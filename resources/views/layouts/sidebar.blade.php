@@ -30,7 +30,7 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('class.index')}}" >
+                            <a class="nav-link" href="{{route('class.create')}}" >
                                 <i class="ni ni-pin-3 text-primary"></i>
                                 <span class="nav-link-text">Class</span>
                             </a>
