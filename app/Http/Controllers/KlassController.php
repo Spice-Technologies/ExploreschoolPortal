@@ -49,7 +49,7 @@ class KlassController extends Controller
 
          ]);
 
-         //this style  below works with create) method but doesnt work with save()..I don't think it is something I want to check now, but we move...
+         //this style of inserting to the elated table below works with create()) method but doesnt work with save()..I don't think it is something I want to check now, but we move...
         
          $klass->subClasses()->create([
             'subKlass_name' => $request->subclass,

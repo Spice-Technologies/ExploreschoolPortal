@@ -100,8 +100,7 @@
                                     </div>
                                     <div class="form-check-inline">
                                         <label class="form-check-label">
-                                            <input type="radio" name="gender" class="form-check-input"
-                                                value="Female">Female
+                                            <input type="radio" name="gender" class="form-check-input" value="Female">Female
                                         </label>
                                     </div>
                                 </div>
@@ -113,11 +112,9 @@
                         <div class="form-group col-lg-6">
                             <label for="exampleFormControlSelect1">Asign Class</label>
                             <select name="class_id" value="1" class="form-control" id="exampleFormControlSelect1">
-                                <option>1</option>
-                                <option>Primary Two</option>
-                                <option>Primary Three</option>
-                                <option>Primary Four</option>
-                                <option>Primary Five</option>
+                                @foreach ($classes as $class)
+                                    <option value="{{ $class->class_name }}">{{ $class->class_name}}</option>
+                                @endforeach
                             </select>
                         </div>
                         <hr class="my-4" />
@@ -139,8 +136,7 @@
                                     <div class="form-group">
                                         <label class="form-control-label" for="input-address">Permanent Address</label>
                                         <input id="input-address" name="permanent_address" class="form-control"
-                                            placeholder="Home Address"
-                                            value="amaudara umualumkau " type="text">
+                                            placeholder="Home Address" value="amaudara umualumkau " type="text">
                                     </div>
                                 </div>
                             </div>

@@ -28,8 +28,8 @@ class StudentController extends Controller
      */
     public function create()
     {
-        $class =  Klass::get('class_name');
-        return view('backend.students.create', compact('class'));
+        $classes=  Klass::get('class_name');
+        return view('backend.students.create', compact('classes'));
     }
 
     /**
