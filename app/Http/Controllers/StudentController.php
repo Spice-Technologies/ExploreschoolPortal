@@ -87,6 +87,7 @@ class StudentController extends Controller
         $user->student()->create([
             'class_id' => $request->class_id,
             'parent_id' => 1,
+            'SubKlass_id' =>$request->Sub_Class_id,
             'gender' => $request->gender,
             'dateofbirth' => $request->dateofbirth,
             'lga' => $request->lga,
