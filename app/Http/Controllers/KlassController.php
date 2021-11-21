@@ -47,8 +47,8 @@ class KlassController extends Controller
         $klass->class_description = $request->class_desc;
         $klass->save();
 
-        $klass->subClasses = $request->subclass;
-        $klass->subClasses->save();
+        $klass->subClasses->subKlass_name = $request->subclass;
+        $klass->subClasses->save(); 
         
     }
 
