@@ -42,13 +42,20 @@ class KlassController extends Controller
 
         ]);
 
-        $klass = new Klass();
-        $klass->class_name = $request->class;
-        $klass->class_description = $request->class_desc;
-        $klass->save();
 
-        $klass->subClasses->subKlass_name = $request->subclass;
-        $klass->subClasses->save(); 
+        $klass = Klass::create([ 
+            'class_name' =>$request->class,
+            'class_description' =>$request->class_desc,
+
+         ]);
+
+         //this style  below works with create) method but doesnt work with save()..I don't think it is something I want to check now, but we move...
+        
+         $klass->subClasses()->create([
+            'subKlass_name' => $request->subclass,
+            'sub_class_description' => 'This subclass was created from '.$request->class
+        ]);
+        return redirect()->route('class.index');
         
     }
 
