@@ -10,6 +10,8 @@
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <!-- Favicon -->
+    <link href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" rel="icon" type="image/png">
 
     <!-- Icons -->
     <link href=" {{ asset('assets/vendor/nucleo/css/nucleo.min.css') }}" rel="stylesheet">
@@ -36,7 +38,7 @@
 
 <body>
     <!-- sidebar-->
-    @include('layouts.sidebar') 
+    @include('layouts.sidebar')
     <!-- Main content -->
     <div class="main-content" id="panel">
         <!-- Topnav -->
@@ -197,8 +199,8 @@
                             </div>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link" href="#" role="button" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
                                 <i class="ni ni-ungroup"></i>
                             </a>
                             <div
@@ -290,7 +292,7 @@
         </nav>
         <div class="container-fluid mt-3">
             @yield('content')
-            <!-- Footer -->
+            <!-- Fxooter -->
             <footer class="footer pt-0">
 
                 <div class="row align-items-center justify-content-lg-between">
@@ -324,12 +326,16 @@
         </div>
     </div>
     <!-- Argon Scripts -->
-    <!-- Core -->
-    <script src="../assets/vendor/jquery/dist/jquery.min.js"></script>
+
+
+    <script src="{{ asset('assets/vendor/jquery/dist/jquery.min.js') }}"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="../assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
     <script src="../assets/vendor/js-cookie/js.cookie.js"></script>
     <script src="../assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
     <script src="../assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
+
     <!-- Argon JS -->
     <script src="../assets/js/argon.js?v=1.2.0"></script>
 </body>

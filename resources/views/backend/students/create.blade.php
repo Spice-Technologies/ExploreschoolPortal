@@ -120,10 +120,10 @@
                                 </select>
                             </div>
                             <div class="form-group col-lg-6">
-                                <label for="exampleFormControlSelect1">Asign  Sub Class</label>
+                                <label for="exampleFormControlSelect1">Asign Sub Class</label>
                                 <select name="Sub_Class_id" value="1" class="form-control" id="exampleFormControlSelect1">
                                     @foreach ($subclasses as $subclass)
-                                    <option value="{{ $subclass->id }}">{{ $subclass->subKlass_name }}</option>
+                                        <option value="{{ $subclass->id }}">{{ $subclass->subKlass_name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -183,4 +183,6 @@
             </div>
         </div>
     </div>
+
+
 @endsection
