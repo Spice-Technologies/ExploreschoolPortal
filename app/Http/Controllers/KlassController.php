@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Klass;
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 class KlassController extends Controller
@@ -14,10 +15,11 @@ class KlassController extends Controller
      */
     public function index()
     {
-        //fetch all students in JSS1A
-        // $klass =Klass::where('class_name', 'JSS1')->findOrFail();
+       // fetch all students in JSS1A
+        $klass =Klass::where('class_name', 'JSS1')->findOrFail(1);
+        $students=Student::where('gender', 'female')->findOrFail(1);
 
-        // dd($klass);
+        dd($students);
         return view('backend.class.index');
     }
 

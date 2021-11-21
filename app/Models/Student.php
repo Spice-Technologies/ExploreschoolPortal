@@ -13,6 +13,7 @@ class Student extends Model
         'user_id',
         'parent_id',
         'class_id',
+        'SubKlass_id',
         'gender',
         'dateofbirth',
         'current_address',
@@ -24,12 +25,14 @@ class Student extends Model
     ];
 
     protected $dates = [
-        'dateofbirth' 
+        'dateofbirth'
     ];
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-
-
+    public function subKlass()
+    {
+        return $this->belongsTo(SubKlass::class);
+    }
 }

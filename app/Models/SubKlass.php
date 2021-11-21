@@ -20,4 +20,8 @@ class SubKlass extends Model
         return $this->belongsTo(Klass::class);
     }
 
+    public function students() {
+        return $this->hasMany(Student::class);
+    }
+
 }
