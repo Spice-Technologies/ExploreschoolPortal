@@ -14,6 +14,10 @@ class KlassController extends Controller
      */
     public function index()
     {
+        //fetch all students in JSS1A
+        // $klass =Klass::where('class_name', 'JSS1')->findOrFail();
+
+        // dd($klass);
         return view('backend.class.index');
     }
 

@@ -28,7 +28,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        $classes=  Klass::get('class_name');
+        $classes=  Klass::get();
         return view('backend.students.create', compact('classes'));
     }
 
