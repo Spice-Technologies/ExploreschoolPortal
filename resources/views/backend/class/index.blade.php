@@ -40,9 +40,7 @@
                             </select>
                         </div>
                     </div>
-
                     <div class="table-responsive">
-
                         <div>
                             <table id="myTable" class="table align-items-center table-dark">
                                 <thead class="thead-dark">
@@ -137,7 +135,7 @@
             </div>
         </div>
     </div>
-    <script src="{{ asset('assets/vendor/jquery/dist/jquery.min.js') }}" type="text/javascript">
+    <script type="text/javascript">
         $(document).ready(function() {
             $('#myTable').DataTable();
         });
