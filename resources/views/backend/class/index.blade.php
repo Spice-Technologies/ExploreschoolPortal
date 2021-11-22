@@ -12,18 +12,16 @@
 
                         <h3 class="mb-0">Search class </h3>
                     </div>
-                    <div class="col-4 text-right">
-                        <a href="#!" class="btn btn-sm btn-primary">Upload Excel File</a>
-                    </div>
+
                 </div>
             </div>
             <div class="card-body">
-                <form action="{{ route('class.store') }}" method="POST">
+                <form action="{{ route('class.show', 'class' => 1, 'subClass' => 1 ) }}" method="GET">
                     @csrf
                     <h6 class="heading-small text-muted mb-4">User information</h6>
 
                     <div class="row">
-                        <div class="form-group col-lg-6">
+                        <div class="form-group col-lg-5">
                             <label for="exampleFormControlSelect1">Select Class</label>
                             <select name="class_id" value="1" class="form-control" id="exampleFormControlSelect1">
                                 {{-- @foreach ($classes as $class) --}}
@@ -31,13 +29,16 @@
                                 {{-- @endforeach --}}
                             </select>
                         </div>
-                        <div class="form-group col-lg-6">
+                        <div class="form-group col-lg-5">
                             <label for="exampleFormControlSelect1">Select Sub Class</label>
                             <select name="class_id" value="1" class="form-control" id="exampleFormControlSelect1">
                                 {{-- @foreach ($classes as $class) --}}
                                 <option value="2">2</option>
                                 {{-- @endforeach --}}
                             </select>
+                        </div>
+                        <div class="col-2 ">
+                            <a href="#!" class="btn btn-primary mt-md-4">Fetch Result</a>
                         </div>
                     </div>
                     <div class="table-responsive">
