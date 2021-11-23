@@ -115,6 +115,11 @@ class StudentController extends Controller
         //check for the student in class
     }
 
+    public function fetch($id)
+    {
+        //check for the student in class
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

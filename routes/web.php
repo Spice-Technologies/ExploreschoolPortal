@@ -22,7 +22,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::group(['middleware' => ['auth', 'role:Admin']], function(){
-    Route::resource('student', 'App\Http\Controllers\StudentController'); 
-    Route::resource('class','App\Http\Controllers\KlassController');
+Route::group(['middleware' => ['auth', 'role:Admin']], function () {
+    Route::resource('student', 'App\Http\Controllers\StudentController');
+    Route::resource('class', 'App\Http\Controllers\KlassController');
 });

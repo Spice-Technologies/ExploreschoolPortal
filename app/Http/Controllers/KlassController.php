@@ -13,13 +13,18 @@ class KlassController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $req)
     {
         // fetch all students in JSS1A
         // $klass =Klass::where('class_name', 'JSS1')->findOrFail(1);
         // $students=Student::where('gender', 'female')->findOrFail(1);
 
         // dd($students);
+        if ($req->has('class_id')) {
+            //if you use gt(), you may not always have your errors thrown but try to be more specific with something like first() as away to debug your code
+            $studentsClass = Student::where('class_id', $req->class_id)->get();
+            return redirect()->route('class.index')->with(['studentsClass' => $studentsClass]);
+        }
         return view('backend.class.index');
     }
 
@@ -70,15 +75,17 @@ class KlassController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $req)
+    public function show(Request $id)
+    {
+    }
+
+    public function fetch(Request $req)
     {
         //find the students class
-        if ($req->has('class_id') && empty($req->sub_class_id) ) {
-            $studentClass = Student::where('class_id',$req->id)->get();
-
-            return view('backend.class.index', compact('studentClass'));
+        if ($req->has('class_id') && empty($req->sub_class_id)) {
+            $studentsClass = Student::where('class_id', $req->id)->get();
+            return redirect()->route('class.index')->with(['studentsClass' => $studentsClass]);
         }
-        
     }
 
     /**
