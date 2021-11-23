@@ -55,8 +55,8 @@
                                 </tr>
                             </thead>
                             <tbody class="list">
-
-                                @if (isset($studentsClass))
+                                <?php $studentsClass = Session::get('studentsClass'); ?>
+                                @if (!empty($studentsClass))
                                     @foreach ($studentsClass as $studentClass)
                                         <tr>
                                             <th scope="row">
@@ -66,7 +66,7 @@
                                                             src="../../assets/img/theme/bootstrap.jpg">
                                                     </a>
                                                     <div class="media-body">
-                                                        <span class="name mb-0 text-sm">Argon Design System</span>
+                                                        <span class="name mb-0 text-sm">{{$studentClass->lga}}</span>
                                                     </div>
                                                 </div>
                                             </th>

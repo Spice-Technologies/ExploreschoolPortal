@@ -20,6 +20,8 @@ class KlassController extends Controller
         // $students=Student::where('gender', 'female')->findOrFail(1);
 
         // dd($students);
+
+        //this apporach (adding with an if statement for situations)i used now for this kind of situation where we have to fetch  results in the same blade and have a default display stuff from the contoller is actually the best
         if ($req->has('class_id')) {
             //if you use gt(), you may not always have your errors thrown but try to be more specific with something like first() as away to debug your code
             $studentsClass = Student::where('class_id', $req->class_id)->get();
