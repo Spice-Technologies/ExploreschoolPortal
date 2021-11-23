@@ -71,7 +71,7 @@ class StudentController extends Controller
         $user = User::create([
             'name' => $request->name,
             
-            'password' => Hash::make($request->password = secure_random_string(10))
+            'password' => Hash::make($request->password = 12345678)
         ]);
         // this is how the user_id value in the students model is being inserted  
 
@@ -112,7 +112,9 @@ class StudentController extends Controller
      */
     public function show($id)
     {
-        //
+        $studentClass = Klass::firstOrFail($id);
+
+        return view();
     }
 
     /**

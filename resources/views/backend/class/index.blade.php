@@ -16,8 +16,8 @@
                 </div>
             </div>
             <div class="card-body">
-                <form action="{{ route('class.show', 'class' => 1, 'subClass' => 1 ) }}" method="GET">
-                    @csrf
+                <form action="{{ route('class.show') }}" method="GET" role="search">
+                   
                     <h6 class="heading-small text-muted mb-4">User information</h6>
 
                     <div class="row">
@@ -38,7 +38,7 @@
                             </select>
                         </div>
                         <div class="col-2 ">
-                            <a href="#!" class="btn btn-primary mt-md-4">Fetch Result</a>
+                            <button type="submit" class="btn btn-primary mt-md-4">Fetch Result</button>
                         </div>
                     </div>
                     <div class="table-responsive">
