@@ -31,7 +31,7 @@
                         </div>
                         <div class="form-group col-lg-5">
                             <label for="exampleFormControlSelect1">Select Sub Class</label>
-                            <select name="class_id" value="1" class="form-control" id="exampleFormControlSelect1">
+                            <select name="sub_class_id" value="0" class="form-control" id="exampleFormControlSelect1">
                                 {{-- @foreach ($classes as $class) --}}
                                 <option value="2">2</option>
                                 {{-- @endforeach --}}

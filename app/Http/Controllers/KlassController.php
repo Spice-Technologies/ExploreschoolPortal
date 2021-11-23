@@ -15,7 +15,7 @@ class KlassController extends Controller
      */
     public function index()
     {
-       // fetch all students in JSS1A
+        // fetch all students in JSS1A
         // $klass =Klass::where('class_name', 'JSS1')->findOrFail(1);
         // $students=Student::where('gender', 'female')->findOrFail(1);
 
@@ -49,20 +49,19 @@ class KlassController extends Controller
         ]);
 
 
-        $klass = Klass::create([ 
-            'class_name' =>$request->class,
-            'class_description' =>$request->class_desc,
+        $klass = Klass::create([
+            'class_name' => $request->class,
+            'class_description' => $request->class_desc,
 
-         ]);
+        ]);
 
-         //this style of inserting to the elated table below works with create()) method but doesnt work with save()..I don't think it is something I want to check now, but we move...
-        
-         $klass->subClasses()->create([
+        //this style of inserting to the elated table below works with create()) method but doesnt work with save()..I don't think it is something I want to check now, but we move...
+
+        $klass->subClasses()->create([
             'subKlass_name' => $request->subclass,
-            'sub_class_description' => 'This subclass was created from '.$request->class
+            'sub_class_description' => 'This subclass was created from ' . $request->class
         ]);
         return redirect()->route('class.index');
-        
     }
 
     /**
@@ -71,9 +70,15 @@ class KlassController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show(Request $req)
     {
-        //
+        //find the students class
+        if ($req->has('class_id') && empty($req->sub_class_id) ) {
+            $studentClass = Student::where('class_id',$req->id)->get();
+
+            return view('backend.class.index', compact('studentClass'));
+        }
+        
     }
 
     /**

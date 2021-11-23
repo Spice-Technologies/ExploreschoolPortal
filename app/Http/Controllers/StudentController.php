@@ -112,9 +112,7 @@ class StudentController extends Controller
      */
     public function show($id)
     {
-        $studentClass = Klass::firstOrFail($id);
-
-        return view();
+        //check for the student in class
     }
 
     /**
