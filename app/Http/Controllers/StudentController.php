@@ -8,6 +8,7 @@ use App\Models\SubKlass;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class StudentController extends Controller
 {
@@ -19,13 +20,14 @@ class StudentController extends Controller
     public function index(Request $req)
     {
         if ($req->has('class_id')) {
-            //if you use gt(), you may not always have your errors thrown but try to be more specific with something like first() as away to debug your code
+            //if you use get(), you may not always have your errors thrown but try to be more specific with something like first() as away to debug your code
             $studentsClass = Student::where('class_id', $req->class_id)->get();
-            return redirect()->route('student.index')->with(['studentsClass' => $studentsClass]);
+            $classes = Klass::all();
+            return view('backend.students.index', compact('classes', 'studentsClass'));
         }
         $classes = Klass::all();
-
-        return view('backend.students.index', compact('classes'));
+        $studentsClass = Student::all();
+        return view('backend.students.index', compact('classes', 'studentsClass'));
     }
 
     /**

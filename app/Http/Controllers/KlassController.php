@@ -20,7 +20,17 @@ class KlassController extends Controller
         // $students=Student::where('gender', 'female')->findOrFail(1);
 
         // dd($students);
+        if ($req->has('class_id')) {
+            //if you use get(), you may not always have your errors thrown but try to be more specific with something like first() as away to debug your code
+            $studentsClass = Student::where('class_id', $req->class_id)->get();
+            // return redirect()->route('student.index')->with(['studentsClass' => $studentsClass]);
+            $classes = Klass::all();
+            return view('backend.students.index', compact('classes', 'studentsClass'));
+        }
+        $classes = Klass::all();
+        $studentsClass = Student::all();
 
+        return view('backend.students.index', compact('classes', 'studentsClass'));
         //this apporach (adding with an if statement for situations)i used now for this kind of situation where we have to fetch  results in the same blade and have a default display stuff from the contoller is actually the best
         if ($req->has('class_id')) {
             //if you use gt(), you may not always have your errors thrown but try to be more specific with something like first() as away to debug your code

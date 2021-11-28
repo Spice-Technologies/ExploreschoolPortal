@@ -55,8 +55,8 @@
                                 </tr>
                             </thead>
                             <tbody class="list">
-                                <?php $studentsClass = Session::get('studentsClass'); ?>
-                                @if (!empty($studentsClass))
+                               
+                             
                                     @foreach ($studentsClass as $studentClass)
                                         <tr>
                                             <th scope="row">
@@ -131,7 +131,7 @@
                                             </td>
                                         </tr>
                                     @endforeach
-                                @endif
+                             
                             </tbody>
                         </table>
                     </div>
