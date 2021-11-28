@@ -16,10 +16,16 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $req)
     {
-        $students = Student::latest()->get();
-        return view('backend.students.index', compact('students'));
+        if ($req->has('class_id')) {
+            //if you use gt(), you may not always have your errors thrown but try to be more specific with something like first() as away to debug your code
+            $studentsClass = Student::where('class_id', $req->class_id)->get();
+            return redirect()->route('student.index')->with(['studentsClass' => $studentsClass]);
+        }
+        $classes = Klass::all();
+
+        return view('backend.students.index', compact('classes'));
     }
 
     /**
@@ -29,9 +35,9 @@ class StudentController extends Controller
      */
     public function create()
     {
-        $classes=  Klass::get();
-        $subclasses=  SubKlass::get();
-        return view('backend.students.create', compact('classes','subclasses'));
+        $classes =  Klass::get();
+        $subclasses =  SubKlass::get();
+        return view('backend.students.create', compact('classes', 'subclasses'));
     }
 
     /**
@@ -70,7 +76,7 @@ class StudentController extends Controller
         //echo secure_random_string(12);
         $user = User::create([
             'name' => $request->name,
-            
+
             'password' => Hash::make($request->password = 12345678)
         ]);
         // this is how the user_id value in the students model is being inserted  
@@ -87,7 +93,7 @@ class StudentController extends Controller
         $user->student()->create([
             'class_id' => $request->class_id,
             'parent_id' => 1,
-            'SubKlass_id' =>$request->Sub_Class_id,
+            'SubKlass_id' => $request->Sub_Class_id,
             'gender' => $request->gender,
             'dateofbirth' => $request->dateofbirth,
             'lga' => $request->lga,
@@ -97,9 +103,9 @@ class StudentController extends Controller
             'permanent_address' => $request->permanent_address
         ]);
         $user->assignRole('Student');
-      
+
         $user->student->reg_num = reg_number($user->student->id);
-     
+
         $user->student->save();
         return redirect()->route('student.index');
     }

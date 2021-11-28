@@ -27,7 +27,9 @@ class KlassController extends Controller
             $studentsClass = Student::where('class_id', $req->class_id)->get();
             return redirect()->route('class.index')->with(['studentsClass' => $studentsClass]);
         }
-        return view('backend.class.index');
+        $classes = Klass::all();
+        
+        return view('backend.class.index', compact('classes'));
     }
 
     /**
