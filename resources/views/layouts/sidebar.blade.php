@@ -25,7 +25,7 @@
                             </a>
                             <ul style="display: block;" class="">
                                 <li><a href="{{route('student.create')}}">Add Students</a></li>
-                                <li><a href="/email/add-contact">View Students</a></li>
+                                <li><a href="{{route('student.index')}}">View Students</a></li>
                                 <li><a href="/email/msgs/list">Sent Messages</a></li>
                             </ul>
                         </li>

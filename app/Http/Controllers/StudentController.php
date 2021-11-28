@@ -109,6 +109,7 @@ class StudentController extends Controller
         $user->assignRole('Student');
 
         $user->student->reg_num = reg_number($user->student->id);
+        $user->student->save();
         $user->email = reg_number($user->student->id);
         $user->save();
         return redirect()->route('student.index');
