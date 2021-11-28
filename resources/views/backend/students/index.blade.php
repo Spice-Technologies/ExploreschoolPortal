@@ -76,7 +76,7 @@
                                             <td>
                                                 <span class="badge badge-dot mr-4">
                                                     <i class="bg-warning"></i>
-                                                    <span class="status">pending</span>
+                                                 <a href="{{route('student.edit',  $studentClass->id)}}"> <span class="status">edit</span> </a>
                                                 </span>
                                             </td>
                                             <td>

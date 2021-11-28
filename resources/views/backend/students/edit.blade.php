@@ -1,43 +1,5 @@
 @extends('layouts.app')
 @section('content')
-    {{-- <div class="col-lg-8 mx-auto"> 
-        <form>
-            <div class="form-group">
-                <label for="exampleFormControlInput1">First Name</label>
-                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-            </div>
-            <div class="form-group">
-                <label for="exampleFormControlInput1">Last Name</label>
-                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-            </div>
-            <div class="form-group">
-                <label for="exampleFormControlInput1">Middle name</label>
-                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-            </div>
-            <div class="form-group">
-                <label for="exampleFormControlInput1">Email address</label>
-                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-            </div>
-            <div class="form-group">
-                <label for="exampleFormControlInput1">Email address</label>
-                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-            </div>
-            <div class="form-group">
-                <label for="exampleFormControlSelect1">Example select</label>
-                <select class="form-control" id="exampleFormControlSelect1">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="exampleFormControlTextarea1">Example textarea</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-            </div>
-        </form>
-    </div> --}}
 
     <div class="col-xl-10 order-xl-1 mx-auto">
         <div class="card">
@@ -56,7 +18,7 @@
                 </div>
             </div>
             <div class="card-body">
-                <form action="{{ route('student.store') }}" method="POST">
+                <form action="{{ route('student.update', $student->id) }}" method="POST">
                     @csrf
                     <h6 class="heading-small text-muted mb-4">User information</h6>
                     <div class="pl-lg-4">
@@ -64,7 +26,7 @@
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-username">Firstname</label>
-                                    <input type="text" id="lname" value="{{ old('name') }}" name="name"
+                                    <input type="text" id="lname" value="{{  $student->name }}" name="name"
                                         class="form-control" placeholder="firstname">
 
                                 </div>
@@ -72,14 +34,14 @@
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-email">Last Name</label>
-                                    <input type="text" id="input-email" value="{{ old('lname') }}" name="lname"
+                                    <input type="text" id="input-email" value="{{  $student->name }}" name="lname"
                                         class="form-control" placeholder="last name">
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-email">Other Name</label>
-                                    <input type="text" id="input-email" value="{{ old('lname') }}" name="lname"
+                                    <input type="text" id="input-email" value="{{  $student->name }}" name="lname"
                                         class="form-control" placeholder="last name">
                                 </div>
                             </div>
@@ -88,7 +50,7 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-last-name">Date Of Birth</label>
-                                    <input type="date" id="dateofbirth" value="{{ old('dateofbirth') }}"
+                                    <input type="date" id="dateofbirth" value="{{  $student->dateofbirth }}"
                                         name="dateofbirth" class="form-control">
                                 </div>
                             </div>
@@ -155,21 +117,21 @@
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label class="form-control-label" for="input-city">State of Origin </label>
-                                        <input type="text" name="state" value="{{ old('state') }}" class="form-control"
+                                        <input type="text" name="state" value="{{  $student->state }}" class="form-control"
                                             placeholder="Country">
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label class="form-control-label" for="input-country">LGA</label>
-                                        <input type="text" name="lga" value="{{ old('lga') }}" class="form-control"
+                                        <input type="text" name="lga" value="{{  $student->lga }}" class="form-control"
                                             placeholder="LGA">
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label class="form-control-label" for="input-country">Country</label>
-                                        <input type="text" name="country" value="{{ old('country') }}"
+                                        <input type="text" name="country" value="{{  $student->country }}"
                                             class="form-control" placeholder="Postal code">
                                     </div>
                                 </div>
@@ -183,6 +145,5 @@
             </div>
         </div>
     </div>
-
 
 @endsection
