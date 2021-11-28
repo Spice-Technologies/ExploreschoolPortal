@@ -72,7 +72,7 @@
                                             <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                                         </div>
                                         <input class="form-control @error('email') is-invalid @enderror"
-                                            placeholder="Email" type="email" name="email" value="{{ old('email') }}"
+                                            placeholder="Login details" type="text" name="email" value="{{ old('email') }}"
                                             required autocomplete="email" autofocus>
                                         @error('email')
                                             <span class="invalid-feedback" role="alert">

@@ -79,7 +79,7 @@ class StudentController extends Controller
         $user = User::create([
             'name' => $request->name,
 
-            'password' => Hash::make($request->password = 12345678)
+            'password' => $request->password = 12345678
         ]);
         // this is how the user_id value in the students model is being inserted  
 
@@ -91,6 +91,8 @@ class StudentController extends Controller
             $regNum = "EXP" . '\\' . $date . '\\' . $uniqueId;
             return $regNum;
         };
+
+
         $reg_numDemo = secure_random_string(2);
         $user->student()->create([
             'class_id' => $request->class_id,
@@ -108,7 +110,7 @@ class StudentController extends Controller
 
         $user->student->reg_num = reg_number($user->student->id);
         $user->email = reg_number($user->student->id);
-        $user->student->save();
+        $user->save();
         return redirect()->route('student.index');
     }
     //so cards can be used to login but validates depending on the number of times used...if the students buys new card, the card login will be changed
