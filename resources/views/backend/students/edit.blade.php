@@ -12,14 +12,12 @@
 
                         <h3 class="mb-0">Create Student Details </h3>
                     </div>
-                    <div class="col-4 text-right">
-                        <a href="#!" class="btn btn-sm btn-primary">Upload Excel File</a>
-                    </div>
                 </div>
             </div>
             <div class="card-body">
                 <form action="{{ route('student.update', $student->id) }}" method="POST">
                     @csrf
+                    @method('PUT')
                     <h6 class="heading-small text-muted mb-4">User information</h6>
                     <div class="pl-lg-4">
                         <div class="row">

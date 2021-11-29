@@ -151,9 +151,32 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Student $student)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'class_id'          => 'required|numeric',
+            'gender'            => 'required|string',
+            'dateofbirth'       => 'required|date',
+            'current_address'   => 'required|string',
+            'permanent_address' => 'required|string',
+
+        ]);
+
+        $student->user()->update([
+            'name' => $request->name
+        ]);
+
+        $student->update([
+            'class_id'          => 'required|numeric',
+            'gender'            => 'required|string',
+            'dateofbirth'       => 'required|date',
+            'current_address'   => 'required|string',
+            'permanent_address' => 'required|string',
+
+        ]);
+
+        return redirect()->route('student.index');
     }
 
     /**
