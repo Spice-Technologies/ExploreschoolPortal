@@ -23,28 +23,28 @@
                     <h6 class="heading-small text-muted mb-4">User information</h6>
                     <div class="pl-lg-4">
                         <div class="row">
-                            <div class="col-lg-4">
+                            <div class="col-lg-12">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-username">Firstname</label>
-                                    <input type="text" id="lname" value="{{  $student->name }}" name="name"
+                                    <input type="text" id="lname" value="{{  $student->user->name }}" name="name"
                                         class="form-control" placeholder="firstname">
 
                                 </div>
                             </div>
-                            <div class="col-lg-4">
+                            {{-- <div class="col-lg-4">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-email">Last Name</label>
-                                    <input type="text" id="input-email" value="{{  $student->name }}" name="lname"
+                                    <input type="text" id="input-email" value="{{   $student->user->name }}" name="lname"
                                         class="form-control" placeholder="last name">
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-email">Other Name</label>
-                                    <input type="text" id="input-email" value="{{  $student->name }}" name="lname"
+                                    <input type="text" id="input-email" value="{{  $student->user->name }}" name="lname"
                                         class="form-control" placeholder="last name">
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="row">
                             <div class="col-lg-6">
@@ -100,7 +100,7 @@
                                         <label class="form-control-label" for="input-address">Current Address</label>
                                         <input id="input-address" name="current_address" class="form-control"
                                             placeholder="Home Address"
-                                            value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09" type="text">
+                                            value="{{ $student->permanent_address}}" type="text">
                                     </div>
                                 </div>
                             </div>
@@ -109,7 +109,7 @@
                                     <div class="form-group">
                                         <label class="form-control-label" for="input-address">Permanent Address</label>
                                         <input id="input-address" name="permanent_address" class="form-control"
-                                            placeholder="Home Address" value="amaudara umualumkau " type="text">
+                                            placeholder="Home Address" value="{{ $student->current_address}}" type="text">
                                     </div>
                                 </div>
                             </div>
@@ -139,7 +139,7 @@
                         </div>
                         <hr class="my-4" />
                         <div class="">
-                            <button class="btn btn-primary" type="submit">Submit </button>
+                            <button class="btn btn-primary" type="submit">Update </button>
                         </div>
                 </form>
             </div>
