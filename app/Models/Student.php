@@ -24,9 +24,11 @@ class Student extends Model
         'reg_num'
     ];
 
-    protected $dates = [
-        'dateofbirth'
-    ];
+ 
+    //    protected $dates = [
+    //     'dateofbirth'
+    // ];
+
     public function user()
     {
         return $this->belongsTo(User::class);

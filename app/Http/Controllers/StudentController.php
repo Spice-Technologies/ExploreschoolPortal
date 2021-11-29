@@ -168,11 +168,11 @@ class StudentController extends Controller
         ]);
 
         $student->update([
-            'class_id'          => 'required|numeric',
-            'gender'            => 'required|string',
-            'dateofbirth'       => 'required|date',
-            'current_address'   => 'required|string',
-            'permanent_address' => 'required|string',
+            'class_id'          => $request->class_id,
+            'gender'            => $request->gender,
+            'dateofbirth'       => $request->dateofbirth,
+            'current_address'   => $request->current_address,
+            'permanent_address' => $request->permanent_address,
 
         ]);
 
