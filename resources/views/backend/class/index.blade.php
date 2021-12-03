@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
-List class here 
+List classes here!
 
 
 @endsection
