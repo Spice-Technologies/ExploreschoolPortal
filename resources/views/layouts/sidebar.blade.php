@@ -35,8 +35,9 @@
                                 <span class="nav-link-text">Class</span>
                             </a>
                             <ul style="display: block;" class="">
+                                <li><a href="{{ route('class.index') }}">View Class</a></li>
                                 <li><a href="{{ route('class.create') }}">Add Class</a></li>
-                                <li><a href="{{ route('promote.index') }}">View Class</a></li>
+                                <li><a href="{{ route('promote.index') }}">Promote Class</a></li>
 
                             </ul>
 
