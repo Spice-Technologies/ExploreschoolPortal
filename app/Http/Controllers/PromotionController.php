@@ -9,33 +9,13 @@ class PromotionController extends Controller
 {
     public function promote(Request  $request)
     {
-        //manual promotion
-        // $request->validate([
-        //     'class_id_from' => 'required|string',
-        //     'class_id_to' => 'required|string',
-        // ]);
 
-        // bulk promotion
+        $matches = collect([1, 2]);
+        $matches->each(function ($item, $key) {
 
-        //first thing to do is move the grade class to another table then update the remaiing rows
-
-        ///update all where class_id = 1 to 2; 2 to 3; 3 to 4;
-        $collection->each(function ($item, $key) {
-            if (/* some condition */) {
-                return false;
-            }
+            Student::where('class_id', '=', $key)->update(['class_id' => $item  + 1]);
+            //I am honestly surprise why using $key to compare 'class_id' in the where clause works perfectly than using the $item which is the actual item as I thought
         });
-        $matches = [1, 2,];
-        foreach ($matches as $m => $key) {
-          
-            $result = Student::where('class_id', '=', $m)->update(['class_id' =>   $key]);
-          
-        }
-        return "Done successfully ";
-        // for ($i = 0; $i < count($matches); $i++) {
-        //     // return  $matches[$i];
-        //     $jov = $i = $i + 1;
-        //     $result = Student::where('class_id', '=', $i)->update(['class_id' => $jov]);
-        // }
+        return "I pray this stuff works";
     }
 }
