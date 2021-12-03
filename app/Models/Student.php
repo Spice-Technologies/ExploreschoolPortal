@@ -24,7 +24,7 @@ class Student extends Model
         'reg_num'
     ];
 
- 
+
     //    protected $dates = [
     //     'dateofbirth'
     // ];
@@ -36,5 +36,10 @@ class Student extends Model
     public function subKlass()
     {
         return $this->belongsTo(SubKlass::class);
+    }
+
+    public function class()
+    {
+        return $this->belongsTo(Klass::class, 'class_id');
     }
 }

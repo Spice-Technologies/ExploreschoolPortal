@@ -28,7 +28,7 @@ class Klass extends Model
     ];
 
     public function students()
-    { // class has many many students but students has or must belong to only One Class
+    { // class has many many stu$studentClass->reg_numdents but students has or must belong to only One Class
         return $this->hasMany(Student::class, 'class_id');
     }
 
