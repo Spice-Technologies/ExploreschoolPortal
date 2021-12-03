@@ -26,6 +26,6 @@ class PromotionController extends Controller
 
         // DB::table('users')->increment('votes', 1, ['name' => 'John']);
 
-        return "I pray this stuff works";
+        return redirect()->route('student.index');
     }
 }

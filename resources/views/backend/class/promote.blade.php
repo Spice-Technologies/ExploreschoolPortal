@@ -3,7 +3,7 @@
 
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-    Launch demo modal
+   Promote Student 
   </button>
   
   <!-- Modal -->
@@ -11,17 +11,17 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Promotion</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          ...
+         <span class="text-danger display-4"> ** Be please be sure that you are about to perform this operation. You can't undo this at anytime ! whatsoever regardless of who you Are!! </span>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <a href="{{route('promote')}}"><button type="button" class="btn btn-primary">Promote</button></a>
         </div>
       </div>
     </div>
