@@ -26,7 +26,7 @@
                             <ul style="display: block;" class="">
                                 <li><a href="{{ route('student.create') }}">Add Students</a></li>
                                 <li><a href="{{ route('student.index') }}">View Students</a></li>
-                                <li><a href="/email/msgs/list">Sent Messages</a></li>
+
                             </ul>
                         </li>
                         <li class="nav-item">
@@ -37,7 +37,7 @@
                             <ul style="display: block;" class="">
                                 <li><a href="{{ route('class.create') }}">Add Class</a></li>
                                 <li><a href="{{ route('promote.index') }}">View Class</a></li>
-                                <li><a href="/email/msgs/list">Sent Messages</a></li>
+
                             </ul>
 
                         </li>
