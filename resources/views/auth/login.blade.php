@@ -134,7 +134,7 @@
                 <div class="col-xl-6">
                     <div class="copyright text-center text-xl-left text-muted">
                         &copy; 2021 <a href="https://www.creative-tim.com" class="font-weight-bold ml-1"
-                            target="_blank">jovialcore team</a>
+                            target="_blank">spice technologies team</a>
                     </div>
                 </div>
                 <div class="col-xl-6">
