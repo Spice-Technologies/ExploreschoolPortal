@@ -24,16 +24,22 @@
                                 <span class="nav-link-text">Students</span>
                             </a>
                             <ul style="display: block;" class="">
-                                <li><a href="{{route('student.create')}}">Add Students</a></li>
-                                <li><a href="{{route('student.index')}}">View Students</a></li>
+                                <li><a href="{{ route('student.create') }}">Add Students</a></li>
+                                <li><a href="{{ route('student.index') }}">View Students</a></li>
                                 <li><a href="/email/msgs/list">Sent Messages</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('class.create')}}" >
+                            <a class="nav-link" href="{{ route('class.index') }}">
                                 <i class="ni ni-pin-3 text-primary"></i>
                                 <span class="nav-link-text">Class</span>
                             </a>
+                            <ul style="display: block;" class="">
+                                <li><a href="{{ route('class.create') }}">Add Class</a></li>
+                                <li><a href="{{ route('promote.index') }}">View Class</a></li>
+                                <li><a href="/email/msgs/list">Sent Messages</a></li>
+                            </ul>
+
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="profile.html">
