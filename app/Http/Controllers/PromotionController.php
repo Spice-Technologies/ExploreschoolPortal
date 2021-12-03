@@ -11,11 +11,10 @@ class PromotionController extends Controller
     {
 
         $matches = collect([1, 2]);
-        $matches->each(function ($item, $key) {
-
-            Student::where('class_id', '=', $key)->update(['class_id' => $item  + 1]);
+        
+            Student::whereIn('class_id', $matches)->increment('class_id', 1);
             //I am honestly surprise why using $key to compare 'class_id' in the where clause works perfectly than using the $item which is the actual item as I thought
-        });
+    
         return "I pray this stuff works";
     }
 }
