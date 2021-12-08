@@ -20,10 +20,12 @@ class PromotionController extends Controller
         //check if there are ss3 students and move them to a new table
 
         $Student = new Student();
-        $Student->where('class_id', 6)->each(function ($graduate) {
-            $graduateStud = $graduate->replicate();
-            $graduateStud->setTable('Grads');
+        $Student->where('class_id', 6)->each(function ($finalist) {
+            $graduateStud = $finalist->replicate();
+            $graduateStud->setTable('graduates');
             $graduateStud->save();
+
+            $finalist->delete();
         });
 
         $matches = collect([1, 2, 3, 4, 5, 6]);
