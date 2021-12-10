@@ -26,6 +26,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::group(['middleware' => ['auth', 'role:Admin']], function () {
     Route::get('/promote', [App\Http\Controllers\PromotionController::class, 'index'])->name('promote.index');
     Route::get('/promoteClass', [App\Http\Controllers\PromotionController::class, 'promote'])->name('promote');
-    Route::resource('student', 'App\Http\Controllers\StudentController');
-    Route::resource('class', 'App\Http\Controllers\KlassController');
+    Route::resource('/student', 'App\Http\Controllers\StudentController');
+    Route::resource('/class', 'App\Http\Controllers\KlassController');
 });
