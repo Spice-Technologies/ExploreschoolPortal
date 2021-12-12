@@ -14,13 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // Route::group(['domain' => 'admin.explore'], function () {
 //     Route::get('/', function () {
@@ -28,11 +21,22 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 //     });
 // });
 
+Auth::routes();
+
 Route::domain('admin.explore')->group(function () {
-      Route::get('/app', function () {
+      Route::get('/', function () {
         return "I will only trigger when domain is admin.explore.";
     });
 });
+
+
+Route::get('/', function () {
+    return view('welcome');~
+});
+
+
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 // Route::middleware('web')->domain('admin.' . env('SITE_URL'))->group(function () {
 //     Route::get('/', function () {
 //         return "I will only trigger when domain is admin.myapp.dev.";
