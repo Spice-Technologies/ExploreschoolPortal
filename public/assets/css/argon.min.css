@@ -23494,7 +23494,7 @@ input.datetimepicker[data-color=yellow]+.bootstrap-datetimepicker-widget.dropdow
 
 .nav-item.nav-with-child>.nav-item-child {
     list-style: none;
-    height: 0;
+    height: 0px;
     min-height: 0px;
     overflow: hidden !important;
     padding: 0px 1.5rem;
