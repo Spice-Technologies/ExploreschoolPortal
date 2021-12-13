@@ -3,7 +3,7 @@
         <!-- Brand -->
         <div class="sidenav-header  align-items-center">
             <a class="navbar-brand" href="javascript:void(0)">
-                <img src="{{asset('assets/img/brand/blue.png')}}" class="navbar-brand-img" alt="...">
+                <img src="{{ asset('assets/img/brand/blue.png') }}" class="navbar-brand-img" alt="...">
             </a>
         </div>
         <div class="navbar-inner">
@@ -12,7 +12,7 @@
                 <!-- Nav items -->
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('home')}}">
+                        <a class="nav-link" href="{{ route('home') }}">
                             <i class="ni ni-tv-2 text-primary"></i>
                             <span class="nav-link-text">Dashboard</span>
                         </a>
@@ -41,6 +41,24 @@
 
                             </ul>
 
+                        </li>
+                        <li class="nav-item nav-with-child">
+                            <a class="nav-link">
+                                <i class="ni ni-align-left-2"></i> Multilevel
+                            </a>
+                            <ul class="nav-item-child">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="">
+                                        Multilevel 1
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="">
+                                        Multilevel 2
+                                    </a>
+                                </li>
+
+                            </ul>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="profile.html">

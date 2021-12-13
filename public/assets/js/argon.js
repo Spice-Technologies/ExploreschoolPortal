@@ -735,6 +735,30 @@ var Tooltip = (function() {
 
 })();
 
+
+
+// multilvel menu 
+var NavWithChild = (function() {
+
+    // Variables
+
+    var $nav = $('.nav-item.nav-with-child');
+    setTimeout(function() {
+        $nav.each(function(index, each) {
+
+            $(each).on('click', function(event) {
+                if ($(each).is('.nav-item-expanded')) {
+                    $(each).removeClass('nav-item-expanded')
+
+                } else {
+                    $(each).addClass('nav-item-expanded')
+                }
+            })
+        });
+    }, 300)
+
+})();
+
 //
 // Form control
 //
