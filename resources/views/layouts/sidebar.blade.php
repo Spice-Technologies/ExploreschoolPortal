@@ -29,6 +29,7 @@
 
                             </ul>
                         </li>
+                
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('class.index') }}">
                                 <i class="ni ni-pin-3 text-primary"></i>
@@ -43,8 +44,8 @@
 
                         </li>
                         <li class="nav-item nav-with-child">
-                            <a class="nav-link">
-                                <i class="ni ni-align-left-2"></i> Multilevel
+                            <a class="nav-link ">
+                                <i class="ni ni-align-left-2 "></i> Multilevel
                             </a>
                             <ul class="nav-item-child">
                                 <li class="nav-item">

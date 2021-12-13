@@ -23498,8 +23498,12 @@ input.datetimepicker[data-color=yellow]+.bootstrap-datetimepicker-widget.dropdow
     min-height: 0px;
     overflow: hidden !important;
     padding: 0px 1.5rem;
-    transition: all 0.5s ease-in-out;
+    transition: all 0.2s ease-in-out;
     margin-left: 25px;
+}
+
+.nav-item.nav-with-child>.nav-link {
+    cursor: pointer;
 }
 
 .nav-item.nav-with-child.nav-item-expanded>.nav-item-child {
@@ -23508,7 +23512,7 @@ input.datetimepicker[data-color=yellow]+.bootstrap-datetimepicker-widget.dropdow
     height: auto;
     min-height: 50px;
     display: block;
-    transition: all 0.5s ease-in-out;
+    transition: all 0.2s ease-in-out;
 }
 
 

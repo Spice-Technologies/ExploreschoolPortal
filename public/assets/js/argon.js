@@ -755,7 +755,7 @@ var NavWithChild = (function() {
                 }
             })
         });
-    }, 300)
+    }, 50)
 
 })();
 
