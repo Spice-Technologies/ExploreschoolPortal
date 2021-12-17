@@ -106,6 +106,7 @@ class StudentController extends Controller
             'current_address' => $request->current_address,
             'permanent_address' => $request->permanent_address
         ]);
+        
         $user->assignRole('Student');
 
         $user->student->reg_num = reg_number($user->student->id);

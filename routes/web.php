@@ -24,28 +24,13 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::domain('admin.explore')->group(function () {
-      Route::get('/', function () {
-        return "I will only trigger when domain is admin.explore.";
+    Route::group(['middleware' => ['auth', 'role:Admin']], function () {
+        Route::get('/promote', [App\Http\Controllers\PromotionController::class, 'index'])->name('promote.index');
     });
 });
 
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
-
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-// Route::middleware('web')->domain('admin.' . env('SITE_URL'))->group(function () {
-//     Route::get('/', function () {
-//         return "I will only trigger when domain is admin.myapp.dev.";
-//     });
-// });
 
-// Route::domain('{admin}.explore')->group(function () {
-//     return "this is the super admin section for this app" ;
-// });
 
 Route::group(['middleware' => ['auth', 'role:Admin']], function () {
     Route::get('/promote', [App\Http\Controllers\PromotionController::class, 'index'])->name('promote.index');
