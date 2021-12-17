@@ -18,31 +18,47 @@
                         </a>
                     </li>
                     @role('Admin')
-                        <li class="nav-item">
-                            <a class="nav-link" href="icons.html">
-                                <i class="ni ni-planet text-orange"></i>
-                                <span class="nav-link-text">Students</span>
+                        <li class="nav-item nav-with-child">
+                            <a class="nav-link ">
+                                <i class="ni ni-align-left-2 "></i> Student
                             </a>
-                            <ul style="display: block;" class="">
-                                <li><a href="{{ route('student.create') }}">Add Students</a></li>
-                                <li><a href="{{ route('student.index') }}">View Students</a></li>
+                            <ul class="nav-item-child">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('student.create') }}">
+                                        Add Student
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('student.index') }}">
+                                        View Students
+                                    </a>
+                                </li>
 
                             </ul>
                         </li>
-                
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('class.index') }}">
-                                <i class="ni ni-pin-3 text-primary"></i>
-                                <span class="nav-link-text">Class</span>
+                        <li class="nav-item nav-with-child">
+                            <a class="nav-link ">
+                                <i class="ni ni-align-left-2 "></i> Class
                             </a>
-                            <ul style="display: block;" class="">
-                                <li><a href="{{ route('class.index') }}">View Class</a></li>
-                                <li><a href="{{ route('class.create') }}">Add Class</a></li>
-                                <li><a href="{{ route('promote.index') }}">Promote Class</a></li>
-
+                            <ul class="nav-item-child">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('class.index') }}">
+                                        View Class
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('class.create') }}">
+                                        Add Class
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('promote.index') }}">
+                                        Promote class
+                                    </a>
+                                </li>
                             </ul>
-
                         </li>
+
                         <li class="nav-item nav-with-child">
                             <a class="nav-link ">
                                 <i class="ni ni-align-left-2 "></i> Multilevel
