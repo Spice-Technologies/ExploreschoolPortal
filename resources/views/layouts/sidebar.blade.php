@@ -59,7 +59,7 @@
                             </ul>
                         </li>
 
-                        <li class="nav-item nav-with-child">
+                        {{-- <li class="nav-item nav-with-child">
                             <a class="nav-link ">
                                 <i class="ni ni-align-left-2 "></i> Multilevel
                             </a>
@@ -76,7 +76,7 @@
                                 </li>
 
                             </ul>
-                        </li>
+                        </li> --}}
                         <li class="nav-item">
                             <a class="nav-link" href="profile.html">
                                 <i class="ni ni-single-02 text-yellow"></i>
