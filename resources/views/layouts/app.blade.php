@@ -37,7 +37,10 @@
 
 <body>
     <!-- sidebar-->
-    @include('layouts.sidebar')
+    @include('partials.sidebar')
+@role('Admin')
+    @include('partials.superAdminSidebar')
+@endrole
     <!-- Main content -->
     <div class="main-content" id="panel">
         <!-- Topnav -->
