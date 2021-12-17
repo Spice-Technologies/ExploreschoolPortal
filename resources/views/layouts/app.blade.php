@@ -24,7 +24,7 @@
     <link href=" {{ asset('/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
 
     <!-- Argon CSS -->
-    <link type="text/css" href="{{asset('/assets/css/argon.min.css')}}" rel="stylesheet">
+    <link type="text/css" href="{{ asset('/assets/css/argon.min.css') }}" rel="stylesheet">
 
     {{-- <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
@@ -38,9 +38,15 @@
 <body>
     <!-- sidebar-->
     @include('partials.sidebar')
-@role('Admin')
-    @include('partials.superAdminSidebar')
-@endrole
+
+    <!--  side bar for super admins -->
+    @role('Admin')
+        @include('partials.superAdminSidebar')
+    @endrole
+    <!-- end sidebar-->
+
+
+    
     <!-- Main content -->
     <div class="main-content" id="panel">
         <!-- Topnav -->
@@ -158,7 +164,7 @@
                                         <div class="row align-items-center">
                                             <div class="col-auto">
                                                 <!-- Avatar -->
-                                                <img alt="oahdjdkdk" src="{{asset('/assets/img/theme/team-4.jpg')}}"
+                                                <img alt="oahdjdkdk" src="{{ asset('/assets/img/theme/team-4.jpg') }}"
                                                     class="avatar rounded-circle">
                                             </div>
                                             <div class="col ml--2">
@@ -254,7 +260,8 @@
                                 aria-haspopup="true" aria-expanded="false">
                                 <div class="media align-items-center">
                                     <span class="avatar avatar-sm rounded-circle">
-                                        <img alt="Image placeholder" src="{{asset('/assets/img/theme/team-4.jpg')}}">
+                                        <img alt="Image placeholder"
+                                            src="{{ asset('/assets/img/theme/team-4.jpg') }}">
                                     </span>
                                     <div class="media-body  ml-2  d-none d-lg-block">
                                         <span class="mb-0 text-sm  font-weight-bold">John Snow</span>
@@ -337,10 +344,10 @@
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="{{ asset('/assets/vendor/js-cookie/js.cookie.js') }}"></script>
     <script src=" {{ asset('/assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js') }} "></script>
-    <script src=" {{ asset('/assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js')}}"></script>
+    <script src=" {{ asset('/assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js') }}"></script>
 
     <!-- Argon JS -->
-    <script src="{{asset('/assets/js/argon.js?v=1.2.0')}}"></script>
+    <script src="{{ asset('/assets/js/argon.js?v=1.2.0') }}"></script>
 
 
 </body>

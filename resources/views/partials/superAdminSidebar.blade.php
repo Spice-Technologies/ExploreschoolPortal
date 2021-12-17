@@ -19,17 +19,17 @@
                     </li>     
                         <li class="nav-item nav-with-child">
                             <a class="nav-link ">
-                                <i class="ni ni-align-left-2 "></i> Student
+                                <i class="ni ni-align-left-2 "></i> Admin Mgt
                             </a>
                             <ul class="nav-item-child">
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('student.create') }}">
-                                        Add Student
+                                        Add Admin
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('student.index') }}">
-                                        View Students
+                                        View Admin
                                     </a>
                                 </li>
 
@@ -37,22 +37,17 @@
                         </li>
                         <li class="nav-item nav-with-child">
                             <a class="nav-link ">
-                                <i class="ni ni-align-left-2 "></i> Class
+                                <i class="ni ni-align-left-2 "></i> School Mgt
                             </a>
                             <ul class="nav-item-child">
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('class.index') }}">
-                                        View Class
+                                        View Schools
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('class.create') }}">
-                                        Add Class
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('promote.index') }}">
-                                        Promote class
+                                        Register School
                                     </a>
                                 </li>
                             </ul>
@@ -76,40 +71,7 @@
 
                             </ul>
                         </li> --}}
-                        <li class="nav-item">
-                            <a class="nav-link" href="profile.html">
-                                <i class="ni ni-single-02 text-yellow"></i>
-                                <span class="nav-link-text">Profile</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="tables.html">
-                                <i class="ni ni-bullet-list-67 text-default"></i>
-                                <span class="nav-link-text">Tables</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="login.html">
-                                <i class="ni ni-key-25 text-info"></i>
-                                <span class="nav-link-text">Login</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="register.html">
-                                <i class="ni ni-circle-08 text-pink"></i>
-                                <span class="nav-link-text">Register</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="upgrade.html">
-                                <i class="ni ni-send text-dark"></i>
-                                <span class="nav-link-text">Upgrade</span>
-                            </a>
-                        </li>
-                  
-                </ul>
-
-               
+                </ul>     
                     <!-- Divider -->
                     <hr class="my-3">
                     <!-- Heading -->
