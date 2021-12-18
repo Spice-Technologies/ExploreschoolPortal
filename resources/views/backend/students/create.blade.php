@@ -66,7 +66,6 @@
                                     <label class="form-control-label" for="input-username">Firstname</label>
                                     <input type="text" id="lname" value="{{ old('name') }}" name="name"
                                         class="form-control" placeholder="firstname">
-
                                 </div>
                             </div>
                             <div class="col-lg-4">

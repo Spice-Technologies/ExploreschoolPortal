@@ -13,16 +13,16 @@ class superAdminController extends Controller
 {
     public function index()
     {
-        $admins = Admins::all();
-        return view('dashboard.admin.index', compact('admins'));
+       // $admins = Admins::all(); compact('admins')
+        return view('dashboard.admin.index');
     }
 
 
     public function AdminCreate()
     {
       
-        $schools = School::all();
-        return view('dashboard.admin.create', compact('schools'));
+       // $schools = School::all(); compact('schools')
+        return view('dashboard.admin.create');
     }
 
     public function addAdmin(Request $req)

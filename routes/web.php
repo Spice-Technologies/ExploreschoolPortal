@@ -26,10 +26,11 @@ Auth::routes();
 Route::domain('admin.explore')->group(function () {
     Route::group(['middleware' => ['auth', 'role:Admin']], function () {
         Route::get('/', [App\Http\Controllers\superAdminController::class, 'index'])->name('dashboard.admin.index');
+        Route::get('/create', [App\Http\Controllers\superAdminController::class, 'adminCreate'])->name('dashboard.admin.create');
     }); 
 });
 
-Route::get('/hoe', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
 Route::group(['middleware' => ['auth', 'role:Admin']], function () {
