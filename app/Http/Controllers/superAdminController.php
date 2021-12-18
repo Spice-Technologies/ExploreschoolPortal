@@ -3,15 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Functions\Functions;
+use App\Models\Admins;
 use App\Models\School;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class superAdminController extends Controller
 {
     public function index()
     {
-        return view('dashboard.admin.index');
+        $admins = Admins::all();
+        return view('dashboard.admin.index', compact('admins'));
     }
 
 
@@ -34,12 +37,16 @@ class superAdminController extends Controller
 
         $user = User::create([
             'name' =>  $req->name,
-            'password' => $req->password = 12345678
+            'email' => $req->name,
+            'password' => $req->password = Hash::make(12345678)
         ]);
 
-        $user->admins()->create([
+        $user->admin->create([
             'school_id' => $req->class_id,
             'phone' => $req->phone
-        ]);        
+        ]); 
+        $user->assignRole('Admin');
+
+        return redirect()->route('dashboard.admin.index');       
     }
 }

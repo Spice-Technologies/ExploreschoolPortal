@@ -92,7 +92,7 @@ class StudentController extends Controller
             return $regNum;
         };
 
-
+// refactor this code with the fill() method, chidi 
         $reg_numDemo = secure_random_string(2);
         $user->student()->create([
             'class_id' => $request->class_id,
