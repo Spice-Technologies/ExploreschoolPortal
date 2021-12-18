@@ -23,12 +23,12 @@
                         </a>
                         <ul class="nav-item-child">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('student.create') }}">
+                                <a class="nav-link" href="{{ route('dashboard.admin.create') }}">
                                     Add Admin
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('dashboard.admin.create') }}">
+                                <a class="nav-link" href="{{ route('dashboard.admin.index') }}">
                                     View Admin
                                 </a>
                             </li>

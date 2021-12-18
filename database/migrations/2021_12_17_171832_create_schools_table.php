@@ -15,6 +15,9 @@ class CreateSchoolsTable extends Migration
     {
         Schema::create('schools', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('Owner');
+            $table->string('contact_address');
             $table->timestamps();
         });
     }

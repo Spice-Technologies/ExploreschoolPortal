@@ -3,7 +3,11 @@
 
     <div class="col-xl-10 order-xl-1 mx-auto">
         <div class="card">
+
             <div class="card-body">
+                <div class="col-sm-6 mb-5 p-0">
+                    <h1>Add admin</h1>
+                  </div>
                 <form method="POST" action="">
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Select School</label>
@@ -26,17 +30,19 @@
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <label class="form-control-label" for="input-email">Email</label>
-                                <input type="email" id="input-email" value="{{ old('email') }}" name="lname"
+                                <input type="email" id="input-email" value="{{ old('email') }}" name="email"
                                     class="form-control" placeholder="Email...">
                             </div>
                         </div>
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <label class="form-control-label" for="input-email">Phone Number</label>
-                                <input type="Tel" id="input-email" value="{{ old('lname') }}" name="lname"
-                                    class="form-control" placeholder="Enter Phone number...">
+                                <input type="text" name="phone"  class="form-control" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"  placeholder="Enter phone number ..."/>
                             </div>
                         </div>
+                    </div>
+                    <div class="mt-2">
+                        <button class="btn btn-primary" type="submit">Submit </button>
                     </div>
                 </form>
             </div>
