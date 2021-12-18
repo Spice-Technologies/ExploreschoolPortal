@@ -7,24 +7,27 @@
             <div class="card-body">
                 <div class="col-sm-6 mb-5 p-0">
                     <h1>Add admin</h1>
-                  </div>
-                <form method="POST" action="">
+                </div>
+
+                @if ($errors->any())
+                    {!! implode('', $errors->all('<div class="alert alert-danger">:message</div>')) !!}
+                @endif
+                <form method="POST" action="{{ route('dashboard.admin.post') }}">
+                    @csrf
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Select School</label>
-                        <select class="form-control" id="exampleFormControlSelect1">
-                            <option>Rejoic Academy</option>
-                            <option>Kingstone Academy</option>
-                            <option>Bright Academy</option>
-                            <option>Oceanic Int'l Schools</option>
-                            <option>Riveere Academy</option>
+                        <select class="form-control" name="school_id">
+                            @foreach ($schools as $school)
+                                <option value="{{ $school->id}}">{{ $school->name }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <label class="form-control-label" for="input-username">Firstname</label>
-                                <input type="text" id="lname" value="{{ old('name') }}" name="name"
-                                    class="form-control" placeholder="firstname">
+                                <input type="text" id="lname" value="{{ old('name') }}" name="name" class="form-control"
+                                    placeholder="firstname">
                             </div>
                         </div>
                         <div class="col-lg-4">
@@ -37,7 +40,9 @@
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <label class="form-control-label" for="input-email">Phone Number</label>
-                                <input type="text" name="phone"  class="form-control" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"  placeholder="Enter phone number ..."/>
+                                <input type="text" name="phone" class="form-control"
+                                    onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"
+                                    placeholder="Enter phone number ..." />
                             </div>
                         </div>
                     </div>

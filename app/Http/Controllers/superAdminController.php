@@ -13,16 +13,16 @@ class superAdminController extends Controller
 {
     public function index()
     {
-       // $admins = Admins::all(); compact('admins')
+        // $admins = Admins::all(); compact('admins')
         return view('dashboard.admin.index');
     }
 
 
     public function AdminCreate()
     {
-      
-       // $schools = School::all(); compact('schools')
-        return view('dashboard.admin.create');
+
+        $schools = School::all();
+        return view('dashboard.admin.create', compact('schools'));
     }
 
     public function addAdmin(Request $req)
@@ -32,21 +32,22 @@ class superAdminController extends Controller
             'name' => 'required|string|max:255',
             'school_id'          => 'required|numeric',
             'email' => 'required|string|email|unique:users',
-            'phone' => 'required|max:13'
+            'phone' => 'required|max:15'
         ]);
 
         $user = User::create([
             'name' =>  $req->name,
-            'email' => $req->name,
+            'email' => $req->email,
             'password' => $req->password = Hash::make(12345678)
         ]);
 
-        $user->admin->create([
-            'school_id' => $req->class_id,
+        $user->admin()->create([
+            'school_id' => $req->school_id,
             'phone' => $req->phone
-        ]); 
+        ]);
+
         $user->assignRole('Admin');
 
-        return redirect()->route('dashboard.admin.index');       
+        return redirect()->route('dashboard.admin.index');
     }
 }
