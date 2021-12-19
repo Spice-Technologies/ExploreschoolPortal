@@ -32,7 +32,7 @@ class superAdminController extends Controller
             'name' => 'required|string|max:255',
             'school_id'          => 'required|numeric',
             'email' => 'required|string|email|unique:users',
-            'phone' => 'required|max:15'
+            'phone' => 'required|max:15|unique:admins'
         ]);
 
         $user = User::create([

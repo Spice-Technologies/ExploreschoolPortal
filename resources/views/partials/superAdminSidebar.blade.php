@@ -41,12 +41,12 @@
                         </a>
                         <ul class="nav-item-child">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('class.index') }}">
+                                <a class="nav-link" href="{{ route('school.index') }}">
                                     View Schools
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('class.create') }}">
+                                <a class="nav-link" href="{{ route('school.create') }}">
                                     Register School
                                 </a>
                             </li>
