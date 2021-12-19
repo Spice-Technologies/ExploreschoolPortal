@@ -7,14 +7,14 @@
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col" class="sort" data-sort="name">Name</th>
-                        <th scope="col" class="sort" data-sort="budget">Reg Number</th>
+                        <th scope="col" class="sort" data-sort="budget">Contact</th>
                         <th scope="col" class="sort" data-sort="status">Status</th>
                         <th scope="col">Users</th>
-                        <th scope="col" class="sort" data-sort="completion">Completion</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody class="list">
+                    @foreach ($admins as $admin )
                     <tr>
                         <th scope="row">
                             <div class="media align-items-center">
@@ -22,44 +22,21 @@
                                     <img alt="Image placeholder" src="../../assets/img/theme/bootstrap.jpg">
                                 </a>
                                 <div class="media-body">
-                                    <span class="name mb-0 text-sm">fjjg</span>
+                                    <span class="name mb-0 text-sm">{{$admin->user->name}}</span>
                                 </div>
                             </div>
                         </th>
                         <td class="budget">
-                            bugehe
+                            {{$admin->phone}}
+                        </td>
+                        <td>
+                            {{$admin->user->email}}
                         </td>
                         <td>
                             <span class="badge badge-dot mr-4">
                                 <i class="bg-warning"></i>
                                 <a href=""> <span class="status">edit</span> </a>
                             </span>
-                        </td>
-                        <td>
-                            <div class="avatar-group">
-                                <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip"
-                                    data-original-title="Ryan Tompson">
-                                    <img alt="Image placeholder" src="../../assets/img/theme/team-1.jpg">
-                                </a>
-                                <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip"
-                                    data-original-title="Romina Hadid">
-                                    <img alt="Image placeholder" src="../../assets/img/theme/team-2.jpg">
-                                </a>
-                                <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip"
-                                    data-original-title="Alexander Smith">
-                                    <img alt="Image placeholder" src="../../assets/img/theme/team-3.jpg">
-                                </a>
-                                <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip"
-                                    data-original-title="Jessica Doe">
-                                    <img alt="Image placeholder" src="{{ asset('assets/img/theme/team-4.jpg') }}">
-                                </a>
-                            </div>
-
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <span class="completio mr-2">fkfkkf</span>
-                            </div>
                         </td>
                         <td class="text-right">
                             <div class="dropdown">
@@ -75,6 +52,7 @@
                             </div>
                         </td>
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

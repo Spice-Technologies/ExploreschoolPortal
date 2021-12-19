@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Functions\Functions;
-use App\Models\Admins;
+use App\Models\Admin;
 use App\Models\School;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -13,8 +13,8 @@ class superAdminController extends Controller
 {
     public function index()
     {
-        // $admins = Admins::all(); compact('admins')
-        return view('dashboard.admin.index');
+        $admins = Admin::all(); compact('admins');
+        return view('dashboard.admin.index', compact('admins'));
     }
 
 
