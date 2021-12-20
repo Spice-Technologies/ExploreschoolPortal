@@ -2,6 +2,9 @@
 
 @section('content')
     <div class="table-responsive">
+        <div class="col-sm-6 mb-4 p-0">
+            <h1>View Pin Stats</h1>
+        </div>
         <div>
             <table id="myTable" class="table align-items-center table-dark">
                 <thead class="thead-dark">
@@ -30,12 +33,12 @@
                                 {{ $pin->session->session }}
                             </td>
                             <td>
-
-                             <span class="name mb-0 text-sm">{{ $pin->generated == 1 ? 'Genereated' : 'Not Generated' }}</span>
-
+                                <span class="name mb-0 text-sm">{{ $pin->generated == 1 ? 'Genereated' : 'Not Generated' }}</span>
                             </td>
                             <td>
-                                <button class="btn btn-secondary"> Download</button>
+                                <a href="{{route('pinDownload', $pin->id )}}">
+                                    <button class="btn btn-secondary"> Download</button>
+                                </a>
                             </td>
                             <td class="text-right">
                                 <div class="dropdown">

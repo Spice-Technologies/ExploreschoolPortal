@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\PinDownload;
 use App\Models\Admin;
 use App\Models\Pin;
 use App\Models\School;
 use App\Models\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session as msgSession;
+use Maatwebsite\Excel\Facades\Excel;
 
 use function App\Http\Controllers\secure_random_string as ControllersSecure_random_string;
 
@@ -83,7 +85,7 @@ class PinController extends Controller
                                 ->where('session_id', $request->session)
                                 ->first();
         if (!$mainPin) {
-            $pinModel->pin = serialize($allPins); // serialized so that everything can be inside one db field instead of multiple rows
+            $pinModel->pin = json_encode($allPins); // serialized so that everything can be inside one db field instead of multiple rows
             $pinModel->session_id = $request->session;
             $pinModel->school_id = $request->school;
             $pinModel->generated = 1;
@@ -138,5 +140,12 @@ class PinController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+//  this is for downloading the excel 
+    public function download(Pin $pin)
+    { 
+        return (new  PinDownload($pin->school_id, $pin->session_id, $pin->generated))->download($pin->school->school.'.csv');
+       // return Excel::download(new PinDownload, $pin->school->school.'.csv'); //actully theNameOfTheSchool.csv
     }
 }

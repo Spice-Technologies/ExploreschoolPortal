@@ -37,9 +37,11 @@ Route::domain('admin.explore')->group(function () {
         //school mgt
         Route::resource('/school', 'App\Http\Controllers\SchoolController');
 
+            // download pins section 
+        Route::get('/pin/download/{pin}', [App\Http\Controllers\PinController::class, 'download'])->name('pinDownload');
         // Request pin section 
-
         Route::resource('/pin',  'App\Http\Controllers\PinController');
+        
     });
 });
 
