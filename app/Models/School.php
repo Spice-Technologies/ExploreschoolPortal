@@ -16,4 +16,8 @@ class School extends Model
     {
         return $this->hasMany(Admins::class);
     }
+    public function pin() {
+        
+        return $this->hasOne(Pin::class);
+    }
 }

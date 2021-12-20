@@ -18,14 +18,14 @@
                         <label for="exampleFormControlSelect1">Select School</label>
                         <select class="form-control" name="school_id">
                             @foreach ($schools as $school)
-                                <option value="{{ $school->id}}">{{ $school->name }}</option>
+                                <option value="{{ $school->id}}">{{ $school->school }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="form-group">
-                                <label class="form-control-label" for="input-username">Firstname</label>
+                                <label class="form-control-label" for="input-username">Full name </label>
                                 <input type="text" id="lname" value="{{ old('name') }}" name="name" class="form-control"
                                     placeholder="firstname">
                             </div>

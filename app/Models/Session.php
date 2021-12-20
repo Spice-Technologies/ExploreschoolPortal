@@ -12,4 +12,10 @@ class Session extends Model
     protected  $fillable = [
         'session'
     ];
+
+
+    public function pin() {
+        
+        return $this->hasOne(Pin::class);
+    }
 }
