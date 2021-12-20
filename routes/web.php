@@ -34,8 +34,12 @@ Route::domain('admin.explore')->group(function () {
         Route::get('/index', [App\Http\Controllers\superAdminController::class, 'index'])->name('dashboard.admin.index');
         Route::post('/post', [App\Http\Controllers\superAdminController::class, 'addAdmin'])->name('dashboard.admin.post');
 
-        //schhol mgt
+        //school mgt
         Route::resource('/school', 'App\Http\Controllers\SchoolController');
+
+        // Request pin section 
+
+        Route::resource('/pin',  'App\Http\Controllers\PinController');
     });
 });
 

@@ -13,7 +13,7 @@ class superAdminController extends Controller
 {
     public function index()
     {
-        $admins = Admin::all(); compact('admins');
+        $admins = Admin::all(); 
         return view('dashboard.admin.index', compact('admins'));
     }
 
