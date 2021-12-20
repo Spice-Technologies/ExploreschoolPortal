@@ -20,6 +20,8 @@ class PinController extends Controller
      */
     public function index()
     {
+        $pins = Pin::all();
+        return view('dashboard.pinRequest.index', compact('pins'));
     }
 
     /**
