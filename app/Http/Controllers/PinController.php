@@ -7,6 +7,7 @@ use App\Models\Pin;
 use App\Models\School;
 use App\Models\Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session as msgSession;
 
 use function App\Http\Controllers\secure_random_string as ControllersSecure_random_string;
 
@@ -43,7 +44,8 @@ class PinController extends Controller
     {
         $request->validate([
             'school' => 'required|numeric', // actually school_id but to avoid FE validation error like 'school_id' is required....you get?
-            'session' => 'required|numeric', // actually session_id 
+            'session' => 'required|numeric',
+            'pins' =>'required|numeric'// actually session_id 
         ]);
         //things to do :
         // get the no of pins via request payload
@@ -52,6 +54,8 @@ class PinController extends Controller
         // take that array then serialised it
         //send the serialsed array into the db
         //finish !
+        // not finish yet..
+        //lets prevent the form from generatingpin twice either by misake or anyting 
 
         function secure_random_string($length)
         {
@@ -69,12 +73,22 @@ class PinController extends Controller
             $generatedPin =   secure_random_string(13);
             array_push($allPins, $generatedPin);
         }
-        
+
         $pinModel = new Pin();
-        $pinModel->pin = serialize($allPins);
-        $pinModel->session_id = $request->session;
-        $pinModel->school_id = $request->school;
-        $pinModel->save();
+        // check if pins have been generated for this school before
+        $mainPin = Pin::select('*')->where('school_id', $request->school)
+                                ->where('generated', '1')
+                                ->where('session_id', $request->session)
+                                ->first();
+        if (!$mainPin) {
+            $pinModel->pin = serialize($allPins); // serialized so that everything can be inside one db field instead of multiple rows
+            $pinModel->session_id = $request->session;
+            $pinModel->school_id = $request->school;
+            $pinModel->generated = 1;
+            $pinModel->save();
+        } else {
+            return back()->with('msg', 'Oops! We have already generated pins for the school, ' .$mainPin->school->school. ', for '.$mainPin->session->session.' session !' );
+        }
 
         return redirect()->route('pin.index');
     }

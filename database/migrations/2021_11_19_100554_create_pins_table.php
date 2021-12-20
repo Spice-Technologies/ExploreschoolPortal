@@ -18,6 +18,7 @@ class CreatePinsTable extends Migration
             $table->string('pin');
             $table->unsignedBigInteger('session_id');
             $table->unsignedBigInteger('school_id');
+            $table->integer('generated');
             $table->timestamps();
         });
     }
