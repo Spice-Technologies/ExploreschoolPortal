@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::domain('admin.'.env('SITE_URL'))->group(function () {
+//Route::domain('admin.'.env('SITE_URL'))->group(function () {
     Route::group(['middleware' => ['auth', 'role:Admin']], function () {
 
             // dashboard/ or home
@@ -43,7 +43,7 @@ Route::domain('admin.'.env('SITE_URL'))->group(function () {
         Route::resource('/pin',  'App\Http\Controllers\PinController');
         
     });
-});
+//});
 
 
 
