@@ -43,6 +43,6 @@ class LoginController extends Controller
             return route('dashboard.admin.index');
         }
 
-        return route('user.hme');
+        return route('user.home');
     }
 }

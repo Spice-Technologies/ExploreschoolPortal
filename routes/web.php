@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::domain('admin.explore')->group(function () {
+Route::domain('admin.'.env('SITE_URL'))->group(function () {
     Route::group(['middleware' => ['auth', 'role:Admin']], function () {
 
             // dashboard/ or home
@@ -47,7 +47,7 @@ Route::domain('admin.explore')->group(function () {
 
 
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
 Route::group(['middleware' => ['auth', 'role:Admin']], function () {
