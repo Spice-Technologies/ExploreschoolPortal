@@ -49,7 +49,7 @@ class PinController extends Controller
         $request->validate([
             'school' => 'required|numeric', // actually school_id but to avoid FE validation error like 'school_id' is required....you get?
             'session' => 'required|numeric',
-            'pins' =>'required|numeric'// actually session_id 
+            'pins' => 'required|numeric' // actually session_id 
         ]);
         //things to do :
         // get the no of pins via request payload
@@ -81,9 +81,9 @@ class PinController extends Controller
         $pinModel = new Pin();
         // check if pins have been generated for this school before
         $mainPin = Pin::select('*')->where('school_id', $request->school)
-                                ->where('generated', '1')
-                                ->where('session_id', $request->session)
-                                ->first();
+            ->where('generated', '1')
+            ->where('session_id', $request->session)
+            ->first();
         if (!$mainPin) {
             $pinModel->pin = json_encode($allPins); // serialized so that everything can be inside one db field instead of multiple rows
             $pinModel->session_id = $request->session;
@@ -91,7 +91,7 @@ class PinController extends Controller
             $pinModel->generated = 1;
             $pinModel->save();
         } else {
-            return back()->with('msg', 'Oops! We have already generated pins for the school, ' .$mainPin->school->school. ', for '.$mainPin->session->session.' session !' );
+            return back()->with('msg', 'Oops! We have already generated pins for the school, ' . $mainPin->school->school . ', for ' . $mainPin->session->session . ' session !');
         }
 
         return redirect()->route('pin.index');
@@ -142,10 +142,15 @@ class PinController extends Controller
         //
     }
 
-//  this is for downloading the excel 
+    //  this is for downloading the excel 
     public function download(Pin $pin)
-    { 
-        return (new  PinDownload($pin->school_id, $pin->session_id, $pin->generated))->download($pin->school->school.'.csv');
-       // return Excel::download(new PinDownload, $pin->school->school.'.csv'); //actully theNameOfTheSchool.csv
+    {
+        // this right here will select the specific row that fits the specified condition from the where clause
+        $pinRow = Pin::where('school_id', $pin->school_id)
+            ->where('session_id', $pin->session_id)
+            ->where('generated', $pin->generated)
+            ->first();
+            //the actually result is passed down to the excel exporting class,PinDownload
+        return (new  PinDownload($pinRow->pin))->download($pin->school->school.'.csv');
     }
 }
