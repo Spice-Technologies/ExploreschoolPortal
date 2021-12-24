@@ -53,6 +53,28 @@
                                     placeholder="Enter phone number ..." />
                             </div>
                         </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label class="form-control-label" for="input-email">LGA</label>
+                                <input type="text" name="lga" {{ old('lga') }} class="form-control" placeholder="Enter LGA..." />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label class="form-control-label" for="input-email">State</label>
+                                <input type="text" id="input-email" value="{{ old('state') }}" name="state"
+                                    class="form-control" placeholder="State...">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label class="form-control-label" for="input-email">School Website</label>
+                                <input type="url" id="input-email" value="{{ old('website') }}" name="website"
+                                    class="form-control" placeholder="optional...">
+                            </div>
+                        </div>
                     </div>
                     <div class="mt-2">
                         <button class="btn btn-primary" type="submit">Submit </button>

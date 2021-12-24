@@ -18,7 +18,11 @@ class CreateSchoolsTable extends Migration
             $table->string('school');
             $table->string('owner');
             $table->string('email');
+            $table->string('lga');
+            $table->string('state');
+            $table->string('website')->nullable();
             $table->unsignedBigInteger('phone');
+            $table->Integer('active');
             $table->string('contact_addr');
             $table->timestamps();
         });

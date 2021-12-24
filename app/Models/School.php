@@ -9,15 +9,17 @@ class School extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['school', 'owner', 'email', 'phone', 'contact_addr'];
+    protected $fillable = ['school', 'owner', 'email', 'phone', 'contact_addr', 'lga', 'state', 'website'];
 
+    protected $guarded = ['active'];
 
     public function admin()
     {
         return $this->hasMany(Admins::class);
     }
-    public function pin() {
-        
+    public function pin()
+    {
+
         return $this->hasOne(Pin::class);
     }
 }

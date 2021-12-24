@@ -41,17 +41,25 @@ class SchoolController extends Controller
             'owner'          => 'required|string|max:255',
             'email'    => 'required|string|unique:schools',
             'phone' => 'required|string|max:15|unique:schools',
-            'contact_addr' => 'required|string'
-
+            'contact_addr' => 'required|string',
+            'lga' => 'required|string',
+            'state' => 'required|string',
+           // 'website' => 'required|string',
         ]);
-
-        School::create([
+        $school = new School();
+        $school->active = 1;
+    
+        $school->fill([
             'school' => $request->school,
             'owner' => $request->owner,
             'email' => $request->email,
             'phone' => $request->phone,
             'contact_addr' => $request->contact_addr,
+            'lga' => $request->lga,
+            'state' => $request->state,
+            'website' => $request->website,
         ]);
+        $school->save();
 
         return redirect()->route('school.index');
     }
@@ -92,7 +100,10 @@ class SchoolController extends Controller
             'owner'          => 'required|string|max:255',
             'email'    => 'required|string',
             'phone' => 'required|string|max:15',
-            'contact_addr' => 'required|string'
+            'contact_addr' => 'required|string',
+            'lga' => 'required|string',
+            'state' => 'required|string',
+           // 'website' => 'required|string',
 
         ]);
 
@@ -102,6 +113,10 @@ class SchoolController extends Controller
             'email' => $request->email,
             'phone' => $request->phone,
             'contact_addr' => $request->contact_addr,
+            'lga' => $request->lga,
+            'state' => $request->state,
+            'website' => $request->website,
+
         ]);
 
         return redirect()->route('school.index');
