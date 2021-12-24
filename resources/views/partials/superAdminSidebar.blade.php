@@ -24,7 +24,7 @@
                         <ul class="nav-item-child">
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('dashboard.admin.create') }}">
-                                    Add Admin
+                                    Register an Admin
                                 </a>
                             </li>
                             <li class="nav-item">

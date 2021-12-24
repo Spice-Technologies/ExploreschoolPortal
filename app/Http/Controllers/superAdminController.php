@@ -8,6 +8,7 @@ use App\Models\School;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Crypt;
 
 class superAdminController extends Controller
 {
@@ -17,7 +18,6 @@ class superAdminController extends Controller
         return view('dashboard.admin.index', compact('admins'));
     }
 
-
     public function AdminCreate()
     {
 
@@ -25,6 +25,17 @@ class superAdminController extends Controller
         return view('dashboard.admin.create', compact('schools'));
     }
 
+  private function secure_random_string($length)
+    {
+        $random_string = '';
+        for ($i = 0; $i < $length; $i++) {
+            $number = random_int(0, 36);
+            $character = base_convert($number, 10, 36);
+            $random_string .= $character;
+        }
+
+        return $random_string;
+    }
     public function addAdmin(Request $req)
     {
         // Functions::secure_random_string($length);
@@ -38,7 +49,7 @@ class superAdminController extends Controller
         $user = User::create([
             'name' =>  $req->name,
             'email' => $req->email,
-            'password' => $req->password = Hash::make(12345678)
+            'password' => encrypt($this->secure_random_string($req->password))
         ]);
 
         $user->admin()->create([
@@ -47,6 +58,7 @@ class superAdminController extends Controller
         ]);
 
         $user->assignRole('Admin');
+
 
         return redirect()->route('dashboard.admin.index');
     }
