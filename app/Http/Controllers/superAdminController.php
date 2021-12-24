@@ -49,7 +49,7 @@ class superAdminController extends Controller
         $user = User::create([
             'name' =>  $req->name,
             'email' => $req->email,
-            'password' => encrypt($this->secure_random_string($req->password))
+            'password' => Crypt::encryptString($this->secure_random_string($req->password))
         ]);
 
         $user->admin()->create([

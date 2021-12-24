@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\School;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\Encryption\DecryptException;
+use Illuminate\Support\Facades\Crypt;
 
 class SchoolController extends Controller
 {
@@ -70,9 +73,11 @@ class SchoolController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(School $school)
     {
-        //
+        $admin = Admin::where('school_id', $school->id)->first();
+        $Adminpass = Crypt::decryptString($admin->user->password);
+        return view('dashboard.school.show', compact('school','admin', 'Adminpass'));   
     }
 
     /**
@@ -83,6 +88,7 @@ class SchoolController extends Controller
      */
     public function edit(School $school)
     {
+       
         return view('dashboard.school.edit', compact('school'));
     }
 
