@@ -116,12 +116,6 @@
                                     disabled>
                             </div>
                         </div>
-                        <div class="col-lg-4">
-                            <div class="form-group">
-                                <label class="form-control-label" for="input-email">LGA</label>
-                                <input type="text" name="lga" value="{{ $school->lga }}" class="form-control" disabled />
-                            </div>
-                        </div>
                     </div>
 
                 </form>
