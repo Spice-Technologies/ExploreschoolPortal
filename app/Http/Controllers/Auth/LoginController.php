@@ -41,6 +41,8 @@ class LoginController extends Controller
     public function redirectPath() {
         if(auth()->user()->hasRole('Admin')){
             return route('dashboard.admin.index');
+        } elseif(auth()->user->hasRole('SuperAdmin')) {
+            return route('dashboard.superadmin.index');
         }
 
         return route('user.home');
