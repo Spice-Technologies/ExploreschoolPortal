@@ -15,19 +15,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-// Route::group(['domain' => 'admin.explore'], function () {
-//     Route::get('/', function () {
-//         return "I will only trigger when domain is admin.myapp.~dev.";
-//     });
-// });
-
 Auth::routes();
 
 //Route::domain('admin.'.env('SITE_URL'))->group(function () {
-    Route::group(['middleware' => ['auth', 'role:Admin']], function () {
+    Route::group(['middleware' => ['auth', 'role:SuperAdmin']], function () {
 
             // dashboard/ or home
-        Route::get('/', [App\Http\Controllers\superAdminController::class, 'index'])->name('dashboard.admin.index');
+        Route::get('/', [App\Http\Controllers\superAdminController::class, 'index'])->name('dashboard');
 
         // admin mgt
         Route::get('/create', [App\Http\Controllers\superAdminController::class, 'adminCreate'])->name('dashboard.admin.create');
@@ -44,10 +38,6 @@ Auth::routes();
         
     });
 //});
-
-
-
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
 Route::group(['middleware' => ['auth', 'role:Admin']], function () {

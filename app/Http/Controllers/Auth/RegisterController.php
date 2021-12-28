@@ -75,12 +75,12 @@ class RegisterController extends Controller
         return $user;
     }
 
-    protected function  redirectPath() {
+    protected function  redirectTo() {
         $user = Auth::user();
         $user->assignRole('SuperAdmin');
        
         if(Auth::user()->hasRole('SuperAdmin')) {
-            return route('dashboard.superAdmin.index');
+            return '/';
         }
     }
 }

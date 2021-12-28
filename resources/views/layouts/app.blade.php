@@ -40,7 +40,7 @@
     @include('partials.sidebar')
 
     <!--  side bar for super admins -->
-    @role('Admin')
+    @role('SuperAdmin')
         @include('partials.superAdminSidebar')
     @endrole
     <!-- end sidebar-->

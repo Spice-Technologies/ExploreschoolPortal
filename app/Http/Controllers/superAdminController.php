@@ -15,7 +15,7 @@ class superAdminController extends Controller
     public function index()
     {
         $admins = Admin::all(); 
-        return view('dashboard.admin.index', compact('admins'));
+        return view( 'dashboard.superAdmin.admin.index' , compact('admins'));
     }
 
     public function AdminCreate()
