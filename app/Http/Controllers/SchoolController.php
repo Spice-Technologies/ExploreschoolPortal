@@ -47,11 +47,11 @@ class SchoolController extends Controller
             'contact_addr' => 'required|string',
             'lga' => 'required|string',
             'state' => 'required|string',
-           // 'website' => 'required|string',
+            // 'website' => 'required|string',
         ]);
         $school = new School();
         $school->active = 1;
-    
+
         $school->fill([
             'school' => $request->school,
             'owner' => $request->owner,
@@ -76,8 +76,8 @@ class SchoolController extends Controller
     public function show(School $school)
     {
         $admin = Admin::where('school_id', $school->id)->first();
-        $Adminpass = Crypt::decryptString($admin->user->password);
-        return view('dashboard.superAdmin.school.show', compact('school','admin', 'Adminpass'));   
+
+        return view('dashboard.superAdmin.school.show', compact('school', 'admin',));
     }
 
     /**
@@ -88,7 +88,7 @@ class SchoolController extends Controller
      */
     public function edit(School $school)
     {
-       
+
         return view('dashboard.superAdmin.school.edit', compact('school'));
     }
 
@@ -109,7 +109,7 @@ class SchoolController extends Controller
             'contact_addr' => 'required|string',
             'lga' => 'required|string',
             'state' => 'required|string',
-           // 'website' => 'required|string',
+            // 'website' => 'required|string',
 
         ]);
 

@@ -49,7 +49,7 @@ class superAdminController extends Controller
         $user = User::create([
             'name' =>  $req->name,
             'email' => $req->email,
-            'password' => Crypt::encryptString($this->secure_random_string($req->password))
+            'password' => Hash::make($req->password)
         ]);
 
         $user->admin()->create([
@@ -60,6 +60,6 @@ class superAdminController extends Controller
         $user->assignRole('Admin');
 
 
-        return redirect()->route('dashboard.superAdmin.admin.index');
+        return redirect()->route('dashboard.admin.index');
     }
 }

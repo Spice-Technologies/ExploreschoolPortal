@@ -18,25 +18,27 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 //Route::domain('admin.'.env('SITE_URL'))->group(function () {
-    Route::group(['middleware' => ['auth', 'role:SuperAdmin']], function () {
+Route::group(['middleware' => ['auth', 'role:SuperAdmin']], function () {
 
-            // dashboard/ or home
-        Route::get('/', [App\Http\Controllers\superAdminController::class, 'index'])->name('dashboard');
+    // dashboard/ or home
+    Route::get('/', [App\Http\Controllers\superAdminController::class, 'index'])->name('dashboard');
 
-        // admin mgt
-        Route::get('/create', [App\Http\Controllers\superAdminController::class, 'adminCreate'])->name('dashboard.admin.create');
-        Route::get('/index', [App\Http\Controllers\superAdminController::class, 'index'])->name('dashboard.admin.index');  // dashboard/ or home
-        Route::post('/post', [App\Http\Controllers\superAdminController::class, 'addAdmin'])->name('dashboard.admin.post');
+    // admin mgt
+    Route::get('/create', [App\Http\Controllers\superAdminController::class, 'adminCreate'])->name('dashboard.admin.create');
+    Route::get('/index', [App\Http\Controllers\superAdminController::class, 'index'])->name('dashboard.admin.index');  // dashboard/ or home
+    Route::post('/post', [App\Http\Controllers\superAdminController::class, 'addAdmin'])->name('dashboard.admin.post');
 
-        //school mgt
-        Route::resource('/school', 'App\Http\Controllers\SchoolController');
+    //school mgt
+    Route::resource('/school', 'App\Http\Controllers\SchoolController');
 
-            // download pins section 
-        Route::get('/pin/download/{pin}', [App\Http\Controllers\PinController::class, 'download'])->name('pinDownload');
-        // Request pin section 
-        Route::resource('/pin',  'App\Http\Controllers\PinController');
-        
-    });
+    // download pins section 
+    Route::get('/pin/download/{pin}', [App\Http\Controllers\PinController::class, 'download'])->name('pinDownload');
+    // Request pin section 
+    Route::resource('/pin',  'App\Http\Controllers\PinController');
+
+    // Session section
+    Route::resource('/session',  'App\Http\Controllers\SessionController');
+});
 //});
 
 
