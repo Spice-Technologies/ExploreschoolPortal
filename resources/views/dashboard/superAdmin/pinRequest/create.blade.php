@@ -27,7 +27,7 @@
                                 <label for="exampleFormControlSelect1">Select School</label>
                                 <select class="form-control" name="school">
                                     @foreach ($schools as $school)
-                                        <option value="{{ $school->id }}">{{ $school->school }}</option>
+                                        <option value="{{ $school->id  ?? ''}}">{{ $school->school }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -42,8 +42,8 @@
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <label class="form-control-label" for="input-email">Session</label>
-                                <input type="hidden" name="session" value="{{ $session->id }}" id="">
-                                <input type="text" value="{{ $session->session }}" class="form-control"
+                                <input type="hidden" name="session" value="{{ $session->id ?? '' }}" id="">
+                                <input type="text" value="{{ $session->session ?? ''}}" class="form-control"
                                     placeholder="Enter phone number ..." />
                             </div>
                         </div>

@@ -11,14 +11,14 @@ use Illuminate\Support\Facades\Crypt;
 class SchoolController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing odashboard.superAdminf the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
         $schools = School::all();
-        return view('dashboard.school.index', compact('schools'));
+        return view('dashboard.superAdmin.school.index', compact('schools'));
     }
 
     /**
@@ -28,7 +28,7 @@ class SchoolController extends Controller
      */
     public function create()
     {
-        return view('dashboard.school.create');
+        return view('dashboard.superAdmin.school.create');
     }
 
     /**
@@ -77,7 +77,7 @@ class SchoolController extends Controller
     {
         $admin = Admin::where('school_id', $school->id)->first();
         $Adminpass = Crypt::decryptString($admin->user->password);
-        return view('dashboard.school.show', compact('school','admin', 'Adminpass'));   
+        return view('dashboard.superAdmin.school.show', compact('school','admin', 'Adminpass'));   
     }
 
     /**
@@ -89,7 +89,7 @@ class SchoolController extends Controller
     public function edit(School $school)
     {
        
-        return view('dashboard.school.edit', compact('school'));
+        return view('dashboard.superAdmin.school.edit', compact('school'));
     }
 
     /**

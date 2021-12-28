@@ -31,7 +31,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-        //protected $redirectTo = RouteServiceProvider::HOME;
+    //protected $redirectTo = RouteServiceProvider::HOME;
     /**
      * Create a new controller instance.
      *
@@ -75,12 +75,8 @@ class RegisterController extends Controller
         return $user;
     }
 
-    protected function  redirectTo() {
-     //   $user = Auth::user();
-      //  $user->assignRole('SuperAdmin');
-       
-        //if(Auth::user()->hasRole('SuperAdmin')) {
-            return '/';
-      //  }
-    }
+    protected function  redirectTo()
+    {
+        return '/';
+        }
 }

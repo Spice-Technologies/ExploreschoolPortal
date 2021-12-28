@@ -23,7 +23,7 @@ class PinController extends Controller
     public function index()
     {
         $pins = Pin::all();
-        return view('dashboard.pinRequest.index', compact('pins'));
+        return view('dashboard.superAdmin.pinRequest.index', compact('pins'));
     }
 
     /**
@@ -35,7 +35,7 @@ class PinController extends Controller
     {
         $schools = School::all();
         $session = Session::first(); // i should write the code in away that it suggest also the session based on the current year of the calender
-        return view('dashboard.pinRequest.create', compact('schools', 'session'));
+        return view('dashboard.superAdmin.pinRequest.create', compact('schools', 'session'));
     }
 
     /**

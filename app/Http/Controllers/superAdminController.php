@@ -22,7 +22,7 @@ class superAdminController extends Controller
     {
 
         $schools = School::all();
-        return view('dashboard.admin.create', compact('schools'));
+        return view('dashboard.superAdmin.admin.create', compact('schools'));
     }
 
   private function secure_random_string($length)
@@ -60,6 +60,6 @@ class superAdminController extends Controller
         $user->assignRole('Admin');
 
 
-        return redirect()->route('dashboard.admin.index');
+        return redirect()->route('dashboard.superAdmin.admin.index');
     }
 }
