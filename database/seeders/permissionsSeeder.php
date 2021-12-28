@@ -3,7 +3,10 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\PermissionRegistrar;
+
 
 class permissionsSeeder extends Seeder
 {
@@ -20,11 +23,16 @@ class permissionsSeeder extends Seeder
          // create permissions
          // Permission::create(['name' => 'edit articles']);
          $role = Role::create(['name' => 'SuperAdmin']);
-         $role = Role::create(['name' => 'Admin']);
+         $roleAdmin = Role::create(['name' => 'Admin']);
          $role = Role::create(['name' => 'Teacher']);
          $role = Role::create(['name' => 'Parent']);
-         $role = Role::create(['name' => 'Student']);
- 
-         // $role->givePermissionTo('edit articles');
+         $roleStudent = Role::create(['name' => 'Student']);
+
+         Permission::create(['name' => 'Manage School']);
+        Permission::create(['name' => 'See School Info']);
+   
+            // create roles and assign existing permissions
+        $roleAdmin->givePermissionTo('Manage School');
+        $roleStudent->givePermissionTo('See School Info');
     }
 }

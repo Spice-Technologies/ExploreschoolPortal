@@ -76,11 +76,11 @@ class RegisterController extends Controller
     }
 
     protected function  redirectTo() {
-        $user = Auth::user();
-        $user->assignRole('SuperAdmin');
+     //   $user = Auth::user();
+      //  $user->assignRole('SuperAdmin');
        
-        if(Auth::user()->hasRole('SuperAdmin')) {
+        //if(Auth::user()->hasRole('SuperAdmin')) {
             return '/';
-        }
+      //  }
     }
 }
