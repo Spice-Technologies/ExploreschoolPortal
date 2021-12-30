@@ -47,8 +47,8 @@
                                 <span class="badge badge-dot mr-4">
                                     <i class="bg-warning"></i>
                                     {{-- <a href=""> <span class="status">edit</span> </a> --}}
-                                </span>
-                            </td> --}}
+                              
+                           
                             <td class="text-right">
                                 <div class="dropdown">
                                     <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
