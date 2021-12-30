@@ -80,7 +80,7 @@
                                 <div class="row">
                                     <div class="col">
                                         <h5 class="card-title text-uppercase text-muted mb-0">Current Session</h5>
-                                        <span class="h2 font-weight-bold mb-0">49,65%</span>
+                                        <span class="h2 font-weight-bold mb-0">{{$session->session}}</span>
                                     </div>
                                     <div class="col-auto">
                                         <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
@@ -88,10 +88,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <p class="mt-3 mb-0 text-sm">
-                                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                                    <span class="text-nowrap">Since last month</span>
-                                </p>
+
                             </div>
                         </div>
                     </div>
@@ -102,6 +99,9 @@
     <!-- Page content -->
     <div class="container-fluid mt--6">
         <div class="row">
+            @if (!$schools)
+            <h2 class="text-danger"> <i>It is highly recommended that you <span> <a href="{{route('school.create')}}"> Register school </a></span> first before you can fully access all application feautures !</i> </h2>  
+            @endif
 
 
         </div>

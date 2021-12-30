@@ -16,14 +16,23 @@ class superAdminController extends Controller
 {
     public function index()
     {
-        
+
         $schools = School::count();
         $admins = Admin::count();
         $students = Student::count();
         $session = Session::first();
-      
-        return view('dashboard.superAdmin.index', compact('schools','session', 'admins', 'students'));
+
+        return view('dashboard.superAdmin.index', compact('schools', 'session', 'admins', 'students'));
     }
+
+
+    public function ViewAdmin()
+    {
+
+        $admins = Admin::all();
+        return view('dashboard.superAdmin.admin.index', compact('admins'));
+    }
+
 
     public function AdminCreate()
     {
@@ -56,6 +65,6 @@ class superAdminController extends Controller
         $user->assignRole('Admin');
 
 
-        return redirect()->route('dashboard.admin.index');
+        return redirect()->route('dashboard.admin.view')->with('msg', 'Admin created successfully');
     }
 }

@@ -25,8 +25,10 @@ Route::group(['middleware' => ['auth', 'role:SuperAdmin']], function () {
 
     // admin mgt
     Route::get('/create', [App\Http\Controllers\superAdminController::class, 'adminCreate'])->name('dashboard.admin.create');
-    Route::get('/index', [App\Http\Controllers\superAdminController::class, 'index'])->name('dashboard.admin.index');  // dashboard/ or home
+    Route::get('/index', [App\Http\Controllers\superAdminController::class, 'index'])->name('dashboard.admin.index');  // dashboard/ or home for only super admins
     Route::post('/post', [App\Http\Controllers\superAdminController::class, 'addAdmin'])->name('dashboard.admin.post');
+  
+    Route::get('/admin/view', [App\Http\Controllers\superAdminController::class, 'ViewAdmin'])->name('dashboard.admin.view');
 
     //school mgt
     Route::resource('/school', 'App\Http\Controllers\SchoolController');

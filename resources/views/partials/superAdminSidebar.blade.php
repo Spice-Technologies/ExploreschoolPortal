@@ -45,7 +45,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('dashboard.admin.index') }}">
+                                <a class="nav-link" href="{{ route('dashboard.admin.view') }}">
                                     View Admin
                                 </a>
                             </li>

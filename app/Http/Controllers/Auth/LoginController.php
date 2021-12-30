@@ -42,9 +42,9 @@ class LoginController extends Controller
         if(auth()->user()->hasRole('Admin')){
             return route('dashboard.admin.index');
         } elseif(auth()->user()->hasRole('SuperAdmin')) {
-            return route('dashboard.superadmin.index');
+            return route('dashboard.admin.index');
         }
 
-        return route('user.home');
+        return route('user.home'); // student
     }
 }
