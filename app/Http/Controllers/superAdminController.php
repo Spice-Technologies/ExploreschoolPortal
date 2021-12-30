@@ -24,19 +24,7 @@ class superAdminController extends Controller
         $schools = School::all();
         return view('dashboard.superAdmin.admin.create', compact('schools'));
     }
-    //
-
-  private function secure_random_string($length)
-    {
-        $random_string = '';
-        for ($i = 0; $i < $length; $i++) {
-            $number = random_int(0, 36);
-            $character = base_convert($number, 10, 36);
-            $random_string .= $character;
-        }
-
-        return $random_string;
-    }
+    
     public function addAdmin(Request $req)
     {
         // Functions::secure_random_string($length);
