@@ -10,7 +10,7 @@
             <div class="row">
                 <div class="col">
                     <h5 class="card-title text-uppercase text-muted mb-0">Session</h5>
-                    <span class="h2 font-weight-bold mb-0">{{$ession->session ?? 'There are no session yet. Pls add'}}</span>
+                    <span class="h2 font-weight-bold mb-0">{{$session->session ?? 'There are no session yet. Pls add'}}</span>
                 </div>
                 <div class="col-auto">
                     <div class="icon icon-shape bg-orange text-white rounded-circle shadow">
@@ -19,8 +19,8 @@
                 </div>
             </div>
             <p class="mt-3 mb-0 text-sm">
-                <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                <span class="text-nowrap">Since last month</span>
+               <a href="{{route('session.create')}}"> <span class="text-primary mr-2">Is this the current session <i class="fa fa-question text-danger"></i>  </span>
+                <span class="text-nowrap"></span>
             </p>
 
         </div>

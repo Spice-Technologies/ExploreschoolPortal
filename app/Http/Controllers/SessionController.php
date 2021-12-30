@@ -14,7 +14,7 @@ class SessionController extends Controller
      */
     public function index()
     {
-        $session = Session::all();
+        $session = Session::first();
         return view('dashboard.superAdmin.session.index', compact('session'));
     }
 
@@ -37,12 +37,14 @@ class SessionController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'session' => 'required'
+            'session' => 'required|unique:sessions,session'
         ]);
     
         $session = new Session();
         $session->session = $request->session;
         $session->save();
+
+        return redirect()->route('session.index');
 
     }
 
