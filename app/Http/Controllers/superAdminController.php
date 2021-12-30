@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Functions\Functions;
 use App\Models\Admin;
 use App\Models\School;
+use App\Models\Session;
+use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -14,8 +16,13 @@ class superAdminController extends Controller
 {
     public function index()
     {
-        $admins = Admin::all(); 
-        return view( 'dashboard.superAdmin.admin.index' , compact('admins'));
+        
+        $schools = School::count();
+        $admins = Admin::count();
+        $students = Student::count();
+        $session = Session::first();
+      
+        return view('dashboard.superAdmin.index', compact('schools','session', 'admins', 'students'));
     }
 
     public function AdminCreate()
@@ -24,7 +31,7 @@ class superAdminController extends Controller
         $schools = School::all();
         return view('dashboard.superAdmin.admin.create', compact('schools'));
     }
-    
+
     public function addAdmin(Request $req)
     {
         // Functions::secure_random_string($length);
