@@ -19,8 +19,8 @@
                     <tr>
                         <th scope="col" class="sort" data-sort="name">Name</th>
                         <th scope="col" class="sort" data-sort="budget">Contact</th>
-                        <th scope="col" class="sort" data-sort="status">Status</th>
-                        <th scope="col">Users</th>
+                        <th scope="col" class="sort" data-sort="status">email</th>
+                     
                         <th scope="col"></th>
                     </tr>
                 </thead>
@@ -43,12 +43,12 @@
                             <td>
                                 {{ $admin->user->email }}
                             </td>
-                            <td>
+                            {{-- <td>
                                 <span class="badge badge-dot mr-4">
                                     <i class="bg-warning"></i>
-                                    <a href=""> <span class="status">edit</span> </a>
+                                    {{-- <a href=""> <span class="status">edit</span> </a> --}}
                                 </span>
-                            </td>
+                            </td> --}}
                             <td class="text-right">
                                 <div class="dropdown">
                                     <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"

@@ -67,4 +67,24 @@ class superAdminController extends Controller
 
         return redirect()->route('dashboard.admin.view')->with('msg', 'Admin created successfully');
     }
+
+    public function updateAdmin(Request $req, Admin $admin)
+    {
+        $req->validate([
+            'name' => 'required|string|max:255',
+            'school_id'          => 'required|numeric',
+            'email' => 'required|string|email|unique:users',
+            'phone' => 'required|max:15|unique:admins'
+        ]);
+
+    
+        $admin->update([
+            'name' =>  $req->name,
+            'email' => $req->email,
+            'password' => Hash::make($req->password)
+        ]);
+
+
+
+    }
 }
