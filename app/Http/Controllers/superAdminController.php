@@ -22,8 +22,9 @@ class superAdminController extends Controller
     {
 
         $schools = School::all();
-        return view('dashboard.admin.create', compact('schools'));
+        return view('dashboard.superAdmin.admin.create', compact('schools'));
     }
+    //
 
   private function secure_random_string($length)
     {
@@ -49,7 +50,7 @@ class superAdminController extends Controller
         $user = User::create([
             'name' =>  $req->name,
             'email' => $req->email,
-            'password' => Crypt::encryptString($this->secure_random_string($req->password))
+            'password' => Hash::make($req->password)
         ]);
 
         $user->admin()->create([

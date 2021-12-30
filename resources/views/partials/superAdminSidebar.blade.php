@@ -19,6 +19,23 @@
                     </li>
                     <li class="nav-item nav-with-child">
                         <a class="nav-link ">
+                            <i class="ni ni-align-left-2 "></i> Session Mgt
+                        </a>
+                        <ul class="nav-item-child">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('session.index') }}">
+                                    View Sessions
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('session.create') }}">
+                                    Add Session
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item nav-with-child">
+                        <a class="nav-link ">
                             <i class="ni ni-align-left-2 "></i> Admin Mgt
                         </a>
                         <ul class="nav-item-child">
