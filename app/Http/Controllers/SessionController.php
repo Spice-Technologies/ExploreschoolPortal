@@ -14,7 +14,7 @@ class SessionController extends Controller
      */
     public function index()
     {
-        $session = Session::all();
+        $session = Session::first();
         return view('dashboard.superAdmin.session.index', compact('session'));
     }
 
