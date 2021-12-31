@@ -44,7 +44,7 @@
                                 <label class="form-control-label" for="input-email">Session</label>
                                 <input type="hidden" name="session" value="{{ $session->id ?? '' }}" id="">
                                 <input type="text" value="{{ $session->session ?? ''}}" class="form-control"
-                                    placeholder="Enter phone number ..." />
+                                    placeholder="Enter pin..."  disabled/>
                             </div>
                         </div>
                     </div>
