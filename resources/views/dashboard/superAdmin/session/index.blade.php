@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
-
 <div style="width: 18rem;">
     <div class="card card-stats">
         <!-- Card body -->

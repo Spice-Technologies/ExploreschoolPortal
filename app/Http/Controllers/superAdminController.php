@@ -54,7 +54,7 @@ class superAdminController extends Controller
         $user = User::create([
             'name' =>  $req->name,
             'email' => $req->email,
-            'password' => Hash::make($req->password)
+            'password' => Hash::make(12345678)
         ]);
 
         $user->admin()->create([
