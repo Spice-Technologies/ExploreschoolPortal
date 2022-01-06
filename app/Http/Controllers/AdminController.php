@@ -8,6 +8,6 @@ class AdminController extends Controller
 {
  public function index()
     {
-        return 'This is the admin dashboard';
+        return view('backend.index');
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -37,12 +38,14 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
-  
-    public function redirectPath() {
-        if(auth()->user()->hasRole('Admin')){
-            return route('dashboard.admin');
-        } elseif(auth()->user()->hasRole('SuperAdmin')) {
-            return route('dashboard.admin.index');
+
+    public function redirectPath()
+    {
+        $user = Auth::user();
+        if ($user->hasRole('Admin')) {
+            return     $this->redirectTo = route('dashboard.admin');
+        } elseif ($user->hasRole('SuperAdmin')) {
+            return     $this->redirectTo = route('dashboard.admin.index');
         }
 
         return route('user.home'); // student

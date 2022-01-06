@@ -17,14 +17,16 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 //everyone should have access to this but stuff will only be accessible if they are logged in
-Route::get('/index', [App\Http\Controllers\superAdminController::class, 'index'])->name('dashboard.admin.index');
 
 //Route::domain('admin.'.env('SITE_URL'))->group(function () {
 Route::group(['middleware' => ['auth', 'role:SuperAdmin']], function () {
 
     // dashboard/ or home
-    Route::get('/', [App\Http\Controllers\superAdminController::class, 'index'])->name('dashboard');
+    Route::get('/superAdmin', [App\Http\Controllers\superAdminController::class, 'index'])->name('dashboard');
 
+    // dashboard/SuperAdmin
+    Route::get('/index', [App\Http\Controllers\superAdminController::class, 'index'])->name('dashboard.admin.index');
+    
     // admin mgt
     Route::get('/create', [App\Http\Controllers\superAdminController::class, 'adminCreate'])->name('dashboard.admin.create');
     
@@ -48,7 +50,7 @@ Route::group(['middleware' => ['auth', 'role:SuperAdmin']], function () {
 
 Route::group(['middleware' => ['auth', 'role:Admin']], function () {
     // dashboard/ or home
-    Route::get('/', [App\Http\Controllers\AdminController::class, 'index'])->name('dashboard.admin');
+    Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('dashboard.admin');
     Route::get('/promote', [App\Http\Controllers\PromotionController::class, 'index'])->name('promote.index');
     Route::get('/promoteClass', [App\Http\Controllers\PromotionController::class, 'promote'])->name('promote');
     Route::resource('/student', 'App\Http\Controllers\StudentController');

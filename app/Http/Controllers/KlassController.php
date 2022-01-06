@@ -21,7 +21,7 @@ class KlassController extends Controller
 
         // dd($students);
 
-       
+
         if ($req->has('class_id')) {
             //if you use get(), you may not always have your errors thrown but try to be more specific with something like first() as away to debug your code
             $studentsClass = Student::where('class_id', $req->class_id)->get();
@@ -40,7 +40,7 @@ class KlassController extends Controller
             return redirect()->route('class.index')->with(['studentsClass' => $studentsClass]);
         }
         $classes = Klass::all();
-        
+
         return view('backend.class.index', compact('classes'));
     }
 

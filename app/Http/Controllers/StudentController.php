@@ -94,8 +94,8 @@ class StudentController extends Controller
 
         $reg_numDemo = secure_random_string(2);
 
-// refactor this code with the fill() method, chidi 
-    
+        // refactor this code with the fill() method, chidi 
+
         $user->student()->create([
             'class_id' => $request->class_id,
             'parent_id' => 1,
@@ -108,7 +108,7 @@ class StudentController extends Controller
             'current_address' => $request->current_address,
             'permanent_address' => $request->permanent_address
         ]);
-        
+
         $user->assignRole('Student');
 
         $user->student->reg_num = reg_number($user->student->id);
