@@ -46,7 +46,7 @@
     <!-- end sidebar-->
 
 
-    
+
     <!-- Main content -->
     <div class="main-content" id="panel">
         <!-- Topnav -->
@@ -62,7 +62,7 @@
                                 </div>
                                 <input class="form-control" placeholder="Search" type="text">
                             </div>
-                        </div>
+                        </div>Search
                         <button type="button" class="close" data-action="search-close"
                             data-target="#navbar-search-main" aria-label="Close">
                             <span aria-hidden="true">×</span>
@@ -264,7 +264,19 @@
                                             src="{{ asset('/assets/img/theme/team-4.jpg') }}">
                                     </span>
                                     <div class="media-body  ml-2  d-none d-lg-block">
-                                        <span class="mb-0 text-sm  font-weight-bold">John Snow</span>
+                                        <span class="mb-0 text-sm  font-weight-bold">John Snow </span>
+
+
+                                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
+                                            {{ __('Logout') }}
+                                        </a>
+
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                            class="d-none">
+                                            @csrf
+                                        </form>
+
                                     </div>
                                 </div>
                             </a>
@@ -307,8 +319,8 @@
                 <div class="row align-items-center justify-content-lg-between">
                     <div class="col-lg-6">
                         <div class="copyright text-center  text-lg-left  text-muted">
-                            &copy; {{ date("Y");}} <a href="https://spicetech.com.ng" class="font-weight-bold ml-1"
-                                target="_blank">Spice technologies</a>
+                            &copy; {{ date('Y') }} <a href="https://spicetech.com.ng"
+                                class="font-weight-bold ml-1" target="_blank">Spice technologies</a>
                         </div>
                     </div>
                     <div class="col-lg-6">

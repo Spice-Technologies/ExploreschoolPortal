@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+
+
 
 class LoginController extends Controller
 {
@@ -43,11 +46,20 @@ class LoginController extends Controller
     {
         $user = Auth::user();
         if ($user->hasRole('Admin')) {
-            return     $this->redirectTo = route('dashboard.admin');
+            $this->redirectTo = '/admin';
+            return $this->redirectTo;
         } elseif ($user->hasRole('SuperAdmin')) {
-            return     $this->redirectTo = route('dashboard.admin.index');
+            $this->redirectTo = '/superAdmin';
+            return $this->redirectTo;
         }
 
         return route('user.home'); // student
+    }
+
+
+    //logout that redirects to login after user clicks on  stuff  
+    protected function loggedOut(Request $request)
+    {
+        return redirect('/login');
     }
 }
