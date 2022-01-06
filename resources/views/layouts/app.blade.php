@@ -266,17 +266,10 @@
                                     <div class="media-body  ml-2  d-none d-lg-block">
                                         <span class="mb-0 text-sm  font-weight-bold">John Snow </span>
 
-
-                                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                    document.getElementById('logout-form').submit();">
-                                            {{ __('Logout') }}
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                            class="d-none">
-                                            @csrf
+                                        <form id="logout-form" action="{{ url('logout') }}" method="POST">
+                                            {{ csrf_field() }}
+                                            <button class="btn btn-warning btn-sm" type="submit" style="font-size: 17px">Logout</button>
                                         </form>
-
                                     </div>
                                 </div>
                             </a>
