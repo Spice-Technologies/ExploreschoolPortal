@@ -2,16 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\Klass;
 use App\Models\Student;
 use App\Models\SubKlass;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
 class StudentController extends Controller
 {
+ /*
+     Hiii..I used my own ceated static functions, Admin::AdminSchool() to always get the the school that the admin belongs to
+
+     I also used scoped queries to avoid repeatition of where clauses that has to do with fetching the school the user is related to
+
+   
+     */
+
     /**
      * Display a listing of the resource.
      *
@@ -21,12 +31,13 @@ class StudentController extends Controller
     {
         if ($req->has('class_id')) {
             //if you use get(), you may not always have your errors thrown but try to be more specific with something like first() as away to debug your code
-            $studentsClass = Student::where('class_id', $req->class_id)->get();
+            $studentsClass = Student::where('class_id', $req->class_id)->where('school_id', Admin::AdminSchool())->get();
+         
             $classes = Klass::all();
             return view('backend.students.index', compact('classes', 'studentsClass'));
         }
         $classes = Klass::all();
-        $studentsClass = Student::all();
+        $studentsClass = Student::SchoolId(Admin::AdminSchool())->get();
         return view('backend.students.index', compact('classes', 'studentsClass'));
     }
 
@@ -93,9 +104,7 @@ class StudentController extends Controller
         };
 
         $reg_numDemo = secure_random_string(2);
-
         // refactor this code with the fill() method, chidi 
-
         $user->student()->create([
             'class_id' => $request->class_id,
             'parent_id' => 1,
@@ -106,7 +115,8 @@ class StudentController extends Controller
             'state' => $request->state,
             'country' => $request->country,
             'current_address' => $request->current_address,
-            'permanent_address' => $request->permanent_address
+            'permanent_address' => $request->permanent_address,
+            'school_id' => Admin::AdminSchool(), //check the admin model to see how this is working 
         ]);
 
         $user->assignRole('Student');

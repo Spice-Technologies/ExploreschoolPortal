@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -23,7 +23,9 @@ class Admin extends Model
         return $this->belongsTo(School::class);
     } 
 
-
+    public static function AdminSchool(){
+        return  self::where('id', Auth::user()->admin->id)->first()->school->id;
+    }
     /*  
         Writing the scope query logic for selecting the things admin is going to see based on the school id
 

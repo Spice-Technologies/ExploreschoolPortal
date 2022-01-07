@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Student extends Model
+class Student extends Model 
 {
     use HasFactory;
 
@@ -22,13 +22,8 @@ class Student extends Model
         'lga',
         'country',
         'reg_num',
-        'student_id'
+        'school_id'
     ];
-
-
-    //    protected $dates = [
-    //     'dateofbirth'
-    // ];
 
     public function user()
     {
@@ -43,4 +38,11 @@ class Student extends Model
     {
         return $this->belongsTo(Klass::class, 'class_id');
     }
+
+
+    //uisng dynamic scoping
+
+     public function scopeSchoolId($query, $school_id){
+         return $query->where('school_id', $school_id);
+     }
 }
