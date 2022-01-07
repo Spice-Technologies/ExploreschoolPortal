@@ -18,6 +18,7 @@ class CreateStudentsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('parent_id');
             $table->unsignedBigInteger('class_id');
+            $table->unsignedBigInteger('student_id');
             $table->unsignedBigInteger('SubKlass_id');
             $table->enum('gender', ['male', 'female']);
             $table->date('dateofbirth');

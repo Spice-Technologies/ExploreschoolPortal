@@ -21,7 +21,8 @@ class Student extends Model
         'state',
         'lga',
         'country',
-        'reg_num'
+        'reg_num',
+        'student_id'
     ];
 
 
