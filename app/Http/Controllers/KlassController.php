@@ -17,7 +17,7 @@ class KlassController extends Controller
     {
 
         $classes = Klass::all();
-        return view('backend.classes.index', compact('classes'));
+        return view('backend.class.index', compact('classes'));
     }
 
     /**
