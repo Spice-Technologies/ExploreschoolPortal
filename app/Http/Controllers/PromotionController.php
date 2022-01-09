@@ -21,10 +21,10 @@ class PromotionController extends Controller
         $Student = new Student();
 
     
-        $Student->SchoolId(Admin::AdminSchool())->get();
+        $adminOwnStudents = $Student->SchoolId(Admin::AdminSchool())->get();
         //fetch all the students in the class but based on the admin and school he belongs to before promotion 
-        
-        $Student->where('class_id', 6)->each(function ($finalist) {
+      
+         $adminOwnStudents->where('class_id', 6)->each(function ($finalist) {
             $graduateStud = $finalist->replicate();
             $graduateStud->setTable('graduates');
             $graduateStud->save();
@@ -33,7 +33,7 @@ class PromotionController extends Controller
 
         $matches = collect([1, 2, 3, 4, 5]);
         //to avoid this stuff for repeating more than once in year, you will have to check for the session date in the database, against the current year, then fire the increment() stuff
-        Student::whereIn('class_id', $matches)->increment('class_id', 1);
+        $adminOwnStudents->where('school_id', Admin::AdminSchool())->whereIn('class_id', $matches)->increment('class_id', 1);
         //$h->toSql(); using this to output raw sql queries
         return redirect()->route('student.index');
     }

@@ -32,7 +32,7 @@ class StudentController extends Controller
         if ($req->has('class_id')) {
             //if you use get(), you may not always have your errors thrown but try to be more specific with something like first() as away to debug your code
             $studentsClass = Student::where('class_id', $req->class_id)->where('school_id', Admin::AdminSchool())->get();
-            //you can refactor this code by using onetoMany through relationship
+            //you can refactor this code by using onetoMany through relationship in their respective models esp between admin, school and student //i.e one to many students through school
          
             $classes = Klass::all();
             return view('backend.students.index', compact('classes', 'studentsClass'));
