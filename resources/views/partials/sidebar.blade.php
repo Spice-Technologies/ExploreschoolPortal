@@ -58,6 +58,28 @@
                                 </li>
                             </ul>
                         </li>
+                        <li class="nav-item nav-with-child">
+                            <a class="nav-link ">
+                                <i class="ni ni-align-left-2 "></i> Results
+                            </a>
+                            <ul class="nav-item-child">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('class.index') }}">
+                                        Upload Result
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('class.create') }}">
+                                        Check Result
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('promote.index') }}">
+                                        Master Sheets
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
                     @endrole
                 </ul>
             </div>

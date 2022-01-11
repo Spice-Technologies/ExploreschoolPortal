@@ -16,10 +16,8 @@ class PromotionController extends Controller
 
     public function promote(Request  $request)
     {
-
         //check if there are ss3 students and move them to a new table
         $Student = new Student();
-
 
         $adminOwnStudents = $Student->SchoolId(Admin::AdminSchool())->get();
         //fetch all the students in the class but based on the admin and school he belongs to before promotion 
