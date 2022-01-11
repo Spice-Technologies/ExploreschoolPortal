@@ -53,6 +53,13 @@ Route::group(['middleware' => ['auth', 'role:Admin']], function () {
     Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('dashboard.admin');
     Route::get('/promote', [App\Http\Controllers\PromotionController::class, 'index'])->name('promote.index');
     Route::get('/promoteClass', [App\Http\Controllers\PromotionController::class, 'promote'])->name('promote');
+
+    //Manage results
+    Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('dashboard.admin');
+
+
+    //manage students
     Route::resource('/student', 'App\Http\Controllers\StudentController');
+    // manage class
     Route::resource('/class', 'App\Http\Controllers\KlassController');
 });
