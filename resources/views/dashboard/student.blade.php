@@ -45,7 +45,7 @@
                     <div class="h5 font-weight-300">
 
                         <span class="h3"> Age: </span><span
-                            class="font-weight-light">{{ (int) $student->dateofbirth->diffForHumans() }}</span>
+                            class="font-weight-light">  </span>
 
                         <i class="ni location_pin mr-2"></i>
                     </div>
@@ -102,14 +102,14 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-last-name">Date Of Birth</label>
-                                    <h5 class="h4"> {{ $student->dateofbirth->format('d M Y') }} </h5>
+                                    <h5 class="h4"> </h5>
 
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-last-name">Date Of Birth</label>
-                                    <h5 class="h4"> {{ $student->dateofbirth->format('d M Y') }} </h5>
+                                    <h5 class="h4">  </h5>
 
                                 </div>
                             </div>
