@@ -26,10 +26,10 @@ Route::group(['middleware' => ['auth', 'role:SuperAdmin']], function () {
 
     // dashboard/SuperAdmin
     Route::get('/index', [App\Http\Controllers\superAdminController::class, 'index'])->name('dashboard.admin.index');
-    
+
     // admin mgt
     Route::get('/create', [App\Http\Controllers\superAdminController::class, 'adminCreate'])->name('dashboard.admin.create');
-    
+
     Route::post('/post', [App\Http\Controllers\superAdminController::class, 'addAdmin'])->name('dashboard.admin.post');
 
     Route::get('/admin/view', [App\Http\Controllers\superAdminController::class, 'ViewAdmin'])->name('dashboard.admin.view');
@@ -57,9 +57,17 @@ Route::group(['middleware' => ['auth', 'role:Admin']], function () {
     //Manage results
     Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('dashboard.admin');
 
-
     //manage students
     Route::resource('/student', 'App\Http\Controllers\StudentController');
+
     // manage class
     Route::resource('/class', 'App\Http\Controllers\KlassController');
+});
+
+Route::group(['middleware' => ['auth', 'role:Student']], function () {
+
+    // dashboard/ or home
+    Route::get('/user', [App\Http\Controllers\SoleStudentController::class, 'index'])->name('student.user.index');
+    // Route::resource('/student/user', 'App\Http\Controllers\SoleStudentController.php');
+
 });

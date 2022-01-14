@@ -53,7 +53,7 @@ class LoginController extends Controller
             return $this->redirectTo;
         }
 
-        return route('user.home'); // student
+        return route('student.user.index'); // student
     }
 
 
