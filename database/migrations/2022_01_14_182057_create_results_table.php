@@ -24,6 +24,7 @@ class CreateResultsTable extends Migration
             $table->unsignedBigInteger('subject_id');
             $table->unsignedBigInteger('session_id');
             $table->unsignedBigInteger('term_id');
+            $table->string('subject');
             $table->timestamps();
             
         });
