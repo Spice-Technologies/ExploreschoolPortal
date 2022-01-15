@@ -18,9 +18,9 @@ class ResultsImport implements ToCollection
 
     public $studentInfo = [];
 
-    public function whereRegNum($id)
+    public function whereRegNum($csvRegNo)
     {
-        $data = Student::where('reg_num', $id)->first();
+        $data = Student::where('reg_num', $csvRegNo)->first();
 
         array_push($this->studentInfo, collect($data)->toArray());
 
@@ -37,7 +37,7 @@ class ResultsImport implements ToCollection
         foreach ($t as $key => $row) {
 
             Result::updateOrCreate(
-                ['student_id' => $this->whereRegNum($row[2])->id],
+                ['student_id' => $this->whereRegNum($row[2])->id], //I make the query once then push the result to an array so I avoid repeating them
 
                 [
                     'class_id' => $this->studentInfo[$key]['class_id'],
