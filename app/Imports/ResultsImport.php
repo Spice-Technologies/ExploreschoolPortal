@@ -1,64 +1,52 @@
-<?php
-
-namespace App\Imports;
-
-use App\Models\result;
-use App\Models\Student;
-use Illuminate\Support\Collection;
-use Maatwebsite\Excel\Concerns\ToCollection;
-use Maatwebsite\Excel\Concerns\ToModel;
-
-class ResultsImport implements ToCollection
+<?php function letterCounterCheck($string)
 {
-    /**
-     * @param array $row
-     *
-     * @return \Illuminate\Database\Eloquent\Model|null
-     */
+    return LetterCounter::CountLettersAsString($string);
+}
+// DO NOT MODIFY THE CODE ABOVE
 
-    public $studentInfo = [];
-
-    public function whereRegNum($csvRegNo)
+class LetterCounter
+{
+    // Write your code here
+    public static function CountLettersAsString($data)
     {
-        $data = Student::where('reg_num', $csvRegNo)->first();
-
-        array_push($this->studentInfo, collect($data)->toArray());
-
-        return $data;
-    }
-    //so I am tryitn to prevent the functioon regnum from being called multiple times instead, I push all the data into the StendInfo array then find the matchin gone
-    //and return it.
-
-    public function collection(collection $rows)
-    {
-
-        $array = $rows->toArray();
-        $t = array_splice($array, 1);
-        foreach ($t as $key => $row) {
-
-            Result::updateOrCreate(
-                ['student_id' => $this->whereRegNum($row[2])->id], //I make the query once then push the result to an array so I avoid repeating them
-
-                [
-                    'class_id' => $this->studentInfo[$key]['class_id'],
-                    'subject_id' => $row[4],
-                    'school_id' => $this->studentInfo[$key]['school_id'],
-                    'assessment_total' => $row[6],
-                    'exam_score' => $row[7],
-                    'total_score' => $row[7] + $row[6],
-                    'session_id' => 1,
-                    'term_id' => 1,
-                    'subject' => $row[9],
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]
-            );
+        $result = [];
+        $data = strtolower($data);
+        $data = preg_replace('/[^a-z]/', '', $data);
+        $data = str_split($data);
+        foreach ($data as $letter) {
+            if (array_key_exists($letter, $result)) {
+                $result[$letter]++;
+            } else {
+                $result[$letter] = 1;
+            }
         }
+        return $result;
+    
+        $textWithDup = str_split(strtolower($data));
+
+        $unique = array_unique(str_split(strtolower($data)));
+
+        // I want to return the duplictes only
+        //lets add a something to all
+        $dupes = array_values(array_diff_key($textWithDup, $unique));
+        // now loop through the unique arrays, if anything in the dupes is same, add double start
+        $result = [];
+        $result =  array_map(function ($incoming) use ($dupes) {
+            if (in_array($incoming, $dupes)) {
+                return $incoming . ":**";
+            } else {
+                return  $incoming . ":*";
+            }
+        },  array_values($unique));
+        return implode(',', $result);
     }
 
-    //my logic and approach
+    //before you remove the duplicates, get the values that have duplicate first.
+    //have another array with the unique values
 
-    //just get the student exam number,
-    //use that number to get the other details like CLASS, SCHOOL, to be inserted into result table 
+    //then while you are converting the arrays to string using explode, if one of the matching items from the unduplicated array is matching the uniquvalues, add extra star to it 
 
+    //
+
+    // remove duplicate array 
 }
