@@ -15,28 +15,28 @@
             </div>
             <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
                 <div class="d-flex justify-content-between">
-                    <a href="#" class="btn btn-sm btn-info  mr-4 ">Connect</a>
-                    <a href="#" class="btn btn-sm btn-default float-right">Message</a>
+                    <a href="#" class="btn btn-sm btn-info  mr-4 "></a>
+                    <a href="#" class="btn btn-sm btn-default float-right"></a>
                 </div>
             </div>
-            <div class="card-body pt-0">
-                <div class="row">
-                    <div class="col">
+            <div class="card-body pt-0 ">
+                <div class="row mb-4">
+                    {{-- <div class="col">
                         <div class="card-profile-stats d-flex justify-content-center">
                             <div>
-                                <span class="heading">22</span>
-                                <span class="description">Friends</span>
+                                <span class="heading">-</span>
+                                <span class="description">-</span>
                             </div>
                             <div>
-                                <span class="heading">10</span>
-                                <span class="description">Photos</span>
+                                <span class="heading">-</span>
+                                <span class="description">-</span>
                             </div>
                             <div>
-                                <span class="heading">89</span>
-                                <span class="description">Comments</span>
+                                <span class="heading">-</span>
+                                <span class="description">-</span>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="text-center">
                     <h5 class="h3">
@@ -64,15 +64,15 @@
             <div class="card-header">
                 <div class="row align-items-center">
                     <div class="col-8">
-                        <h3 class="mb-0">Edit profile </h3>
+                        <h3 class="mb-0">Student profile </h3>
                     </div>
-                    <div class="col-4 text-right">
+                    {{-- <div class="col-4 text-right">
                         <a href="#!" class="btn btn-sm btn-primary">Settings</a>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
             <div class="card-body">
-                <form>
+               
                     <h6 class="heading-small text-muted mb-4">User information</h6>
                     <div class="pl-lg-4">
                         <div class="row">
@@ -80,36 +80,43 @@
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-username">Exam Number</label>
                                     <h5 class="h4">
-                                        {{ $student->user->email }}
+                                        {{ $student->user->email }} 
                                     </h5>
                                 </div>
                             </div>
 
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="input-email">Email address</label>
-                                    <h5 class="h4"> {{ $student->user->email }} </h5>
+                                    <label class="form-control-label" for="input-email">Name</label>
+                                    <h5 class="h4"> {{ $student->user->name }} </h5>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="input-first-name">Name</label>
+                                    <label class="form-control-label" for="input-first-name">Date OF Birth</label>
                                     <h5 class="h4"> {{ $student->user->name }} </h5>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="input-last-name">Date Of Birth</label>
-                                    <h5 class="h4"> </h5>
+                                    <label class="form-control-label" for="input-last-name">LGA</label>
+                                    <h5 class="h4">{{ $student->lga }}  </h5>
 
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="input-last-name">Date Of Birth</label>
-                                    <h5 class="h4">  </h5>
+                                    <label class="form-control-label" for="input-last-name">State</label>
+                                    <h5 class="h4"> {{ $student->state}}  </h5>
+
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="input-last-name">Country</label>
+                                    <h5 class="h4"> {{ $student->country}}  </h5>
 
                                 </div>
                             </div>
@@ -151,17 +158,6 @@
                             </div>
                         </div>
                     </div>
-                    <hr class="my-4" />
-                    <!-- Description -->
-                    <h6 class="heading-small text-muted mb-4">About me</h6>
-                    <div class="pl-lg-4">
-                        <div class="form-group">
-                            <label class="form-control-label">About Me</label>
-                            <textarea rows="4" class="form-control"
-                                placeholder="A few words about you ...">A student with the vibes</textarea>
-                        </div>
-                    </div>
-                </form>
             </div>
         </div>
     </div>
