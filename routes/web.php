@@ -57,6 +57,10 @@ Route::group(['middleware' => ['auth', 'role:Admin']], function () {
     //Manage results
     Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('dashboard.admin');
 
+    // Import  results
+    Route::get('/import', [App\Http\Controllers\ResultController::class, 'index'])->name('import.upload');
+    Route::post('/admin/import', [App\Http\Controllers\ResultController::class, 'importResult'])->name('dashboard.admin.importPost');
+
     //manage students
     Route::resource('/student', 'App\Http\Controllers\StudentController');
 

@@ -64,7 +64,7 @@
                             </a>
                             <ul class="nav-item-child">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('class.index') }}">
+                                    <a class="nav-link" href="{{ route('import.upload') }}">
                                         Upload Result
                                     </a>
                                 </li>
