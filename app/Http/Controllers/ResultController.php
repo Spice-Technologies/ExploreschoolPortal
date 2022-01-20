@@ -42,9 +42,18 @@ class ResultController extends Controller
     }
 
      public function masterPdfGen(  $session_id, $klass_id, $term_id) {
-           
-    
- 
+
+        $session = Session::find($session_id);
+        $klass = Klass::find($klass_id);
+        $term = Term::find($term_id);
+        $subClass = SubKlass::where('klass_id', $klass_id)->get();
+        $results = Result::where('session_id', $session_id)
+                            ->where('klass_id', $klass_id)
+                            ->where('term_id', $term_id)
+                            ->get();
+        $pdf = PDF::loadView('backend.result.masterpdf', compact('session', 'klass', 'term', 'subClass', 'results'));
+        return $pdf->download('result.pdf');
+        
      }
 
 
