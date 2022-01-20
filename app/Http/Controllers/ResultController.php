@@ -22,4 +22,9 @@ class ResultController extends Controller
         Excel::import(new ResultsImport,  $file);
         return back()->with('msg', 'Import Upload was successfull');
     }
+
+    public function master()
+    {
+        return view('backend.result.mastersheet');
+    }
 }

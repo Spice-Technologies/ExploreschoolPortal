@@ -70,11 +70,11 @@
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('class.create') }}">
-                                        Check Result
+                                        Single Sheets
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('promote.index') }}">
+                                    <a class="nav-link" href="{{ route('result.masterResult') }}">
                                         Master Sheets
                                     </a>
                                 </li>
