@@ -2,7 +2,7 @@
 
 namespace App\Imports;
 
-use App\Models\result;
+use App\Models\Result;
 use App\Models\Student;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;

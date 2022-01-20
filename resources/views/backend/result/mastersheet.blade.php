@@ -10,11 +10,61 @@
                 </button>
             </div>
         @endif
-        <div class="card p-4">
-select class <br>
-select subclass <br>
-select term <br>
-select session (the default session will always be session )
+        <div class="card  ">
+            <div class="card-header">
+                <div class="row align-items-center">
+                    <div class="col-8">
+                        @if ($errors->any())
+                            {!! implode('', $errors->all('<div class="alert alert-danger">:message</div>')) !!}
+                        @endif
+
+                        <h3 class="mb-0">Print Master Result </h3>
+                    </div>
+
+                </div>
+            </div>
+            <form action="{{ route('student.index') }}" method="GET" role="search">
+                <div class="row mx-auto p-4">
+                    <div class="form-group col-lg-6">
+                        <label for="exampleFormControlSelect1">Select Class</label>
+                        <select name="sub_class_id" value="0" class="form-control" id="exampleFormControlSelect1">
+                            @foreach ($classes as $class)
+                                <option value="{{ $class->id }}">{{ $class->class_name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group col-lg-6">
+                        <label for="exampleFormControlSelect1">Select SubClass</label>
+                        <select name="sub_class_id" value="0" class="form-control" id="exampleFormControlSelect1">
+                            @foreach ($classes as $class)
+                                <option value="1">A</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group col-lg-6">
+                        <label for="exampleFormControlSelect1">Select term</label>
+                        <select name="sub_class_id" value="0" class="form-control" id="exampleFormControlSelect1">
+                            @foreach ($terms as $term)
+                                <option value="{{ $term->id }}">{{ $term->Term }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group col-lg-6">
+                        <label for="exampleFormControlSelect1">Select Session</label>
+                        <select name="sub_class_id" value="0" class="form-control" id="exampleFormControlSelect1">
+                            @foreach ($sessions as $session)
+                                <option value="{{ $session->id }}">{{ $session->session }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-2 ">
+                        <button type="submit" class="btn btn-primary mt-md-4">Fetch Result</button>
+                    </div>
+                </div>
+
+            </form>
         </div>
     </div>
 @endsection
