@@ -10,6 +10,7 @@ use App\Models\Result;
 use App\Models\Session;
 use App\Models\SubKlass;
 use App\Models\Term;
+use Barryvdh\DomPDF\PDF;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ResultController extends Controller
@@ -39,4 +40,13 @@ class ResultController extends Controller
         return view('backend.result.mastersheet', compact('sessions', 'classes', 'terms'));
 
     }
+
+     public function masterPdfGen(  $session_id, $klass_id, $term_id) {
+           
+    
+ 
+     }
+
+
+    
 }
