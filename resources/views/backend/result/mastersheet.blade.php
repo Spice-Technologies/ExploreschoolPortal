@@ -72,12 +72,8 @@
                 <h3 class="mb-0">Download Master sheet </h3>
             </div>
             <div class="row p-4 d-flex justify-content-between w-100">
-                <div class="col-10">
+                <div class="col-md-10   col-4">
                     <button class="btn btn-light  ">exploreJssOneClass.pdf </button>
-                </div>
-                <div class="col-2 ">
-
-                    <span class="text-primary">Download </span>
                 </div>
             </div>
         </div>
