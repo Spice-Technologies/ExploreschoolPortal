@@ -10,7 +10,7 @@ use App\Models\Result;
 use App\Models\Session;
 use App\Models\SubKlass;
 use App\Models\Term;
-use Barryvdh\DomPDF\PDF;
+use Barryvdh\DomPDF\Facade as PDF;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ResultController extends Controller
@@ -31,31 +31,31 @@ class ResultController extends Controller
 
     public function master()
     {
-   
+
         $sessions = Session::all();
         $classes = Klass::all();
-       // $subClass = SubKlass::all();
+        // $subClass = SubKlass::all();
         $terms = Term::all();
-    
-        return view('backend.result.mastersheet', compact('sessions', 'classes', 'terms'));
 
+        return view('backend.result.mastersheet', compact('sessions', 'classes', 'terms'));
     }
 
-     public function masterPdfGen(  $session_id, $klass_id, $term_id) {
+    public function masterPdfGen(Request $r)
+    {
 
-        $session = Session::find($session_id);
-        $klass = Klass::find($klass_id);
-        $term = Term::find($term_id);
-        $subClass = SubKlass::where('klass_id', $klass_id)->get();
-        $results = Result::where('session_id', $session_id)
-                            ->where('klass_id', $klass_id)
-                            ->where('term_id', $term_id)
-                            ->get();
-        $pdf = PDF::loadView('backend.result.masterpdf', compact('session', 'klass', 'term', 'subClass', 'results'));
+
+
+        // dd($r->all());
+        $session = Session::find($r->session_id);
+        $klass = Klass::find($r->klass_id);
+        $term = Term::find($r->term_id);
+        $subClass = SubKlass::where('class_id', $r->klass_id)->get();
+        $results = Result::where('session_id', $r->session_id)
+            ->where('class_id', $r->klass_id)
+            ->where('term_id', $r->term_id)
+            ->get();
+        //'session', 'klass', 'term', 'subClass',
+        $pdf = PDF::loadView('backend.result.masterpdf', compact('results'));
         return $pdf->download('result.pdf');
-        
-     }
-
-
-    
+    }
 }

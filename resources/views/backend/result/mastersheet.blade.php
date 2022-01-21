@@ -23,11 +23,11 @@
 
                 </div>
             </div>
-            <form action="{{ route('student.index') }}" method="GET" role="search">
+            <form action="{{ route('result.masterPdfGen') }}" method="GET" role="search">
                 <div class="row mx-auto p-4">
                     <div class="form-group col-lg-6">
                         <label for="exampleFormControlSelect1">Select Class</label>
-                        <select name="sub_class_id" value="0" class="form-control" id="exampleFormControlSelect1">
+                        <select name="klass_id" value="0" class="form-control" id="exampleFormControlSelect1">
                             @foreach ($classes as $class)
                                 <option value="{{ $class->id }}">{{ $class->class_name }}</option>
                             @endforeach
@@ -36,7 +36,7 @@
 
                     <div class="form-group col-lg-6">
                         <label for="exampleFormControlSelect1">Select SubClass</label>
-                        <select name="sub_class_id" value="0" class="form-control" id="exampleFormControlSelect1">
+                        <select name="sub_id" value="0" class="form-control" id="exampleFormControlSelect1">
                             @foreach ($classes as $class)
                                 <option value="1">A</option>
                             @endforeach
@@ -45,7 +45,7 @@
 
                     <div class="form-group col-lg-6">
                         <label for="exampleFormControlSelect1">Select term</label>
-                        <select name="sub_class_id" value="0" class="form-control" id="exampleFormControlSelect1">
+                        <select name="term_id" value="0" class="form-control" id="exampleFormControlSelect1">
                             @foreach ($terms as $term)
                                 <option value="{{ $term->id }}">{{ $term->Term }}</option>
                             @endforeach
@@ -53,7 +53,7 @@
                     </div>
                     <div class="form-group col-lg-6">
                         <label for="exampleFormControlSelect1">Select Session</label>
-                        <select name="sub_class_id" value="0" class="form-control" id="exampleFormControlSelect1">
+                        <select name="session_id" value="0" class="form-control" id="exampleFormControlSelect1">
                             @foreach ($sessions as $session)
                                 <option value="{{ $session->id }}">{{ $session->session }}</option>
                             @endforeach
