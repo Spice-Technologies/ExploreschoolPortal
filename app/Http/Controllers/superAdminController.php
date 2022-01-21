@@ -44,6 +44,11 @@ class superAdminController extends Controller
     public function addAdmin(Request $req)
     {
         // Functions::secure_random_string($length);
+
+        // $password = Functions::secure_random_string(8);
+        // $password = Hash::make($password);
+        
+
         $req->validate([
             'name' => 'required|string|max:255',
             'school_id'          => 'required|numeric',
