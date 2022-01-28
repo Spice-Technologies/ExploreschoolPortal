@@ -43,7 +43,7 @@ class ResultController extends Controller
     public function masterPdfGen(Request $r)
     {
 
-
+      
 
         // dd($r->all());
         $session = Session::find($r->session_id);
@@ -55,7 +55,9 @@ class ResultController extends Controller
             ->where('term_id', $r->term_id)
             ->get();
         //'session', 'klass', 'term', 'subClass',
-        $pdf = PDF::loadView('backend.result.masterpdf', compact('results'));
-        return $pdf->download('result.pdf');
+
+        return view('backend.result.masterPdf', compact('session', 'klass', 'term', 'subClass', 'results'));
+        // $pdf = PDF::loadView('backend.result.masterpdf', compact('results'));
+        // return $pdf->download('result.pdf');
     }
 }
