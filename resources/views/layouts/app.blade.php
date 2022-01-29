@@ -268,7 +268,8 @@
 
                                         <form id="logout-form" action="{{ url('logout') }}" method="POST">
                                             {{ csrf_field() }}
-                                            <button class="btn btn-warning btn-sm" type="submit" style="font-size: 17px">Logout</button>
+                                            <button class="btn btn-warning btn-sm" type="submit"
+                                                style="font-size: 17px">Logout</button>
                                         </form>
                                     </div>
                                 </div>

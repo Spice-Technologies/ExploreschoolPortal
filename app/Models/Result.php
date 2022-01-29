@@ -20,4 +20,24 @@ class Result extends Model
 
         return $this->hasOne(Pin::class);
     }
+
+    public function student()
+    {
+        return $this->hasOne(Student::class);
+    }
+
+    public function class()
+    {
+        return $this->hasOne(Klass::class);
+    }
+
+    public function session()
+    {
+        return $this->hasOne(Session::class);
+    }
+
+    public function term()
+    {
+        return $this->hasOne(Term::class);
+    }
 }

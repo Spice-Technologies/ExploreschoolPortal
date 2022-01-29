@@ -26,7 +26,7 @@ class ResultController extends Controller
 
         $file = $request->file('file');
         Excel::import(new ResultsImport,  $file);
-        return back()->with('msg', 'Import Upload was successfull');
+        return back()->with('msg', 'Import Upload was successful');
     }
 
     public function master()
@@ -56,8 +56,8 @@ class ResultController extends Controller
             ->get();
         //'session', 'klass', 'term', 'subClass',
 
-        $pdf = PDF::loadView ('backend.result.masterPdf', compact('session', 'klass', 'term', 'subClass', 'results'));
-        // $pdf = PDF::loadView('backend.result.masterpdf', compact('results'));
+       // $pdf = PDF::loadView ('backend.result.masterPdf', compact('session', 'klass', 'term', 'subClass', 'results'));
+         $pdf = PDF::loadView('backend.result.masterpdf', compact('results'));
          return $pdf->download('master  result.pdf');
     }
 }
