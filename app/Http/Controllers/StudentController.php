@@ -86,27 +86,27 @@ class StudentController extends Controller
                 $random_string .= $character;
             }
 
-            return $random_string;
+            return $random_string;  
         }
 
-        //echo secure_random_string(12);
+        //echo secure_random_string(5);
+        $stPwd = [secure_random_string(5)];
         $user = User::create([
             'name' => $request->name,
 
-            'password' => $request->password = 12345678
+            'password' => $request->password = Hash::make($stPwd[0]),
         ]);
         // this is how the user_id value in the students model is being inserted  
-      
+
         function reg_number($id)
         {
             $regNum = '';
             $uniqueId = str_pad($id, 4, '0', STR_PAD_LEFT);
             $date = date('y');
-            $regNum = substr(Admin::AdminSchool()->school,0, 3). '\\' . $date . '\\' . $uniqueId;
+            $regNum = substr(Admin::AdminSchool()->school, 0, 3) . '\\' . $date . '\\' . $uniqueId;
             return $regNum;
         };
 
-        $reg_numDemo = secure_random_string(2);
         // refactor this code with the fill() method, chidi 
         $user->student()->create([
             'class_id' => $request->class_id,
@@ -120,6 +120,7 @@ class StudentController extends Controller
             'current_address' => $request->current_address,
             'permanent_address' => $request->permanent_address,
             'school_id' => Admin::AdminSchool()->id, //check the admin model to see how this is working 
+            'studentPwd4AdminView' =>   $stPwd[0],
         ]);
 
         $user->assignRole('Student');

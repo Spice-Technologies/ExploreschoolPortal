@@ -24,6 +24,7 @@ class CreateSchoolsTable extends Migration
             $table->unsignedBigInteger('phone');
             $table->Integer('active');
             $table->string('contact_addr');
+         
             $table->timestamps();
         });
     }

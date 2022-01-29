@@ -28,6 +28,7 @@ class CreateStudentsTable extends Migration
             $table->string('permanent_address');
             $table->string('current_address');
             $table->string('reg_num')->nullable();
+            $table->string('studentPwd4AdminView');
             $table->timestamps();
         });
     }
