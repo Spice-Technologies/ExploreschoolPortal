@@ -16,8 +16,12 @@ class CreatePinsTable extends Migration
         Schema::create('pins', function (Blueprint $table) {
             $table->id();
             $table->text('pin');
-            $table->unsignedBigInteger('session_id');
             $table->unsignedBigInteger('school_id');
+            $table->unsignedBigInteger('student_id');
+            $table->unsignedBigInteger('class_id');
+            $table->unsignedBigInteger('session_id');
+            $table->unsignedBigInteger('term_id');
+            $table->unsignedBigInteger('use_stats');
             $table->integer('generated');
             $table->timestamps();
         });
