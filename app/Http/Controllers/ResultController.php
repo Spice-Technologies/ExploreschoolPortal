@@ -56,8 +56,8 @@ class ResultController extends Controller
             ->get();
         //'session', 'klass', 'term', 'subClass',
 
-        return view('backend.result.masterPdf', compact('session', 'klass', 'term', 'subClass', 'results'));
+        $pdf = PDF::loadView ('backend.result.masterPdf', compact('session', 'klass', 'term', 'subClass', 'results'));
         // $pdf = PDF::loadView('backend.result.masterpdf', compact('results'));
-        // return $pdf->download('result.pdf');
+         return $pdf->download('master  result.pdf');
     }
 }

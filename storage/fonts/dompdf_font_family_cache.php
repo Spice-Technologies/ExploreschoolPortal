@@ -87,5 +87,8 @@ return array (
     '600' => $fontDir . '/open_sans_600_50bb364a7fe911a2a48a6f505613df8b',
     'bold' => $fontDir . '/open_sans_bold_2b29b70e8fdb444eafdbe10ae3ef325f',
   ),
+  'glyphicons halflings' => array(
+    'normal' => $fontDir . '/glyphicons_halflings_normal_91a063d0f3772b152f606edc0383c99d',
+  ),
 );
 }; ?>
