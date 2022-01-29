@@ -120,11 +120,10 @@ class StudentController extends Controller
             'current_address' => $request->current_address,
             'permanent_address' => $request->permanent_address,
             'school_id' => Admin::AdminSchool()->id, //check the admin model to see how this is working 
-            'studentPwd4AdminView' =>   $stPwd[0],
+            'studentPwd4AdminView' => $stPwd[0],
         ]);
 
         $user->assignRole('Student');
-
         $user->student->reg_num = reg_number($user->student->id);
         $user->student->save();
         $user->email = reg_number($user->student->id);
