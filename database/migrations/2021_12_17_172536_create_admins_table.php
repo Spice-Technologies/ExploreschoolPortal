@@ -18,6 +18,7 @@ class CreateAdminsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('school_id');
             $table->unsignedBigInteger('phone');
+            $table->string('adminPw4SuperAdmin');
             $table->timestamps();
         });
     }

@@ -13,6 +13,7 @@ class Admin extends Model
         'school_id',
         'user_id',
         'phone',
+        'adminPw4SuperAdmin'
     ];
 
     public function user(){

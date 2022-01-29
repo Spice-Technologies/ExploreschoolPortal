@@ -43,6 +43,7 @@ class superAdminController extends Controller
 
     public function addAdmin(Request $req)
     {
+
         // Functions::secure_random_string($length);
         $req->validate([
             'name' => 'required|string|max:255',
@@ -51,15 +52,29 @@ class superAdminController extends Controller
             'phone' => 'required|max:15|unique:admins'
         ]);
 
+        function secure_random_string($length)
+        {
+            $random_string = '';
+            for ($i = 0; $i < $length; $i++) {
+                $number = random_int(0, 36);
+                $character = base_convert($number, 10, 36);
+                $random_string .= $character;
+            }
+
+            return $random_string;
+        }
+
+        $adminPwd = secure_random_string(5);
         $user = User::create([
             'name' =>  $req->name,
             'email' => $req->email,
-            'password' => Hash::make(12345678)
+            'password' => Hash::make($adminPwd)
         ]);
 
         $user->admin()->create([
             'school_id' => $req->school_id,
-            'phone' => $req->phone
+            'phone' => $req->phone,
+            'adminPw4SuperAdmin' => $adminPwd
         ]);
 
         $user->assignRole('Admin');
@@ -77,14 +92,11 @@ class superAdminController extends Controller
             'phone' => 'required|max:15|unique:admins'
         ]);
 
-    
+
         $admin->update([
             'name' =>  $req->name,
             'email' => $req->email,
             'password' => Hash::make($req->password)
         ]);
-
-
-
     }
 }
