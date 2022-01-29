@@ -20,8 +20,7 @@ class PinDownload implements FromCollection, WithHeadings
     public function collection()
     {
         return collect([
-
-            array_chunk(json_decode($this->pinToFormat), 1) // without this array_chunk, all the data from the json_decode will be in one row in the downloaded excel sheet  
+            array_chunk($this->pinToFormat, 1)
 
         ]);
     }

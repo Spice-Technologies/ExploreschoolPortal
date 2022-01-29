@@ -49,7 +49,9 @@ class PinController extends Controller
         $request->validate([
             'school' => 'required|numeric', // actually school_id but to avoid FE validation error like 'school_id' is required....you get?
             'session' => 'required|numeric',
-            'pins' => 'required|numeric' // actually session_id 
+            'pins' => 'required|numeric',
+
+
         ]);
         //things to do :
         // get the no of pins via request payload
@@ -72,11 +74,6 @@ class PinController extends Controller
 
             return $random_string;
         }
-        $allPins = [];
-        for ($i = 0; $i < $request->pins; $i++) {
-            $generatedPin =   secure_random_string(13);
-            array_push($allPins, $generatedPin);
-        }
 
         $pinModel = new Pin();
         // check if pins have been generated for this school before
@@ -85,7 +82,7 @@ class PinController extends Controller
             ->where('session_id', $request->session)
             ->first();
         if (!$mainPin) {
-            $pinModel->pin = json_encode($allPins); // serialized so that everything can be inside one db field instead of multiple rows
+            $pinModel->pin = secure_random_string(15);
             $pinModel->session_id = $request->session;
             $pinModel->school_id = $request->school;
             $pinModel->generated = 1;
@@ -146,11 +143,17 @@ class PinController extends Controller
     public function download(Pin $pin)
     {
         // this right here will select the specific row that fits the specified condition from the where clause
-        $pinRow = Pin::where('school_id', $pin->school_id)
+        $pinRows = Pin::where('school_id', $pin->school_id)
             ->where('session_id', $pin->session_id)
             ->where('generated', $pin->generated)
-            ->first();
-            //the actually result is passed down to the excel exporting class,PinDownload
-        return (new  PinDownload($pinRow->pin))->download($pin->school->school.'.csv');
+            ->get();
+        $pins = [];
+        foreach ($pinRows as $pinRow) {
+            $pinner = $pinRow->pin;
+            array_push($pins, $pinner);
+        }
+
+        //the actually result is passed down to the excel exporting class,PinDownload
+        return (new  PinDownload($pins))->download($pin->school->school_id . '.csv');
     }
 }
