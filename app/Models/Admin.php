@@ -24,7 +24,7 @@ class Admin extends Model
     } 
 
     public static function AdminSchool(){
-        return  self::where('id', Auth::user()->admin->id)->first()->school->id;
+        return  self::where('id', Auth::user()->admin->id)->first()->school;
     }
     /*  
         Writing the scope query logic for selecting the things admin is going to see based on the school id

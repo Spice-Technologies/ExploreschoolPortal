@@ -154,6 +154,6 @@ class PinController extends Controller
         }
 
         //the actually result is passed down to the excel exporting class,PinDownload
-        return (new  PinDownload($pins))->download($pin->school->school_id . '.csv');
+        return (new  PinDownload($pins, $pin->school->school_id ))->download($pin->school->school_id . '.csv');
     }
 }

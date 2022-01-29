@@ -12,9 +12,11 @@ class PinDownload implements FromCollection, WithHeadings
 {
     use Exportable;
 
-    public function __construct($pin)
+    public function __construct($pin, $school)
+
     {
         $this->pinToFormat = $pin;
+        $this->school = $school;
     }
 
     public function collection()
@@ -28,7 +30,7 @@ class PinDownload implements FromCollection, WithHeadings
     public function headings(): array
     {
         return [
-            'Pins'
+            'Pins for School: ' . $this->school,
         ];
     }
 
