@@ -10,14 +10,16 @@ use App\Models\Result;
 use App\Models\Session;
 use App\Models\SubKlass;
 use App\Models\Term;
-use Barryvdh\DomPDF\Facade as PDF;
+
 use Maatwebsite\Excel\Facades\Excel;
+use PDF;
 
 class ResultController extends Controller
 {
 
     public function index()
     {
+    
         return view('backend.result.upload');
     }
 
@@ -56,8 +58,10 @@ class ResultController extends Controller
             ->get();
         //'session', 'klass', 'term', 'subClass',
 
-       // $pdf = PDF::loadView ('backend.result.masterPdf', compact('session', 'klass', 'term', 'subClass', 'results'));
-         $pdf = PDF::loadView('backend.result.masterpdf', compact('results'));
+       $pdf = PDF::loadView('backend.result.masterPdf', compact('session', 'klass', 'term', 'subClass', 'results'));
+        // $pdf = PDF::loadView('backend.result.masterPdf', compact('results'));
          return $pdf->download('master  result.pdf');
+
+        //  return view('backend.result.masterPdf', compact('session', 'klass', 'term', 'subClass', 'results'));
     }
 }
