@@ -59,7 +59,9 @@
                                     <th scope="col" class="sort" data-sort="budget">Reg Number</th>
                                     <th scope="col" class="sort" data-sort="status">Status</th>
                                     <th scope="col">Users</th>
-                                    <th scope="col" class="sort" data-sort="completion">Completion</th>
+                                    <th scope="col" class="sort" data-sort="completion">Class</th>
+                                    <th scope="col" class="sort" data-sort="completion">password</th>
+
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
@@ -115,6 +117,12 @@
                                             <div class="d-flex align-items-center">
                                                 <span
                                                     class="completio mr-2">{{ $studentClass->class->class_name ?? '' }}</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <span
+                                                    class="completio mr-2">{{ $studentClass->studentPwd4AdminView ?? '' }}</span>
                                             </div>
                                         </td>
                                         <td class="text-right">
