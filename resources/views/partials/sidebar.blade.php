@@ -23,7 +23,7 @@
                         </a>
                         <ul class="nav-item-child">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('student.result') }}">
+                                <a class="nav-link" >
                                     Check Your Result
                                 </a>
                             </li>
