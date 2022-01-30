@@ -82,16 +82,19 @@ class PinController extends Controller
             ->where('session_id', $request->session)
             ->first();
         if (!$mainPin) {
-            $pinModel->pin = secure_random_string(15);
-            $pinModel->session_id = $request->session;
-            $pinModel->school_id = $request->school;
-            $pinModel->generated = 1;
-            $pinModel->save();
+
+            for ($i = 0; $i < $request->pins; $i++) {
+                
+                $pinModel->pin = secure_random_string(15);
+                $pinModel->session_id = $request->session;
+                $pinModel->school_id = $request->school;
+                $pinModel->generated = 1;
+                $pinModel->save();
+            }
+            return redirect()->route('pin.index');
         } else {
             return back()->with('msg', 'Oops! We have already generated pins for the school, ' . $mainPin->school->school . ', for ' . $mainPin->session->session . ' session !');
         }
-
-        return redirect()->route('pin.index');
     }
 
     /**
@@ -154,6 +157,6 @@ class PinController extends Controller
         }
 
         //the actually result is passed down to the excel exporting class,PinDownload
-        return (new  PinDownload($pins, $pin->school->school_id ))->download($pin->school->school_id . '.csv');
+        return (new  PinDownload($pins, $pin->school->school_id))->download($pin->school->school_id . '.csv');
     }
 }

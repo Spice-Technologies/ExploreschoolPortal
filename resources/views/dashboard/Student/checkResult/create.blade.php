@@ -7,7 +7,7 @@
         <div class="card-body ">
            <h2> Enter Pin </h2>
             <div class="pb-3">
-                <input type="text" class="form-control form-control-alternative" placeholder="e.g 123456789">
+                <input type="text" name="checkResult" class="form-control form-control-alternative p-4" placeholder="e.g 123456789">
             </div>
         </div>
     </div>
