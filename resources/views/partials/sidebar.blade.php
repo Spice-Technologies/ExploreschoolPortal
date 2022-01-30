@@ -23,7 +23,7 @@
                         </a>
                         <ul class="nav-item-child">
                             <li class="nav-item">
-                                <a class="nav-link" >
+                                <a class="nav-link" href="{{ route('result.create') }}">
                                     Check Your Result
                                 </a>
                             </li>

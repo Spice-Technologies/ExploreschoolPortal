@@ -23,7 +23,7 @@ class checkResultController extends Controller
      */
     public function create()
     {
-        //
+            return view('dashboard.Student.checkResult.create');
     }
 
     /**
