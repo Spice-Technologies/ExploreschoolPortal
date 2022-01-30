@@ -67,11 +67,6 @@ class StudentController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'class_id'          => 'required|numeric',
-            'gender'            => 'required|string',
-            'dateofbirth'       => 'required|date',
-            'current_address'   => 'required|string',
-            'permanent_address' => 'required|string',
-
         ]);
 
         //dd($request->all());
@@ -86,7 +81,7 @@ class StudentController extends Controller
                 $random_string .= $character;
             }
 
-            return $random_string;  
+            return $random_string;
         }
 
         //echo secure_random_string(5);
