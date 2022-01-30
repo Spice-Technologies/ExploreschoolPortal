@@ -22,7 +22,7 @@ class PinController extends Controller
      */
     public function index()
     {
-        $pins = collect(Pin::all())->unique('school_id'); // to make sure that
+        $pins = collect(Pin::all())->unique('school_id'); // to make sure that only unique list for schools with their pins are displayed
         return view('dashboard.superAdmin.pinRequest.index', compact('pins'));
     }
 
@@ -78,12 +78,10 @@ class PinController extends Controller
         $pinModel = new Pin();
         // check if pins have been generated for this school before
         $mainPin = Pin::select('*')->where('school_id', $request->school)
-            ->where('generated', '1')
             ->where('session_id', $request->session)
             ->first();
         if (!$mainPin) {
             $pinners = [];
-
             for ($i = 0; $i < $request->pins; $i++) {
                 $pinners[]  =   [
                     'pin' =>  secure_random_string(15),
