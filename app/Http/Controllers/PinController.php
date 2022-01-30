@@ -22,7 +22,7 @@ class PinController extends Controller
      */
     public function index()
     {
-        $pins = Pin::all();
+        $pins = collect(Pin::all())->unique('school_id'); // to make sure that
         return view('dashboard.superAdmin.pinRequest.index', compact('pins'));
     }
 
@@ -82,15 +82,22 @@ class PinController extends Controller
             ->where('session_id', $request->session)
             ->first();
         if (!$mainPin) {
+            $pinners = [];
 
             for ($i = 0; $i < $request->pins; $i++) {
-                
-                $pinModel->pin = secure_random_string(15);
-                $pinModel->session_id = $request->session;
-                $pinModel->school_id = $request->school;
-                $pinModel->generated = 1;
-                $pinModel->save();
+                $pinners[]  =   [
+                    'pin' =>  secure_random_string(15),
+                    'session_id' => $request->session,
+                    'school_id' => $request->school,
+                ];
+                // $pinModel->pin = secure_random_string(15);
+                // $pinModel->session_id = $request->session;
+                // $pinModel->school_id = $request->school;
+                // $pinModel->generated = 1;
+                // $pinModel->save();
             }
+
+            $pinModel->insert($pinners);
             return redirect()->route('pin.index');
         } else {
             return back()->with('msg', 'Oops! We have already generated pins for the school, ' . $mainPin->school->school . ', for ' . $mainPin->session->session . ' session !');
