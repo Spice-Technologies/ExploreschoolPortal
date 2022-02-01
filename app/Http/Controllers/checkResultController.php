@@ -43,7 +43,7 @@ class checkResultController extends Controller
         //
 
         $pin = Pin::where('pin', $request->pin)->first();
-        // $student = new Student();
+       
 
         $userModel = Auth::user();
         $student = $userModel->student->id;
