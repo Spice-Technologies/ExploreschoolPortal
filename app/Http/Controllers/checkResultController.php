@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Admin;
 use App\Models\Pin;
+use App\Models\Session;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -44,12 +45,13 @@ class checkResultController extends Controller
 
         $pin = Pin::where('pin', $request->pin)->first();
        
-
+        $session = new Session();
         $userModel = Auth::user();
         $student = $userModel->student->id;
         if ($pin->use_stats < 5) {
             $examPin =  Pin::where('pin', $request->pin)
                 ->where('use_stats', '<', 5)
+                ->where('session_id', $session->id)
                 ->update([
                     'use_stats' => $pin->use_stats + 1,
                     'student_id' =>  $student,
