@@ -2,7 +2,7 @@
 
 namespace App\Imports;
 
-use App\Models\result;
+use App\Models\Result;
 use App\Models\Student;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
@@ -59,6 +59,6 @@ class ResultsImport implements ToCollection
     //my logic and approach
 
     //just get the student exam number,
-    //use that number to get the other details like CLASS, SCHOOL, to be inserted into result table 
+    //use that number to get the other details like CLASS, SCHOOL, to be inserted into result table z
 
 }

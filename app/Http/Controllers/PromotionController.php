@@ -19,7 +19,7 @@ class PromotionController extends Controller
         //check if there are ss3 students and move them to a new table
         $Student = new Student();
 
-        $adminOwnStudents = $Student->SchoolId(Admin::AdminSchool())->get();
+        $adminOwnStudents = $Student->SchoolId(Admin::AdminSchool()->id)->get();
         //fetch all the students in the class but based on the admin and school he belongs to before promotion 
 
         $adminOwnStudents->where('class_id', 6)->each(function ($finalist) {
@@ -36,7 +36,7 @@ class PromotionController extends Controller
         //     $finalist->save();
         // });
 
-        $adminOwnStudents->where('school_id', Admin::AdminSchool())
+        $adminOwnStudents->where('school_id', Admin::AdminSchool()->id)
             ->whereIn('class_id', $matches)
             ->each(function ($stClass) {
                 $stClass->class_id = $stClass->class_id + 1;

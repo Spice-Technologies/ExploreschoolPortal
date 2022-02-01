@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class result extends Model
+class Result extends Model
 {
     use HasFactory;
 
@@ -19,5 +19,25 @@ class result extends Model
     {
 
         return $this->hasOne(Pin::class);
+    }
+
+    public function student()
+    {
+        return $this->hasOne(Student::class);
+    }
+
+    public function class()
+    {
+        return $this->hasOne(Klass::class);
+    }
+
+    public function session()
+    {
+        return $this->hasOne(Session::class);
+    }
+
+    public function term()
+    {
+        return $this->hasOne(Term::class);
     }
 }

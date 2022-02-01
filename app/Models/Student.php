@@ -22,7 +22,8 @@ class Student extends Model
         'lga',
         'country',
         'reg_num',
-        'school_id'
+        'school_id',
+        'studentPwd4AdminView'
     ];
 
     public function user()

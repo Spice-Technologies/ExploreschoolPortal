@@ -17,7 +17,7 @@ class CreateKlassesTable extends Migration
             $table->id();
             $table->string('class_name');
             $table->string('teacher_id')->nullable();
-            $table->string('class_description');
+            $table->string('class_description')->nullable();
             $table->timestamps();
         });
     }

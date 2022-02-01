@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Session;
 
 class StudentController extends Controller
 {
- /*
+    /*
      Hiii..I used my own ceated static functions, Admin::AdminSchool() to always get the the school that the admin belongs to
 
      I also used scoped queries to avoid repeatition of where clauses that has to do with fetching the school the user is related to
@@ -31,14 +31,14 @@ class StudentController extends Controller
     {
         if ($req->has('class_id')) {
             //if you use get(), you may not always have your errors thrown but try to be more specific with something like first() as away to debug your code
-            $studentsClass = Student::where('class_id', $req->class_id)->where('school_id', Admin::AdminSchool())->get();
+            $studentsClass = Student::where('class_id', $req->class_id)->where('school_id', Admin::AdminSchool()->id)->get();
             //you can refactor this code by using onetoMany through relationship in their respective models esp between admin, school and student //i.e one to many students through school
-         
+
             $classes = Klass::all();
             return view('backend.students.index', compact('classes', 'studentsClass'));
         }
         $classes = Klass::all();
-        $studentsClass = Student::SchoolId(Admin::AdminSchool())->get();
+        $studentsClass = Student::SchoolId(Admin::AdminSchool()->id)->get();
 
         // dd($studentsClass->toArray());
         return view('backend.students.index', compact('classes', 'studentsClass'));
@@ -67,11 +67,6 @@ class StudentController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'class_id'          => 'required|numeric',
-            'gender'            => 'required|string',
-            'dateofbirth'       => 'required|date',
-            'current_address'   => 'required|string',
-            'permanent_address' => 'required|string',
-
         ]);
 
         //dd($request->all());
@@ -89,11 +84,12 @@ class StudentController extends Controller
             return $random_string;
         }
 
-        //echo secure_random_string(12);
+        //echo secure_random_string(5);
+        $stPwd = [secure_random_string(5)];
         $user = User::create([
             'name' => $request->name,
 
-            'password' => $request->password = 12345678
+            'password' => $request->password = Hash::make($stPwd[0]),
         ]);
         // this is how the user_id value in the students model is being inserted  
 
@@ -102,11 +98,10 @@ class StudentController extends Controller
             $regNum = '';
             $uniqueId = str_pad($id, 4, '0', STR_PAD_LEFT);
             $date = date('y');
-            $regNum = "EXP" . '\\' . $date . '\\' . $uniqueId;
+            $regNum = substr(Admin::AdminSchool()->school, 0, 3) . '\\' . $date . '\\' . $uniqueId;
             return $regNum;
         };
 
-        $reg_numDemo = secure_random_string(2);
         // refactor this code with the fill() method, chidi 
         $user->student()->create([
             'class_id' => $request->class_id,
@@ -119,11 +114,11 @@ class StudentController extends Controller
             'country' => $request->country,
             'current_address' => $request->current_address,
             'permanent_address' => $request->permanent_address,
-            'school_id' => Admin::AdminSchool(), //check the admin model to see how this is working 
+            'school_id' => Admin::AdminSchool()->id, //check the admin model to see how this is working 
+            'studentPwd4AdminView' => $stPwd[0],
         ]);
 
         $user->assignRole('Student');
-
         $user->student->reg_num = reg_number($user->student->id);
         $user->student->save();
         $user->email = reg_number($user->student->id);

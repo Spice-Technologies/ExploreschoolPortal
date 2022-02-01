@@ -22,7 +22,7 @@ class PinController extends Controller
      */
     public function index()
     {
-        $pins = Pin::all();
+        $pins = collect(Pin::all())->unique('school_id'); // to make sure that only unique list for schools with their pins are displayed
         return view('dashboard.superAdmin.pinRequest.index', compact('pins'));
     }
 
@@ -49,7 +49,9 @@ class PinController extends Controller
         $request->validate([
             'school' => 'required|numeric', // actually school_id but to avoid FE validation error like 'school_id' is required....you get?
             'session' => 'required|numeric',
-            'pins' => 'required|numeric' // actually session_id 
+            'pins' => 'required|numeric',
+
+
         ]);
         //things to do :
         // get the no of pins via request payload
@@ -72,29 +74,32 @@ class PinController extends Controller
 
             return $random_string;
         }
-        $allPins = [];
-        for ($i = 0; $i < $request->pins; $i++) {
-            $generatedPin =   secure_random_string(13);
-            array_push($allPins, $generatedPin);
-        }
 
         $pinModel = new Pin();
         // check if pins have been generated for this school before
         $mainPin = Pin::select('*')->where('school_id', $request->school)
-            ->where('generated', '1')
             ->where('session_id', $request->session)
             ->first();
         if (!$mainPin) {
-            $pinModel->pin = json_encode($allPins); // serialized so that everything can be inside one db field instead of multiple rows
-            $pinModel->session_id = $request->session;
-            $pinModel->school_id = $request->school;
-            $pinModel->generated = 1;
-            $pinModel->save();
+            $pinners = [];
+            for ($i = 0; $i < $request->pins; $i++) {
+                $pinners[]  =   [
+                    'pin' =>  secure_random_string(15),
+                    'session_id' => $request->session,
+                    'school_id' => $request->school,
+                ];
+                // $pinModel->pin = secure_random_string(15);
+                // $pinModel->session_id = $request->session;
+                // $pinModel->school_id = $request->school;
+                // $pinModel->generated = 1;
+                // $pinModel->save();
+            }
+
+            $pinModel->insert($pinners);
+            return redirect()->route('pin.index');
         } else {
             return back()->with('msg', 'Oops! We have already generated pins for the school, ' . $mainPin->school->school . ', for ' . $mainPin->session->session . ' session !');
         }
-
-        return redirect()->route('pin.index');
     }
 
     /**
@@ -146,11 +151,17 @@ class PinController extends Controller
     public function download(Pin $pin)
     {
         // this right here will select the specific row that fits the specified condition from the where clause
-        $pinRow = Pin::where('school_id', $pin->school_id)
+        $pinRows = Pin::where('school_id', $pin->school_id)
             ->where('session_id', $pin->session_id)
             ->where('generated', $pin->generated)
-            ->first();
-            //the actually result is passed down to the excel exporting class,PinDownload
-        return (new  PinDownload($pinRow->pin))->download($pin->school->school.'.csv');
+            ->get();
+        $pins = [];
+        foreach ($pinRows as $pinRow) {
+            $pinner = $pinRow->pin;
+            array_push($pins, $pinner);
+        }
+
+        //the actually result is passed down to the excel exporting class,PinDownload
+        return (new  PinDownload($pins, $pin->school->school_id))->download($pin->school->school_id . '.csv');
     }
 }

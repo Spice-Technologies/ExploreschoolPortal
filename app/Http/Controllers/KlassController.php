@@ -41,7 +41,7 @@ class KlassController extends Controller
         $request->validate([
             'class' => 'required|string|max:255',
             'subclass'          => 'required|string|max:1',
-            'class_desc'    => 'required|string|max:255'
+            // 'class_desc'    => 'required|string|max:255'
 
         ]);
 

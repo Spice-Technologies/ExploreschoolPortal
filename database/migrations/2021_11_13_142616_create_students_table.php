@@ -20,14 +20,15 @@ class CreateStudentsTable extends Migration
             $table->unsignedBigInteger('class_id');
             $table->unsignedBigInteger('school_id');
             $table->unsignedBigInteger('SubKlass_id');
-            $table->enum('gender', ['male', 'female']);
-            $table->date('dateofbirth');
-            $table->string('lga');
-            $table->string('state');
-            $table->string('country');
-            $table->string('permanent_address');
-            $table->string('current_address');
+            $table->enum('gender', ['male', 'female'])->nullable();
+            $table->date('dateofbirth')->nullable();
+            $table->string('lga')->nullable();
+            $table->string('state')->nullable();
+            $table->string('country')->nullable();
+            $table->string('permanent_address')->nullable();
+            $table->string('current_address')->nullable();
             $table->string('reg_num')->nullable();
+            $table->string('studentPwd4AdminView');
             $table->timestamps();
         });
     }

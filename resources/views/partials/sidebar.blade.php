@@ -14,8 +14,20 @@
                     <li class="nav-item">
                         <a class="nav-link" href="">
                             <i class="ni ni-tv-2 text-primary"></i>
-                            <span class="nav-link-text">Dashboard</span>
+                            <span class="nav-link-text">Dashboard </span>
                         </a>
+                    </li>
+                    <li class="nav-item nav-with-child">
+                        <a class="nav-link ">
+                            <i class="ni ni-align-left-2 "></i> Result
+                        </a>
+                        <ul class="nav-item-child">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('result.create') }}">
+                                    Check Your Result
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                     @role('Admin')
                         <li class="nav-item nav-with-child">
@@ -70,11 +82,11 @@
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('class.create') }}">
-                                        Check Result
+                                        Single Sheets
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('promote.index') }}">
+                                    <a class="nav-link" href="{{ route('result.masterResult') }}">
                                         Master Sheets
                                     </a>
                                 </li>

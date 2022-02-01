@@ -12,16 +12,17 @@ class PinDownload implements FromCollection, WithHeadings
 {
     use Exportable;
 
-    public function __construct($pin)
+    public function __construct($pin, $school)
+
     {
         $this->pinToFormat = $pin;
+        $this->school = $school;
     }
 
     public function collection()
     {
         return collect([
-
-            array_chunk(json_decode($this->pinToFormat), 1) // without this array_chunk, all the data from the json_decode will be in one row in the downloaded excel sheet  
+            array_chunk($this->pinToFormat, 1)
 
         ]);
     }
@@ -29,7 +30,7 @@ class PinDownload implements FromCollection, WithHeadings
     public function headings(): array
     {
         return [
-            'Pins'
+            'Pins for School: ' . $this->school,
         ];
     }
 

@@ -59,7 +59,11 @@ Route::group(['middleware' => ['auth', 'role:Admin']], function () {
 
     // Import  results
     Route::get('/import', [App\Http\Controllers\ResultController::class, 'index'])->name('import.upload');
-    Route::post('/admin/import', [App\Http\Controllers\ResultController::class, 'importResult'])->name('dashboard.admin.importPost');
+    Route::post('/admin/result/import', [App\Http\Controllers\ResultController::class, 'importResult'])->name('dashboard.admin.importPost');
+    Route::get('/admin/result/master', [App\Http\Controllers\ResultController::class, 'master'])->name('result.masterResult');
+    Route::post('/admin/result/single', [App\Http\Controllers\ResultController::class, 'importResult'])->name('dashboard.admin.importPost');
+    Route::get('/admin/result/masterGen', [App\Http\Controllers\ResultController::class, 'masterPdfGen'])->name('result.masterPdfGen');
+
 
     //manage students
     Route::resource('/student', 'App\Http\Controllers\StudentController');
@@ -72,6 +76,7 @@ Route::group(['middleware' => ['auth', 'role:Student']], function () {
 
     // dashboard/ or home
     Route::get('/user', [App\Http\Controllers\SoleStudentController::class, 'index'])->name('student.user.index');
-    // Route::resource('/student/user', 'App\Http\Controllers\SoleStudentController.php');
+    Route::resource('/student/result', 'App\Http\Controllers\checkResultController');
+    
 
 });
