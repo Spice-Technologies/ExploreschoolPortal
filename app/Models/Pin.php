@@ -10,7 +10,7 @@ class Pin extends Model
     use HasFactory;
 
     protected  $fillable = [
-        'pin', 'session_id', 'school_id',
+        'pin', 'session_id', 'school_id', 'use_stats', 'student_id', 'class_id',
     ];
 
     protected  $guarded = [ //you can even avoid writiing the guarded as anything value outside the filllable is treated as guarded

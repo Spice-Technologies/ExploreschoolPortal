@@ -6,6 +6,7 @@ use App\Models\Admin;
 use App\Models\Pin;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class checkResultController extends Controller
 {
@@ -26,7 +27,7 @@ class checkResultController extends Controller
      */
     public function create()
     {
-            return view('dashboard.Student.checkResult.create');
+        return view('dashboard.Student.checkResult.create');
     }
 
     /**
@@ -37,7 +38,40 @@ class checkResultController extends Controller
      */
     public function store(Request $request)
     {
+        // select from pin table where request->pin is equal to pin in table
+        //if pin is equal to pin in table
+        //
 
+        $pin = Pin::where('pin', $request->pin)->first();
+        // $student = new Student();
+
+        $userModel = Auth::user();
+        $student = $userModel->student->id;
+        if ($pin->use_stats < 5) {
+            $examPin =  Pin::where('pin', $request->pin)
+                ->where('use_stats', '<', 5)
+                ->update([
+                    'use_stats' => $pin->use_stats + 1,
+                    'student_id' =>  $student,
+                    'class_id' => $request->class_id,
+                ]);
+        } else {
+            return "Pin has been used more than The required number of times. PLease buy new one";
+        }
+
+        // ->where(function ($query) use ( $student ) {
+        //     $query->where('student_id',  $student )->orWhere('student_id', NULL);
+        // });
+        // dd($examPin);
+        //I also need to check for situation where the student is 1 or null 
+
+        // if ($examPin) {
+        //     $pin->update([
+        //         'use_stats' => $pin->use_stats + 1,
+        //         'student_id' =>  $student,
+        //         'class_id' => $request->class_id,
+        //     ]);
+        // }
     }
 
     /**
@@ -69,28 +103,8 @@ class checkResultController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Pin $pin)
+    public function update(Request $request)
     {
-                // select from pin table where request->pin is equal to pin in table
-        //if pin is equal to pin in table
-        //
-        
-       $examPin =  Pin::where('pin', $request->pin)
-       ->where('use_sats' <= 5)
-       ->where('school_id', $request->school_id)
-       ->where('class_id', $request->class_id)
-       ->where('session_id', $request->session_id);
-
-       if ($examPin){
-        $pin->update([
-            'use_sats' => $pin->use_sats + 1,
-            'student_id' => $request->student_id,
-            'class_id' => $request->class_id,
-            
-        ]);
-
-       }
-
     }
 
     /**
