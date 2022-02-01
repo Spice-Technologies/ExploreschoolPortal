@@ -46,6 +46,7 @@ class checkResultController extends Controller
         $pin = Pin::where('pin', $request->pin)->first();
        
         $session = new Session();
+        dd(date('Y', strtotime('last year')));
         $userModel = Auth::user();
         $student = $userModel->student->id;
         if ($pin->use_stats < 5) {
