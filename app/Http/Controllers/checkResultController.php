@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
+use App\Models\Pin;
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 class checkResultController extends Controller
@@ -34,7 +37,7 @@ class checkResultController extends Controller
      */
     public function store(Request $request)
     {
-        
+
     }
 
     /**
@@ -66,9 +69,28 @@ class checkResultController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Pin $pin)
     {
+                // select from pin table where request->pin is equal to pin in table
+        //if pin is equal to pin in table
         //
+        
+       $examPin =  Pin::where('pin', $request->pin)
+       ->where('use_sats' <= 5)
+       ->where('school_id', $request->school_id)
+       ->where('class_id', $request->class_id)
+       ->where('session_id', $request->session_id);
+
+       if ($examPin){
+        $pin->update([
+            'use_sats' => $pin->use_sats + 1,
+            'student_id' => $request->student_id,
+            'class_id' => $request->class_id,
+            
+        ]);
+
+       }
+
     }
 
     /**
