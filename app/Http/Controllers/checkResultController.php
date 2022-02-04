@@ -46,13 +46,14 @@ class checkResultController extends Controller
         $pin = Pin::where('pin', $request->pin)->first();
        
         $session = new Session();
-        dd(date('Y', strtotime('last year')));
+     
+        // dd(date('Y', strtotime('last year')));
         $userModel = Auth::user();
         $student = $userModel->student->id;
         if ($pin->use_stats < 5) {
             $examPin =  Pin::where('pin', $request->pin)
                 ->where('use_stats', '<', 5)
-                ->where('session_id', $session->id)
+                ->where('session_id', $session->latest()->first('id')->id)//get first value which is super and always
                 ->update([
                     'use_stats' => $pin->use_stats + 1,
                     'student_id' =>  $student,
@@ -61,6 +62,11 @@ class checkResultController extends Controller
         } else {
             return "Pin has been used more than The required number of times. PLease buy new one";
         }
+
+        //rules for pins
+        //can't be used more than 5 times
+        //should be used by only and tied to only one student
+        //can't be used more than one session in which it was generated 
 
         // ->where(function ($query) use ( $student ) {
         //     $query->where('student_id',  $student )->orWhere('student_id', NULL);
