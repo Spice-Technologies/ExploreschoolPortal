@@ -49,26 +49,26 @@ class checkResultController extends Controller
         ]);
 
         $pin = Pin::where('pin', $request->pin)->first();
-       
+
         $session = new Session();
-     
+
         // dd(date('Y', strtotime('last year')));
         $userModel = Auth::user();
         $student = $userModel->student->id;
-        if( $pin->student_id !=  $student  ) {
-            return "this pin has been used by another student";
+        if ($pin->student_id !=  $student) {
+            return back()->with('msg', 'Pin does not belong to you');
         }
         if ($pin->use_stats < 5) {
             $examPin =  Pin::where('pin', $request->pin)
                 ->where('use_stats', '<', 5)
-                ->where('session_id', $session->latest()->first('id')->id)//get first value which is super and always
+                ->where('session_id', $session->latest()->first('id')->id) //get first value which is super and always
                 ->update([
                     'use_stats' => $pin->use_stats + 1,
                     'student_id' =>  $student,
                     'class_id' => $request->class_id,
                 ]);
         } else {
-            return "Pin has been used more than The required number of times. PLease buy new one";
+            return back()->with('msg',  'Pin has been used more than the required number of times. PLease buy new one');
         }
 
         //rules for pins//

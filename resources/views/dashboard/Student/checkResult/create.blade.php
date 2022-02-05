@@ -10,6 +10,10 @@
             @if ($errors->any())
                 {!! implode('', $errors->all('<div class="alert alert-danger">:message</div>')) !!}
             @endif
+
+            @if (session('msg'))
+                <div class="alert alert-danger">{{ session('msg') }}</div>
+            @endif
             <form action="{{ route('result.store') }}" method="POST">
                 @csrf
                 <div class="pb-3">
