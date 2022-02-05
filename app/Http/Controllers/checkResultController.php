@@ -43,6 +43,10 @@ class checkResultController extends Controller
         //if pin is equal to pin in table
         //
 
+        $request->validate([
+            'pin' => 'required',
+        ]);
+
         $pin = Pin::where('pin', $request->pin)->first();
        
         $session = new Session();
@@ -50,6 +54,9 @@ class checkResultController extends Controller
         // dd(date('Y', strtotime('last year')));
         $userModel = Auth::user();
         $student = $userModel->student->id;
+        if( $pin->student_id !=  $student  ) {
+            return "this pin has been used by another student";
+        }
         if ($pin->use_stats < 5) {
             $examPin =  Pin::where('pin', $request->pin)
                 ->where('use_stats', '<', 5)
@@ -63,10 +70,9 @@ class checkResultController extends Controller
             return "Pin has been used more than The required number of times. PLease buy new one";
         }
 
-        //rules for pins
-        //can't be used more than 5 times
-        //should be used by only and tied to only one student
-        //can't be used more than one session in which it was generated 
+        //rules for pins//
+        //can't be used more than 5 times. Done
+        //can't be used more than one session in which it was generated . Done
 
         // ->where(function ($query) use ( $student ) {
         //     $query->where('student_id',  $student )->orWhere('student_id', NULL);
