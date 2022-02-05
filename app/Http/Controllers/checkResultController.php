@@ -44,7 +44,8 @@ class checkResultController extends Controller
         //
 
         $request->validate([
-            'pin' => 'required',
+            'pin' => 'required|exists:pins,pin',
+
         ]);
 
         $pin = Pin::where('pin', $request->pin)->first();
