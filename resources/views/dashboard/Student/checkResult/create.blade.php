@@ -23,6 +23,11 @@
 
                 </div>
             </form>
+
+            @if($resultDisplay ?? ''){
+               {{ Yesss }} 
+            }
+            @endif
         </div>
     </div>
 @endsection

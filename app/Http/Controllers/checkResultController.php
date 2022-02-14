@@ -67,6 +67,8 @@ class checkResultController extends Controller
                     'student_id' =>  $student,
                     'class_id' => $request->class_id,
                 ]);
+            $resultDisplay = $examPin ? true : false;
+            return redirect()->route('result.create')->with(['resultDisplay',  $resultDisplay]);
         } else {
             return back()->with('msg',  'Pin has been used more than the required number of times. PLease buy new one');
         }
