@@ -61,7 +61,8 @@ class checkResultController extends Controller
         if ($pin->use_stats < 5) {
             $examPin =  Pin::where('pin', $request->pin)
                 ->where('use_stats', '<', 5)
-                ->where('session_id', $session->latest()->first('id')->id) //get first value which is super and always
+                ->where('session_id', $session->latest()->first('id')->id)
+                ->where('term_id', ) //get first value which is super and always
                 ->update([
                     'use_stats' => $pin->use_stats + 1,
                     'student_id' =>  $student,
@@ -70,24 +71,6 @@ class checkResultController extends Controller
         } else {
             return back()->with('msg',  'Pin has been used more than the required number of times. PLease buy new one');
         }
-
-        //rules for pins//
-        //can't be used more than 5 times. Done
-        //can't be used more than one session in which it was generated . Done
-
-        // ->where(function ($query) use ( $student ) {
-        //     $query->where('student_id',  $student )->orWhere('student_id', NULL);
-        // });
-        // dd($examPin);
-        //I also need to check for situation where the student is 1 or null 
-
-        // if ($examPin) {
-        //     $pin->update([
-        //         'use_stats' => $pin->use_stats + 1,
-        //         'student_id' =>  $student,
-        //         'class_id' => $request->class_id,
-        //     ]);
-        // }
     }
 
     /**
