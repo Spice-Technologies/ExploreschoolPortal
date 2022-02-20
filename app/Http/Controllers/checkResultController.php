@@ -6,6 +6,7 @@ use App\Models\Admin;
 use App\Models\Pin;
 use App\Models\Session;
 use App\Models\Student;
+use App\Models\Term;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,7 +29,8 @@ class checkResultController extends Controller
      */
     public function create()
     {
-        return view('dashboard.Student.checkResult.create');
+        $terms = Term::all();
+        return view('dashboard.Student.checkResult.create', compact('terms'));
     }
 
     /**
@@ -45,8 +47,10 @@ class checkResultController extends Controller
 
         $request->validate([
             'pin' => 'required|exists:pins,pin',
+            'term' => 'required'
 
         ]);
+        //  use this place to make sure that the student has 
 
         $pin = Pin::where('pin', $request->pin)->first();
 
@@ -55,22 +59,40 @@ class checkResultController extends Controller
         // dd(date('Y', strtotime('last year')));
         $userModel = Auth::user();
         $student = $userModel->student->id;
-        if ($pin->student_id !=  $student) {
-            return back()->with('msg', 'Pin does not belong to you');
-        }
-        if ($pin->use_stats < 5) {
-            $examPin =  Pin::where('pin', $request->pin)
-                ->where('use_stats', '<', 5)
-                ->where('session_id', $session->latest()->first('id')->id)
-                ->where('term_id', ) //get first value which is super and always
-                ->update([
-                    'use_stats' => $pin->use_stats + 1,
-                    'student_id' =>  $student,
-                    'class_id' => $request->class_id,
-                ]);
+        // if ($pin->student_id !=  $student) {
+        //     return back()->with('msg', 'Pin does not belong to you');
+        // }
+        //  if the pin is fresh
+        if ($pin->use_stats > 5) return 'You have exceeded the number of times meant to use this pin';
+
+        if ($pin->term_id == NULL &&  $pin->session_id = $session->latest()->first('id')->id) {
+            $examPin =  $pin->update([
+                'use_stats' => $pin->use_stats + 1,
+                'student_id' =>  $student,
+                'class_id' => $request->class_id,
+                'term_id' =>  $request->term //issuee : how to set the system in a way that only a particular term result is checked 
+            ]);
+
+            $resultDisplay = $examPin ? true : false;
+            return 'it was successful';
+
+            // return redirect()->route('school.index');
+            // return view('result.create', compact('resultDisplay'));
         } else {
-            return back()->with('msg',  'Pin has been used more than the required number of times. PLease buy new one');
+
+            $examPin =  $pin->update([
+                'use_stats' => $pin->use_stats + 1,
+                'student_id' =>  $student,
+                'class_id' => $request->class_id,
+                'term_id' =>  $pin->term_id //issuee : how to set the system in a way that only a particular term result is checked 
+            ]);
+            return 'it was successful';
         }
+
+
+        // else {
+        //     return back()->with('msg',  'Pin has been used more than the required number of times. PLease buy new one');
+        // }
     }
 
     /**
