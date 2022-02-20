@@ -59,18 +59,14 @@ class checkResultController extends Controller
         // dd(date('Y', strtotime('last year')));
         $userModel = Auth::user();
         $student = $userModel->student->id;
-        // if ($pin->student_id !=  $student) {
-        //     return back()->with('msg', 'Pin does not belong to you');
-        // }
-        //  if the pin is fresh
-        if ($pin->use_stats > 5) return 'You have exceeded the number of times meant to use this pin';
+        if ($pin->use_stats >= 5) return back()->with('msg', 'You have exceeded the number of times meant to use this pin');
 
         if ($pin->term_id == NULL &&  $pin->session_id = $session->latest()->first('id')->id) {
             $examPin =  $pin->update([
                 'use_stats' => $pin->use_stats + 1,
                 'student_id' =>  $student,
                 'class_id' => $request->class_id,
-                'term_id' =>  $request->term //issuee : how to set the system in a way that only a particular term result is checked 
+                'term_id' =>  $request->term
             ]);
 
             $resultDisplay = $examPin ? true : false;
@@ -79,20 +75,18 @@ class checkResultController extends Controller
             // return redirect()->route('school.index');
             // return view('result.create', compact('resultDisplay'));
         } else {
+            $termsNth = ['Zeroth', 'first', 'second', 'third'];
+
+            if ($pin->term_id != $request->term) return back()->with('msg', 'This pin is already tied to ' .  $termsNth[$pin->term_id] . ' Term Only. Which means that you can use this pin to check for only ' . $termsNth[$pin->term_id] . ' term results.');
 
             $examPin =  $pin->update([
                 'use_stats' => $pin->use_stats + 1,
                 'student_id' =>  $student,
                 'class_id' => $request->class_id,
-                'term_id' =>  $pin->term_id //issuee : how to set the system in a way that only a particular term result is checked 
+                'term_id' =>  $pin->term_id  //once a student has used a particurlar pin, that pin is automtically tied to him/her
             ]);
-            return 'it was successful';
+            return back()->with('msg',  'Success');
         }
-
-
-        // else {
-        //     return back()->with('msg',  'Pin has been used more than the required number of times. PLease buy new one');
-        // }
     }
 
     /**
