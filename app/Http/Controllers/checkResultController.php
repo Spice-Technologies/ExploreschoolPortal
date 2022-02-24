@@ -61,7 +61,7 @@ class checkResultController extends Controller
         $student = $userModel->student->id;
         if ($pin->use_stats >= 5) return back()->with('msg', 'You have exceeded the number of times meant to use this pin');
 
-        if ($pin->term_id == NULL &&  $pin->session_id = $session->latest()->first('id')->id) {
+        if ($pin->term_id == NULL &&  $pin->session_id == $session->latest()->first('id')->id) {
             $examPin =  $pin->update([
                 'use_stats' => $pin->use_stats + 1,
                 'student_id' =>  $student,
@@ -70,7 +70,7 @@ class checkResultController extends Controller
             ]);
 
             $resultDisplay = $examPin ? true : false;
-            return 'it was successful';
+            return back()->with(['pdfSuccess' => 'You have exceeded the number of times meant to use this pin', 'pdfDown' =>  $resultDisplay ]);
 
             // return redirect()->route('school.index');
             // return view('result.create', compact('resultDisplay'));
@@ -83,7 +83,8 @@ class checkResultController extends Controller
                 'use_stats' => $pin->use_stats + 1,
                 'student_id' =>  $student,
                 'class_id' => $request->class_id,
-                'term_id' =>  $pin->term_id  //once a student has used a particurlar pin, that pin is automtically tied to him/her
+                'term_id' =>  $pin->term_id
+                //once a student has used a particurlar pin, that pin is automtically tied to him/her
             ]);
             return back()->with('msg',  'Success');
         }
