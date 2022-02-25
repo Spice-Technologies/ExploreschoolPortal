@@ -10,6 +10,8 @@ use App\Models\Term;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+
+
 class checkResultController extends Controller
 {
     /**
@@ -33,6 +35,11 @@ class checkResultController extends Controller
         return view('dashboard.Student.checkResult.create', compact('terms'));
     }
 
+    private function DisplayResult($student) {
+
+       return  Student::find($student);
+
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -70,7 +77,16 @@ class checkResultController extends Controller
             ]);
 
             $resultDisplay = $examPin ? true : false;
-            return back()->with(['pdfSuccess' => 'You have exceeded the number of times meant to use this pin', 'pdfDown' =>  $resultDisplay ]);
+            // dd($resultDisplay);
+
+
+            $fetchResult = $this->DisplayResult($student);
+
+            return view('dashboard.Student.checkResult.show', compact('text', 'fetchResult'));
+    
+        //  return redirect('folder.name', compact('variableName');
+
+            return back()->with(['pdfSuccess' => 'You have exceeded the number of times meant to use this pin', 'pdfDown' =>  $resultDisplay]);
 
             // return redirect()->route('school.index');
             // return view('result.create', compact('resultDisplay'));
