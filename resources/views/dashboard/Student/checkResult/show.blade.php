@@ -13,7 +13,7 @@
             <tbody>
                 <tr>
                     <th scope="row">1</th>
-                    <td>{{ $fetchResult->}}</td>
+                    <td>{{ $fetchResult}}</td>
                     <td>Otto</td>
                     <td>@mdo</td>
                 </tr>
