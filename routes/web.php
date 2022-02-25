@@ -44,6 +44,9 @@ Route::group(['middleware' => ['auth', 'role:SuperAdmin']], function () {
 
     // Session section
     Route::resource('/session',  'App\Http\Controllers\SessionController');
+    // Subject Management 
+    Route::resource('/subject',  'App\Http\Controllers\SubjectController');
+
 });
 //});
 

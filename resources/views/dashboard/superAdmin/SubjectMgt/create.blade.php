@@ -18,7 +18,7 @@
                     <label class="custom-file-label" for="customFileLang">Select file</label>
                 </div>
                 <div class="text-left mt-4">
-                    <button type="submit" class="btn btn-primary">Import Result</button>
+                    <button type="submit" class="btn btn-primary">Upload</button>
                 </div>
             </form>
         </div>
