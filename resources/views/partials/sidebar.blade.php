@@ -82,11 +82,11 @@
                                         Upload Result
                                     </a>
                                 </li>
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">
                                     <a class="nav-link" href="{{ route('class.create') }}">
                                         Single Sheets
                                     </a>
-                                </li>
+                                </li> --}}
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('result.masterResult') }}">
                                         Master Sheets
