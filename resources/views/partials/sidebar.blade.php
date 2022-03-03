@@ -17,6 +17,7 @@
                             <span class="nav-link-text">Dashboard </span>
                         </a>
                     </li>
+                    @role('Student')
                     <li class="nav-item nav-with-child">
                         <a class="nav-link ">
                             <i class="ni ni-align-left-2 "></i> Result
@@ -29,6 +30,7 @@
                             </li>
                         </ul>
                     </li>
+                    @endrole
                     @role('Admin')
                         <li class="nav-item nav-with-child">
                             <a class="nav-link ">
