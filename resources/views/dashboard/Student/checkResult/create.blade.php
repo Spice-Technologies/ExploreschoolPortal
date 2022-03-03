@@ -15,6 +15,8 @@
 
             @if (session('msg'))
                 <div class="alert alert-danger">{{ session('msg') }}</div>
+            @elseif(session('success'))
+                <div class="alert alert-success">{{ session('success') }}</div>
             @endif
             <form action="{{ route('result.store') }}" method="POST">
                 @csrf
@@ -38,7 +40,10 @@
 
             <!-- Button trigger modal -->
 
-            <div @class(['d-none', 'd-block' => $resultDisplay ?? NULL])>
+            <div @class([
+                'd-none',
+                'd-block' => $resultDisplay ?? null,
+            ])>
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
                     Launch demo modal
                 </button>
@@ -67,7 +72,7 @@
             </div>
 
             <!-- End of Modal -->
-            @if ($resultDisplay ?? '' ?? '')
+            @if ($resultDisplay ?? ('' ?? ''))
                 {
                 {{ Yesss }}
                 }

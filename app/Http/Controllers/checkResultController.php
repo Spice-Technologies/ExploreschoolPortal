@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Admin;
 use App\Models\Pin;
+use App\Models\Result;
 use App\Models\Session;
 use App\Models\Student;
 use App\Models\Term;
@@ -13,7 +14,11 @@ use Illuminate\Support\Facades\Auth;
 
 
 class checkResultController extends Controller
+
+
 {
+
+
     /**
      * Display a listing of the resource.
      *
@@ -35,10 +40,17 @@ class checkResultController extends Controller
         return view('dashboard.Student.checkResult.create', compact('terms'));
     }
 
-    private function DisplayResult($student) {
+    /**
+     * Return results checked by the student via the student id
+     */
 
-       return  Student::find($student);
+    private function DisplayResult($student)
+    {
 
+        $r = Result::where('student_id', $student);
+        if ($r->exists()) return  $r->get();
+        else
+            return false;
     }
     /**
      * Store a newly created resource in storage.
@@ -57,39 +69,40 @@ class checkResultController extends Controller
             'term' => 'required'
 
         ]);
-        //  use this place to make sure that the student has 
 
         $pin = Pin::where('pin', $request->pin)->first();
 
         $session = new Session();
 
-        // dd(date('Y', strtotime('last year')));
-        $userModel = Auth::user();
+        $userModel = Auth::user(); // you get the student from the userModel side 
         $student = $userModel->student->id;
+        $fetchResults = $this->DisplayResult($student);
+
         if ($pin->use_stats >= 5) return back()->with('msg', 'You have exceeded the number of times meant to use this pin');
 
-        if ($pin->term_id == NULL &&  $pin->session_id == $session->latest()->first('id')->id) {
+        //if the pin is so fresh and has never been used before 
+        if ($pin->use_stats == 0) {
             $examPin =  $pin->update([
                 'use_stats' => $pin->use_stats + 1,
                 'student_id' =>  $student,
                 'class_id' => $request->class_id,
                 'term_id' =>  $request->term
             ]);
+            //check if the student result has been uploaded 
+            if ($fetchResults == false) {
 
-            $resultDisplay = $examPin ? true : false;
-            // dd($resultDisplay);
+                $examPin =  $pin->update([
+                    'use_stats' => 0,
+                    'student_id' =>  NULL,
+                    'class_id' => NULL,
+                    'term_id' =>  NULL
+                ]);
+                return back()->with('msg', 'Looks like your result has not been uploaded yet !!!');
+            } else {
+                return view('dashboard.Student.checkResult.show', compact('fetchResults'));
+            }
 
-
-            $fetchResult = $this->DisplayResult($student);
-
-            return view('dashboard.Student.checkResult.show', compact('text', 'fetchResult'));
-    
-        //  return redirect('folder.name', compact('variableName');
-
-            return back()->with(['pdfSuccess' => 'You have exceeded the number of times meant to use this pin', 'pdfDown' =>  $resultDisplay]);
-
-            // return redirect()->route('school.index');
-            // return view('result.create', compact('resultDisplay'));
+            // when the record is not fresh 
         } else {
             $termsNth = ['Zeroth', 'first', 'second', 'third'];
 
@@ -100,11 +113,11 @@ class checkResultController extends Controller
                 'student_id' =>  $student,
                 'class_id' => $request->class_id,
                 'term_id' =>  $pin->term_id
-                //once a student has used a particurlar pin, that pin is automtically tied to him/her
             ]);
-            return back()->with('msg',  'Success');
+            return view('dashboard.Student.checkResult.show', compact('fetchResults'));
         }
     }
+
 
     /**
      * Display the specified resource.

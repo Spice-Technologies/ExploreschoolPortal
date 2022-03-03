@@ -36,8 +36,20 @@ class Result extends Model
         return $this->hasOne(Session::class);
     }
 
+
+    public function school()
+    {
+        return $this->belongsTo(School::class);
+    }
+
+
     public function term()
     {
         return $this->hasOne(Term::class);
+    }
+
+    public function subjectModel()
+    {
+        return $this->belongsTo(Subject::class, 'subject_id');
     }
 }
