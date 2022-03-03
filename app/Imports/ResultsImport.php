@@ -20,13 +20,13 @@ class ResultsImport implements ToCollection
 
     public function whereRegNum($csvRegNo)
     {
-        $data = Student::where('reg_num', $csvRegNo)->first();
+        $data = Student::where('reg_num', $csvRegNo);
 
         array_push($this->studentInfo, collect($data)->toArray());
 
-        return $data;
+        return $data->exists() ? $data->first() : 'No student found';
     }
-    //so I am tryitn to prevent the functioon regnum from being called multiple times instead, I push all the data into the StendInfo array then find the matchin gone
+    //so I am trying to prevent the function regnum from being called multiple times instead, I push all the data into the StendInfo array then find the matching gone
     //and return it.
 
     public function collection(collection $rows)
@@ -38,7 +38,7 @@ class ResultsImport implements ToCollection
 
             Result::updateOrCreate(
                 ['student_id' => $this->whereRegNum($row[2])->id], //I make the query once then push the result to an array so I avoid repeating them
-
+                
                 [
                     'class_id' => $this->studentInfo[$key]['class_id'],
                     'subject_id' => $row[4],
