@@ -40,22 +40,25 @@
 
             <!-- Button trigger modal -->
 
-            <div @class([
-                'd-none',
-                'd-block' => $resultDisplay ?? null,
-            ])>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                    Launch demo modal
-                </button>
+            @if (!empty(Session::get('results')))
+                <script>
+                    $(document).ready(function() {
+                        $('#exampleModalCenter').modal('show');
+                    });
+                </script>
+            @endif
+            {{-- <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                Launch demo modal
+            </button> --}}
 
-            </div>
             <!-- Modal -->
             <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                            <h5 class="modal-title" id="exampleModalCenterTitle">Print Result</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -70,13 +73,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- End of Modal -->
-            @if ($resultDisplay ?? ('' ?? ''))
-                {
-                {{ Yesss }}
-                }
-            @endif
         </div>
     </div>
 @endsection

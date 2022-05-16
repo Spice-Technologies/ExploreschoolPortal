@@ -44,9 +44,6 @@ class ResultController extends Controller
 
     public function masterPdfGen(Request $r)
     {
-
-      
-
         // dd($r->all());
         $session = Session::find($r->session_id);
         $klass = Klass::find($r->klass_id);

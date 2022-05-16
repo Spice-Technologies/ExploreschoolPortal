@@ -80,7 +80,7 @@ class checkResultController extends Controller
 
         if ($pin->use_stats >= 5) return back()->with('msg', 'You have exceeded the number of times meant to use this pin');
 
-        //if the pin is so fresh and has never been used before 
+        //if the pin is 'so fresh' and has never been used before 
         if ($pin->use_stats == 0) {
             $examPin =  $pin->update([
                 'use_stats' => $pin->use_stats + 1,
@@ -90,7 +90,6 @@ class checkResultController extends Controller
             ]);
             //check if the student result has been uploaded 
             if ($fetchResults == false) {
-
                 $examPin =  $pin->update([
                     'use_stats' => 0,
                     'student_id' =>  NULL,
@@ -114,7 +113,9 @@ class checkResultController extends Controller
                 'class_id' => $request->class_id,
                 'term_id' =>  $pin->term_id
             ]);
-            return view('dashboard.Student.checkResult.show', compact('fetchResults'));
+            return redirect()->back()->with('results', $fetchResults);
+
+          //  return view('dashboard.Student.checkResult.show', compact('fetchResults'));
         }
     }
 
@@ -162,4 +163,9 @@ class checkResultController extends Controller
     {
         //
     }
+
+    // initiating a modal
+    //when the student has finished checking the result, 
+    // load the modal to show the result to the student when the page has refreshed
+    //with download option
 }
