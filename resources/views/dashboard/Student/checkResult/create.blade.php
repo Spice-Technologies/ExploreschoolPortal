@@ -64,43 +64,58 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <div class="modal-body">    
-                                    @if (Session::get('results'))
-                                        @foreach (Session::get('results') as $result)
-                                            {{ $result->subjectModel->subject }}
-                                        @endforeach
-                                    @endif
-                                    <table class="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">#</th>
-                                                <th scope="col">First</th>
-                                                <th scope="col">Last</th>
-                                                <th scope="col">Handle</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th scope="row">1</th>
-                                                <td>Mark</td>
-                                                <td>Otto</td>
-                                                <td>@mdo</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">2</th>
-                                                <td>Jacob</td>
-                                                <td>Thornton</td>
-                                                <td>@fat</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">3</th>
-                                                <td colspan="2">Larry the Bird</td>
-                                                <td>@twitter</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                
-                         
+                        <div class="modal-body">
+                            {{-- @if (Session::get('results'))
+                                @foreach (Session::get('results') as $result)
+                                    {{ $result->subjectModel->subject }}
+                                @endforeach
+                            @endif --}}
+                            <div class="col-12" >
+                                <div class="row">
+                                    <div class="col-12 text-center">
+                                        <span class="avatar avatar-lg rounded-circle ">
+                                            <img alt="Image placeholder"
+                                                src="{{ asset('/assets/img/theme/team-4.jpg') }}">
+                                        </span>
+                                        <h3 class="box-title text-bold ">SCHOOL NAME </h3>
+                                        <h6> Address </h6>
+                                        <span> Phone </span>
+                                        <span> Email </span>
+                                        <h3 class="box-title text-bold">ACADEMIC PERFORMANCE REPORT SHEET</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">First</th>
+                                        <th scope="col">Last</th>
+                                        <th scope="col">Handle</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Mark</td>
+                                        <td>Otto</td>
+                                        <td>@mdo</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>Jacob</td>
+                                        <td>Thornton</td>
+                                        <td>@fat</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td colspan="2">Larry the Bird</td>
+                                        <td>@twitter</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+
                         </div>
                         <div class="modal-footer">
                             {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> --}}
