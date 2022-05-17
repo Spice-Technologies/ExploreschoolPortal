@@ -7,6 +7,7 @@
     </div>
     <div class="card col-6 mx-auto">
         <div class="card-body ">
+
             <h2> Select School </h2>
             {{-- validation errors --}}
             @if ($errors->any())
@@ -53,9 +54,9 @@
             </button> --}}
 
             <!-- Modal -->
-            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+            <div class="modal fade " id="exampleModalCenter" tabindex="-1" role="dialog"
                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-dialog  modal-xl" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalCenterTitle">Print Result</h5>
@@ -64,11 +65,19 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            ...
+                            <div class="card col-12 mx-auto">
+                                <div class="card-body ">
+                                    @if (Session::get('results'))
+                                        @foreach (Session::get('results') as $result)
+                                            {{ $result->subjectModel->subject }}
+                                        @endforeach
+                                    @endif
+                                </div>
+                            </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> --}}
+                            <button type="button" class="btn btn-primary">Print Result</button>
                         </div>
                     </div>
                 </div>

@@ -98,7 +98,7 @@ class checkResultController extends Controller
                 ]);
                 return back()->with('msg', 'Looks like your result has not been uploaded yet !!!');
             } else {
-                return view('dashboard.Student.checkResult.show', compact('fetchResults'));
+                return redirect()->back()->with('results', $fetchResults);
             }
 
             // when the record is not fresh 
@@ -113,9 +113,14 @@ class checkResultController extends Controller
                 'class_id' => $request->class_id,
                 'term_id' =>  $pin->term_id
             ]);
-            return redirect()->back()->with('results', $fetchResults);
 
-          //  return view('dashboard.Student.checkResult.show', compact('fetchResults'));
+            
+            return redirect()->back()->with([
+                'results' => $fetchResults,
+         
+            ]);
+
+            //  return view('dashboard.Student.checkResult.show', compact('fetchResults'));
         }
     }
 
