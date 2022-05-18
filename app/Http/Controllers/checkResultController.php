@@ -94,7 +94,7 @@ class checkResultController extends Controller
                     'use_stats' => 0,
                     'student_id' =>  NULL,
                     'class_id' => NULL,
-                    'term_id' =>  NULL
+                    'term_id' =>   NULL
                 ]);
                 return back()->with('msg', 'Looks like your result has not been uploaded yet !!!');
             } else {
