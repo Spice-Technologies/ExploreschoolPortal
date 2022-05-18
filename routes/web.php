@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
 Auth::routes();
 //everyone should have access to this but stuff will only be accessible if they are logged in
 
@@ -46,10 +45,8 @@ Route::group(['middleware' => ['auth', 'role:SuperAdmin']], function () {
     Route::resource('/session',  'App\Http\Controllers\SessionController');
     // Subject Management 
     Route::resource('/subject',  'App\Http\Controllers\SubjectController');
-
 });
 //});
-
 
 Route::group(['middleware' => ['auth', 'role:Admin']], function () {
     // dashboard/ or home
@@ -80,6 +77,4 @@ Route::group(['middleware' => ['auth', 'role:Student']], function () {
     // dashboard/ or home
     Route::get('/user', [App\Http\Controllers\SoleStudentController::class, 'index'])->name('student.user.index');
     Route::resource('/student/result', 'App\Http\Controllers\checkResultController');
-    
-
 });

@@ -42,6 +42,8 @@ class ResultController extends Controller
         return view('backend.result.mastersheet', compact('sessions', 'classes', 'terms'));
     }
 
+    
+
     public function masterPdfGen(Request $r)
     {
         // dd($r->all());

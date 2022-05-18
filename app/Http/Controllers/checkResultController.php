@@ -117,7 +117,6 @@ class checkResultController extends Controller
             
             return redirect()->back()->with([
                 'results' => $fetchResults,
-         
             ]);
 
             //  return view('dashboard.Student.checkResult.show', compact('fetchResults'));
