@@ -187,7 +187,7 @@
                                             <td>123</td>
                                             <td>334</td>
                                         </tr>
-                                    
+
                                         <?php
                                         
                                         ?>
@@ -210,7 +210,9 @@
                         </div>
                         <div class="modal-footer">
                             {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> --}}
-                            <button type="button" class="btn btn-primary">Print Result</button>
+                            <a href="javascript:htmlToPdf()">Download File As PDF</a>
+
+                            {{-- <button type="button" class="btn btn-primary">Print Result</button> --}}
                         </div>
                     </div>
                 </div>

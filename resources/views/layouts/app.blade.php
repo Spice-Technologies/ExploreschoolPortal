@@ -30,9 +30,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
-    {{-- <!-- datatables -->
-    <link href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" rel="stylesheet"> --}}
-
+    <script src=" {{ asset('/assets/vendor/jspdf/jspdf.js') }}"></script>
 </head>
 
 <body>
@@ -341,12 +339,22 @@
         </div>
     </div>
     <!-- Argon Scripts -->
+    <script>
+        function htmlToPdf() {
+            var doc = new jsPDF();
+            doc.fromHTML(document.getElementById("exampleModalCenter"),
+                15,
+                15, {
+                    'width': 170
+                },
+                function() {
+                    doc.save("PDF_Documet.pdf");
+                });
+        }
+    </script>
+    {{-- <script src="{{ asset('/assets/vendor/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script> --}}
 
-
-
-    <script src="{{ asset('/assets/vendor/jquery/dist/jquery.min.js') }}"></script>
-
-    <script src="{{ asset('/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="{{ asset('/assets/vendor/js-cookie/js.cookie.js') }}"></script>
     <script src=" {{ asset('/assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js') }} "></script>
@@ -354,7 +362,6 @@
 
     <!-- Argon JS -->
     <script src="{{ asset('/assets/js/argon.js?v=1.2.0') }}"></script>
-
 
 </body>
 

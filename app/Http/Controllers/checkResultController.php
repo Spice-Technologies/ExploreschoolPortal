@@ -14,8 +14,6 @@ use Illuminate\Support\Facades\Auth;
 
 
 class checkResultController extends Controller
-
-
 {
 
 
@@ -26,7 +24,7 @@ class checkResultController extends Controller
      */
     public function index()
     {
-        //
+        return view('backend.result.masterPdf');
     }
 
     /**
@@ -114,7 +112,6 @@ class checkResultController extends Controller
                 'term_id' =>  $pin->term_id
             ]);
 
-            
             return redirect()->back()->with([
                 'results' => $fetchResults,
             ]);
