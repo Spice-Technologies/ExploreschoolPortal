@@ -42,10 +42,55 @@
             <!-- Button trigger modal -->
 
             @if (!empty(Session::get('results')))
-                <script>
-                    $(document).ready(function() {
-                        $('#exampleModalCenter').modal('show');
-                    });
+                
+
+                  
+ 
+
+
+
+
+<script type="text/javascript">
+   var pdf = new jsPDF('p', 'pt', 'a4');
+
+   function saveDoc() {
+       window.html2canvas = html2canvas
+       const doc = document.getElementsByTagName('div')[0];
+
+       if (doc) {
+           console.log("div is ");
+           console.log(doc);
+           console.log("hellowww");
+
+
+
+           pdf.html(document.getElementById('doc'), {
+               callback: function (pdf) {
+                   pdf.save('DOC.pdf');
+               }
+           })
+      }
+    }
+  
+                    
+                    // $(document).ready(function() {
+                    //     $('#exampleModalCenter').modal('show');
+
+                    //     $("#downloadPdf").click(function() {
+                    //         window.html2canvas = html2canvas
+                    //         var pdf = new jsPDF('p', 'pt', 'a4');
+                    //         //   const doc =  document.getElementsById('div')[0]
+                    //         var specialElementHandlers = {
+                    //             '#editor': function(element, renderer) {
+                    //                 return true;
+                    //             }
+                    //         };
+                    //         pdf.html($('#exampleModalCenter')).then(() => {
+                    //             pdf.save('sample-file.pdf');
+                    //         });
+
+                    //     })
+                    // });
                 </script>
             @endif
             {{-- <!-- Button trigger modal -->
@@ -209,10 +254,10 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> --}}
-                            <a href="javascript:htmlToPdf()">Download File As PDF</a>
+                            {{-- <button type="button" id= ""class="btn btn-secondary" data-dismiss="modal">Close</button> --}}
+                            {{-- <a href="javascript:html2pdf()">Download File As PDF</a> --}}
 
-                            {{-- <button type="button" class="btn btn-primary">Print Result</button> --}}
+                            <button type="button" id="downloadPdf" class="btn btn-primary">Print Result</button>
                         </div>
                     </div>
                 </div>

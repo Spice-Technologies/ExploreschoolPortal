@@ -30,7 +30,11 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
-    <script src=" {{ asset('/assets/vendor/jspdf/jspdf.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.min.js"></script>
+    <!-- html2canvas -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script> --}}
+
 </head>
 
 <body>
@@ -339,28 +343,33 @@
         </div>
     </div>
     <!-- Argon Scripts -->
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.8.0/html2pdf.bundle.min.js"></script> --}}
     <script>
-        function htmlToPdf() {
-            var doc = new jsPDF();
-            doc.fromHTML(document.getElementById("exampleModalCenter"),
-                15,
-                15, {
-                    'width': 170
-                },
-                function() {
-                    doc.save("PDF_Documet.pdf");
-                });
-        }
+        // $("#downloadPdf").click(function() {
+        //     var doc = new jsPDF();
+        //     var specialElementHandlers = {
+        //         '#editor': function(element, renderer) {
+        //             return true;
+        //         }
+        //     };
+        //     doc.fromHTML($('#exampleModalCenter').html(), 15, 15, {
+        //         'width': 170,
+        //         'elementHandlers': specialElementHandlers
+        //     });
+
+        //     doc.save('vscode.pdf');
+        // })
     </script>
     {{-- <script src="{{ asset('/assets/vendor/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ asset('/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script> --}}
-
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="{{ asset('/assets/vendor/js-cookie/js.cookie.js') }}"></script>
     <script src=" {{ asset('/assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js') }} "></script>
     <script src=" {{ asset('/assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js') }}"></script>
 
     <!-- Argon JS -->
+    <script src="{{ asset('/assets/js/argon.js?v=1.2.0') }}"></script>
+    <script type="text/javascript" src="html2canvas.js"></script> 
     <script src="{{ asset('/assets/js/argon.js?v=1.2.0') }}"></script>
 
 </body>

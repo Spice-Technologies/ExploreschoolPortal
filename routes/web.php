@@ -75,7 +75,7 @@ Route::group(['middleware' => ['auth', 'role:Admin']], function () {
 Route::group(['middleware' => ['auth', 'role:Student']], function () {
 
     // dashboard/ or home
-    Route::get('/printPDf', [App\Http\Controllers\PrintResultController::class, 'printPDf'])->name('printPDf');
+    Route::get('/user/printPDf', [App\Http\Controllers\PrintResultController::class, 'printPDf'])->name('printPDf');
     Route::get('/user', [App\Http\Controllers\SoleStudentController::class, 'index'])->name('student.user.index');
     Route::resource('/student/result', 'App\Http\Controllers\checkResultController');
 });
