@@ -37,67 +37,6 @@
 
                 </div>
             </form>
-
-
-            <!-- Button trigger modal -->
-
-            @if (!empty(Session::get('results')))
-                
-
-                  
- 
-
-
-
-
-<script type="text/javascript">
-   var pdf = new jsPDF('p', 'pt', 'a4');
-
-   function saveDoc() {
-       window.html2canvas = html2canvas
-       const doc = document.getElementsByTagName('div')[0];
-
-       if (doc) {
-           console.log("div is ");
-           console.log(doc);
-           console.log("hellowww");
-
-
-
-           pdf.html(document.getElementById('doc'), {
-               callback: function (pdf) {
-                   pdf.save('DOC.pdf');
-               }
-           })
-      }
-    }
-  
-                    
-                    // $(document).ready(function() {
-                    //     $('#exampleModalCenter').modal('show');
-
-                    //     $("#downloadPdf").click(function() {
-                    //         window.html2canvas = html2canvas
-                    //         var pdf = new jsPDF('p', 'pt', 'a4');
-                    //         //   const doc =  document.getElementsById('div')[0]
-                    //         var specialElementHandlers = {
-                    //             '#editor': function(element, renderer) {
-                    //                 return true;
-                    //             }
-                    //         };
-                    //         pdf.html($('#exampleModalCenter')).then(() => {
-                    //             pdf.save('sample-file.pdf');
-                    //         });
-
-                    //     })
-                    // });
-                </script>
-            @endif
-            {{-- <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                Launch demo modal
-            </button> --}}
-
             <!-- Modal -->
             <div class="modal fade " id="exampleModalCenter" tabindex="-1" role="dialog"
                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -109,7 +48,7 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <div class="modal-body">
+                        <div class="modal-body" id="resultStuff">
                             {{-- @if (Session::get('results'))
                                 @foreach (Session::get('results') as $result)
                                     {{ $result->subjectModel->subject }}
@@ -264,4 +203,18 @@
             </div>
         </div>
     </div>
+    @if (!empty(Session::get('results')))
+        <script type="text/javascript">
+            $(document).ready(function() {
+
+                $('#exampleModalCenter').modal('show');
+                $('#downloadPdf').click(function() {
+                    var element = document.getElementById('resultStuff');
+                    var worker = html2pdf().from(element).save();
+                    html2pdf(worker);
+                });
+
+            })
+        </script>
+    @endif
 @endsection
