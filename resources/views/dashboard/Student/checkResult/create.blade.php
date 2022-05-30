@@ -59,7 +59,7 @@
                                     <div class="col-12 text-center">
                                         <span class="avatar avatar-lg rounded-circle ">
                                             <img alt="Image placeholder"
-                                                src="{{ asset('/assets/img/theme/team-4.jpg') }}">
+                                                src="https://cdn.pixabay.com/photo/2013/10/31/14/09/phone-booth-203492_960_720.jpg">
                                         </span>
                                         <h3 class="box-title text-bold ">SCHOOL NAME </h3>
                                         <h5> Address: no 2 gwalameji road, opp, fedral poly </h5>
@@ -127,7 +127,7 @@
                                             <td>30</td>
                                             <td>90</td>
                                             <td>56</td>
-                                            <td>45<sup>chevkSup</sup></td>
+                                            <td>45</td>
                                             <td>123</td>
                                             <td>334</td>
                                         </tr>
@@ -137,7 +137,7 @@
                                             <td>30</td>
                                             <td>90</td>
                                             <td>56</td>
-                                            <td>45<sup>chevkSup</sup></td>
+                                            <td>45</td>
                                             <td>123</td>
                                             <td>334</td>
                                         </tr>
@@ -147,7 +147,7 @@
                                             <td>30</td>
                                             <td>90</td>
                                             <td>56</td>
-                                            <td>45<sup>chevkSup</sup></td>
+                                            <td>45</td>
                                             <td>123</td>
                                             <td>334</td>
                                         </tr>
@@ -157,7 +157,7 @@
                                             <td>30</td>
                                             <td>90</td>
                                             <td>56</td>
-                                            <td>45<sup>chevkSup</sup></td>
+                                            <td>45</td>
                                             <td>123</td>
                                             <td>334</td>
                                         </tr>
@@ -167,7 +167,7 @@
                                             <td>30</td>
                                             <td>90</td>
                                             <td>56</td>
-                                            <td>45<sup>chevkSup</sup></td>
+                                            <td>45</td>
                                             <td>123</td>
                                             <td>334</td>
                                         </tr>
@@ -209,8 +209,26 @@
 
                 $('#exampleModalCenter').modal('show');
                 $('#downloadPdf').click(function() {
+                    var opt = {
+                        margin: 1,
+                        filename: 'TestwithImage.pdf',
+                        image: {
+                            type: 'jpeg',
+                            quality: 0.98
+                        },
+                        html2canvas: {
+                            dpi: 192,
+                            letterRendering: true,
+                            useCORS: true
+                        },
+                        // jsPDF: {
+                        //     unit: 'in',
+                        //     format: 'A4',
+                        //     orientation: 'portrait'
+                        // }
+                    };
                     var element = document.getElementById('resultStuff');
-                    var worker = html2pdf().from(element).save();
+                    var worker = html2pdf().set(opt).from(element).save();
                     html2pdf(worker);
                 });
 
