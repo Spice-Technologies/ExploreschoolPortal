@@ -8,7 +8,7 @@
     <div class="card col-6 mx-auto">
         <div class="card-body ">
 
-            <h2> Select School </h2>
+            {{-- <h2> Select School </h2> --}}
             {{-- validation errors --}}
             @if ($errors->any())
                 {!! implode('', $errors->all('<div class="alert alert-danger">:message</div>')) !!}
@@ -21,7 +21,15 @@
             @endif
             <form action="{{ route('result.store') }}" method="POST">
                 @csrf
-
+                <h4> Select Session </h4>
+                <div class="form-group">
+                    <select class="form-control" name="term">
+                        @foreach ($sessions as $session)
+                            <option value="{{ $$session->id ?? '' }}">{{ $session->session }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <h4> Select Term  </h4>
                 <div class="form-group">
                     <select class="form-control" name="term">
                         @foreach ($terms as $term)

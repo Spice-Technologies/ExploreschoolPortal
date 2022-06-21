@@ -35,7 +35,8 @@ class checkResultController extends Controller
     public function create()
     {
         $terms = Term::all();
-        return view('dashboard.Student.checkResult.create', compact('terms'));
+        $sessions = Session::get('session');
+        return view('dashboard.Student.checkResult.create', compact('terms', 'sessions'));
     }
 
     /**
@@ -64,19 +65,18 @@ class checkResultController extends Controller
 
         $request->validate([
             'pin' => 'required|exists:pins,pin',
-            'term' => 'required'
-
+            'term' => 'required',
+            'class_id' => 'required'
         ]);
 
         $pin = Pin::where('pin', $request->pin)->first();
 
         $session = new Session();
 
-        $userModel = Auth::user(); // you get the student from the userModel side 
-        $student = $userModel->student->id;
+        $student = Student::$studentId;
         $fetchResults = $this->DisplayResult($student);
 
-        if ($pin->use_stats >= 200) return back()->with('msg', 'You have exceeded the number of times meant to use this pin');
+        if ($pin->use_stats >= 900) return back()->with('msg', 'You have exceeded the number of times meant to use this pin');
 
         //if the pin is 'so fresh' and has never been used before 
         if ($pin->use_stats == 0) {

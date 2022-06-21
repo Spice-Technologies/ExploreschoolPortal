@@ -21,7 +21,7 @@ Auth::routes();
 Route::group(['middleware' => ['auth', 'role:SuperAdmin']], function () {
 
     // dashboard/ or home
-    Route::get('/', [App\Http\Controllers\superAdminController::class, 'index'])->name('dashboard');
+    Route::get('/superAdmin', [App\Http\Controllers\superAdminController::class, 'index'])->name('dashboard');
 
     // dashboard/SuperAdmin
     Route::get('/index', [App\Http\Controllers\superAdminController::class, 'index'])->name('dashboard.admin.index');
