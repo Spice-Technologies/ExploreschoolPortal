@@ -52,4 +52,17 @@ class Result extends Model
     {
         return $this->belongsTo(Subject::class, 'subject_id');
     }
+
+
+    /**
+     * Return results checked by the student via the student id
+     */
+
+    public static function DisplayResult($student, $class, $session)
+    {
+        $r = self::where('student_id', $student)->where('class_id', $class)->where('session_id', $session);
+        if ($r->exists()) return  $r->get();
+        else
+            return false;
+    }
 }

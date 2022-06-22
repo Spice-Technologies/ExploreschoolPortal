@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\Models\Klass;
 use App\Models\Pin;
 use App\Models\Result;
 use App\Models\Session;
@@ -35,22 +36,12 @@ class checkResultController extends Controller
     public function create()
     {
         $terms = Term::all();
-        $sessions = Session::get('session');
-        return view('dashboard.Student.checkResult.create', compact('terms', 'sessions'));
+        $klasses = Klass::get(['id','class_name']);
+       
+        $sessions = Session::get(['session', 'id']);
+        return view('dashboard.Student.checkResult.create', compact('terms', 'sessions', 'klasses'));
     }
 
-    /**
-     * Return results checked by the student via the student id
-     */
-
-    private function DisplayResult($student)
-    {
-
-        $r = Result::where('student_id', $student);
-        if ($r->exists()) return  $r->get();
-        else
-            return false;
-    }
     /**
      * Store a newly created resource in storage.
      *
@@ -66,15 +57,15 @@ class checkResultController extends Controller
         $request->validate([
             'pin' => 'required|exists:pins,pin',
             'term' => 'required',
-            'class_id' => 'required'
+            'class_id' => 'required',
+            'session' => 'required'//exists:results,session_id
+            
         ]);
 
         $pin = Pin::where('pin', $request->pin)->first();
 
-        $session = new Session();
-
-        $student = Student::$studentId;
-        $fetchResults = $this->DisplayResult($student);
+        $student = Student::studentId();
+        $fetchResults = Result::DisplayResult($student, $request->class_id, $request->session);
 
         if ($pin->use_stats >= 900) return back()->with('msg', 'You have exceeded the number of times meant to use this pin');
 
@@ -86,7 +77,7 @@ class checkResultController extends Controller
                 'class_id' => $request->class_id,
                 'term_id' =>  $request->term
             ]);
-            //check if the student result has been uploaded 
+            //check if the student result has not bbeen uploaded // i think I should check for this first..maybe rearrange my if else statements
             if ($fetchResults == false) {
                 $examPin =  $pin->update([
                     'use_stats' => 0,

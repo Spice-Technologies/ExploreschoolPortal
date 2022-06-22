@@ -23,17 +23,26 @@
                 @csrf
                 <h4> Select Session </h4>
                 <div class="form-group">
-                    <select class="form-control" name="term">
+                    <select class="form-control" name="session">
                         @foreach ($sessions as $session)
-                            <option value="{{ $$session->id ?? '' }}">{{ $session->session }}</option>
+                            <option value="{{ $session->id }}">{{ $session->session }}</option>
                         @endforeach
                     </select>
                 </div>
-                <h4> Select Term  </h4>
+                <h4> Select Term </h4>
                 <div class="form-group">
                     <select class="form-control" name="term">
                         @foreach ($terms as $term)
-                            <option value="{{ $term->id ?? '' }}">{{ $term->Term }}</option>
+                            <option value="{{ $term->id }}">{{ $term->Term }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <h4> Select Class </h4>
+                <div class="form-group">
+                    <select class="form-control" name="class_id">
+                        @foreach ($klasses as $klass)
+                            <option value="{{ $klass->id }}">{{ $klass->class_name }}</option>
                         @endforeach
                     </select>
                 </div>

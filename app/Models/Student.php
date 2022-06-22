@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
-class Student extends Model 
+class Student extends Model
 {
     use HasFactory;
 
@@ -43,14 +43,18 @@ class Student extends Model
 
     //uisng dynamic scoping
 
-     public function scopeSchoolId($query, $school_id){
-         return $query->where('school_id', $school_id);
-     }
+    public function scopeSchoolId($query, $school_id)
+    {
+        return $query->where('school_id', $school_id);
+    }
 
-     public static $studentId = Auth::user()->student->id;
-    
+    public static function studentId()
+    {
+        return Auth::user()->student->id;
+    }
 
-     /* 
+
+    /* 
             working on the promote class feature
 
             public function scopePromote($query, $class_id){
