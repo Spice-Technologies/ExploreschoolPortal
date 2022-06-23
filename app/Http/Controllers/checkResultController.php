@@ -35,9 +35,10 @@ class checkResultController extends Controller
      */
     public function create()
     {
+
         $terms = Term::all();
-        $klasses = Klass::get(['id','class_name']);
-       
+        $klasses = Klass::get(['id', 'class_name']);
+
         $sessions = Session::get(['session', 'id']);
         return view('dashboard.Student.checkResult.create', compact('terms', 'sessions', 'klasses'));
     }
@@ -58,13 +59,15 @@ class checkResultController extends Controller
             'pin' => 'required|exists:pins,pin',
             'term' => 'required',
             'class_id' => 'required',
-            'session' => 'required'//exists:results,session_id
-            
+            'session' => 'required' //exists:results,session_id
+
         ]);
-
-        $pin = Pin::where('pin', $request->pin)->first();
-
         $student = Student::studentId();
+        $regNumb = Auth::user()->email;
+        $result = new Result();
+        $result->getAllResult($regNumb, $request->session, $request->class_id);
+        dd(  $result->getAverage() );
+        $pin = Pin::where('pin', $request->pin)->first();
         $fetchResults = Result::DisplayResult($student, $request->class_id, $request->session);
 
         if ($pin->use_stats >= 900) return back()->with('msg', 'You have exceeded the number of times meant to use this pin');
