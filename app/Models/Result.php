@@ -11,10 +11,7 @@ class Result extends Model
     use HasFactory;
 
     protected $carrier = [];
-    protected $boeing = [
-
-        'RegNum' => 'fff'
-    ];
+    protected $boeing = [];
 
     protected $testArr = [];
 
@@ -78,50 +75,52 @@ class Result extends Model
     public function getAllResult($session, $class)
     {
         $this->carrier = self::where('class_id', $class)->where('session_id', $session)->with('subject')->get()->toArray();
-        //get total number of subjects then divide by total score...to get this as a single function or a single value we can do array reduce but i just want to map the number of subjects first.
 
-        //also note that we had something like $this->carrier[] so as to push the array below as the second item...if you use array_push for the array instance above this one, we'll have an array of array sort of which is not our desired goal..chidi bear this in mind 
-        // $this->carrier['noOfSubjects'] =  count(array_map(function ($v) {
-        //     return $v['subject']['subject'];
-        // }, $this->carrier));
-        //  
+        // $this->boeing = array_column($this->carrier, 'RegNum');
+        // $boe = $this->boeing;
+        //   $y =array_fill_keys($this->boeing, array_filter($this->carrier, function($v) use($boe) {
+        //             echo "<pre>";
+        //             print_r($boe[0] );
+        //             echo "</pre>";
+        //   }));
 
-        //ssave their reg numbe r in a colection then check for that matching reg number using for each or any method and get al the result related to that reg number 
+        $array = array(
+            0 => array(
+                'id' => '20120100',
+                'link' => 'www.janedoe.com',
+                'name' => 'Jane Doe'
+            ),
 
+            1 => array(
+                'id' => '20120100',
+                'link' => 'www.janedoe.com',
+                'name' => 'John Doe'
+            ),
+            2 => array(
+                'id' => '20120101',
+                'link' => 'www.johndoe.com',
+                'name' => 'John Doe'
+            )
+        );
 
+        $arrColum = array_column($array, 'name');
+        // dd(in_array('Jane Doe',$arrColum));
+        $i = 0;
+        $new_array = [];
+        foreach ($array as $key => $value) {
+            if (in_array($value['name'], $arrColum)) {
+                $key = $value['name'] . '-' . $i;
 
-        $this->boeing =
+                $new_array[] = [$key => $value];
 
-            array_map(function ($u) {
-                return $u['RegNum'];
-
-                // array_filter($u, function ($v) use ($key) {
-                //     if ($this->boeing['RegNum']  != 'Mob\22\0002') {
-                //         return $v;
-                //     }
-                // }, ARRAY_FILTER_USE_BOTH);
-
-            }, $this->carrier);
-
-
-        $counter = 0;
-        array_map(function ($u) use ($counter) {
-
-            $this->testArr[$counter.$u['RegNum']] = "cooolect";
-
-            
-            return  $this->testArr +=  ["yhooo"];
-        }, $this->carrier);
-
-        $counter++;
-
-        // dd($this->boeing);
-
-        // dd($this->carrier);
-
-        dd($this->testArr);
+                $i++;
+            }
+        }
+        echo '<pre>';
+        dd($new_array);
+        echo '</pre>';
     }
-    // having the subjects, totalscore, etc in this format ["English","ogombo-campus"] i.e like json is the better approach 
+    // having the subjects, totalscore, etc in this format ["English","ogombo-campus"] i.e like json is the better approach         
     public function getTotalScore()
     {
         $arr = array_filter(collect($this->carrier)->pluck(['total_score'])->toArray());
