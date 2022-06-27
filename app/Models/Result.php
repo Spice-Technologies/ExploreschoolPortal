@@ -111,7 +111,6 @@ class Result extends Model
         foreach ($array as $key => $value) {
             if (in_array($value['name'], $arrColum)) {
                 $key = $value['name'] . '-' . $i;
-
                 $new_array[] = [$key => $value];
 
                 $i++;
