@@ -4,12 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Prophecy\Promise\ReturnPromise;
 
 class Result extends Model
 {
     use HasFactory;
 
     protected $carrier = [];
+    protected $boeing = [
+
+        'RegNum' => 'fff'
+    ];
+
+    protected $testArr = [];
 
     protected $fillable = ['student_id', 'class_id', 'assessment_total', 'exam_score', 'total_score', 'subject_id', 'session_id', 'term_id', 'school_id', 'subject'];
 
@@ -68,19 +75,53 @@ class Result extends Model
             return false;
     }
 
-    public function getAllResult($regNum, $session, $class)
+    public function getAllResult($session, $class)
     {
-        $this->carrier = self::where('RegNum', $regNum)->where('class_id', $class)->where('session_id', $session)->with('subject')->get()->toArray();
-        //get total number of subjects then divide by total score...to get this as a single function or a single value we can do array reduce but i just want to map the number of subjects first
+        $this->carrier = self::where('class_id', $class)->where('session_id', $session)->with('subject')->get()->toArray();
+        //get total number of subjects then divide by total score...to get this as a single function or a single value we can do array reduce but i just want to map the number of subjects first.
 
-        //also note that we had something like $this->carrier[] so as to push the array below as the second item..if you use array_push for the array instance above this one, we'll have an array of array sort of which is not our desired goal..chidi bear this in mind 
-        $this->carrier['noOfSubjects'] =  count(array_map(function ($v) {
-            return $v['subject']['subject'];
-        }, $this->carrier));
+        //also note that we had something like $this->carrier[] so as to push the array below as the second item...if you use array_push for the array instance above this one, we'll have an array of array sort of which is not our desired goal..chidi bear this in mind 
+        // $this->carrier['noOfSubjects'] =  count(array_map(function ($v) {
+        //     return $v['subject']['subject'];
+        // }, $this->carrier));
+        //  
 
-        return  $this->carrier;
+        //ssave their reg numbe r in a colection then check for that matching reg number using for each or any method and get al the result related to that reg number 
+
+
+
+        $this->boeing =
+
+            array_map(function ($u) {
+                return $u['RegNum'];
+
+                // array_filter($u, function ($v) use ($key) {
+                //     if ($this->boeing['RegNum']  != 'Mob\22\0002') {
+                //         return $v;
+                //     }
+                // }, ARRAY_FILTER_USE_BOTH);
+
+            }, $this->carrier);
+
+
+        $counter = 0;
+        array_map(function ($u) use ($counter) {
+
+            $this->testArr[$counter.$u['RegNum']] = "cooolect";
+
+            
+            return  $this->testArr +=  ["yhooo"];
+        }, $this->carrier);
+
+        $counter++;
+
+        // dd($this->boeing);
+
+        // dd($this->carrier);
+
+        dd($this->testArr);
     }
-
+    // having the subjects, totalscore, etc in this format ["English","ogombo-campus"] i.e like json is the better approach 
     public function getTotalScore()
     {
         $arr = array_filter(collect($this->carrier)->pluck(['total_score'])->toArray());
@@ -104,4 +145,5 @@ class Result extends Model
     // Trying to access array offset on value of type int
 
     //learn about interfaces, trait and absrtact classes 
+
 }

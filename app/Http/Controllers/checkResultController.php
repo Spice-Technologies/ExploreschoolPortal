@@ -63,10 +63,10 @@ class checkResultController extends Controller
 
         ]);
         $student = Student::studentId();
-        $regNumb = Auth::user()->email;
+        // $regNumb = Auth::user()->email;
         $result = new Result();
-        $result->getAllResult($regNumb, $request->session, $request->class_id);
-        dd(  $result->getAverage() );
+        dd( $result->getAllResult($request->session, $request->class_id));
+         $result->getAverage();
         $pin = Pin::where('pin', $request->pin)->first();
         $fetchResults = Result::DisplayResult($student, $request->class_id, $request->session);
 
