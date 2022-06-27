@@ -104,6 +104,7 @@ class Result extends Model
         );
 
         $arrColum = array_column($array, 'name');
+        $arr= array_column($this->carrier, 'RegNum');
         // dd(in_array('Jane Doe',$arrColum));
         $i = 0;
         $new_array = [];
@@ -116,9 +117,7 @@ class Result extends Model
                 $i++;
             }
         }
-        echo '<pre>';
-        dd($new_array);
-        echo '</pre>';
+        dd(array_diff_key( $arr , array_unique( $arr ) ));
     }
     // having the subjects, totalscore, etc in this format ["English","ogombo-campus"] i.e like json is the better approach         
     public function getTotalScore()
