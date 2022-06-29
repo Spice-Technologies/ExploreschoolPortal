@@ -103,20 +103,25 @@ class Result extends Model
             )
         );
 
-        $arrColum = array_column($array, 'name');
+        $arrColum = array_unique(array_column($array, 'name'));
+        
         $arr= array_column($this->carrier, 'RegNum');
         // dd(in_array('Jane Doe',$arrColum));
         $i = 0;
         $new_array = [];
-        foreach ($array as $key => $value) {
-            if (in_array($value['name'], $arrColum)) {
-                $key = $value['name'] . '-' . $i;
-                $new_array[] = [$key => $value];
+        foreach ($this->carrier as $key => $value) {
+
+            // dd($this->carrier);
+            
+            if ($value['RegNum'] == 'Mob\22\0001') {
+                $key = $value['RegNum'] . '-' . $i;
+                $new_array += [$key => $value];
 
                 $i++;
             }
         }
-        dd(array_diff_key( $arr , array_unique( $arr ) ));
+        dd($new_array);
+        // dd(array_diff_key( $arr , array_unique( $arr ) ));
     }
     // having the subjects, totalscore, etc in this format ["English","ogombo-campus"] i.e like json is the better approach         
     public function getTotalScore()
