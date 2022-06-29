@@ -105,7 +105,7 @@ class Result extends Model
 
         $arrColum = array_unique(array_column($array, 'name'));
         
-        $arr= array_column($this->carrier, 'RegNum');
+        $arr= array_unique(array_column($this->carrier, 'RegNum'));
         // dd(in_array('Jane Doe',$arrColum));
         $i = 0;
         $new_array = [];
@@ -117,15 +117,17 @@ class Result extends Model
             //if preg_match, return all the matches
             if ($value['RegNum'] == 'Mob\22\0001') {
                 //then filter where all Mob\22\0001 and save 
-                $key = $value['subject']['subject'];
+                $key = $value['RegNum'];
                 $new_array += [$key => $value];
 
                 $i++;
             }
         }
-        dd($new_array);
-        $keys = (array_keys($new_array));
-        dd($keys);
+        // dd($new_array);
+        // $keys = (array_keys($new_array));
+        // dd($keys);
+        dd($arr);
+        
         // dd(array_diff_key( $arr , array_unique( $arr ) ));
     }
     // having the subjects, totalscore, etc in this format ["English","ogombo-campus"] i.e like json is the better approach         
