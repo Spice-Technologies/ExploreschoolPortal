@@ -218,14 +218,12 @@ class Result extends Model
             return $accumulator;
         }, []);
 
-        // dd($menu);
+        dd($this->carrier);
 
         //let me write my onw 
 
         $myOwn = array_reduce($this->carrier, function ($accumulator, $item) {
-
-            $index = $item['RegNum']; // Mob220001
-//this if it is not set is really doing the majic --Omorrrr!!!
+            $index = $item['RegNum']; 
             if (!isset($accumulator[$index])) {
                 $accumulator[$index]= [
                     'id' => $item['id'],
@@ -239,9 +237,6 @@ class Result extends Model
                 'subject' => $item['subject']['subject'],
                 'subject_id' => $item['subject_id']
             ];
-
-            // dd($accumulator);
-
             return $accumulator;
         }, []);
 
