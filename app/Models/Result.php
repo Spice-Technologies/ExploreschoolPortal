@@ -118,20 +118,15 @@ class Result extends Model
                 ];
             }
 
-            $subMenu = $accumulator[$index]['submenu'][$i] = [
+            $subMenu = $accumulator[$index]['submenu'][] = [
                 'id' => $item['id'],
-                'total_score'=> $item['total_score'],
+                'total_score' . $item['id'] => $item['total_score'], // I will be using the ids as their identifiers so that in calculating the total scores there are no duplications or situation of calculating duplicate ids ..hence this result of unique ids also depends on how I chose to sore the result into the database... hence alwasy bear in mind of your databse structure as it is key to your result.
             ];
-            if (isset($subMenu['total_score'])) {
+            // getting the total score of all subjects
                 foreach ($accumulator[$index]['submenu'] as $key => $v) {
-                    $accumulator[$index]['score'] =  $accumulator[$index]['score'] + $v['total_score'];
+                    $accumulator[$index]['score'] =  $accumulator[$index]['score'] + ( $v['total_score' . $item['id']] ?? 0); //  this in particular is what is checking if the total_score is not set yet, just add 0 instead of throwing an errorr..omorrr !!! Senior Devvvv !!! 
                 }
-            }
-
-            // if (isset($accumulator[$index]['score']) && isset($subMenu['total_score' . $i])) {
-
-            //     $accumulator[$index]['score'] =  $subMenu['total_score' . 1] +  ($subMenu['total_score' . $i+1] ?? 0)  ;
-            // }
+         
             return $accumulator;
         }, []);
 
