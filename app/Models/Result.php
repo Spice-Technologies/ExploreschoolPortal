@@ -114,7 +114,7 @@ class Result extends Model
                     'id' => $item['id'],
                     'RegNum' => $item['RegNum'],
                     'submenu' => [],
-                    'score' => 0
+                    'Tscore' => 0
                 ];
             }
 
@@ -124,7 +124,7 @@ class Result extends Model
             ];
             // getting the total score of all subjects
             foreach ($accumulator[$index]['submenu'] as $key => $v) {
-                $accumulator[$index]['score'] =  $accumulator[$index]['score'] + ($v['total_score' . $item['id']] ?? 0); //  this in particular is what is checking if the total_score is not set yet, just add 0 instead of throwing an errorr..omorrr !!! Senior Devvvv !!! 
+                $accumulator[$index]['Tscore'] =  $accumulator[$index]['Tscore'] + ($v['total_score' . $item['id']] ?? 0); //  this in particular is what is checking if the total_score is not set yet, just add 0 instead of throwing an errorr..omorrr !!! Senior Devvvv !!! 
             }
 
             return $accumulator;
