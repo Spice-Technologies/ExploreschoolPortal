@@ -123,42 +123,12 @@ class Result extends Model
                 'total_score' . $item['id'] => $item['total_score'], // I will be using the ids as their identifiers so that in calculating the total scores there are no duplications or situation of calculating duplicate ids ..hence this result of unique ids also depends on how I chose to sore the result into the database... hence alwasy bear in mind of your databse structure as it is key to your result.
             ];
             // getting the total score of all subjects
-                foreach ($accumulator[$index]['submenu'] as $key => $v) {
-                    $accumulator[$index]['score'] =  $accumulator[$index]['score'] + ( $v['total_score' . $item['id']] ?? 0); //  this in particular is what is checking if the total_score is not set yet, just add 0 instead of throwing an errorr..omorrr !!! Senior Devvvv !!! 
-                }
-         
+            foreach ($accumulator[$index]['submenu'] as $key => $v) {
+                $accumulator[$index]['score'] =  $accumulator[$index]['score'] + ($v['total_score' . $item['id']] ?? 0); //  this in particular is what is checking if the total_score is not set yet, just add 0 instead of throwing an errorr..omorrr !!! Senior Devvvv !!! 
+            }
+
             return $accumulator;
         }, []);
-
-
-        // $array =
-        //     [
-        //         [
-        //             'a' => 1,
-        //             'b' => 1,
-        //             'c' => 1,
-        //         ],
-        //         [
-        //             'a' => 2,
-        //             'b' => 2,
-        //         ],
-        //         [
-        //             'a' => 3,
-        //             'd' => 3,
-        //         ]
-        //     ];
-
-        // $result = array_reduce($array, function ($carry, $item) {
-        //     foreach ($item as $k => $v)
-
-        //         $carry[$k] = $v + ($carry[$k] ?? 0);
-
-
-        //     return $carry;
-        // }, []);
-
-
-        // dd($result);
 
         dd($myOwn);
 
