@@ -76,122 +76,8 @@ class Result extends Model
     {
         $this->carrier = self::where('class_id', $class)->where('session_id', $session)->with('subject')->get()->toArray();
 
-        // $this->boeing = array_column($this->carrier, 'RegNum');
-        // $boe = $this->boeing;
-        //   $y =array_fill_keys($this->boeing, array_filter($this->carrier, function($v) use($boe) {
-        //             echo "<pre>";
-        //             print_r($boe[0] );
-        //             echo "</pre>";
-        //   }));
-
-        $array = array(
-            0 => array(
-                'id' => '20120100',
-                'link' => 'www.janedoe.com',
-                'name' => 'Jane Doe'
-            ),
-
-            1 => array(
-                'id' => '20120100',
-                'link' => 'www.janedoe.com',
-                'name' => 'John Doe'
-            ),
-            2 => array(
-                'id' => '20120101',
-                'link' => 'www.johndoe.com',
-                'name' => 'John Doe'
-            )
-        );
-
-        $arrColum = array_unique(array_column($array, 'name'));
-
-        $arr = (array_unique(array_column($this->carrier, 'id')));
-
-
-        // dd(in_array('Jane Doe',$arrColum));
-        $i = 0;
-        $new_array = [];
-        foreach ($this->carrier as $key => $value) {
-
-            // dd($this->carrier);
-
-
-            //if preg_match, return all the matches
-            if ($value['RegNum'] == 'Mob\22\0001') {
-                //then filter where all Mob\22\0001 and save 
-                $key = $value['RegNum'];
-                $new_array += [$key => $value];
-
-                $i++;
-            }
-        }
-        $oldArr = [];
-        $searched = [];
-        // dd($arr);
-        // dd($this->carrier);
-        // break down 
-        /* 
-            Assign the arrays keys to the different Ids to make them unique
-
-        
-        */
-        // foreach ($arr as $key => $value) {
-
-        //     $oldArr[$value] = $this->carrier[$key];
-
-        //     // if ($oldArr[$key] == $this->carrier[$key]['RegNum']) {
-        //     //     $searched[] = $this->carrier[$key];
-        //     // }
-        // }
-
-        // dd($oldArr);
-
-
-
-        $array = [
-            [
-                "menu_id" => "1",
-                "menu_name" => "Clients",
-                "submenu_name" => "Add",
-                "submenu_link" => "clients/add"
-            ],
-            [
-                "menu_id" => "1",
-                "menu_name" => "Clients",
-                "submenu_name" => "List",
-                "submenu_link" => "clients"
-            ],
-            [
-                "menu_id" => "2",
-                "menu_name" => "Products",
-                "submenu_name" => "List",
-                "submenu_link" => "products"
-            ],
-        ];
 
         /*
-        Basically, where the menu_id == 1 / similar menu id, get all the submenu into one menu_id(1) container 
-        */
-
-        // dd($array);
-
-        //Grouping submenus to their menus
-
-        $menu =  array_reduce($array, function ($accumulator, $item) {
-
-            $index = $item['menu_name']; //clients, 
-
-            if (!isset($accumulator[$index])) {
-
-                $accumulator[$index] = [
-                    'menu_id' => $item['menu_id'],
-                    'menu_name' => $item['menu_name'],
-                    'submenu' => []
-                ];
-            }
-
-
-            /*
              so here is where the code is selecting all the items in array with same index !
              this is where the unique identifier is happening !
 
@@ -207,38 +93,77 @@ class Result extends Model
              2. Pick a unique identifier
              3. Group it with by the virtue of a different sub menu name 
 
-            */
-            $accumulator[$index]['submenu'][] = [
-                'submenu_name' => $item['submenu_name'],
-                'submenu_link' => $item['submenu_link']
-            ];
+    */
 
-            // dd($accumulator);
-
-            return $accumulator;
-        }, []);
-
-        dd($this->carrier);
+        // dd($this->carrier);
 
         //let me write my onw 
 
-        $myOwn = array_reduce($this->carrier, function ($accumulator, $item) {
-            $index = $item['RegNum']; 
+
+        // dd($func([1,2,3]));
+        $i = 0; //passed by reference ----Wisdom dy this my brain---I don dy sabi this thing 
+        $myOwn = array_reduce($this->carrier, function ($accumulator, $item) use (&$i) {
+            $index = $item['RegNum'];
+
+            //if it is set is for the regnum..you are checking if the regnum is already existing 
+            //if it is not set will make it do the iteration again inside 
+
             if (!isset($accumulator[$index])) {
-                $accumulator[$index]= [
+                $i++;
+                $accumulator[$index] = [
                     'id' => $item['id'],
                     'RegNum' => $item['RegNum'],
                     'submenu' => [],
+                    'score' => 0
                 ];
             }
-            $accumulator[$index]['submenu'][] = [
+
+            $subMenu = $accumulator[$index]['submenu'][$i] = [
                 'id' => $item['id'],
-                'total_score' => $item['total_score'],
-                'subject' => $item['subject']['subject'],
-                'subject_id' => $item['subject_id']
+                'total_score'=> $item['total_score'],
             ];
+            if (isset($subMenu['total_score'])) {
+                foreach ($accumulator[$index]['submenu'] as $key => $v) {
+                    $accumulator[$index]['score'] =  $accumulator[$index]['score'] + $v['total_score'];
+                }
+            }
+
+            // if (isset($accumulator[$index]['score']) && isset($subMenu['total_score' . $i])) {
+
+            //     $accumulator[$index]['score'] =  $subMenu['total_score' . 1] +  ($subMenu['total_score' . $i+1] ?? 0)  ;
+            // }
             return $accumulator;
         }, []);
+
+
+        // $array =
+        //     [
+        //         [
+        //             'a' => 1,
+        //             'b' => 1,
+        //             'c' => 1,
+        //         ],
+        //         [
+        //             'a' => 2,
+        //             'b' => 2,
+        //         ],
+        //         [
+        //             'a' => 3,
+        //             'd' => 3,
+        //         ]
+        //     ];
+
+        // $result = array_reduce($array, function ($carry, $item) {
+        //     foreach ($item as $k => $v)
+
+        //         $carry[$k] = $v + ($carry[$k] ?? 0);
+
+
+        //     return $carry;
+        // }, []);
+
+
+        // dd($result);
 
         dd($myOwn);
 
@@ -250,10 +175,6 @@ class Result extends Model
         4. then add an array to  the  submenu array inside index array 
         no 4 is the unique identifier so all indexes with clients index for example will be grouped togther
         */
-
-
-
-        dd(array_values($menu));
     }
     // having the subjects, totalscore, etc in this format ["English","ogombo-campus"] i.e like json is the better approach         
     public function getTotalScore()

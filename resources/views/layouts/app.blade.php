@@ -283,7 +283,7 @@
                                     <i class="ni ni-single-02"></i>
                                     <span>My profile</span>
                                 </a>
-                                <a href="#!" class="dropdown-item">
+                                <a hr~ef="#!" class="dropdown-item">
                                     <i class="ni ni-settings-gear-65"></i>
                                     <span>Settings</span>
                                 </a>
