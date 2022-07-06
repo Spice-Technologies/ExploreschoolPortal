@@ -11,6 +11,7 @@ class Result extends Model
     use HasFactory;
 
     protected $carrier = [];
+    protected $arrComputed = [];
     protected $boeing = [];
 
     protected $testArr = [];
@@ -102,7 +103,7 @@ class Result extends Model
 
         // dd($func([1,2,3]));
         $i = 0; //passed by reference ----Wisdom dy this my brain---I don dy sabi this thing 
-        $myOwn = array_reduce($this->carrier, function ($accumulator, $item) use (&$i) {
+        $this->arrComputed  = array_reduce($this->carrier, function ($accumulator, $item) use (&$i) {
             $index = $item['RegNum'];
 
             //if it is set is for the regnum..you are checking if the regnum is already existing 
@@ -114,24 +115,31 @@ class Result extends Model
                     'id' => $item['id'],
                     'RegNum' => $item['RegNum'],
                     'submenu' => [],
-                    'Tscore' => 0
+                    'Tscore' => 0,
+                    'Tsubjects' => 0
                 ];
             }
 
             $subMenu = $accumulator[$index]['submenu'][] = [
                 'id' => $item['id'],
+                'subject' => $item['subject']['subject'],
                 'total_score' . $item['id'] => $item['total_score'], // I will be using the ids as their identifiers so that in calculating the total scores there are no duplications or situation of calculating duplicate ids ..hence this result of unique ids also depends on how I chose to sore the result into the database... hence alwasy bear in mind of your databse structure as it is key to your result.
             ];
+
             // getting the total score of all subjects
             foreach ($accumulator[$index]['submenu'] as $key => $v) {
-                $accumulator[$index]['Tscore'] =  $accumulator[$index]['Tscore'] + ($v['total_score' . $item['id']] ?? 0); //  this in particular is what is checking if the total_score is not set yet, just add 0 instead of throwing an errorr..omorrr !!! Senior Devvvv !!! 
-            }
+                $accumulator[$index]['Tscore'] =  $accumulator[$index]['Tscore'] + ($v['total_score' . $item['id']] ?? 0);
+                //  this in particular is what is checking if the total_score is not set yet, just add 0 instead of throwing an errorr..omorrr !!! Senior Devvvv !!! 
 
+
+            }
+            //get the total number of subjects
+            $accumulator[$index]['Tsubjects'] = count($accumulator[$index]['submenu']);
             return $accumulator;
         }, []);
 
-        dd($myOwn);
 
+        dd($this->arrComputed);
         /*
         Code comment:
         1. Start the accumulator with an empty array instead of the default null
@@ -153,7 +161,11 @@ class Result extends Model
 
     public function getTotalNumberOfSubjects()
     {
-        return $this->carrier['noOfSubjects'];
+        foreach ($this->arrComputed  as $arr) {
+            dd($arr['submenu']);
+        }
+
+        //$this->carrier['noOfSubjects'];
     }
 
     public function getAverage()
