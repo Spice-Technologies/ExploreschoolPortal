@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use PhpOffice\PhpSpreadsheet\Calculation\Statistical\Averages;
 use Prophecy\Promise\ReturnPromise;
 
 class Result extends Model
@@ -78,6 +79,7 @@ class Result extends Model
         $this->carrier = self::where('class_id', $class)->where('session_id', $session)->with('subject')->get()->toArray();
 
 
+
         /*
              so here is where the code is selecting all the items in array with same index !
              this is where the unique identifier is happening !
@@ -100,9 +102,10 @@ class Result extends Model
 
         //let me write my onw 
 
-
+        /***  *****************************   The Wrapper of this code. The main boss... Use array reduce to kind of group arrays and reduce them to their respectives values *************************************************************/
         // dd($func([1,2,3]));
-        $i = 0; //passed by reference ----Wisdom dy this my brain---I don dy sabi this thing 
+        $i = 0; //passed by reference(&$i) ---- Wisdom dy this my brain---I sabi this thing !!!
+
         $this->arrComputed  = array_reduce($this->carrier, function ($accumulator, $item) use (&$i) {
             $index = $item['RegNum'];
 
@@ -116,13 +119,15 @@ class Result extends Model
                     'RegNum' => $item['RegNum'],
                     'submenu' => [],
                     'Tscore' => 0,
-                    'Tsubjects' => 0
+                    'Tsubjects' => 0,
+                    'Average' => 0
                 ];
             }
 
             $subMenu = $accumulator[$index]['submenu'][] = [
                 'id' => $item['id'],
                 'subject' => $item['subject']['subject'],
+                'subject_id' => $item['subject_id'],
                 'total_score' . $item['id'] => $item['total_score'], // I will be using the ids as their identifiers so that in calculating the total scores there are no duplications or situation of calculating duplicate ids ..hence this result of unique ids also depends on how I chose to sore the result into the database... hence alwasy bear in mind of your databse structure as it is key to your result.
             ];
 
@@ -130,16 +135,25 @@ class Result extends Model
             foreach ($accumulator[$index]['submenu'] as $key => $v) {
                 $accumulator[$index]['Tscore'] =  $accumulator[$index]['Tscore'] + ($v['total_score' . $item['id']] ?? 0);
                 //  this in particular is what is checking if the total_score is not set yet, just add 0 instead of throwing an errorr..omorrr !!! Senior Devvvv !!! 
-
-
             }
             //get the total number of subjects
             $accumulator[$index]['Tsubjects'] = count($accumulator[$index]['submenu']);
+
+            //get the average of each students
+
+            $accumulator[$index]['Average'] = round($accumulator[$index]['Tscore'] / $accumulator[$index]['Tsubjects'], 2);
+
             return $accumulator;
         }, []);
 
+        
+        // getting the position for the students. Everything here is sorted base on the average. From highest to lowest.  
+        $sort = usort($this->arrComputed, function ($a, $b) {
+            return $a['Average'] < $b['Average'];
+        });
 
-        dd($this->arrComputed);
+
+        return $this->arrComputed;
         /*
         Code comment:
         1. Start the accumulator with an empty array instead of the default null
@@ -158,21 +172,6 @@ class Result extends Model
             return  $b + $v;
         });
     }
-
-    public function getTotalNumberOfSubjects()
-    {
-        foreach ($this->arrComputed  as $arr) {
-            dd($arr['submenu']);
-        }
-
-        //$this->carrier['noOfSubjects'];
-    }
-
-    public function getAverage()
-    {
-        return $this->getTotalScore() / $this->getTotalNumberOfSubjects();
-    }
-
     //     ErrorException
     // Trying to access array offset on value of type int
 

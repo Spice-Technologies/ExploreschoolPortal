@@ -12,6 +12,8 @@ use App\Models\Term;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use PDF;
+
 
 
 class checkResultController extends Controller
@@ -65,10 +67,10 @@ class checkResultController extends Controller
         $student = Student::studentId();
         // $regNumb = Auth::user()->email;
         $result = new Result();
-        dd( $result->getAllResult($request->session, $request->class_id));
-         $result->getAverage();
+        $fetchResults = $result->getAllResult($request->session, $request->class_id);
+        // $result->getAverage();
         $pin = Pin::where('pin', $request->pin)->first();
-        $fetchResults = Result::DisplayResult($student, $request->class_id, $request->session);
+        // $fetchResults = Result::DisplayResult($student, $request->class_id, $request->session);
 
         if ($pin->use_stats >= 900) return back()->with('msg', 'You have exceeded the number of times meant to use this pin');
 
@@ -81,7 +83,7 @@ class checkResultController extends Controller
                 'term_id' =>  $request->term
             ]);
             //check if the student result has not bbeen uploaded // i think I should check for this first..maybe rearrange my if else statements
-            if ($fetchResults == false) {
+            if ($fetchResults == false) { //why not say, If not false  ?
                 $examPin =  $pin->update([
                     'use_stats' => 0,
                     'student_id' =>  NULL,
@@ -105,6 +107,10 @@ class checkResultController extends Controller
                 'class_id' => $request->class_id,
                 'term_id' =>  $pin->term_id
             ]);
+            $e = ['the result'];
+
+            $pdf = PDF::loadview('backend.result.masterPdf', $e);
+            return $pdf->download('laravel-pdfworking.pdf');
 
             return redirect()->back()->with([
                 'results' => $fetchResults,

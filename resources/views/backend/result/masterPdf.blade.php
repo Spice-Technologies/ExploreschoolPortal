@@ -28,7 +28,7 @@
                                 <img alt="Image placeholder"
                                     src="{{ asset('/assets/img/theme/team-4.jpg') }}">
                             </span>
-                            <h3 class="box-title text-bold ">SCHOOL NAME </h3>
+                            <h3 class="box-title text-bold ">SCHOOL NAME. From controller :{{$e['hi']}} </h3>
                             <h5> Address: no 2 gwalameji road, opp, fedral poly </h5>
                             <h5> Phone: 08203845153 </h5>
                             <h5> Email: jovialcore@gmail.com </h5>
