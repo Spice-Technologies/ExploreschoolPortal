@@ -107,9 +107,10 @@ class checkResultController extends Controller
                 'class_id' => $request->class_id,
                 'term_id' =>  $pin->term_id
             ]);
-            $e = ['the result'];
+          
+      
 
-            $pdf = PDF::loadview('backend.result.masterPdf', $e);
+            $pdf = PDF::loadview('backend.result.masterPdf', ['results' => $fetchResults]);
             return $pdf->download('laravel-pdfworking.pdf');
 
             return redirect()->back()->with([
