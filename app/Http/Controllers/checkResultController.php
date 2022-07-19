@@ -8,6 +8,7 @@ use App\Models\Pin;
 use App\Models\Result;
 use App\Models\Session;
 use App\Models\Student;
+use App\Models\Subject;
 use App\Models\Term;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -107,15 +108,16 @@ class checkResultController extends Controller
                 'class_id' => $request->class_id,
                 'term_id' =>  $pin->term_id
             ]);
-          
-      
 
-            $pdf = PDF::loadview('backend.result.masterPdf', ['results' => $fetchResults]);
+
+            $subjects = $result->subjects;
+
+            $pdf = PDF::loadview('backend.result.masterPdf', ['results' => $fetchResults, 'subjects' => $subjects]);
             return $pdf->download('laravel-pdfworking.pdf');
 
-            return redirect()->back()->with([
-                'results' => $fetchResults,
-            ]);
+            // return redirect()->back()->with([
+            //     'results' => $fetchResults,
+            // ]);
 
             //  return view('dashboard.Student.checkResult.show', compact('fetchResults'));
         }

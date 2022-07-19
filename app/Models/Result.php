@@ -13,9 +13,7 @@ class Result extends Model
 
     protected $carrier = [];
     protected $arrComputed = [];
-    protected $boeing = [];
-
-    protected $testArr = [];
+    public $subjects= [];
 
     protected $fillable = ['student_id', 'class_id', 'assessment_total', 'exam_score', 'total_score', 'subject_id', 'session_id', 'term_id', 'school_id', 'subject'];
 
@@ -77,9 +75,12 @@ class Result extends Model
     public function getAllResult($session, $class)
     {
         $this->carrier = self::where('class_id', $class)->where('session_id', $session)->with('subject')->get()->toArray();
-
-
-
+        $this->subjects = ['Dont start counting @ zero'];
+        foreach ((Subject::get('subject')->toArray()) as $v) {
+           foreach($v as $val) {
+            $this->subjects[] = $val;
+           }
+        }
         /*
              so here is where the code is selecting all the items in array with same index !
              this is where the unique identifier is happening !
@@ -97,9 +98,6 @@ class Result extends Model
              3. Group it with by the virtue of a different sub menu name 
 
     */
-
-        // dd($this->carrier);
-
         //let me write my onw 
 
         /***  *****************************   The Wrapper of this code. The main boss... Use array reduce to kind of group arrays and reduce them to their respectives values *************************************************************/
@@ -127,7 +125,7 @@ class Result extends Model
             $subMenu = $accumulator[$index]['submenu'][] = [
                 'id' => $item['id'],
                 'subject' => $item['subject']['subject'],
-                'subject_id' => $item['subject_id'],
+                'subject_id' => $item['subject']['id'],
                 'total_score' . $item['id'] => $item['total_score'], // I will be using the ids as their identifiers so that in calculating the total scores there are no duplications or situation of calculating duplicate ids ..hence this result of unique ids also depends on how I chose to sore the result into the database... hence alwasy bear in mind of your databse structure as it is key to your result.
             ];
 
@@ -146,7 +144,8 @@ class Result extends Model
             return $accumulator;
         }, []);
 
-        
+        // dd($this->arrComputed);
+
         // getting the position for the students. Everything here is sorted base on the average. From highest to lowest.  
         $sort = usort($this->arrComputed, function ($a, $b) {
             return $a['Average'] < $b['Average'];

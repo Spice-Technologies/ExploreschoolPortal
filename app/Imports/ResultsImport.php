@@ -23,7 +23,7 @@ class ResultsImport implements ToCollection
         $data = Student::where('reg_num', $csvRegNo);
 
         array_push($this->studentInfo, collect($data)->toArray());
-
+        //for everytime it loops through the excel rows, it returns the first/or it returns a single row
         return $data->exists() ? $data->first() : 'No student found';
     }
     //so I am trying to prevent the function regnum from being called multiple times instead, I push all the data into the StendInfo array then find the matching gone
@@ -31,17 +31,16 @@ class ResultsImport implements ToCollection
 
     public function collection(collection $rows)
     {
-
         $array = $rows->toArray();
         $t = array_splice($array, 1);
         foreach ($t as $key => $row) {
 
             Result::updateOrCreate(
                 ['student_id' => $this->whereRegNum($row[2])->id], //I make the query once then push the result to an array so I avoid repeating them
-                
+
                 [
                     'class_id' => $this->studentInfo[$key]['class_id'],
-                    'subject_id' => $row[4],
+                    'subject_id' => $row[4],// we will want to make sure this subject_id here is same with the id column for subjects in the subjectsTable !!!
                     'school_id' => $this->studentInfo[$key]['school_id'],
                     'assessment_total' => $row[6],
                     'exam_score' => $row[7],

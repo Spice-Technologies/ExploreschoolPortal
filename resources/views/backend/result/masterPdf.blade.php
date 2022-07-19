@@ -42,19 +42,32 @@
     <h1>A Fancy Table</h1>
 
     <table id="customers">
+
+
+        <?php
+        
+        $listOfSubjects = $subjects;
+        ?>
+
         <tr>
             <th>S/N</th>
             <th>RegNum</th>
-            <th>Country</th>
+            {{-- array splice is removing 'Dont start counting @ zero' so subjects listed here can be only subjects --}}
+            @foreach (array_splice($listOfSubjects, 1) as $subject)
+                <th>{{ $subject }}</th>
+            @endforeach
         </tr>
-        <?php $No = 1; ?>
+        <?php $serialNo = 1; ?>
         @foreach ($results as $key => $result)
             <tr>
-
-                <td><?= $No++;?> </td>
+                <td><?= $serialNo++ ?> </td>
                 <td>{{ $result['RegNum'] }} </td>
-                @foreach ($result['submenu'] as $subjectDetails)
-                    <td>{{ $subjectDetails['subject'] }} </td>
+                @foreach ($result['submenu'] as $sub)
+                    @if ($sub['subject'] == $subject)
+                        <td> {{ $sub['subject'] }} </td>
+                    @else
+                        <td> {{ '--' }} </td>
+                    @endif
                 @endforeach
             </tr>
         @endforeach
