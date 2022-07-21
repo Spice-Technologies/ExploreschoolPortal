@@ -75,6 +75,7 @@ class Result extends Model
     public function getAllResult($session, $class)
     {
         $this->carrier = self::where('class_id', $class)->where('session_id', $session)->with('subject')->get()->toArray();
+        
         $this->subjects = ['Dont start counting @ zero'];
         foreach ((Subject::get('subject')->toArray()) as $v) {
            foreach($v as $val) {

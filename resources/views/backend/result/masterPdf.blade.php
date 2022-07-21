@@ -58,17 +58,40 @@
             @endforeach
         </tr>
         <?php $serialNo = 1; ?>
+
         @foreach ($results as $key => $result)
             <tr>
                 <td><?= $serialNo++ ?> </td>
                 <td>{{ $result['RegNum'] }} </td>
-                @foreach ($result['submenu'] as $sub)
-                    @if ($sub['subject'] == $subject)
-                        <td> {{ $sub['subject'] }} </td>
-                    @else
-                        <td> {{ '--' }} </td>
-                    @endif
-                @endforeach
+                {{-- speccifiy the number of times the submenu will loop
+                         to get the submenu no of times to iterate, we get the value of 
+                         count or total number of items in the submenu array and assign it to a varibale and sa
+                         if the submenuNoItems is less or equall to the number, so stuff 
+                         if i is equal to submenu count, set submenu count back to zero and lets continue looping through again --}}
+
+
+                <?php
+                $submenIterator = 0;
+                $submenuSubCount = count($result['submenu']);
+                $subs = array_keys($subjects);
+                ?>
+
+                <?php
+                for ($i = 1; $i < 11; $i++) {
+                    if ($result['submenu'][$submenIterator]['subject_id'] == $subs[$i]) {
+                        echo '<td>' . $subjects[$i] . '</td>';
+                        if ($i <= $submenuSubCount) {
+                            $submenIterator++;
+                        } else {
+                            $submenIterator = 0;
+                        }
+                    } else {
+                        echo '<td> -- </td>';
+                    }
+                }
+                
+                ?>
+
             </tr>
         @endforeach
 
