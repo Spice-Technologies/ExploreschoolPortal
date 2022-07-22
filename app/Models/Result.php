@@ -13,7 +13,7 @@ class Result extends Model
 
     protected $carrier = [];
     protected $arrComputed = [];
-    public $subjects= [];
+    public $subjects = [];
 
     protected $fillable = ['student_id', 'class_id', 'assessment_total', 'exam_score', 'total_score', 'subject_id', 'session_id', 'term_id', 'school_id', 'subject'];
 
@@ -75,12 +75,12 @@ class Result extends Model
     public function getAllResult($session, $class)
     {
         $this->carrier = self::where('class_id', $class)->where('session_id', $session)->with('subject')->get()->toArray();
-        
+
         $this->subjects = ['Dont start counting @ zero'];
         foreach ((Subject::get('subject')->toArray()) as $v) {
-           foreach($v as $val) {
-            $this->subjects[] = $val;
-           }
+            foreach ($v as $val) {
+                $this->subjects[] = $val;
+            }
         }
         /*
              so here is where the code is selecting all the items in array with same index !
@@ -123,6 +123,8 @@ class Result extends Model
                 ];
             }
 
+     
+
             $subMenu = $accumulator[$index]['submenu'][] = [
                 'id' => $item['id'],
                 'subject' => $item['subject']['subject'],
@@ -151,8 +153,9 @@ class Result extends Model
         $sort = usort($this->arrComputed, function ($a, $b) {
             return $a['Average'] < $b['Average'];
         });
+        // array_filter()
 
-
+        // dd($this->arrComputed);
         return $this->arrComputed;
         /*
         Code comment:

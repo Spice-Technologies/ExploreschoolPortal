@@ -63,32 +63,36 @@
             <tr>
                 <td><?= $serialNo++ ?> </td>
                 <td>{{ $result['RegNum'] }} </td>
-                {{-- speccifiy the number of times the submenu will loop
-                         to get the submenu no of times to iterate, we get the value of 
-                         count or total number of items in the submenu array and assign it to a varibale and sa
-                         if the submenuNoItems is less or equall to the number, so stuff 
-                         if i is equal to submenu count, set submenu count back to zero and lets continue looping through again --}}
-
 
                 <?php
                 $submenIterator = 0;
-                $submenuSubCount = count($result['submenu']);
+                $submenuSubCount = 7;
                 $subs = array_keys($subjects);
+                $p = 0;
                 ?>
 
                 <?php
-                for ($i = 1; $i < 11; $i++) {
-                    if ($result['submenu'][$submenIterator]['subject_id'] == $subs[$i]) {
-                        echo '<td>' . $subjects[$i] . '</td>';
-                        if ($i <= $submenuSubCount) {
-                            $submenIterator++;
-                        } else {
-                            $submenIterator = 0;
+                for ($i = 1; $i < 12; $i++) {
+                    if ($result['submenu'][$p]['subject_id'] == $subs[$i]) {
+                        if ($p <= $i) {
+                            echo '<td>' . $result['submenu'][$p]['subject']  . '</td>';
+                            $p++;
                         }
                     } else {
                         echo '<td> -- </td>';
                     }
                 }
+                
+                // if ($result['submenu'][$submenIterator]['subject_id'] == $subs[$i]) {
+                //     echo '<td>' . $result['submenu'][$submenIterator]['subject']  . '</td>';
+                //     if ($i <= $submenuSubCount) {
+                //         $submenIterator++;
+                //     } else {
+                //         $submenIterator = 0;
+                //     }
+                // } else {
+                //     echo '<td> -- </td>';
+                // }
                 
                 ?>
 
