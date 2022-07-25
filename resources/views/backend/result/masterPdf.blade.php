@@ -47,6 +47,7 @@
         <?php
         
         $listOfSubjects = $subjects;
+        
         ?>
 
         <tr>
@@ -68,20 +69,64 @@
                 // dd($results[1]['submenu']);
                 $subs = array_keys($subjects);
                 $p = 0;
-                $n = count($result['submenu']);
+                
                 $rr = $result['submenu'];
+                // dd($rr);
                 ?>
 
                 <?php
                 
-                for ($i = 1; $i < 12; $i++) {
-                    if ($rr[$p]['subject_id'] == $subs[$i]) {
-                        echo '<td>' . $result['submenu'][$p]['subject'] . '</td>';
-                        $p++;
+                $array1 = [1, 3, 4, 6, 8];
+                $array2 = [1, 2, 3, 4, 8, 6, 7, 8, 9];
+                
+                // $a = [];
+                
+                // for ($i = 0; $i < count($array2); $i++) {
+                //     if (isset($array1[$i]) && $array1[$i] == $array2[$i]) {
+                //         $a[$i] = $i + 1 . ' same';
+                //     } else {
+                //         $a[$i] = $i + 1 . ' not the same';
+                //     }
+                // }
+                
+                // dd($a);
+                
+                //reverse engineering...another way of approaching a problem
+                ///why not do it the other way round
+                
+                $a = [];
+                $an = count($a);
+                $rn = count($result['submenu']);
+                $b = [];
+                
+                for ($i = 0; $i < count($subs); $i++) {
+                    if (isset($rr[$i]['subject_id'])) {
+                        array_push($a, $rr[$i]['subject_id']);
+                    }
+                }
+                for ($i = 1; $i < count($subs); $i++) {
+                    if (in_array($subs[$i], $a, true)) {
+                        echo '<td>' . $subjects[$i] . '</td>';
+                        //so pick the subject that matches from the list of subjects pulled from db and not the submenu array itself ..so we used the subject as the pointer
+                        // $b[$i] = $j . ' same';
                     } else {
                         echo '<td> -- </td>';
                     }
                 }
+                
+                // dd($b);
+                
+                // $subs = [1,2,3,4,5,6,7,8,9,10,11];
+                // // dd($subs);
+                
+                // for ($i = 0; $i < 11; $i++) {
+                //     if ($rr[$p]['subject_id'] == $subs[$i]) {
+                //         echo '<td>' . $result['submenu'][$p]['subject'] . '</td>';
+                //         $p++;
+                //     } else {
+                //         echo '<td> -- </td>';
+                //     }
+                // }
                 
                 //first i need to make sure that p starts from zero after completing its loop.
                 

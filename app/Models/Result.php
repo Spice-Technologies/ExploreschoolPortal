@@ -146,6 +146,7 @@ class Result extends Model
 
             return $accumulator;
         }, []);
+       
 
         // dd($this->arrComputed);
 
