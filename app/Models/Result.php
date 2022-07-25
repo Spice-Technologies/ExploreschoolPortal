@@ -126,7 +126,7 @@ class Result extends Model
      
 
             $subMenu = $accumulator[$index]['submenu'][] = [
-                'id' => $item['id'],
+                'idIdentifier' => $item['id'],
                 'subject' => $item['subject']['subject'],
                 'subject_id' => $item['subject']['id'],
                 'total_score' . $item['id'] => $item['total_score'], // I will be using the ids as their identifiers so that in calculating the total scores there are no duplications or situation of calculating duplicate ids ..hence this result of unique ids also depends on how I chose to sore the result into the database... hence alwasy bear in mind of your databse structure as it is key to your result.
