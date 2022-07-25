@@ -64,49 +64,37 @@
             <tr>
                 <td> <?= $serialNo++ ?> </td>
                 <td>{{ $result['RegNum'] }} </td>
-
-                <?php
-                // dd($results[1]['submenu']);
-                $subs = array_keys($subjects);
-                $p = 0;
-                
-                $rr = $result['submenu'];
-                // dd($rr);
-                ?>
-
                 <?php
                 
-                $array1 = [1, 3, 4, 6, 8];
-                $array2 = [1, 2, 3, 4, 8, 6, 7, 8, 9];
+                $subs = array_keys($subjects); // get the subjects Array keys  instead of values
+                $rr = $result['submenu']; // submenu array that contains the subjects details(subject id, etc)
                 
-                // $a = [];
-                
-                // for ($i = 0; $i < count($array2); $i++) {
-                //     if (isset($array1[$i]) && $array1[$i] == $array2[$i]) {
-                //         $a[$i] = $i + 1 . ' same';
-                //     } else {
-                //         $a[$i] = $i + 1 . ' not the same';
-                //     }
-                // }
-                
-                // dd($a);
-                
+                $subsCount = count($subs);
                 //reverse engineering...another way of approaching a problem
                 ///why not do it the other way round
                 
-                $a = [];
-                $an = count($a);
-                $rn = count($result['submenu']);
-                $b = [];
+                /* WAAAAAAIIIIITTTTT ::: It took me roughly 5 DAYS to arrive at this code below that rightly displays the student who took a subject and the one that didn't take the subject. It's simple right ? Lol but the head turns and all ... 
+                                                                                                                
+                the stackoverflow answer that sparked my approach.... I helped me think of my approach in a reversed direction ....pheeeew!!!
+                https://stackoverflow.com/a/40562725/14669082
+                                                                                                                
+                                                                                                                */
                 
-                for ($i = 0; $i < count($subs); $i++) {
+                $arrPicker = []; //the array holder or picker to have subjects ids so that we can use it with in_array() function to check if any Main subjects ids(subs[x]) is in it(arrPicker)
+                for ($i = 0; $i < $subsCount; $i++) {
                     if (isset($rr[$i]['subject_id'])) {
-                        array_push($a, $rr[$i]['subject_id']);
+                        array_push($arrPicker, $rr[$i]['subject_id']);
                     }
                 }
-                for ($i = 1; $i < count($subs); $i++) {
-                    if (in_array($subs[$i], $a, true)) {
-                        echo '<td>' . $subjects[$i] . '</td>';
+                for ($i = 1; $i < $subsCount; $i++) {
+                    if (in_array($subs[$i], $arrPicker, true)) {
+                        foreach ($rr as $g) {
+                            if ($g['subject_id'] == $subs[$i]) {
+                                echo '<td>' . $g['subject'] . '</td>';
+                                break;
+                            }
+                        }
+                
                         //so pick the subject that matches from the list of subjects pulled from db and not the submenu array itself ..so we used the subject as the pointer
                         // $b[$i] = $j . ' same';
                     } else {
@@ -114,49 +102,7 @@
                     }
                 }
                 
-                // dd($b);
-                
-                // $subs = [1,2,3,4,5,6,7,8,9,10,11];
-                // // dd($subs);
-                
-                // for ($i = 0; $i < 11; $i++) {
-                //     if ($rr[$p]['subject_id'] == $subs[$i]) {
-                //         echo '<td>' . $result['submenu'][$p]['subject'] . '</td>';
-                //         $p++;
-                //     } else {
-                //         echo '<td> -- </td>';
-                //     }
-                // }
-                
-                //first i need to make sure that p starts from zero after completing its loop.
-                
-                // for ($i = 1; $i < 12; $i++) {
-                //     // dd($result['submenu'][$p]['subject_id'] == $subs[$p]);
-                //     if (dd(!isset($result['submenu'][2]['subject_id']) === true)) {
-                //         echo '<td> -- </td>';
-                //     }
-                // if ($result['submenu'][$i]['subject_id'] ?? null === $subs[$i]) {
-                //     //     if ($p <= $i) {
-                //     echo '<td>' . $result['submenu'][$p]['subject'] . '</td>';
-                //     $p++; //add to your checker
-                //     // }
-                // } else {
-                //     echo '<td> -- </td>';
-                //     $p++;
-                //     // $p = $p + 0; //maintain your checker
-                // }
-                // }
-                
-                // if ($result['submenu'][$submenIterator]['subject_id'] == $subs[$i]) {
-                //     echo '<td>' . $result['submenu'][$submenIterator]['subject']  . '</td>';
-                //     if ($i <= $submenuSubCount) {
-                //         $submenIterator++;
-                //     } else {
-                //         $submenIterator = 0;
-                //     }
-                // } else {
-                //     echo '<td> -- </td>';
-                // }
+                /*What this code is simply doing is that*/
                 
                 ?>
 
