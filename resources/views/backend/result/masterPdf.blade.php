@@ -61,27 +61,46 @@
 
         @foreach ($results as $key => $result)
             <tr>
-                <td><?= $serialNo++ ?> </td>
+                <td> <?= $serialNo++ ?> </td>
                 <td>{{ $result['RegNum'] }} </td>
 
                 <?php
-                $submenIterator = 0;
-                $submenuSubCount = 7;
+                // dd($results[1]['submenu']);
                 $subs = array_keys($subjects);
                 $p = 0;
+                $n = count($result['submenu']);
+                $rr = $result['submenu'];
                 ?>
 
                 <?php
+                
                 for ($i = 1; $i < 12; $i++) {
-                    if ($result['submenu'][$p]['subject_id'] == $subs[$i]) {
-                        if ($p <= $i) {
-                            echo '<td>' . $result['submenu'][$p]['subject']  . '</td>';
-                            $p++;
-                        }
+                    if ($rr[$p]['subject_id'] == $subs[$i]) {
+                        echo '<td>' . $result['submenu'][$p]['subject'] . '</td>';
+                        $p++;
                     } else {
                         echo '<td> -- </td>';
                     }
                 }
+                
+                //first i need to make sure that p starts from zero after completing its loop.
+                
+                // for ($i = 1; $i < 12; $i++) {
+                //     // dd($result['submenu'][$p]['subject_id'] == $subs[$p]);
+                //     if (dd(!isset($result['submenu'][2]['subject_id']) === true)) {
+                //         echo '<td> -- </td>';
+                //     }
+                // if ($result['submenu'][$i]['subject_id'] ?? null === $subs[$i]) {
+                //     //     if ($p <= $i) {
+                //     echo '<td>' . $result['submenu'][$p]['subject'] . '</td>';
+                //     $p++; //add to your checker
+                //     // }
+                // } else {
+                //     echo '<td> -- </td>';
+                //     $p++;
+                //     // $p = $p + 0; //maintain your checker
+                // }
+                // }
                 
                 // if ($result['submenu'][$submenIterator]['subject_id'] == $subs[$i]) {
                 //     echo '<td>' . $result['submenu'][$submenIterator]['subject']  . '</td>';
