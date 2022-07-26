@@ -48,6 +48,16 @@
         
         $listOfSubjects = $subjects;
         
+        function ordinal($number)
+        {
+            $ends = ['th', 'st', 'nd', 'rd', 'th', 'th', 'th', 'th', 'th', 'th'];
+            if ($number % 100 >= 11 && $number % 100 <= 13) {
+                return $number . 'th';
+            } else {
+                return $number . $ends[$number % 10];
+            }
+        }
+        
         ?>
 
         <tr>
@@ -57,6 +67,10 @@
             @foreach (array_splice($listOfSubjects, 1) as $subject)
                 <th>{{ $subject }}</th>
             @endforeach
+            <th> Totals Score</th>
+            <th> Average</th>
+            <th> Position</th>
+
         </tr>
         <?php $serialNo = 1; ?>
 
@@ -68,17 +82,17 @@
                 
                 $subs = array_keys($subjects); // get the subjects Array keys  instead of values
                 $rr = $result['submenu']; // submenu array that contains the subjects details(subject id, etc)
-                // dd($results[2]);
+                
                 $subsCount = count($subs);
                 //reverse engineering...another way of approaching a problem
                 ///why not do it the other way round
                 
                 /* WAAAAAAIIIIITTTTT ::: It took me roughly 5 DAYS to arrive at this code below that rightly displays the student who took a subject and the one that didn't take the subject. It's simple right ? Lol but the head turns and all ... 
-                                                                                                                                
-                                the stackoverflow answer that sparked my approach.... I helped me think of my approach in a reversed direction ....pheeeew!!!
-                                https://stackoverflow.com/a/40562725/14669082
-                                                                                                                                
-                                                                                                                                */
+                                                                                                                                                                                                                                                
+                                                                                                                                                the stackoverflow answer that sparked my approach.... I helped me think of my approach in a reversed direction ....pheeeew!!!
+                                                                                                                                                https://stackoverflow.com/a/40562725/14669082
+                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                */
                 
                 $arrPicker = []; //the array holder or picker to have subjects ids so that we can use it with in_array() function to check if any Main subjects ids(subs[x]) is in it(arrPicker)
                 for ($i = 0; $i < $subsCount; $i++) {
@@ -91,10 +105,8 @@
                     if (in_array($subs[$i], $arrPicker, true)) {
                         foreach ($rr as $total) {
                             if ($total['subject_id'] == $subs[$i]) {
-                                
-                
                                 echo '<td>' . $total['total_score' . $total['idIdentifier']] . '</td>';
-                                //e.g note: $total['total_score'.$result['id']+1] is same as "total_score12"
+                                //e.g note: $total['total_score' . $total['idIdentifier']]  is same as "total_score12"
                                 break;
                             }
                         }
@@ -106,12 +118,20 @@
                 /*What this code is simply doing is that it matches the subjects total to the */
                 
                 /*things that went into this school mgt mass result prinitng summary.
-                                 Get the  students, group the students base on the respective subjects they offer
-                                 sort the students details in such that the highest average is set as the first
-                                 display the total score in the table and any subject the student did not write, add a '---' to it
-                                
-                                */
+                                                                                                                                                 Get the  students, group the students base on the respective subjects they offer
+                                                                                                                                                 sort the students details in such that the highest average is set as the first
+                                                                                                                                                 display the total score in the table and any subject the student did not write, add a '---' to it
+                                                                                                                                                
+                                                                                                                                                */
                 
+                ?>
+                <td> {{ $result['Tscore'] }}</td>
+                <td> {{ $result['Average'] }}</td>
+                <?php
+                
+               
+                
+                echo '<td>' . ordinal($serialNo). '</td>';
                 ?>
 
 

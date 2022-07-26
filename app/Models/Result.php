@@ -75,7 +75,8 @@ class Result extends Model
     public function getAllResult($session, $class)
     {
         $this->carrier = self::where('class_id', $class)->where('session_id', $session)->with('subject')->get()->toArray();
-
+        
+        // Setting the subjects header for the table 
         $this->subjects = ['Dont start counting @ zero'];
         foreach ((Subject::get('subject')->toArray()) as $v) {
             foreach ($v as $val) {
@@ -123,7 +124,7 @@ class Result extends Model
                 ];
             }
 
-     
+
 
             $subMenu = $accumulator[$index]['submenu'][] = [
                 'idIdentifier' => $item['id'],
@@ -146,7 +147,7 @@ class Result extends Model
 
             return $accumulator;
         }, []);
-       
+
 
         // dd($this->arrComputed);
 
