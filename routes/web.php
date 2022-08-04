@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\AdminController;   
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -62,8 +63,9 @@ Route::group(['middleware' => ['auth', 'role:Admin']], function () {
     Route::post('/admin/result/import', [App\Http\Controllers\ResultController::class, 'importResult'])->name('dashboard.admin.importPost');
     Route::get('/admin/result/master', [App\Http\Controllers\ResultController::class, 'master'])->name('result.masterResult');
     Route::post('/admin/result/single', [App\Http\Controllers\ResultController::class, 'importResult'])->name('dashboard.admin.importPost');
-    Route::get('/admin/result/masterGen', [App\Http\Controllers\ResultController::class, 'masterPdfGen'])->name('result.masterPdfGen');
 
+    //master result sheet printing 
+    Route::resource('/admin/master/Mresult', 'App\Http\Controllers\AdminResultController');
 
     //manage students
     Route::resource('/student', 'App\Http\Controllers\StudentController');

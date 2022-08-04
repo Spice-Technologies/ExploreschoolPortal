@@ -57,25 +57,18 @@ class Result extends Model
     public function subject()
     {
         return $this->belongsTo(Subject::class, 'subject_id');
-    }
-
-
-    /**
-     * Return results checked by the student via the student id
-     */
-
-    public static function DisplayResult($student, $class, $session)
-    {
-        $r = self::where('student_id', $student)->where('class_id', $class)->where('session_id', $session);
-        if ($r->exists()) return  $r->get();
-        else
-            return false;
+        
     }
 
     public function getAllResult($session, $class)
     {
+        //get the subject taken by that class via the school
+        $noOfSubjectsTaken = Subject::get('subject')->count();
+       
         $this->carrier = self::where('class_id', $class)->where('session_id', $session)->with('subject')->get()->toArray();
-        
+
+      
+
         // Setting the subjects header for the table 
         $this->subjects = ['Dont start counting @ zero'];
         foreach ((Subject::get('subject')->toArray()) as $v) {
@@ -106,7 +99,7 @@ class Result extends Model
         // dd($func([1,2,3]));
         $i = 0; //passed by reference(&$i) ---- Wisdom dy this my brain---I sabi this thing !!!
 
-        $this->arrComputed  = array_reduce($this->carrier, function ($accumulator, $item) use (&$i) {
+        $this->arrComputed  = array_reduce($this->carrier, function ($accumulator, $item) use (&$i,  $noOfSubjectsTaken) {
             $index = $item['RegNum'];
 
             //if it is set is for the regnum..you are checking if the regnum is already existing 
@@ -124,13 +117,11 @@ class Result extends Model
                 ];
             }
 
-
-
             $subMenu = $accumulator[$index]['submenu'][] = [
                 'idIdentifier' => $item['id'],
                 'subject' => $item['subject']['subject'],
                 'subject_id' => $item['subject']['id'],
-                'total_score' . $item['id'] => $item['total_score'], // I will be using the ids as their identifiers so that in calculating the total scores there are no duplications or situation of calculating duplicate ids ..hence this result of unique ids also depends on how I chose to sore the result into the database... hence alwasy bear in mind of your databse structure as it is key to your result.
+                'total_score' . $item['id'] => $item['total_score'], // I will be using the ids as their identifiers so that in calculating the total scores there are no duplications or situation of calculating duplicate ids ..hence this result of unique ids also depends on how I chose to store the result into the database... hence alwasy bear in mind of your databse structure as it is key to your result.
             ];
 
             // getting the total score of all subjects
@@ -139,10 +130,9 @@ class Result extends Model
                 //  this in particular is what is checking if the total_score is not set yet, just add 0 instead of throwing an errorr..omorrr !!! Senior Devvvv !!! 
             }
             //get the total number of subjects
-            $accumulator[$index]['Tsubjects'] = count($accumulator[$index]['submenu']);
-
+            $accumulator[$index]['Tsubjects'] = $noOfSubjectsTaken; 
+            // formerly I did count($accumulator[$index]['submenu']);
             //get the average of each students
-
             $accumulator[$index]['Average'] = round($accumulator[$index]['Tscore'] / $accumulator[$index]['Tsubjects'], 2);
 
             return $accumulator;
@@ -168,18 +158,4 @@ class Result extends Model
         no 4 is the unique identifier so all indexes with clients index for example will be grouped togther
         */
     }
-    // having the subjects, totalscore, etc in this format ["English","ogombo-campus"] i.e like json is the better approach         
-    public function getTotalScore()
-    {
-        $arr = array_filter(collect($this->carrier)->pluck(['total_score'])->toArray());
-
-        return array_reduce($arr, function ($b, $v) {
-            return  $b + $v;
-        });
-    }
-    //     ErrorException
-    // Trying to access array offset on value of type int
-
-    //learn about interfaces, trait and absrtact classes 
-
 }

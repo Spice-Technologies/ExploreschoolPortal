@@ -1,7 +1,5 @@
 @extends('layouts.app')
 @section('content')
-    {{ \Session::get('pdfDown') }}
-
     <div class="col-sm-6 p-0">
         <h1>Check Result</h1>
     </div>

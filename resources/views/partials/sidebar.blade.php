@@ -88,7 +88,7 @@
                                     </a>
                                 </li> --}}
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('result.masterResult') }}">
+                                    <a class="nav-link" href="{{ route('Mresult.create') }}">
                                         Master Sheets
                                     </a>
                                 </li>

@@ -17,7 +17,7 @@ use PDF;
 
 
 
-class checkResultController extends Controller
+class AdminResultController extends Controller
 {
 
 
@@ -43,7 +43,7 @@ class checkResultController extends Controller
         $klasses = Klass::get(['id', 'class_name']);
 
         $sessions = Session::get(['session', 'id']);
-        return view('dashboard.Student.checkResult.create', compact('terms', 'sessions', 'klasses'));
+        return view('backend.result.create', compact('terms', 'sessions', 'klasses'));
     }
 
     /**
