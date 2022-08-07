@@ -17,7 +17,7 @@
             @elseif(session('success'))
                 <div class="alert alert-success">{{ session('success') }}</div>
             @endif
-            <form action="{{ route('result.store') }}" method="POST">
+            <form action="{{ route('Mresult.store') }}" method="POST">
                 @csrf
                 <h4> Select Session </h4>
                 <div class="form-group">
@@ -44,11 +44,9 @@
                         @endforeach
                     </select>
                 </div>
-                <h2> Enter Pin </h2>
+               
                 <div class="pb-3">
-                    <input type="text" name="pin" class="form-control form-control-alternative p-4"
-                        placeholder="e.g 123456789">
-                    <button type="submit" class="btn btn-primary mt-3">Check</button>
+                    <button type="submit" class="btn btn-primary mt-3">Print</button>
 
                 </div>
             </form>

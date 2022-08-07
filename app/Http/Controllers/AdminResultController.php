@@ -54,72 +54,19 @@ class AdminResultController extends Controller
      */
     public function store(Request $request)
     {
-        // select from pin table where request->pin is equal to pin in table
-        //if pin is equal to pin in table
-        //
 
         $request->validate([
-            'pin' => 'required|exists:pins,pin',
             'term' => 'required',
             'class_id' => 'required',
             'session' => 'required' //exists:results,session_id
 
         ]);
-        $student = Student::studentId();
         $result = new Result();
         $fetchResults = $result->getAllResult($request->session, $request->class_id);
-        
-        $pin = Pin::where('pin', $request->pin)->first();
-      
+        $subjects = $result->subjects;
 
-        if ($pin->use_stats >= 900) return back()->with('msg', 'You have exceeded the number of times meant to use this pin');
-
-        //if the pin is 'so fresh' and has never been used before 
-        if ($pin->use_stats == 0) {
-            $examPin =  $pin->update([
-                'use_stats' => $pin->use_stats + 1,
-                'student_id' =>  $student,
-                'class_id' => $request->class_id,
-                'term_id' =>  $request->term
-            ]);
-            //check if the student result has not bbeen uploaded // i think I should check for this first..maybe rearrange my if else statements
-            if ($fetchResults == false) { //why not say, If not false  ?
-                $examPin =  $pin->update([
-                    'use_stats' => 0,
-                    'student_id' =>  NULL,
-                    'class_id' => NULL,
-                    'term_id' =>   NULL
-                ]);
-                return back()->with('msg', 'Looks like your result has not been uploaded yet !!!');
-            } else {
-                return redirect()->back()->with('results', $fetchResults);
-            }
-
-            // when the record is not fresh 
-        } else {
-            $termsNth = ['Zeroth', 'first', 'second', 'third'];
-
-            if ($pin->term_id != $request->term) return back()->with('msg', 'This pin is already tied to ' .  $termsNth[$pin->term_id] . ' Term Only. Which means that you can use this pin to check for only ' . $termsNth[$pin->term_id] . ' term results.');
-
-            $examPin =  $pin->update([
-                'use_stats' => $pin->use_stats + 1,
-                'student_id' =>  $student,
-                'class_id' => $request->class_id,
-                'term_id' =>  $pin->term_id
-            ]);
-
-
-            $subjects = $result->subjects;
-
-            $pdf = PDF::loadview('backend.result.masterPdf', ['results' => $fetchResults, 'subjects' => $subjects]);
-            return $pdf->download('laravel-pdfworking.pdf');
-
-            // return redirect()->back()->with([
-            //     'results' => $fetchResults,
-            // ]);
-
-            //  return view('dashboard.Student.checkResult.show', compact('fetchResults'));
-        }
+        $pdf = PDF::loadview('backend.result.masterPdf', ['results' => $fetchResults, 'subjects' => $subjects]);
+        return $pdf->download('laravel-pdfworking.pdf');
     }
 
 
