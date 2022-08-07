@@ -61,12 +61,20 @@ class AdminResultController extends Controller
             'session' => 'required' //exists:results,session_id
 
         ]);
-        $result = new Result();
-        $fetchResults = $result->getAllResult($request->session, $request->class_id);
-        $subjects = $result->subjects;
 
-        $pdf = PDF::loadview('backend.result.masterPdf', ['results' => $fetchResults, 'subjects' => $subjects]);
-        return $pdf->download('laravel-pdfworking.pdf');
+
+        $result = new Result();
+        $fetchResults = $result->getAllResult($request->session, $request->class_id, $request->term);
+       
+        if (!$fetchResults) {
+            return back()->with('msg', 'Error! Please kindly confirm from your dashboard that you have result records available for the session, term and class you have choosen !');
+        } else {
+
+            $subjects = $result->subjects;
+
+            $pdf = PDF::loadview('backend.result.masterPdf', ['results' => $fetchResults, 'subjects' => $subjects]);
+            return $pdf->download('laravel-pdfworking.pdf');
+        }
     }
 
 

@@ -60,12 +60,12 @@ class Result extends Model
         
     }
 
-    public function getAllResult($session, $class)
+    public function getAllResult($session, $class, $term)
     {
         //get the subject taken by that class via the school
         $noOfSubjectsTaken = Subject::get('subject')->count();
        
-        $this->carrier = self::where('class_id', $class)->where('session_id', $session)->with('subject')->get()->toArray();
+        $this->carrier = self::where('class_id', $class)->where('session_id', $session)->where('term_id', $term)->with('subject')->get()->toArray();
 
       
 
