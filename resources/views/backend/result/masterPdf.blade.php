@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>School title </title>
     <style>
         #customers {
             font-family: Arial, Helvetica, sans-serif;
@@ -38,9 +38,14 @@
 </head>
 
 <body>
-
-    <h1>A Fancy Table</h1>
-
+    <div style="text-align: center; font-weight:bold; margin-bottom: 20px;">
+        <span>
+            School name
+        </span> <br />
+        <span >
+            Master List For:
+        </span>
+    </div>
     <table id="customers">
 
 
@@ -48,8 +53,9 @@
         
         $listOfSubjects = $subjects;
         
-        function position($number)//ordinal
+        function position($number)
         {
+            //ordinal
             $ends = ['th', 'st', 'nd', 'rd', 'th', 'th', 'th', 'th', 'th', 'th'];
             if ($number % 100 >= 11 && $number % 100 <= 13) {
                 return $number . 'th';
@@ -88,11 +94,11 @@
                 ///why not do it the other way round
                 
                 /* WAAAAAAIIIIITTTTT ::: It took me roughly 5 DAYS to arrive at this code below that rightly displays the student who took a subject and the one that didn't take the subject. It's simple right ? Lol but the head turns and all ... 
-                                                                                                                                                                                                                                                                
-                                                                                                                                                                the stackoverflow answer that sparked my approach.... I helped me think of my approach in a reversed direction ....pheeeew!!!
-                                                                                                                                                                https://stackoverflow.com/a/40562725/14669082
-                                                                                                                                                                                                                                                                
-                                                                                                                                                                                                                                                                */
+                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                the stackoverflow answer that sparked my approach.... I helped me think of my approach in a reversed direction ....pheeeew!!!
+                                                                                                                                                                                                                https://stackoverflow.com/a/40562725/14669082
+                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                */
                 
                 $arrPicker = []; //the array holder or picker to have subjects ids so that we can use it with in_array() function to check if any Main subjects ids(subs[x]) is in it(arrPicker)
                 for ($i = 0; $i < $subsCount; $i++) {
@@ -118,10 +124,10 @@
                 /*What this code is simply doing is that it matches the subjects total to the */
                 
                 /*things that went into this school mgt mass result prinitng summary.
-                                                                                                                             Get the  students, group the students base on the respective subjects they offer
-                                                                                                                        sort the students details in such that the highest average is set as the first
-                                                                                                                    display the total score in the table and any subject the student did not write, add a '---' to it
-*/
+                                                                                                                                                                             Get the  students, group the students base on the respective subjects they offer
+                                                                                                                                                                        sort the students details in such that the highest average is set as the first
+                                                                                                                                                                    display the total score in the table and any subject the student did not write, add a '---' to it
+                                                */
                 
                 ?>
                 <td> {{ $result['Tscore'] }}</td>
