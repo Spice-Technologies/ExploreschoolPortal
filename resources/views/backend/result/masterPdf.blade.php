@@ -38,16 +38,16 @@
 </head>
 
 <body>
-    <?php dd($resultModel->klass); ?>
+
     <div style="text-align: center; font-weight:bold; margin-bottom: 20px;">
         <span>
             {{ $school->school }}
         </span> <br />
-        @foreach ($resultInfo as $resultInfo)
+       
             <span>                  <!--class -->          <!--Term -->       <!--session -->
-                Master List For{{ $resultInfo[2] }} {{ $resultInfo[1] }} {{ $resultInfo[0] }} Session
+                Master List For {{ $resultInfo[2] }} {{ $resultInfo[1] }} {{ $resultInfo[0] }} Session
             </span>
-        @endforeach
+
     </div>
     <table id="customers">
 

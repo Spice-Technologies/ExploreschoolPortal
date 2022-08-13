@@ -81,7 +81,12 @@ class AdminResultController extends Controller
 
             $subjects = $result->subjects;
 
-            $pdf = PDF::loadview('backend.result.masterPdf', ['results' => $fetchResults, 'subjects' => $subjects, 'resultInfo' => $resultInfo]);
+            $pdf = PDF::loadview(
+                'backend.result.masterPdf',
+                ['results' => $fetchResults, 'subjects' => $subjects, 'school' => $schoolAdmin, 'resultInfo' => $resultInfo],
+                //[],
+                ['format' => 'A4-L', 'orientation' => 'L']
+            );
             return $pdf->download('laravel-pdfworking.pdf');
         }
     }
