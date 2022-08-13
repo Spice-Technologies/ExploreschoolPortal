@@ -80,7 +80,7 @@ class AdminResultController extends Controller
         } else {
 
             $subjects = $result->subjects;
-
+                // PDF package used is laravel-mPDF not the popular laravel-dompdf
             $pdf = PDF::loadview(
                 'backend.result.masterPdf',
                 ['results' => $fetchResults, 'subjects' => $subjects, 'school' => $schoolAdmin, 'resultInfo' => $resultInfo],

@@ -70,7 +70,7 @@ class Result extends Model
 
         //get the subject taken by that class via the school
         $noOfSubjectsTaken = Subject::get('subject')->count();
-        //TO DO: make sure that the right admin related to the specific school will print the result peculiar to only the school he or she is managing 
+
        
         $this->carrier = self::where('class_id', $class)->where('session_id', $session)->where('term_id', $term)->where('school_id', $school)->with('subject')->get()->toArray();
 
