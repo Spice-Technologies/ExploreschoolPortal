@@ -36,4 +36,8 @@ class Klass extends Model
     {
         return $this->hasMany(SubKlass::class, 'class_id');
     }
+
+    public function result(){
+        return $this->hasMany(Result::class, 'class_id');
+    }
 }

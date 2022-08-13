@@ -24,6 +24,7 @@ class Admin extends Model
         return $this->belongsTo(School::class);
     } 
 
+    //used to check the school admin belongs to 
     public static function AdminSchool(){
         return  self::where('id', Auth::user()->admin->id)->first()->school;
     }

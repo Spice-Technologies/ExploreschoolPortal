@@ -17,7 +17,7 @@ class StudentController extends Controller
     /*
      Hiii..I used my own ceated static functions, Admin::AdminSchool() to always get the the school that the admin belongs to
 
-     I also used scoped queries to avoid repeatition of where clauses that has to do with fetching the school the user is related to
+     I also used scoped queries to avoid repeatition of where clauses that has to do with fetching the school the student is related to
 
    
      */

@@ -38,13 +38,16 @@
 </head>
 
 <body>
+    <?php dd($resultModel->klass); ?>
     <div style="text-align: center; font-weight:bold; margin-bottom: 20px;">
         <span>
-            School name
+            {{ $school->school }}
         </span> <br />
-        <span >
-            Master List For:
-        </span>
+        @foreach ($resultInfo as $resultInfo)
+            <span>                  <!--class -->          <!--Term -->       <!--session -->
+                Master List For{{ $resultInfo[2] }} {{ $resultInfo[1] }} {{ $resultInfo[0] }} Session
+            </span>
+        @endforeach
     </div>
     <table id="customers">
 
@@ -94,11 +97,11 @@
                 ///why not do it the other way round
                 
                 /* WAAAAAAIIIIITTTTT ::: It took me roughly 5 DAYS to arrive at this code below that rightly displays the student who took a subject and the one that didn't take the subject. It's simple right ? Lol but the head turns and all ... 
-                                                                                                                                                                                                                                                                                                                
-                                                                                                                                                                                                                the stackoverflow answer that sparked my approach.... I helped me think of my approach in a reversed direction ....pheeeew!!!
-                                                                                                                                                                                                                https://stackoverflow.com/a/40562725/14669082
-                                                                                                                                                                                                                                                                                                                
-                                                                                                                                                                                                                                                                                                                */
+                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                the stackoverflow answer that sparked my approach.... I helped me think of my approach in a reversed direction ....pheeeew!!!
+                                                                                                                                                                                                                                https://stackoverflow.com/a/40562725/14669082
+                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                */
                 
                 $arrPicker = []; //the array holder or picker to have subjects ids so that we can use it with in_array() function to check if any Main subjects ids(subs[x]) is in it(arrPicker)
                 for ($i = 0; $i < $subsCount; $i++) {
@@ -124,10 +127,10 @@
                 /*What this code is simply doing is that it matches the subjects total to the */
                 
                 /*things that went into this school mgt mass result prinitng summary.
-                                                                                                                                                                             Get the  students, group the students base on the respective subjects they offer
-                                                                                                                                                                        sort the students details in such that the highest average is set as the first
-                                                                                                                                                                    display the total score in the table and any subject the student did not write, add a '---' to it
-                                                */
+                                                                                                                                                                                             Get the  students, group the students base on the respective subjects they offer
+                                                                                                                                                                                        sort the students details in such that the highest average is set as the first
+                                                                                                                                                                                    display the total score in the table and any subject the student did not write, add a '---' to it
+                                                                */
                 
                 ?>
                 <td> {{ $result['Tscore'] }}</td>

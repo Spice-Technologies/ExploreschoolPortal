@@ -31,7 +31,7 @@
                 <div class="form-group">
                     <select class="form-control" name="term">
                         @foreach ($terms as $term)
-                            <option value="{{ $term->id }}">{{ $term->Term }}</option>
+                            <option value="{{ $term->id  }}">{{ $term->Term }}</option>
                         @endforeach
                     </select>
                 </div>

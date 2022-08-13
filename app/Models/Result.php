@@ -53,22 +53,26 @@ class Result extends Model
     {
         return $this->hasOne(Term::class);
     }
-
     public function subject()
     {
         return $this->belongsTo(Subject::class, 'subject_id');
         
     }
 
-    public function getAllResult($session, $class, $term)
+
+    public function getAllResult($session, $class, $term, $school)
     {
+        //make sure that the admin is on the right school that belongs to him 
+
+            //get the admin, get the school, get the students in that selected class(): i.e from the result table
+
+            //so school Id variable will now be the school the admin belongs to..
+
         //get the subject taken by that class via the school
         $noOfSubjectsTaken = Subject::get('subject')->count();
         //TO DO: make sure that the right admin related to the specific school will print the result peculiar to only the school he or she is managing 
        
-        $this->carrier = self::where('class_id', $class)->where('session_id', $session)->where('term_id', $term)->with('subject')->get()->toArray();
-
-      
+        $this->carrier = self::where('class_id', $class)->where('session_id', $session)->where('term_id', $term)->where('school_id', $school)->with('subject')->get()->toArray();
 
         // Setting the subjects header for the table 
         $this->subjects = ['Dont start counting @ zero'];

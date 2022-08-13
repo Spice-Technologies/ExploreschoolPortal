@@ -20,7 +20,7 @@ class PromotionController extends Controller
         $Student = new Student();
 
         $adminOwnStudents = $Student->SchoolId(Admin::AdminSchool()->id)->get();
-        //fetch all the students in the class but based on the admin and school he belongs to before promotion 
+        //fetch all the students in the class but based on the admin and school he belongs to before promoting them
 
         $adminOwnStudents->where('class_id', 6)->each(function ($finalist) {
             $graduateStud = $finalist->replicate();

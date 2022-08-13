@@ -42,6 +42,7 @@ class Student extends Model
     }
 
     //uisng dynamic scoping
+    // used to get the school the student belong to 
 
     public function scopeSchoolId($query, $school_id)
     {

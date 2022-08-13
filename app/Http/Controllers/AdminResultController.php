@@ -64,15 +64,24 @@ class AdminResultController extends Controller
 
 
         $result = new Result();
-        $fetchResults = $result->getAllResult($request->session, $request->class_id, $request->term);
-       
+
+        //fetch the school that the loggedin admin belongs to
+        $schoolAdmin = Admin::AdminSchool();
+
+        //refactor this aspect later 
+        $resultInfo = [Session::where('id', $request->session)->first()->session, Term::where('id', $request->term)->first()->Term, Klass::where('id', $request->class_id)->first()->class_name];
+
+        // <end> refactor this aspect later </end>
+
+        $fetchResults = $result->getAllResult($request->session, $request->class_id, $request->term, $schoolAdmin->id);
+
         if (!$fetchResults) {
             return back()->with('msg', 'Error! Please kindly confirm from your dashboard that you have result records available for the session, term and class you have choosen !');
         } else {
 
             $subjects = $result->subjects;
 
-            $pdf = PDF::loadview('backend.result.masterPdf', ['results' => $fetchResults, 'subjects' => $subjects]);
+            $pdf = PDF::loadview('backend.result.masterPdf', ['results' => $fetchResults, 'subjects' => $subjects, 'resultInfo' => $resultInfo]);
             return $pdf->download('laravel-pdfworking.pdf');
         }
     }
