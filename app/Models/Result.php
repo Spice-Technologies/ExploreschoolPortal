@@ -15,7 +15,7 @@ class Result extends Model
     protected $arrComputed = [];
     public $subjects = [];
 
-    protected $fillable = ['student_id', 'class_id', 'assessment_total', 'exam_score', 'total_score', 'subject_id', 'session_id', 'term_id', 'school_id', 'subject'];
+    protected $fillable = ['student_id', 'class_id', 'assessment_total', 'exam_score', 'total_score', 'subject_id', 'session_id', 'term_id', 'school_id', 'subject', 'RegNum'];
 
     public function admin()
     {

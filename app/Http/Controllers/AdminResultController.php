@@ -56,20 +56,11 @@ class AdminResultController extends Controller
     {
 
         $request->validate([
-            'term' => 'required, ',
+            'term' => 'required',
             'class_id' => 'required',
             'session' => 'required' //exists:results,session_id
 
         ]);
-
-        $request->validate([
-            'name' => 'required',
-            'comment' => 'required',       //table //column_name
-            'password' => 'required | exists:users,password'
-            //exist wil throught the default error that password
-
-        ]);
-
 
         $result = new Result();
 
