@@ -24,7 +24,6 @@ class ResultsImport implements ToCollection
         $this->term = $term;
         $this->session = $session;
         $this->school = $school;
-    
     }
 
     public function collection(collection $rows)
@@ -36,14 +35,12 @@ class ResultsImport implements ToCollection
 
         foreach ($t as $key => $row) {
             Result::updateOrCreate(
-                ['RegNum' => $row[2]]
-                ,
-
+                ['RegNum' => $row[2]],
                 [
-                    'RegNum' => $row[2], 
+                    'RegNum' => $row[2],
                     'class_id' => $this->class,
                     'subject_id' => $row[4], // we will want to make sure this subject_id here is same with the id column for subjects in the subjectsTable !!!
-                    'school_id' => $this->school, // school id is determinat from the admin himself 
+                    'school_id' => $this->school, // school id is determinat from the admin himself
                     'assessment_total' => $row[6],
                     'exam_score' => $row[7],
                     'total_score' => $row[7] + $row[6],
@@ -61,5 +58,4 @@ class ResultsImport implements ToCollection
 
     //just get the student exam number,
     //use that number to get the other details like CLASS, SCHOOL, to be inserted into result table z
-
 }

@@ -15,12 +15,8 @@ use Illuminate\Support\Facades\Auth;
 
 use PDF;
 
-
-
 class AdminResultController extends Controller
 {
-
-
     /**
      * Display a listing of the resource.
      *
@@ -38,7 +34,6 @@ class AdminResultController extends Controller
      */
     public function create()
     {
-
         $terms = Term::all();
         $klasses = Klass::get(['id', 'class_name']);
 
@@ -54,7 +49,6 @@ class AdminResultController extends Controller
      */
     public function store(Request $request)
     {
-
         $request->validate([
             'term' => 'required',
             'class_id' => 'required',
@@ -67,7 +61,7 @@ class AdminResultController extends Controller
         //fetch the school that the loggedin admin belongs to
         $schoolAdmin = Admin::AdminSchool();
 
-        //refactor this aspect later 
+        //refactor this aspect later
         $resultInfo = [Session::where('id', $request->session)->first()->session, Term::where('id', $request->term)->first()->Term, Klass::where('id', $request->class_id)->first()->class_name];
 
         // <end> refactor this aspect later </end>
@@ -77,13 +71,12 @@ class AdminResultController extends Controller
         if (!$fetchResults) {
             return back()->with('msg', 'Error! Please kindly confirm from your dashboard that you have result records available for the session, term and class you have choosen !');
         } else {
-
             $subjects = $result->subjects;
             // PDF package used is laravel-mPDF not the popular laravel-dompdf
             $pdf = PDF::loadview(
                 'backend.result.masterPdf',
                 ['results' => $fetchResults, 'subjects' => $subjects, 'school' => $schoolAdmin, 'resultInfo' => $resultInfo],
-                //[],
+                [],
                 ['format' => 'A4-L', 'orientation' => 'L']
             );
             return $pdf->download('laravel-pdfworking.pdf');
@@ -136,7 +129,7 @@ class AdminResultController extends Controller
     }
 
     // initiating a modal
-    //when the student has finished checking the result, 
+    //when the student has finished checking the result,
     // load the modal to show the result to the student when the page has refreshed
     //with download option
 }

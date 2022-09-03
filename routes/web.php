@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\StudentController;
-use App\Http\Controllers\AdminController;   
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,7 +20,6 @@ Auth::routes();
 
 //Route::domain('admin.'.env('SITE_URL'))->group(function () {
 Route::group(['middleware' => ['auth', 'role:SuperAdmin']], function () {
-
     // dashboard/ or home
     Route::get('/superAdmin', [App\Http\Controllers\superAdminController::class, 'index'])->name('dashboard');
 
@@ -37,15 +36,15 @@ Route::group(['middleware' => ['auth', 'role:SuperAdmin']], function () {
     //school mgt
     Route::resource('/school', 'App\Http\Controllers\SchoolController');
 
-    // download pins section 
+    // download pins section
     Route::get('/pin/download/{pin}', [App\Http\Controllers\PinController::class, 'download'])->name('pinDownload');
-    // Request pin section 
-    Route::resource('/pin',  'App\Http\Controllers\PinController');
+    // Request pin section
+    Route::resource('/pin', 'App\Http\Controllers\PinController');
 
     // Session section
-    Route::resource('/session',  'App\Http\Controllers\SessionController');
-    // Subject Management 
-    Route::resource('/subject',  'App\Http\Controllers\SubjectController');
+    Route::resource('/session', 'App\Http\Controllers\SessionController');
+    // Subject Management
+    Route::resource('/subject', 'App\Http\Controllers\SubjectController');
 });
 //});
 
@@ -64,7 +63,7 @@ Route::group(['middleware' => ['auth', 'role:Admin']], function () {
     Route::get('/admin/result/master', [App\Http\Controllers\ResultController::class, 'master'])->name('result.masterResult');
     Route::post('/admin/result/single', [App\Http\Controllers\ResultController::class, 'importResult'])->name('dashboard.admin.importPost');
 
-    //master result sheet printing 
+    //master result sheet printing
     Route::resource('/admin/master/Mresult', 'App\Http\Controllers\AdminResultController');
 
     //manage students
@@ -75,7 +74,6 @@ Route::group(['middleware' => ['auth', 'role:Admin']], function () {
 });
 
 Route::group(['middleware' => ['auth', 'role:Student']], function () {
-
     // dashboard/ or home
     Route::get('/user/printPDf', [App\Http\Controllers\PrintResultController::class, 'printPDf'])->name('printPDf');
     Route::get('/user', [App\Http\Controllers\SoleStudentController::class, 'index'])->name('student.user.index');

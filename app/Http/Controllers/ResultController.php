@@ -17,7 +17,6 @@ use PDF;
 
 class ResultController extends Controller
 {
-
     public function index()
     {
         $klasses = Klass::all();
@@ -26,15 +25,14 @@ class ResultController extends Controller
         return view('backend.result.upload', compact('klasses', 'terms', 'sessions'));
     }
 
-    public  function importResult(Request $request)
+    public function importResult(Request $request)
     {
-
         $class = $request->class_id;
         $session = $request->session_id;
         $term =  $request->term_id;
         $school = Admin::AdminSchool()->id;
         $file = $request->file('file');
-        Excel::import(new ResultsImport($class, $term, $session, $school),  $file);
+        Excel::import(new ResultsImport($class, $term, $session, $school), $file);
         if (1) {
             return back()->with('msg', 'Import Upload was successful');
         } else {
@@ -44,7 +42,6 @@ class ResultController extends Controller
 
     public function master()
     {
-
         $sessions = Session::all();
         $classes = Klass::all();
         // $subClass = SubKlass::all();

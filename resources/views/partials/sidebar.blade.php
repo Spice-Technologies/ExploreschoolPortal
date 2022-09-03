@@ -18,18 +18,18 @@
                         </a>
                     </li>
                     @role('Student')
-                    <li class="nav-item nav-with-child">
-                        <a class="nav-link ">
-                            <i class="ni ni-align-left-2 "></i> Result
-                        </a>
-                        <ul class="nav-item-child">
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('result.create') }}">
-                                    Check Your Result
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+                        <li class="nav-item nav-with-child">
+                            <a class="nav-link ">
+                                <i class="ni ni-align-left-2 "></i> Result
+                            </a>
+                            <ul class="nav-item-child">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('result.create') }}">
+                                        Check Your Result
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
                     @endrole
                     @role('Admin')
                         <li class="nav-item nav-with-child">
@@ -89,9 +89,15 @@
                                 </li> --}}
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('Mresult.create') }}">
-                                        Master Sheets
+                                       Single Master Sheet
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('Mresult.create') }}">
+                                        Master sheets (all)
+                                    </a>
+                                </li>
+
                             </ul>
                         </li>
                     @endrole
