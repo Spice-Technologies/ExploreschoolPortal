@@ -132,4 +132,17 @@ class AdminResultController extends Controller
     //when the student has finished checking the result,
     // load the modal to show the result to the student when the page has refreshed
     //with download option
+
+    /**
+     * To print single result sheet sepcifically for admins
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function singleResult()
+    {
+        //alternative is to create admin folder and let all admin controllers be here
+
+
+    }
 }
