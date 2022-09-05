@@ -113,12 +113,6 @@ class checkResultController extends Controller
 
             $pdf = PDF::loadview('backend.result.masterPdf', ['results' => $fetchResults, 'subjects' => $subjects]);
             return $pdf->download('laravel-pdfworking.pdf');
-
-            // return redirect()->back()->with([
-            //     'results' => $fetchResults,
-            // ]);
-
-            //  return view('dashboard.Student.checkResult.show', compact('fetchResults'));
         }
     }
 

@@ -67,7 +67,7 @@ Route::group(['middleware' => ['auth', 'role:Admin']], function () {
     Route::resource('/admin/master/Mresult', 'App\Http\Controllers\AdminResultController');
 
     // admin prinitng of single sheet result 
-    Route::get('/admin/result/single', [App\Http\Controllers\ResultController::class, 'singleResult'])->name('result.singleResult');
+    Route::resource('/admin/master/Sresult', 'App\Http\Controllers\adminSingleResult');
     // end print result 
 
     //manage students
