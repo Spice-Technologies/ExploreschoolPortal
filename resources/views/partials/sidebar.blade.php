@@ -88,12 +88,12 @@
                                     </a>
                                 </li> --}}
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('Mresult.create') }}">
+                                    <a class="nav-link" href="{{ route('Sresult.create') }}">
                                        Single Master Sheet
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('Sresult.create') }}">
+                                    <a class="nav-link" href="{{ route('Mresult.create') }}">
                                         Master sheets (all)
                                     </a>
                                 </li>

@@ -22,4 +22,8 @@ class School extends Model
 
         return $this->hasOne(Pin::class);
     }
+
+    public function student(){
+        return $this->hasMany(Student::class);
+    }
 }

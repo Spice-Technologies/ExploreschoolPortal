@@ -139,7 +139,7 @@ class AdminResultController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function singleResult()
+    public function singleResult(Request $request)
     {
         //alternative is to create admin folder and let all admin controllers be here
 

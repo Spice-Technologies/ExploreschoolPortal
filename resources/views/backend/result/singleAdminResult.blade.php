@@ -31,7 +31,7 @@
                 <div class="form-group">
                     <select class="form-control" name="term">
                         @foreach ($terms as $term)
-                            <option value="{{ $term->id  }}">{{ $term->Term }}</option>
+                            <option value="{{ $term->id }}">{{ $term->Term }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -44,7 +44,15 @@
                         @endforeach
                     </select>
                 </div>
-               
+                <h4> Select Student </h4>
+                <div class="form-group">
+                    <select class="form-control" name="student_id">
+                        @foreach ($klasses as $klass)
+                            <option value="{{ $klass->id }}">{{ $klass->class_name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
                 <div class="pb-3">
                     <button type="submit" class="btn btn-primary mt-3">Print</button>
 

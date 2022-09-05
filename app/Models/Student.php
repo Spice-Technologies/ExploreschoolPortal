@@ -41,8 +41,13 @@ class Student extends Model
         return $this->belongsTo(Klass::class, 'class_id');
     }
 
+    public function school()
+    {
+        return $this->belongsTo(School::class);
+    }
+
     //uisng dynamic scoping
-    // used to get the school the student belong to 
+    // used to get the school the student belong to
 
     public function scopeSchoolId($query, $school_id)
     {
@@ -55,7 +60,7 @@ class Student extends Model
     }
 
 
-    /* 
+    /*
             working on the promote class feature
 
             public function scopePromote($query, $class_id){
