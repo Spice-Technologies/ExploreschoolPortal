@@ -19,7 +19,7 @@ class adminSingleResult extends Controller
      */
     public function index()
     {
-        //
+        return view('backend.result.pdfSingleResult');
     }
 
     /**
@@ -56,10 +56,7 @@ class adminSingleResult extends Controller
             'student' => 'required',
         ]);
 
-        $fetchStudents = Result::where('student_id',  $r->student)->where('class_id', $r->class)->where('term_id', $r->term)->where('session_id', $r->session)->get();
-
-     $fetchStudents->dump();
-
+        $fetchStudents = Result::where('student_id', $r->student)->where('class_id', $r->class)->where('term_id', $r->term)->where('session_id', $r->session)->get();
     }
 
     public function store(Request $request)

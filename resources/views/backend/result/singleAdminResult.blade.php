@@ -17,6 +17,8 @@
             @elseif(session('success'))
                 <div class="alert alert-success">{{ session('success') }}</div>
             @endif
+
+            <a href="{{ route('Sresult.index') }}"> check sample pdf for single result </a>
             <form action="{{ route('result.singleResult') }}" method="GET">
                 
                 <h4> Select Session </h4>
@@ -48,7 +50,6 @@
                 <div class="form-group">
                     <select class="form-control" name="student">
                         @foreach ($students as $key => $student)
-                       
                             <option value="{{ $student->student[$key]->id }}">({{$student->student[$key]->reg_num  }})  {{ $student->student[$key]->user->name }}</option>
                         @endforeach
                     </select>
