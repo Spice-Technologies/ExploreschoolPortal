@@ -42,7 +42,7 @@ class Admin extends Model
 
     //get current logged in  admin
 
-    public function loggedInAdmin()
+    public function adminStudents()
     {
         return Auth::user()->admin->school->with('student', 'student.user')->get();
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Admin;
 use App\Models\Klass;
+use App\Models\Result;
 use App\Models\Session;
 use App\Models\Student;
 use App\Models\Term;
@@ -33,12 +34,10 @@ class adminSingleResult extends Controller
 
         $sessions = Session::get(['session', 'id']);
         $admin = new Admin();
-        $student =  $admin->loggedInAdmin();
+        $students =  $admin->adminStudents();
         //get the current logged in admin that use that to get all other details you may be needing
-        foreach ($student as $key => $value) {
-            dd($value->student[$key]->user->name);
-        }
-        return view('backend.result.singleAdminResult', compact('terms', 'sessions', 'klasses'));
+
+        return view('backend.result.singleAdminResult', compact('terms', 'sessions', 'klasses', 'students'));
     }
 
     /**
@@ -47,6 +46,22 @@ class adminSingleResult extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    public function showResult(Request $r)
+    {
+        $r->validate([
+            'term' => 'required',
+            'class' => 'required',
+            'session' => 'required', //exists:results,session_id
+            'student' => 'required',
+        ]);
+
+        $fetchStudents = Result::where('student_id',  $r->student)->where('class_id', $r->class)->where('term_id', $r->term)->where('session_id', $r->session)->get();
+
+     $fetchStudents->dump();
+
+    }
+
     public function store(Request $request)
     {
         //

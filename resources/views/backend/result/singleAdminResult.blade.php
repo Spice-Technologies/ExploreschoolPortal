@@ -17,8 +17,8 @@
             @elseif(session('success'))
                 <div class="alert alert-success">{{ session('success') }}</div>
             @endif
-            <form action="{{ route('Mresult.store') }}" method="POST">
-                @csrf
+            <form action="{{ route('result.singleResult') }}" method="GET">
+                
                 <h4> Select Session </h4>
                 <div class="form-group">
                     <select class="form-control" name="session">
@@ -38,7 +38,7 @@
 
                 <h4> Select Class </h4>
                 <div class="form-group">
-                    <select class="form-control" name="class_id">
+                    <select class="form-control" name="class">
                         @foreach ($klasses as $klass)
                             <option value="{{ $klass->id }}">{{ $klass->class_name }}</option>
                         @endforeach
@@ -46,15 +46,16 @@
                 </div>
                 <h4> Select Student </h4>
                 <div class="form-group">
-                    <select class="form-control" name="student_id">
-                        @foreach ($klasses as $klass)
-                            <option value="{{ $klass->id }}">{{ $klass->class_name }}</option>
+                    <select class="form-control" name="student">
+                        @foreach ($students as $key => $student)
+                       
+                            <option value="{{ $student->student[$key]->id }}">({{$student->student[$key]->reg_num  }})  {{ $student->student[$key]->user->name }}</option>
                         @endforeach
                     </select>
                 </div>
 
                 <div class="pb-3">
-                    <button type="submit" class="btn btn-primary mt-3">Print</button>
+                    <button type="submit" class="btn btn-primary mt-3">Print Single Result</button>
 
                 </div>
             </form>
