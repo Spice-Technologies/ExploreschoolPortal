@@ -181,26 +181,29 @@ class Result extends Model
         //array_map;to perform and operation using a fucntion on each item of the array
         // then array_filter
 
-        $avergaeScore = 0;
+
         $arr = [];
-        $indicator = 0;
-        $totalSubject = count($wholeClass->get());
-        // foreach ($wholeClass->get() as $key => $v) {
-        //     $otherAvg = $v->total_score /  $totalSubject;
-        //     $arr[$v->subject .$v->RegNum];
-        //     if ($otherAvg >= $arr[$v->subject . $v->RegNum]) {
-        //         $avergaeScore = $indicator;
-        //     } else {
-        //         $indicator++;
-        //     }
-        // }
-
-
+        $indicator = 1;
+        $totalSubject = count($wholeClass->orderBy('total_score', 'DESC')->get());
 
         foreach ($mainStudent as $st) {
+            dump($st);
             $arr[$st->subject . $st->RegNum]  =  $st->total_score / $totalSubject;
         }
-        dd($arr);
+        
+        $avergaeScore = 0;
+        foreach ($wholeClass->get() as $key => $v) {
+            dump($v);
+            $otherAvg = $v->total_score /  $totalSubject;
+            dump($otherAvg);
+         
+            if ($arr[$v->subject . $v->RegNum] == $otherAvg) {
+                dump('true');
+            } else {
+                $indicator++;
+            }
+        }
+
         /// where the student id = 
         //get the average for that subject
         //use that avearge gotten to check the student 
