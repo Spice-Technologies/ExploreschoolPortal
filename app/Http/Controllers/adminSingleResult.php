@@ -49,6 +49,9 @@ class adminSingleResult extends Controller
 
     public function showResult(Request $r)
     {
+
+        $rus = new Result();
+
         $r->validate([
             'term' => 'required',
             'class' => 'required',
@@ -57,9 +60,12 @@ class adminSingleResult extends Controller
         ]);
         //try eager laoding with()
 
-        $fetchStudents = Result::where('student_id', $r->student)->where('class_id', $r->class)->where('term_id', $r->term)->where('session_id', $r->session)->get();
+        $wholeClass = Result::where('class_id', $r->class)->where('term_id', $r->term)->where('session_id', $r->session);
+        $fetchStudents = $wholeClass->where('student_id', $r->student)->get();
 
-    return view('backend.result.pdfsing', compact('fetchStudents'));
+        $rus->position($wholeClass, $fetchStudents);
+
+        return view('backend.result.pdfsing', compact('fetchStudents'));
     }
 
     public function store(Request $request)

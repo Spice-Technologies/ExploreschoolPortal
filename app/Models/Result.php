@@ -56,7 +56,6 @@ class Result extends Model
     public function subject()
     {
         return $this->belongsTo(Subject::class, 'subject_id');
-        
     }
 
 
@@ -64,14 +63,14 @@ class Result extends Model
     {
         //make sure that the admin is on the right school that belongs to him 
 
-            //get the admin, get the school, get the students in that selected class(): i.e from the result table
+        //get the admin, get the school, get the students in that selected class(): i.e from the result table
 
-            //so school Id variable will now be the school the admin belongs to..
+        //so school Id variable will now be the school the admin belongs to..
 
         //get the subject taken by that class via the school
         $noOfSubjectsTaken = Subject::get('subject')->count();
 
-       
+
         $this->carrier = self::where('class_id', $class)->where('session_id', $session)->where('term_id', $term)->where('school_id', $school)->with('subject')->get()->toArray();
 
         // Setting the subjects header for the table 
@@ -135,7 +134,7 @@ class Result extends Model
                 //  this in particular is what is checking if the total_score is not set yet, just add 0 instead of throwing an errorr..omorrr !!! Senior Devvvv !!! 
             }
             //get the total number of subjects
-            $accumulator[$index]['Tsubjects'] = $noOfSubjectsTaken; 
+            $accumulator[$index]['Tsubjects'] = $noOfSubjectsTaken;
             // formerly I did count($accumulator[$index]['submenu']);
             //get the average of each students
             $accumulator[$index]['Average'] = round($accumulator[$index]['Tscore'] / $accumulator[$index]['Tsubjects'], 2);
@@ -166,9 +165,50 @@ class Result extends Model
 
     //for class average, write an accessor that will always check for any class average and implement that 
 
-    public function singleAverage ($stuff) {
-      return $score =  count($stuff);
-  
-    
+    public function singleAverage($stuff)
+    {
+        return $score =  count($stuff);
+    }
+
+    public function position($wholeClass, $mainStudent)
+    {
+
+        //iterate or do something with all the whole class memebers
+        //check for each student on that subject , take another iteration that loops through, while calculating the average and compare that avergae with the current average of that student with and indicator, at what point the avearge is greate
+
+        //get average for main student per subject
+        //likely array to use
+        //array_map;to perform and operation using a fucntion on each item of the array
+        // then array_filter
+
+        $avergaeScore = 0;
+        $arr = [];
+        $indicator = 0;
+        $totalSubject = count($wholeClass->get());
+        // foreach ($wholeClass->get() as $key => $v) {
+        //     $otherAvg = $v->total_score /  $totalSubject;
+        //     $arr[$v->subject .$v->RegNum];
+        //     if ($otherAvg >= $arr[$v->subject . $v->RegNum]) {
+        //         $avergaeScore = $indicator;
+        //     } else {
+        //         $indicator++;
+        //     }
+        // }
+
+
+
+        foreach ($mainStudent as $st) {
+            $arr[$st->subject . $st->RegNum]  =  $st->total_score / $totalSubject;
+        }
+        dd($arr);
+        /// where the student id = 
+        //get the average for that subject
+        //use that avearge gotten to check the student 
+        //also count the avearge score in that class for all students
+        //then compare
+        // with an indicator, at any point the avearge is greater than any student / the rest of the student, get the value of that indicator for that is our position
+
+
+
     }
 }
