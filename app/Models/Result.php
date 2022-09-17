@@ -163,4 +163,12 @@ class Result extends Model
         no 4 is the unique identifier so all indexes with clients index for example will be grouped togther
         */
     }
+
+    //for class average, write an accessor that will always check for any class average and implement that 
+
+    public function singleAverage ($stuff) {
+      return $score =  count($stuff);
+  
+    
+    }
 }

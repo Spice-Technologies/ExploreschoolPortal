@@ -55,8 +55,11 @@ class adminSingleResult extends Controller
             'session' => 'required', //exists:results,session_id
             'student' => 'required',
         ]);
+        //try eager laoding with()
 
         $fetchStudents = Result::where('student_id', $r->student)->where('class_id', $r->class)->where('term_id', $r->term)->where('session_id', $r->session)->get();
+
+    return view('backend.result.pdfsing', compact('fetchStudents'));
     }
 
     public function store(Request $request)
