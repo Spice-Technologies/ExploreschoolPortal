@@ -58,12 +58,15 @@ class adminSingleResult extends Controller
             'session' => 'required', //exists:results,session_id
             'student' => 'required',
         ]);
-        //try eager laoding with()
+        //try eager laoding with() 
+        //the query is suppose to have the admin  and the school it is trying to get
+        //when the admin wants to upload to the db, the admin need to check for it too
 
-        $wholeClass = Result::where('class_id', $r->class)->where('term_id', $r->term)->where('session_id', $r->session);
-        $fetchStudents = $wholeClass->where('student_id', $r->student)->get();
+        $fetchStudents = Result::where('class_id', $r->class)->where('term_id', $r->term)->where('session_id', $r->session)->where('student_id', $r->student)->first();
+    
+        dump($fetchStudents);
 
-        $rus->position($wholeClass, $fetchStudents);
+        $rus->get_details_of_whole_class($r->class, $r->term, $r->session);
 
         return view('backend.result.pdfsing', compact('fetchStudents'));
     }

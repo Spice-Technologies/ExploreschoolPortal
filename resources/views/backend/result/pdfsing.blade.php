@@ -91,11 +91,11 @@
                         @foreach ($fetchStudents as $studentResult)
                             <tr>
                                 {{-- there is a bug here/ fix --}}
-                                <th scope="row">{{ $studentResult->subject }}</th>
-                                <td> {{ $studentResult->assessment_total }}</td>
-                                <td> {{ $studentResult->exam_score }}</td>
-                                <td> {{ $studentResult->total_score }}</td>
-                                <td> {{ $studentResult->total_score / count($fetchStudents) }} </td>
+                                <th scope="row"></th>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
                                 <td>-</td>
                                 <td>-</td>
                                 <td>-</td>

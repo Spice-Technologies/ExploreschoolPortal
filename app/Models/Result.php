@@ -170,10 +170,10 @@ class Result extends Model
         return $score =  count($stuff);
     }
 
-    public function position($wholeClass, $mainStudent)
+    public function get_details_of_whole_class($class, $term, $session)
     {
         //get all students --> basically orderBy subject name
-        $groupedSubPerSt = $wholeClass->orderBy('total_score', 'DESC')->get()->groupBy('subject')->toArray();
+        $groupedSubPerSt =  $this->where('class_id', $class)->where('term_id', $term)->where('session_id', $session)->orderBy('total_score', 'DESC')->get()->groupBy('subject')->toArray();
         // -----
 
         foreach ($groupedSubPerSt as $key => $V) {
@@ -187,10 +187,12 @@ class Result extends Model
                 $avg = $v['total_score'] / $totalStudentPerSubj;
                 //append the average with it's own unique key
                 $groupedSubPerSt[$key][$vkey]['avg'] =  $avg;
+              
                 // position
                 $groupedSubPerSt[$key][$vkey]['position'] =  $vkey+ 1;
             }
         }
         dump($groupedSubPerSt);
+        return $groupedSubPerSt;
     }
 }
