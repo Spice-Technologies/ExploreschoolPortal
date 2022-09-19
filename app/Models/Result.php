@@ -172,46 +172,25 @@ class Result extends Model
 
     public function position($wholeClass, $mainStudent)
     {
+        //get all students --> basically orderBy subject name
+        $groupedSubPerSt = $wholeClass->orderBy('total_score', 'DESC')->get()->groupBy('subject')->toArray();
+        // -----
 
-        //iterate or do something with all the whole class memebers
-        //check for each student on that subject , take another iteration that loops through, while calculating the average and compare that avergae with the current average of that student with and indicator, at what point the avearge is greate
-
-        //get average for main student per subject
-        //likely array to use
-        //array_map;to perform and operation using a fucntion on each item of the array
-        // then array_filter
-
-
-        $arr = [];
-        $indicator = 1;
-        $totalSubject = count($wholeClass->orderBy('total_score', 'DESC')->get());
-
-        foreach ($mainStudent as $st) {
-            dump($st);
-            $arr[$st->subject . $st->RegNum]  =  $st->total_score / $totalSubject;
-        }
-        
-        $avergaeScore = 0;
-        foreach ($wholeClass->get() as $key => $v) {
-            dump($v);
-            $otherAvg = $v->total_score /  $totalSubject;
-            dump($otherAvg);
-         
-            if ($arr[$v->subject . $v->RegNum] == $otherAvg) {
-                dump('true');
-            } else {
-                $indicator++;
+        foreach ($groupedSubPerSt as $key => $V) {
+            //get total std per subject 
+            $totalStudentPerSubj = count($V);
+            // append the the total number of students with it custom array key and new value
+            $groupedSubPerSt[$key]['total_student'] =  $totalStudentPerSubj;
+            //get avearge and append it to the sub array for student
+            foreach ($V as $vkey => $v) {
+                //get average
+                $avg = $v['total_score'] / $totalStudentPerSubj;
+                //append the average with it's own unique key
+                $groupedSubPerSt[$key][$vkey]['avg'] =  $avg;
+                // position
+                $groupedSubPerSt[$key][$vkey]['position'] =  $vkey+ 1;
             }
         }
-
-        /// where the student id = 
-        //get the average for that subject
-        //use that avearge gotten to check the student 
-        //also count the avearge score in that class for all students
-        //then compare
-        // with an indicator, at any point the avearge is greater than any student / the rest of the student, get the value of that indicator for that is our position
-
-
-
+        dump($groupedSubPerSt);
     }
 }
