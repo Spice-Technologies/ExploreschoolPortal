@@ -88,10 +88,18 @@
                     </thead>
                     <tbody>
 
-                        @foreach ($fetchStudents as $studentResult)
+                        @foreach ($wholeClasses as $key => $wholeClass)
                             <tr>
-                                {{-- there is a bug here/ fix --}}
-                                <th scope="row"></th>
+                                <th scope="row">{{ $key }}</th>
+                                <?php
+                                // foreach ($wholeClass as $k => $class) {
+                                //     if( $class['RegNum'] == $fetchStudent->RegNum )
+                                //     @dump($class['RegNum']);
+                                //     break;
+                                // }
+                                ?>
+
+
                                 <td> </td>
                                 <td> </td>
                                 <td> </td>
