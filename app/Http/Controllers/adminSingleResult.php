@@ -61,22 +61,22 @@ class adminSingleResult extends Controller
         //try eager laoding with() 
         //the query is suppose to have the admin  and the school it is trying to get
         //when the admin wants to upload to the db, the admin need to check for it too
-
+        
         $fetchStudent = Result::where('class_id', $r->class)->where('term_id', $r->term)->where('session_id', $r->session)->where('student_id', $r->student)->first();
 
         $wholeClasses = $rus->get_details_of_whole_class($r->class, $r->term, $r->session);
-        //filter that particular student
 
-       $wholeCl= array_filter($wholeClasses, function ($value) use ($fetchStudent) {
+        //filter that particular student
+        $finaleWholeClass = array_filter($wholeClasses, function ($value) use ($fetchStudent) {
             foreach ($value as $v) {
-              
+
                 return $v['student_id'] == $fetchStudent->student_id;
             }
         });
 
-        dump($wholeCl);
+        dump($finaleWholeClass);
 
-        return view('backend.result.pdfsing', compact('fetchStudent', 'wholeClasses'));
+        return view('backend.result.pdfsing', compact('fetchStudent', 'finaleWholeClass'));
     }
 
     public function store(Request $request)

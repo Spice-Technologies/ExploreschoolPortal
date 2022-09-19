@@ -88,19 +88,21 @@
                     </thead>
                     <tbody>
 
-                        @foreach ($wholeClasses as $key => $wholeClass)
+                        @foreach ($finaleWholeClass as $key => $wholeClass)
                             <tr>
                                 <th scope="row">{{ $key }}</th>
-                                <?php
-                                // foreach ($wholeClass as $k => $class) {
-                                //     if( $class['RegNum'] == $fetchStudent->RegNum )
-                                //     @dump($class['RegNum']);
-                                //     break;
-                                // }
-                                ?>
+
+                                {{-- @dump($wholeClass[0]['id']) --}}
+                                <?php array_pop($wholeClass); //remove the last position ther ?>
+                                @foreach ($wholeClass as $klass)
+                                    <td> {{ $klass['assessment_total'] }}</td>
+                                    <td> {{ $klass['exam_score'] }}</td>
+                                    <td> {{ $klass['total_score'] }}</td>
+                                    <td> {{ $klass['avg'] }}</td>
+                                    <td> {{ $klass['position'] }}</td>
+                                @endforeach
 
 
-                                <td> </td>
                                 <td> </td>
                                 <td> </td>
                                 <td> </td>
