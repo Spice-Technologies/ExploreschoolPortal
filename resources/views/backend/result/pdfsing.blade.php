@@ -104,6 +104,7 @@
                                     <td> {{  $singleClassResult['total_score'] }}</td>
                                     <td> {{  $singleClassResult['avg'] }}</td>
                                     <td> {{  $singleClassResult['position'] }}</td>
+                                    <td> {{  $singleClassResult['grade'] }}</td>
                              
 
 
