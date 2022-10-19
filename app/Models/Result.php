@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use PhpOffice\PhpSpreadsheet\Calculation\Statistical\Averages;
 use Prophecy\Promise\ReturnPromise;
+use Symfony\Component\CssSelector\Node\FunctionNode;
 
 class Result extends Model
 {
@@ -170,8 +171,12 @@ class Result extends Model
         return $score =  count($stuff);
     }
 
+
+
     public function get_details_of_whole_class($class, $term, $session)
     {
+
+
         //get all students --> basically orderBy subject name
         $groupedSubPerSt =  $this->where('class_id', $class)->where('term_id', $term)->where('session_id', $session)->orderBy('total_score', 'DESC')->get()->groupBy('subject')->toArray();
         // -----    
@@ -192,6 +197,19 @@ class Result extends Model
                 // how did I calcualte this position ???---- asked on 18-10-2022 --- ???
                 // it is from the 'order_by() method. I ordered the array by total_score..cos in reality, the higher the total score, the hire the average. So by default, the avergae is detected already but I just have to use the key ($vkey + 1) then append the position
                 $groupedSubPerSt[$key][$vkey]['position'] =  $vkey + 1;
+                //named function that i can use within this function so as to avoid the use of $this->getGradeRemark
+
+                $getGradeRemark = function (string $grade) {
+                    $remarks =
+                        [
+                            'A' => ['you have done noble', 'Good job keep it up', 'You are the champion'],
+                            'B' => ['You scored B, Keep trying harder', 'B you are not far from greatness', 'B thats awesome'],
+                            'C' => ['C You for try pass like this shaa', 'C you are almost there', 'C means cheap but you are not. Are you the one that is cheep or the questions ?'],
+                            'P' => ['P odogwu, wetin manU play, you too dy watch movie', 'BBnaija star..rich boi..see as you score low', 'P you are not a failure, so dont be one']
+                        ];
+                    $keys = array_rand($remarks[$grade]);
+                    return $remarks[$grade][$keys];
+                };
 
                 // calculate the grade 
                 $totalScore = $v['total_score'];
@@ -199,19 +217,22 @@ class Result extends Model
 
                     case  $totalScore >= 70 and  $totalScore <= 100:
                         $groupedSubPerSt[$key][$vkey]['grade'] = 'A';
+                        $groupedSubPerSt[$key][$vkey]['gradeRemark'] = $getGradeRemark('A');
                         break;
                     case  $totalScore >= 60 and  $totalScore <= 69:
                         $groupedSubPerSt[$key][$vkey]['grade'] = 'B';
+                        $groupedSubPerSt[$key][$vkey]['gradeRemark'] = $getGradeRemark('B');
                         break;
                     case  $totalScore >= 59 and  $totalScore <= 50:
                         $groupedSubPerSt[$key][$vkey]['grade'] = 'C';
+                        $groupedSubPerSt[$key][$vkey]['gradeRemark'] = $getGradeRemark('C');
                         break;
                     default:
                         $groupedSubPerSt[$key][$vkey]['grade'] = 'P';
+                        $groupedSubPerSt[$key][$vkey]['gradeRemark'] = $getGradeRemark('P');
                 }
             }
         }
-        dump($groupedSubPerSt);
         return $groupedSubPerSt;
     }
 }

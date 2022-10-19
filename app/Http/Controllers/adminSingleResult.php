@@ -9,6 +9,7 @@ use App\Models\Session;
 use App\Models\Student;
 use App\Models\Term;
 use Illuminate\Http\Request;
+use PDF;
 
 class adminSingleResult extends Controller
 {
@@ -80,9 +81,9 @@ class adminSingleResult extends Controller
         //give grade,
         // if student score is less than 
 
-            dump($finaleSingleCourseResult);
+        $pdf = PDF::loadView('backend.result.pdfsing', compact('fetchStudent', 'finaleSingleCourseResult'));
 
-        return view('backend.result.pdfsing', compact('fetchStudent', 'finaleSingleCourseResult'));
+        return $pdf->download('Single result.pdf');
     }
 
     public function store(Request $request)

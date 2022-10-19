@@ -5,9 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
-        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
     <title>Single PDf</title>
+    <style>
+        
+
+    </style>
+
 </head>
 
 <body>
@@ -92,28 +96,18 @@
                             {{-- @foreach ($singleClasses as $singleClasses)
                             @endforeach --}}
                             <tr>
-                                <th scope="row">{{$singleClassResult['subject']  }}</th>
-                                
+                                <th scope="row">{{ $singleClassResult['subject'] }}</th>
+
 
                                 {{-- @dump($wholeClass[0]['id']) --}}
                                 <?php array_pop($finaleSingleCourseResult); //remove the last position ther ?>
-                               
-                                
-                                    <td> {{ $singleClassResult['assessment_total'] }}</td>
-                                    <td> {{  $singleClassResult['exam_score'] }}</td>
-                                    <td> {{  $singleClassResult['total_score'] }}</td>
-                                    <td> {{  $singleClassResult['avg'] }}</td>
-                                    <td> {{  $singleClassResult['position'] }}</td>
-                                    <td> {{  $singleClassResult['grade'] }}</td>
-                             
-
-
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>-</td>
+                                <td> {{ $singleClassResult['assessment_total'] }}</td>
+                                <td> {{ $singleClassResult['exam_score'] }}</td>
+                                <td> {{ $singleClassResult['total_score'] }}</td>
+                                <td> {{ $singleClassResult['avg'] }}</td>
+                                <td> {{ $singleClassResult['position'] }}</td>
+                                <td> {{ $singleClassResult['grade'] }}</td>
+                                <td> {{ $singleClassResult['gradeRemark'] }}</td>
                             </tr>
                         @endforeach
 
