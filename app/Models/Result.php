@@ -174,7 +174,7 @@ class Result extends Model
     {
         //get all students --> basically orderBy subject name
         $groupedSubPerSt =  $this->where('class_id', $class)->where('term_id', $term)->where('session_id', $session)->orderBy('total_score', 'DESC')->get()->groupBy('subject')->toArray();
-        // -----
+        // -----    
 
         foreach ($groupedSubPerSt as $key => $V) {
             //get total std per subject 
@@ -187,9 +187,28 @@ class Result extends Model
                 $avg = $v['total_score'] / $totalStudentPerSubj;
                 //append the average with it's own unique key
                 $groupedSubPerSt[$key][$vkey]['avg'] =  $avg;
-              
+
                 // position
-                $groupedSubPerSt[$key][$vkey]['position'] =  $vkey+ 1;
+                // how did I calcualte this position ???---- asked on 18-10-2022 --- ???
+                // it is from the 'order_by() method. I ordered the array by total_score..cos in reality, the higher the total score, the hire the average. So by default, the avergae is detected already but I just have to use the key ($vkey + 1) then append the position
+                $groupedSubPerSt[$key][$vkey]['position'] =  $vkey + 1;
+
+                // calculate the grade 
+                $totalScore = $v['total_score'];
+                switch ($totalScore) {
+
+                    case  $totalScore >= 70 and  $totalScore <= 100:
+                        $groupedSubPerSt[$key][$vkey]['grade'] = 'A';
+                        break;
+                    case  $totalScore >= 60 and  $totalScore <= 69:
+                        $groupedSubPerSt[$key][$vkey]['grade'] = 'B';
+                        break;
+                    case  $totalScore >= 59 and  $totalScore <= 50:
+                        $groupedSubPerSt[$key][$vkey]['grade'] = 'C';
+                        break;
+                    default:
+                        $groupedSubPerSt[$key][$vkey]['grade'] = 'P';
+                }
             }
         }
         dump($groupedSubPerSt);

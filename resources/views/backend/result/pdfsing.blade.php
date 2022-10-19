@@ -88,19 +88,23 @@
                     </thead>
                     <tbody>
 
-                        @foreach ($finaleWholeClass as $key => $wholeClass)
+                        @foreach ($finaleSingleCourseResult as $key => $singleClassResult)
+                            {{-- @foreach ($singleClasses as $singleClasses)
+                            @endforeach --}}
                             <tr>
-                                <th scope="row">{{ $key }}</th>
+                                <th scope="row">{{$singleClassResult['subject']  }}</th>
+                                
 
                                 {{-- @dump($wholeClass[0]['id']) --}}
-                                <?php array_pop($wholeClass); //remove the last position ther ?>
-                                @foreach ($wholeClass as $klass)
-                                    <td> {{ $klass['assessment_total'] }}</td>
-                                    <td> {{ $klass['exam_score'] }}</td>
-                                    <td> {{ $klass['total_score'] }}</td>
-                                    <td> {{ $klass['avg'] }}</td>
-                                    <td> {{ $klass['position'] }}</td>
-                                @endforeach
+                                <?php array_pop($finaleSingleCourseResult); //remove the last position ther ?>
+                               
+                                
+                                    <td> {{ $singleClassResult['assessment_total'] }}</td>
+                                    <td> {{  $singleClassResult['exam_score'] }}</td>
+                                    <td> {{  $singleClassResult['total_score'] }}</td>
+                                    <td> {{  $singleClassResult['avg'] }}</td>
+                                    <td> {{  $singleClassResult['position'] }}</td>
+                             
 
 
                                 <td> </td>
