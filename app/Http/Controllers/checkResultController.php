@@ -67,7 +67,8 @@ class checkResultController extends Controller
         ]);
         $student = Student::studentId();
         $result = new Result();
-        $fetchResults = $result->get_single_result($request->session, $request->class_id, $request->session, Auth::user()->student->id);
+        
+        $fetchResults = $result->get_single_result($request->class_id,  $request->term, $request->session, Auth::user()->student->id);
 
         $pin = Pin::where('pin', $request->pin)->first();
 
@@ -107,6 +108,7 @@ class checkResultController extends Controller
             // return $pdf->download('Single result.pdf');
 
         } else {
+            dd($fetchResults);
             return back()->with('msg', 'Looks like your result has not been uploaded yet !!!');
         }
     }
