@@ -172,10 +172,9 @@ class Result extends Model
     }
 
 
-
-    public function get_details_of_whole_class($class, $term, $session)
+    /*  This is the main SINGLE RESULT CALCULATOR */
+    public function get_single_result($class, $term, $session, $student)
     {
-
 
         //get all students --> basically orderBy subject name
         $groupedSubPerSt =  $this->where('class_id', $class)->where('term_id', $term)->where('session_id', $session)->orderBy('total_score', 'DESC')->get()->groupBy('subject')->toArray();
@@ -233,6 +232,20 @@ class Result extends Model
                 }
             }
         }
-        return $groupedSubPerSt;
+        // get single result...the main one getting the single result specifically
+        $finaleSingleCourseResult = []; 
+        foreach ($groupedSubPerSt as $key => $value) {
+            foreach ($value as $k => $v) {
+                //use isset to eliminate not set or integer error
+                // check if the student_id from the array is same with the student variable from request that we want to check for, if so, push them to $finaleSingleCourseResult array variable
+                if (isset($v['student_id']) && $v['student_id'] === $student)
+                    // need to append '[]' so that it can take more than on array item
+                    $finaleSingleCourseResult[] = $v;
+            }
+        }
+
+        return $finaleSingleCourseResult;
     }
+
+    /* End of the main SINGLE RESULT CALCULATOR */
 }

@@ -67,52 +67,47 @@ class checkResultController extends Controller
         ]);
         $student = Student::studentId();
         $result = new Result();
-        $fetchResults = $result->getAllResult($request->session, $request->class_id);
-        
+        $fetchResults = $result->get_single_result($request->session, $request->class_id, $request->session, Auth::user()->student->id);
+
         $pin = Pin::where('pin', $request->pin)->first();
-      
 
-        if ($pin->use_stats >= 900) return back()->with('msg', 'You have exceeded the number of times meant to use this pin');
+        if ($pin->use_stats >= 5) return back()->with('msg', 'You have exceeded the number of times meant to use this pin');
 
-        //if the pin is 'so fresh' and has never been used before 
-        if ($pin->use_stats == 0) {
-            $examPin =  $pin->update([
-                'use_stats' => $pin->use_stats + 1,
-                'student_id' =>  $student,
-                'class_id' => $request->class_id,
-                'term_id' =>  $request->term
-            ]);
-            //check if the student result has not bbeen uploaded // i think I should check for this first..maybe rearrange my if else statements
-            if ($fetchResults == false) { //why not say, If not false  ?
+        //check if result has been uploaded
+        if ($fetchResults != false) {
+            //if the pin is 'so fresh' and has never been used before 
+            if ($pin->use_stats == 0) {
+                $termsNth = ['Zeroth', 'first', 'second', 'third'];
                 $examPin =  $pin->update([
-                    'use_stats' => 0,
-                    'student_id' =>  NULL,
-                    'class_id' => NULL,
-                    'term_id' =>   NULL
+                    'use_stats' => $pin->use_stats + 1,
+                    'student_id' =>  $student,
+                    'class_id' => $request->class_id,
+                    'term_id' =>  $request->term
                 ]);
-                return back()->with('msg', 'Looks like your result has not been uploaded yet !!!');
-            } else {
-                return redirect()->back()->with('results', $fetchResults);
+            } elseif ($pin->use_stats <= 5) {
+
+                if ($pin->term_id != $request->term) {
+                    $termsNth = ['Zeroth', 'first', 'second', 'third'];
+                    return back()->with('msg', 'This pin is already tied to ' .  $termsNth[$pin->term_id] . ' Term Only. Which means that you can use this pin to check for only ' . $termsNth[$pin->term_id] . ' term results.');
+                } else {
+
+                    $examPin =  $pin->update([
+                        'use_stats' => $pin->use_stats + 1,
+                        'student_id' =>  $student,
+                        'class_id' => $request->class_id,
+                        'term_id' =>  $request->term
+                    ]);
+                }
             }
 
-            // when the record is not fresh 
+            dd($fetchResults);
+
+            // $pdf = PDF::loadView('backend.result.pdfsing', compact('fetchStudent', 'finaleSingleCourseResult'));
+
+            // return $pdf->download('Single result.pdf');
+
         } else {
-            $termsNth = ['Zeroth', 'first', 'second', 'third'];
-
-            if ($pin->term_id != $request->term) return back()->with('msg', 'This pin is already tied to ' .  $termsNth[$pin->term_id] . ' Term Only. Which means that you can use this pin to check for only ' . $termsNth[$pin->term_id] . ' term results.');
-
-            $examPin =  $pin->update([
-                'use_stats' => $pin->use_stats + 1,
-                'student_id' =>  $student,
-                'class_id' => $request->class_id,
-                'term_id' =>  $pin->term_id
-            ]);
-
-
-            $subjects = $result->subjects;
-
-            $pdf = PDF::loadview('backend.result.masterPdf', ['results' => $fetchResults, 'subjects' => $subjects]);
-            return $pdf->download('laravel-pdfworking.pdf');
+            return back()->with('msg', 'Looks like your result has not been uploaded yet !!!');
         }
     }
 

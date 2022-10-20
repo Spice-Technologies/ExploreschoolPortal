@@ -64,26 +64,12 @@ class adminSingleResult extends Controller
         //when the admin wants to upload to the db, the admin need to check for it too
         //improve this code (N + 1) queries
         $fetchStudent = Result::where('class_id', $r->class)->where('term_id', $r->term)->where('session_id', $r->session)->where('student_id', $r->student)->first();
-        dump($fetchStudent->student_id);
-        $wholeClasses = $rus->get_details_of_whole_class($r->class, $r->term, $r->session);
 
-        //filter that particular student result
-        $finaleSingleCourseResult = [];
-        foreach ($wholeClasses as $key => $value) {
-            foreach($value as $k => $v){
-                //use isset to eliminate not set or integer error
-                // check if the student_id from the array is same with the student variable from request that we want to check for, if so, push them to $finaleSingleCourseResult array variable
-                if(isset($v['student_id']) && $v['student_id'] === $fetchStudent->student_id)
-                // need to append '[]' so that it can take more than on array item
-                    $finaleSingleCourseResult[] = $v;
-            }
-        }
-        //give grade,
-        // if student score is less than 
+        $finaleSingleCourseResult = $rus->get_single_result($r->class, $r->term, $r->session, $fetchStudent->student_id);
 
-        $pdf = PDF::loadView('backend.result.pdfsing', compact('fetchStudent', 'finaleSingleCourseResult'));
+        return view('backend.result.pdfsing', compact('fetchStudent', 'finaleSingleCourseResult'));
 
-        return $pdf->download('Single result.pdf');
+        // return $pdf->download('Single result.pdf');
     }
 
     public function store(Request $request)
