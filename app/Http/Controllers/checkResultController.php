@@ -67,7 +67,7 @@ class checkResultController extends Controller
         ]);
         $student = Student::studentId();
         $result = new Result();
-        
+
         $fetchResults = $result->get_single_result($request->class_id,  $request->term, $request->session, Auth::user()->student->id);
 
         $pin = Pin::where('pin', $request->pin)->first();
@@ -78,7 +78,6 @@ class checkResultController extends Controller
         if ($fetchResults != false) {
             //if the pin is 'so fresh' and has never been used before 
             if ($pin->use_stats == 0) {
-                $termsNth = ['Zeroth', 'first', 'second', 'third'];
                 $examPin =  $pin->update([
                     'use_stats' => $pin->use_stats + 1,
                     'student_id' =>  $student,
@@ -87,9 +86,10 @@ class checkResultController extends Controller
                 ]);
             } elseif ($pin->use_stats <= 5) {
 
-                if ($pin->term_id != $request->term) {
+                if ($pin->term_id != $request->term || $pin->class_id != $request->class_id  || $pin->session_id != $request->session) {
                     $termsNth = ['Zeroth', 'first', 'second', 'third'];
-                    return back()->with('msg', 'This pin is already tied to ' .  $termsNth[$pin->term_id] . ' Term Only. Which means that you can use this pin to check for only ' . $termsNth[$pin->term_id] . ' term results.');
+                    return back()->with('msg', 'This pin is already tied to ' .  $termsNth[$pin->term_id] . ' term, for the session, ' . Session::where('id', $pin->session_id)->first('session')->session . ' and for the class ' . Klass::where('id', $pin->class_id)->first('class_name')->class_name . '.Note that your pin can only be used once for the class, term and session choosen intially with a fresh card');
+                    // that thing I did above is not the best but lets us manage it for now. That's why softwares have versions--this is version 0.1
                 } else {
 
                     $examPin =  $pin->update([
@@ -108,7 +108,7 @@ class checkResultController extends Controller
             // return $pdf->download('Single result.pdf');
 
         } else {
-            dd($fetchResults);
+
             return back()->with('msg', 'Looks like your result has not been uploaded yet !!!');
         }
     }
