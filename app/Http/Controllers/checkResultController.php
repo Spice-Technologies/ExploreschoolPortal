@@ -101,7 +101,7 @@ class checkResultController extends Controller
                 }
             }
 
-            dd($fetchResults);
+            dd($fetchResults); // will send to pdf later
 
             // $pdf = PDF::loadView('backend.result.pdfsing', compact('fetchStudent', 'finaleSingleCourseResult'));
 

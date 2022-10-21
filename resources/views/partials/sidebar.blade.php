@@ -74,6 +74,23 @@
                         </li>
                         <li class="nav-item nav-with-child">
                             <a class="nav-link ">
+                                <i class="ni ni-align-left-2 "></i> Promotion
+                            </a>
+                            <ul class="nav-item-child">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('class.index') }}">
+                                        Individual Promotion
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ { route('promote.index') }}">
+                                        Mass Promotion
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item nav-with-child">
+                            <a class="nav-link ">
                                 <i class="ni ni-align-left-2 "></i> Results
                             </a>
                             <ul class="nav-item-child">
@@ -89,7 +106,7 @@
                                 </li> --}}
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('Sresult.create') }}">
-                                       Single Master Sheet
+                                        Single Master Sheet
                                     </a>
                                 </li>
                                 <li class="nav-item">
