@@ -83,6 +83,11 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('class.index') }}">
+                                        Class Promotion
+                                    </a>
+                                </li>
+                                <li class="nav-item">
                                     <a class="nav-link" href="{{ route('promote.index') }}">
                                         Mass Promotion
                                     </a>
