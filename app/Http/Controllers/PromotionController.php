@@ -45,4 +45,10 @@ class PromotionController extends Controller
         //$h->toSql(); using this to output raw sql queries
         return redirect()->route('student.index')->with('msg', 'Students promoted successfully');
     }
+
+    public function individualPromotionIndex()
+    {
+        return view('backend.promotion.promoteclass');
+
+    }
 }

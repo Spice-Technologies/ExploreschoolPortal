@@ -78,7 +78,7 @@
                             </a>
                             <ul class="nav-item-child">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('class.index') }}">
+                                    <a class="nav-link" href="{{ route('promote.individual.index') }}">
                                         Individual Promotion
                                     </a>
                                 </li>

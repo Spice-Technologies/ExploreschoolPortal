@@ -8,7 +8,7 @@
                 <label for="exampleFormControlSelect1">Select Class</label>
                 <select name="class_id" value="1" class="form-control" id="exampleFormControlSelect1">
                     {{-- @foreach ($classes as $class) --}}
-                        <option value="{{  }}"> {{ }}</option>
+                    <option value=""> </option>
                     {{-- @endforeach --}}
                 </select>
             </div>
@@ -16,7 +16,7 @@
                 <label for="exampleFormControlSelect1">Select Sub Class</label>
                 <select name="sub_class_id" value="0" class="form-control" id="exampleFormControlSelect1">
                     {{-- @foreach ($classes as $class) --}}
-                        <option value="1">A</option>
+                    <option value="1">A</option>
                     {{-- @endforeach --}}
                 </select>
             </div>
