@@ -55,7 +55,7 @@ Route::group(['middleware' => ['auth', 'role:Admin']], function () {
     Route::get('/promoteClass', [App\Http\Controllers\PromotionController::class, 'promote'])->name('promote');
 
     //Individual controller 
-    Route::get('/promote/individual', [App\Http\Controllers\IndividualPromotion::class, 'index'])->name('promote.individual.index');
+    Route::get('/promote/individual', [App\Http\Controllers\KlassPromotionController::class, 'index'])->name('promote.klass.index');
 
     //Manage results
     Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('dashboard.admin');
