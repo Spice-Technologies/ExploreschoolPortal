@@ -12,7 +12,16 @@ class KlassPromotionController extends Controller
     public function index()
     {
 
-        $classes = Klass::all();
+        $classes = Klass::get(['id']);
+
+        //where class == 5 and where current_session != session 
+        // where $classes must be looped, then for each loop, we check if that one is same with 
+
+        $classes->each(function($query){
+
+        });
+        // $student->whereIn('class_id', $classes);
+
         return view('backend.promotion.klasspromotion.index', compact('classes'));
     }
 
@@ -23,7 +32,7 @@ class KlassPromotionController extends Controller
             'prev_class' => 'required',
             'next_class' => 'required'
         ]);
-        $session = new Session();
+
         $student = new Student();
         // from the top of my head
 
@@ -31,14 +40,12 @@ class KlassPromotionController extends Controller
 
         //get the existing session 
 
-        if($currentSession != $session) {
-            $student->where('current_session' != $currentSession)->update([
-                'class_id' => $req->next_class
-            ]);
-        }
-        Student::where('current_session', $currentSession)->update([
+        $student->where('current_session' != $currentSession->session)->update([
+            'class_id' => $req->next_class,
+            'current_session' =>  $currentSession->session,
+        ]);
 
-        ])
+        Student::where('current_session', $currentSession)->update([]);
 
         //two main things to do: get current session
         // get the existing session student account
