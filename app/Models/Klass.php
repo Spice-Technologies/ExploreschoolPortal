@@ -27,7 +27,7 @@ class Klass extends Model
         //TIP: for promotion just change the class_id to the relative class id in original class table
     ];
 
-    public function students()
+    public function student()
     { // class has many many stu$studentClass->reg_numdents but students has or must belong to only One Class
         return $this->hasMany(Student::class, 'class_id');
     }

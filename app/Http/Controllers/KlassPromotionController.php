@@ -16,10 +16,13 @@ class KlassPromotionController extends Controller
 
         //where class == 5 and where current_session != session 
         // where $classes must be looped, then for each loop, we check if that one is same with 
-
-        $classes->each(function($query){
-
+// gloop through all the classes fro the main class table that are related to the students table then use it to check for the classes in that admin school that have been promoted already
+        $mainClass = [];
+        $classes->each(function($query) {
+            $mainClass[] = $query->student->where('current_session', NULL)->all();
         });
+
+        dump($mainClass);
         // $student->whereIn('class_id', $classes);
 
         return view('backend.promotion.klasspromotion.index', compact('classes'));
