@@ -20,6 +20,7 @@ class KlassPromotionController extends Controller
 
     public function promote(Request $req)
     {
+        // dd($req->all());
         $req->validate([
 
             'class_id' => 'required',
@@ -35,15 +36,13 @@ class KlassPromotionController extends Controller
         $currentSession = Session::where('active', 1)->first();
 
         //get the existing session 
-
-        $student->where('current_session','!=', $currentSession->session)->where('school_id', $school)->update([
+        //obviously I'm having date issues here
+        $student->whereNull('session_id')->where('school_id', $school)->orWhere('session_id', '!=', $currentSession->id)->update([
             'class_id' => $req->class_id,
             'current_session' =>  $currentSession->session,
+            'session_id' => $currentSession->id
         ]);
 
-        if(!$student){
-            return "no updated happend";
-        }
 
         return redirect()->route('promote.klass.index')->with('msg', 'Klass promoted successfully');
     }

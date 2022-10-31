@@ -14,6 +14,7 @@ class Student extends Model
         'user_id',
         'parent_id',
         'class_id',
+        'session_id',
         'SubKlass_id',
         'gender',
         'dateofbirth',
