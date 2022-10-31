@@ -155,8 +155,7 @@ class AdminResultController extends Controller
         $fetchResults = $result->getAllResult($request->session, $request->class_id);
         
         $pin = Pin::where('pin', $request->pin)->first();
-      
-
+    
         if ($pin->use_stats >= 900) return back()->with('msg', 'You have exceeded the number of times meant to use this pin');
 
         //if the pin is 'so fresh' and has never been used before 

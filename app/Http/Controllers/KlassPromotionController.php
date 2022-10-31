@@ -36,12 +36,10 @@ class KlassPromotionController extends Controller
 
         //get the existing session 
 
-        $student->where('current_session','!=', $currentSession->session)->where('school_id', $school);
-        
-        dd($student->update([
+        $student->where('current_session','!=', $currentSession->session)->where('school_id', $school)->update([
             'class_id' => $req->class_id,
             'current_session' =>  $currentSession->session,
-        ]));
+        ]);
 
         if(!$student){
             return "no updated happend";
