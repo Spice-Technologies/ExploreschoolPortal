@@ -1,7 +1,9 @@
 @extends('layouts.app')
 @section('content')
     <div class="card-body">
-        <form action="{{ route('student.index') }}" method="GET" role="search">
+        <form action="{{ route('promote.klass.promote') }}" method="POST" role="search">
+            @csrf
+        
             <h6 class="heading-small text-muted mb-4">User information</h6>
 
             <div class="row">

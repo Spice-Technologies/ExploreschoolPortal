@@ -18,6 +18,7 @@ class Student extends Model
         'gender',
         'dateofbirth',
         'current_address',
+        'current_session',
         'permanent_address',
         'state',
         'lga',
