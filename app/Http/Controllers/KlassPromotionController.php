@@ -14,13 +14,18 @@ class KlassPromotionController extends Controller
     {
 
         $currentSession = Session::where('active', 1)->first()->id;
-       
+
         $loggedInAdmin =  Admin::loggedInAdmin();
-        // constraint with eager loading . get the related model, student then add a condition to know make sure it get results where in the student table, row, the session_id is eequal to 1 in otherwords, find where the row has has session as active
-        $classes = Klass::with(['student' =>
-        function ($query) use ($currentSession) {
-            $query->where('session_id', $currentSession);
-        }])->get(['id', 'class_name']);
+       // Laravel Eloquent Filter By Column of Relationship
+       // This is just perfect for what I need. Get the number of classes to show depending on the related model or filter base on the related Model conditions
+       //simply saying "whereHas this condition, 
+       //its simply a situation where the number of results from the start model reference 
+        $classes = Klass::whereHas(
+            'student',
+            function ($query) use ($currentSession) {
+                $query->where('session_id', $currentSession);
+            }
+        )->get(['id', 'class_name'])->toArray();
 
         $promotedClass = [];
         foreach ($classes as $key => $class) {
