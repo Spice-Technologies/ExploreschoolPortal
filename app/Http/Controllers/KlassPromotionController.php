@@ -12,12 +12,19 @@ class KlassPromotionController extends Controller
 {
     public function index()
     {
+
+        $currentSession = Session::where('active', 1)->first()->id;
+       
         $loggedInAdmin =  Admin::loggedInAdmin();
-        $classes = Klass::where('admin_id', $loggedInAdmin)->with('student')->get(['id', 'class_name']);
-        //where class is same to the id uding relationship, then make sure its same admin and where the row has the current session
+        // constraint with eager loading . get the related model, student then add a condition to know make sure it get results where in the student table, row, the session_id is eequal to 1 in otherwords, find where the row has has session as active
+        $classes = Klass::with(['student' =>
+        function ($query) use ($currentSession) {
+            $query->where('session_id', $currentSession);
+        }])->get(['id', 'class_name']);
+
         $promotedClass = [];
         foreach ($classes as $key => $class) {
-            dd($classes[1]->student[0]->admin);
+            dd($classes);
         }
         return view('backend.promotion.klasspromotion.index', compact('classes'));
     }
