@@ -16,10 +16,10 @@ class KlassPromotionController extends Controller
         $currentSession = Session::where('active', 1)->first()->id;
 
         $loggedInAdmin =  Admin::loggedInAdmin();
-       // Laravel Eloquent Filter By Column of Relationship
-       // This is just perfect for what I need. Get the number of classes to show depending on the related model or filter base on the related Model conditions
-       //simply saying "whereHas this condition, 
-       //its simply a situation where the number of results from the start model reference 
+        // Laravel Eloquent Filter By Column of Relationship
+        // This is just perfect for what I need. Get the number of classes to show by filtering base on the related Model conditions
+        //simply saying "whereHas this condition, 
+        //its simply a situation where the number of results from the start model reference 
         $classes = Klass::whereHas(
             'student',
             function ($query) use ($currentSession) {
@@ -28,9 +28,19 @@ class KlassPromotionController extends Controller
         )->get(['id', 'class_name'])->toArray();
 
         $promotedClass = [];
+        $defaultKlasses = [1, 2, 3, 4, 5, 6];
         foreach ($classes as $key => $class) {
-            dd($classes);
+
+            if (in_array($class['id'], $defaultKlasses)) {
+                $promotedClass['promoted'] = $class['id'];
+                //to avoid this error, 
+                $promotedClass['promoted'] = [];
+                $promotedClass['promoted']['class_name'] =  $class['class_name'];
+                $promotedClass['promoted']['class_id'] =  $class['id'];
+            }
         }
+
+        dd(array_merge($promotedClass, $defaultKlasses));
         return view('backend.promotion.klasspromotion.index', compact('classes'));
     }
 
