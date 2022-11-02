@@ -12,8 +12,13 @@ class KlassPromotionController extends Controller
 {
     public function index()
     {
-
-        $classes = Klass::get(['id', 'class_name']);
+        $loggedInAdmin =  Admin::loggedInAdmin();
+        $classes = Klass::where('admin_id', $loggedInAdmin)->with('student')->get(['id', 'class_name']);
+        //where class is same to the id uding relationship, then make sure its same admin and where the row has the current session
+        $promotedClass = [];
+        foreach ($classes as $key => $class) {
+            dd($classes[1]->student[0]->admin);
+        }
         return view('backend.promotion.klasspromotion.index', compact('classes'));
     }
 
@@ -42,6 +47,10 @@ class KlassPromotionController extends Controller
             'current_session' =>  $currentSession->session,
             'session_id' => $currentSession->id
         ]);
+
+        if (isset($student)) {
+            return redirect()->route('promote.klass.index')->with('msg', 'No worries! This class has already been promoted!!!');
+        }
 
 
         return redirect()->route('promote.klass.index')->with('msg', 'Klass promoted successfully');

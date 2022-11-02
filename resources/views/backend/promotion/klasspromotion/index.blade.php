@@ -1,9 +1,18 @@
 @extends('layouts.app')
 @section('content')
+    @if (session('msg'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+            <span class="alert-text">{{ session('msg') }}</span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
     <div class="card-body">
         <form action="{{ route('promote.klass.promote') }}" method="POST" role="search">
             @csrf
-        
+
             <h6 class="heading-small text-muted mb-4">User information</h6>
 
             <div class="row">

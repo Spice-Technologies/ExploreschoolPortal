@@ -26,6 +26,7 @@ class Student extends Model
         'country',
         'reg_num',
         'school_id',
+        'admin_id',
         'studentPwd4AdminView'
     ];
 
@@ -33,6 +34,8 @@ class Student extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    ///  ????
     public function subKlass()
     {
         return $this->belongsTo(SubKlass::class);
@@ -48,6 +51,11 @@ class Student extends Model
         return $this->belongsTo(School::class);
     }
 
+    public function admin()
+    {
+        return $this->belongsTo(Admin::class, 'admin_id');
+    }
+
     //uisng dynamic scoping
     // used to get the school the student belong to
 
@@ -55,6 +63,8 @@ class Student extends Model
     {
         return $query->where('school_id', $school_id);
     }
+
+
 
     public static function studentId()
     {

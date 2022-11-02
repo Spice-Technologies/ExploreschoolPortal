@@ -27,11 +27,25 @@ class Admin extends Model
         return $this->belongsTo(School::class, 'school_id');
     }
 
-    //used to check the school admin belongs to
+    public function student()
+    {
+        return $this->hasMany(Student::class, 'admin_id');
+    }
+
+    //used to check the school admin belongs to..
+
+    //duplicates: you should make the code below just one single function t
     public static function AdminSchool()
     {
         return  self::where('id', Auth::user()->admin->id)->first()->school;
     }
+
+    //currently logged in admin
+    public static  function loggedInAdmin()
+    {
+        return  static::where('id', Auth::user()->admin->id)->first();
+    }
+
 
     //fetch all students under this same admin
 
