@@ -28,19 +28,21 @@ class KlassPromotionController extends Controller
         )->get(['id', 'class_name'])->toArray();
 
         $promotedClass = [];
-        $defaultKlasses = [1, 2, 3, 4, 5, 6];
+        $defaultKlasses = ['Jss 1'=>1, 'Jss 2'=>2, 'Jss 3'=> 3, 'SSS 1'=>4, 'SSS 2'=>5, 'SSS 3'=>6];
         foreach ($classes as $key => $class) {
 
             if (in_array($class['id'], $defaultKlasses)) {
                 $promotedClass['promoted'] = $class['id'];
                 //to avoid this error, 
                 $promotedClass['promoted'] = [];
-                $promotedClass['promoted']['class_name'] =  $class['class_name'];
+                $promotedClass['promoted'][['class_name']] =  $class['class_name'];
                 $promotedClass['promoted']['class_id'] =  $class['id'];
-            }
+                $defaultKlasses  = array_diff($defaultKlasses, [$class['id']]);
+            } 
         }
 
-        dd(array_merge($promotedClass, $defaultKlasses));
+        $classes = array_merge($promotedClass, $defaultKlasses);
+        dd($classes);
         return view('backend.promotion.klasspromotion.index', compact('classes'));
     }
 
