@@ -29,14 +29,12 @@ class KlassPromotionController extends Controller
 
         $promotedClass = [];
         $defaultKlasses = ['Jss 1'=>1, 'Jss 2'=>2, 'Jss 3'=> 3, 'SSS 1'=>4, 'SSS 2'=>5, 'SSS 3'=>6];
+        $ids = [];
         foreach ($classes as $key => $class) {
 
             if (in_array($class['id'], $defaultKlasses)) {
-                $promotedClass['promoted'] = $class['id'];
-                //to avoid this error, 
-                $promotedClass['promoted'] = [];
-                $promotedClass['promoted'][['class_name']] =  $class['class_name'];
-                $promotedClass['promoted']['class_id'] =  $class['id'];
+              
+                $promotedClass['promoted'][$class['class_name']] = $class['id'];
                 $defaultKlasses  = array_diff($defaultKlasses, [$class['id']]);
             } 
         }
