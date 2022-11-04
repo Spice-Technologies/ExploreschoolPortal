@@ -33,8 +33,9 @@ class KlassPromotionController extends Controller
         foreach ($classes as $key => $class) {
 
             if (in_array($class['id'], $defaultKlasses)) {
-              
+                        // pass the promoted ids and class name as keys below
                 $promotedClass['promoted'][$class['class_name']] = $class['id'];
+                        // remove the class (id) that has already being promoted from the final class collector arrary
                 $defaultKlasses  = array_diff($defaultKlasses, [$class['id']]);
             } 
         }
