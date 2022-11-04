@@ -19,17 +19,23 @@
                 <div class="form-group col-lg-5">
                     <label for="exampleFormControlSelect1">Select Class</label>
                     <select name="class_id" value="1" class="form-control" id="exampleFormControlSelect1">
-                        @foreach ($classes as $class)
-                            <option value="{{ $class->id }}"> {{ $class->class_name }}</option>
+                        @foreach ($classes as $key => $class)
+                            @if ($key == 'promoted')
+                                @foreach ($class as $k => $cla)
+                                    <option value="{{ $cla }}" disabled> {{ $k }} <i>-- Promoted </i></option>
+                                @endforeach
+                            @else
+                                <option value="{{ $class }}"> {{ $key }}</option>
+                            @endif
                         @endforeach
                     </select>
                 </div>
                 <div class="form-group col-lg-5">
                     <label for="exampleFormControlSelect1">Promte to ...</label>
                     <select name="sub_class_id" value="0" class="form-control" id="exampleFormControlSelect1">
-                        @foreach ($classes as $class)
-                            <option value="{{ $class->id }}"> {{ $class->class_name }}</option>
-                        @endforeach
+                        {{-- @foreach ($classes as $key => $class)
+                            <option value="{{ $class }}"> {{ $key }}</option>
+                        @endforeach --}}
                     </select>
                 </div>
                 <div class="col-2 ">

@@ -41,7 +41,7 @@ class KlassPromotionController extends Controller
         }
 
         $classes = array_merge($promotedClass, $defaultKlasses);
-        dd($classes);
+     
         return view('backend.promotion.klasspromotion.index', compact('classes'));
     }
 
