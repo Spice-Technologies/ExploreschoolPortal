@@ -28,20 +28,20 @@ class KlassPromotionController extends Controller
         )->get(['id', 'class_name'])->toArray();
 
         $promotedClass = [];
-        $defaultKlasses = ['Jss 1'=>1, 'Jss 2'=>2, 'Jss 3'=> 3, 'SSS 1'=>4, 'SSS 2'=>5, 'SSS 3'=>6];
+        $defaultKlasses = ['Jss 1' => 1, 'Jss 2' => 2, 'Jss 3' => 3, 'SSS 1' => 4, 'SSS 2' => 5, 'SSS 3' => 6];
         $ids = [];
         foreach ($classes as $key => $class) {
 
             if (in_array($class['id'], $defaultKlasses)) {
-                        // pass the promoted ids and class name as keys below
+                // pass the promoted ids and class name as keys below
                 $promotedClass['promoted'][$class['class_name']] = $class['id'];
-                        // remove the class (id) that has already being promoted from the final class collector arrary
+                // remove the class (id) that has already being promoted from the final class collector arrary
                 $defaultKlasses  = array_diff($defaultKlasses, [$class['id']]);
-            } 
+            }
         }
 
         $classes = array_merge($promotedClass, $defaultKlasses);
-     
+
         return view('backend.promotion.klasspromotion.index', compact('classes'));
     }
 
@@ -51,11 +51,22 @@ class KlassPromotionController extends Controller
         // dd($req->all());
         $req->validate([
 
-            'class_id' => 'required',
+            // 'class_id' => 'required',
 
-            // 'prev_class' => 'required',
-            // 'next_class' => 'required'
+            'current_class' => 'required',
+            'next_class' => 'required'
         ]);
+
+
+
+        if ($req->current_class == $req->next_class) {
+            return redirect()->route('promote.klass.index')->with('error', 'Current class and next class should not be the same!');
+            //check if the next class is greater than the current class by one. so they don't promote say from jss2 to ss1
+        } elseif ($req->current_class  >  $req->next_class) {
+            return redirect()->route('promote.klass.index')->with('error', 'You are demoting ! cos  next class is, ' . $req->next_class . ' is less than the current class ' . $req->current_class);
+        } elseif ($req->next_class != ($req->current_class + 1)) {
+            return redirect()->route('promote.klass.index')->with('error', 'You are trying to double promote! You are promoting 2x ahead of the current class. It should be 1x. Next class, ' . $req->next_class . ', should not be 2x ahead of current class, ' . $req->current_class);
+        }
 
         $student = new Student();
         // from the top of my head

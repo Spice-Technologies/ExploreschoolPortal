@@ -1,5 +1,15 @@
 @extends('layouts.app')
 @section('content')
+    @if (Session::has('error'))
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+            <span class="alert-text">{{ session('error') }}</span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+    @endif
     @if (session('msg'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             <span class="alert-icon"><i class="ni ni-like-2"></i></span>
@@ -18,11 +28,12 @@
             <div class="row">
                 <div class="form-group col-lg-5">
                     <label for="exampleFormControlSelect1">Select Class</label>
-                    <select name="class_id" value="1" class="form-control" id="exampleFormControlSelect1">
+                    <select name="current_class" value="1" class="form-control" id="exampleFormControlSelect1">
                         @foreach ($classes as $key => $class)
                             @if ($key == 'promoted')
                                 @foreach ($class as $k => $cla)
-                                    <option value="{{ $cla }}" disabled> {{ $k }} <span style="font-style: italic">-- Promoted </span> </option>
+                                    <option value="{{ $cla }}" disabled> {{ $k }} <span
+                                            style="font-style: italic">-- Promoted </span> </option>
                                 @endforeach
                             @else
                                 <option value="{{ $class }}"> {{ $key }}</option>
@@ -32,8 +43,8 @@
                 </div>
                 <div class="form-group col-lg-5">
                     <label for="exampleFormControlSelect1">Promte to ...</label>
-                    <select name="sub_class_id" value="0" class="form-control" id="exampleFormControlSelect1">
-                        <?php  array_shift($classes) ?>
+                    <select name="next_class" value="0" class="form-control" id="exampleFormControlSelect1">
+                        <?php array_shift($classes); ?>
                         @foreach ($classes as $key => $class)
                             <option value="{{ $class }}"> {{ $key }}</option>
                         @endforeach
