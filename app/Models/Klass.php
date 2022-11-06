@@ -41,7 +41,7 @@ class Klass extends Model
     {
         return $this->hasMany(Result::class, 'class_id');
     }
-
+        // get all classes; both the class that has been promoted and the one that has not been promoted 
     public static function getClass($currentSession, $currently_logged_admin_id)
     {
         $classes = self::whereHas(

@@ -62,9 +62,16 @@ class KlassPromotionController extends Controller
         $currentSession = Session::where('active', 1)->first();
 
         //I had to use the DB facade so that I can know the status of the update
-        $studentUpdate  = DB::table('students')->where('school_id', $school)->Where('session_id', '!=', $currentSession->id)->where('class_id', function($query){
-            dd($query->class_id);
-        })->update([
+
+        /** What this query is doing 
+         * make sure you are selecting from the student's table where the school admin belongs to the logged in admin
+         * Where the session is the current session (this is a major delimiter to decide whether to promte the student or not)
+         * /////TO avoid total error where the instead of promoting a class from say jss1 to jss 2, the app npw promotes or reasign student class say to sss1 or sss3 all in the attempt to use class promotion
+         * this where statement solves that ....It checks if the current class is less than the next_class and if the current class is same as the next class (here we just did minus 1...jsut study the code)
+         * the other aspect of inaccurate promotion or demotion is handle above 
+          * 
+        */
+        $studentUpdate  = DB::table('students')->where('school_id', $school)->Where('session_id', '!=', $currentSession->id)->where('class_id', '<', $req->next_class)->Where('class_id', ($req->next_class - 1))->update([
             'class_id' => $req->next_class,
             'current_session' =>  $currentSession->session,
             'session_id' => $currentSession->id
@@ -74,7 +81,7 @@ class KlassPromotionController extends Controller
             return redirect()->route('promote.klass.index')->with('msg', 'Klass promoted successfully');
         } else {
             $defaultKlasses = [1 => 'Jss 1', 2 => "Jss 2", 3 => 'Jss 3', 4 => 'SSS 1', 5 => 'SSS 2', 6 => 'SSS 3'];
-            return redirect()->route('promote.klass.index')->with('error', 'Unfortunately. You dont have any student in ' .  $defaultKlasses[$req->next_class]);
+            return redirect()->route('promote.klass.index')->with('error', 'Unfortunately. You dont have any student in ' .  $defaultKlasses[$req->current_class]);
         }
 
         // update([
