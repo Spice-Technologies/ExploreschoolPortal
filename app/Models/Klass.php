@@ -37,7 +37,34 @@ class Klass extends Model
         return $this->hasMany(SubKlass::class, 'class_id');
     }
 
-    public function result(){
+    public function result()
+    {
         return $this->hasMany(Result::class, 'class_id');
+    }
+
+    public static function getClass($currentSession, $currently_logged_admin_id)
+    {
+        $classes = self::whereHas(
+            'student',
+            function ($query) use ($currentSession, $currently_logged_admin_id) {
+                $query->where('session_id', $currentSession)->where('admin_id', $currently_logged_admin_id);
+            }
+        )->get(['id', 'class_name'])->toArray();
+
+        $promotedClass = [];
+        $defaultKlasses = ['Jss 1' => 1, 'Jss 2' => 2, 'Jss 3' => 3, 'SSS 1' => 4, 'SSS 2' => 5, 'SSS 3' => 6];
+       
+        foreach ($classes as $key => $class) {
+
+            if (in_array($class['id'], $defaultKlasses)) {
+                // pass the promoted ids and class name as keys below.
+                //tje way I appended this array tohae the class key should be printed on the sands of time 
+                $promotedClass['promoted'][$class['class_name']] = $class['id'];
+                // remove the class (id) that has already being promoted from the final class collector arrary
+                $defaultKlasses  = array_diff($defaultKlasses, [$class['id']]);
+            }
+        }
+
+        return $classes = array_merge($promotedClass, $defaultKlasses);
     }
 }
