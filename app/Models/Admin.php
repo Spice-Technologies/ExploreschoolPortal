@@ -35,6 +35,7 @@ class Admin extends Model
     //used to check the school admin belongs to..
 
     //duplicates: you should make the code below just one single function t
+    //the school admin belongs to
     public static function AdminSchool()
     {
         return  self::where('id', Auth::user()->admin->id)->first()->school;
@@ -56,6 +57,7 @@ class Admin extends Model
 
     //get current logged in  admin
 
+    //fetch all students under this same admin (same thing below)
     public function adminStudents()
     {
         return Auth::user()->admin->school->with('student', 'student.user')->get();

@@ -20,6 +20,7 @@ class Student extends Model
         'dateofbirth',
         'current_address',
         'current_session',
+        'graduate_status',
         'permanent_address',
         'state',
         'lga',

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\Models\Session;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PromotionController extends Controller
 {
@@ -14,41 +16,43 @@ class PromotionController extends Controller
         return view('backend.class.promote');
     }
 
-    public function promote(Request  $request)
+    public function promote()
+
     {
+
         //check if there are ss3 students and move them to a new table
         $Student = new Student();
 
+        $currentSession = Session::where('active', 1)->first();
         $adminOwnStudents = $Student->SchoolId(Admin::AdminSchool()->id)->get();
-        //fetch all the students in the class but based on the admin and school he belongs to before promoting them
+        //fetch all the students in the class but based on the admin and school he belongs to before promoting 
 
-        $adminOwnStudents->where('class_id', 6)->each(function ($finalist) {
-            $graduateStud = $finalist->replicate();
-            $graduateStud->setTable('graduates');
-            $graduateStud->save();
-            $finalist->delete(); //delete the student from the old tbale (student)
-        });
+        $massPromote = DB::table('students')->where('school_id', Admin::AdminSchool()->id)->where('session_id', '!=',  $currentSession->id)->where('graduate_status', '!=', true)->lazyById();
+        // this is approach is better otherway, I  could have use get() to get all the students first before updating them again to the DB--I believe it is not perfomance wise enough. 
+        //th place where I had to use   $query->class_id = $query->class_id + 1; is what saved me.
+        //when you want to think about it, assume that i used mass update ->update([]) method
+        //for what I know , it will be difficulut to get the class to add or pluss with 1
+        // dd($massPromote == true ? 'true' : 'false');
+        if ($massPromote) {
 
-        $matches = collect([1, 2, 3, 4, 5]);
+            //promote normal students...
+            $massPromote->each(function ($query) use ($currentSession) {
 
-        // $adminOwnStudents->where('class_id', 7)->each(function ($finalist) use ($matches) {
-        //     $finalist->class_id = $matches->shift();
-        //     $finalist->save();
-        // });
-
-        $adminOwnStudents->where('school_id', Admin::AdminSchool()->id)
-            ->whereIn('class_id', $matches)
-            ->each(function ($stClass) {
-                $stClass->class_id = $stClass->class_id + 1;
-                $stClass->save();
+                $query->class_id = $query->class_id + 1;
+                $query->current_session =   $currentSession->session;
+                $query->session_id = $currentSession->id;
+                $query->save();
             });
-        //$h->toSql(); using this to output raw sql queries
-        return redirect()->route('student.index')->with('msg', 'Students promoted successfully');
-    }
 
-    public function individualPromotionIndex()
-    {
-        return view('backend.promotion.promoteclass');
-
+            return redirect()->route('student.index')->with('msg', 'Students promoted successfully');
+        } else {
+            //promote graduate
+            $massPromote->update([
+                'graduate_status' => 1,
+                'current_session' =>  $currentSession->session,
+                'session_id' => $currentSession->id
+            ]);
+            return redirect()->route('student.index')->with('msg', 'Students promoted successfully');
+        }
     }
 }
