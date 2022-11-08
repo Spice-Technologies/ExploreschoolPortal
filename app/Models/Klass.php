@@ -39,11 +39,19 @@ class Klass extends Model
 
     public function result()
     {
+
         return $this->hasMany(Result::class, 'class_id');
     }
-        // get all classes; both the class that has been promoted and the one that has not been promoted 
+    // get graduates 
+
+
+
+    // get all classes; both the class that has been promoted and the one that has not been promoted 
     public static function getClass($currentSession, $currently_logged_admin_id)
     {
+        //list classes base on the condition students passes via whereHas()
+        //meanhwile this is not that okay performance wise, 
+        //read https://dev.to/othmane_nemli/laravel-wherehas-and-with-550o
         $classes = self::whereHas(
             'student',
             function ($query) use ($currentSession, $currently_logged_admin_id) {
@@ -53,7 +61,7 @@ class Klass extends Model
 
         $promotedClass = [];
         $defaultKlasses = ['Jss 1' => 1, 'Jss 2' => 2, 'Jss 3' => 3, 'SSS 1' => 4, 'SSS 2' => 5, 'SSS 3' => 6];
-       
+
         foreach ($classes as $key => $class) {
 
             if (in_array($class['id'], $defaultKlasses)) {
