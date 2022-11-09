@@ -47,6 +47,11 @@
                                         View Students
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('student.index') }}">
+                                        View Graduates
+                                    </a>
+                                </li>
 
                             </ul>
                         </li>
