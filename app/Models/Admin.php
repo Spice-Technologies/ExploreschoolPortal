@@ -47,7 +47,7 @@ class Admin extends Model
     //all the students under this  admin belongs to
     public static function admin_students()
     {
-        return  self::AdminSchool()->with('student')->first()->student;
+        return  self::AdminSchool()->with('student', 'student.user')->first()->student;
     }
 
 

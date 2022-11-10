@@ -32,7 +32,7 @@
                             <label for="exampleFormControlSelect1">Select Class</label>
                             <select name="class_id" value="1" class="form-control" id="exampleFormControlSelect1">
                                 {{-- @foreach ($classes as $class) --}}
-                                    <option value="{{ $class->id }}"> {{ $class->class_name }}</option>
+                                <option value=""> </option>
                                 {{-- @endforeach --}}
                             </select>
                         </div>
@@ -40,7 +40,7 @@
                             <label for="exampleFormControlSelect1">Select Sub Class</label>
                             <select name="sub_class_id" value="0" class="form-control" id="exampleFormControlSelect1">
                                 {{-- @foreach ($classes as $class) --}}
-                                    <option value="1">A</option>
+                                <option value="1">A</option>
                                 {{-- @endforeach --}}
                             </select>
                         </div>
@@ -115,7 +115,7 @@
                                         <td>
                                             <div class="d-flex align-items-center">
                                                 <span
-                                                    class="completio mr-2">{{ $studentClass->class->class_name ?? '' }}</span>
+                                                    class="completio mr-2">{{ $studentClass->class->class_name ?? 'Graduate' }}</span>
                                             </div>
                                         </td>
                                         <td>
@@ -124,7 +124,7 @@
                                                     class="completio mr-2">{{ $studentClass->studentPwd4AdminView ?? '' }}</span>
                                             </div>
                                         </td>
-                                                                                <td>
+                                        <td>
                                             <div class="d-flex align-items-center">
                                                 <span
                                                     class="completio mr-2">{{ $studentClass->studentPwd4AdminView ?? '' }}</span>
@@ -138,9 +138,16 @@
                                                     <i class="fas fa-ellipsis-v"></i>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                                    <a class="dropdown-item" href="#">Action</a>
-                                                    <a class="dropdown-item" href="#">Another action</a>
-                                                    <a class="dropdown-item" href="#">Something else here</a>
+                                                    <form id="my_form" method="post"
+                                                        action="{{ route('promote.individual.promote') }}">
+                                                        <a class="dropdown-item" href="javascript:{}"
+                                                            onclick="document.getElementById('my_form').submit();">
+                                                            Promote
+                                                            to
+                                                            {{ $defaultKlasses[$studentClass->class_id + 1] ?? 'Already a Graduate' }}
+
+                                                        </a>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </td>

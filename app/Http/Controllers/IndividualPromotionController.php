@@ -12,10 +12,10 @@ class IndividualPromotionController extends Controller
 {
     public function index()
     {
-
+        $defaultKlasses = [1 => 'Jss 1', 2 => "Jss 2", 3 => 'Jss 3', 4 => 'SSS 1', 5 => 'SSS 2', 6 => 'SSS 3'];
         $students = Admin::admin_students();
         // return every student in the school that the admin belongs to  
-        return view('backend.promotion.individual.index', compact('students'));
+        return view('backend.promotion.individual.index', compact('students', 'defaultKlasses'));
     }
 
     public function promote(Request $req)
