@@ -52,6 +52,6 @@ class PromotionController extends Controller
         });
 
 
-        return redirect()->route('student.index')->with('msg', 'Students promoted successfully');
+        return redirect()->route('promote.individual.index')->with('msg', 'Students promoted successfully');
     }
 }
