@@ -32,23 +32,27 @@ class Admin extends Model
         return $this->hasMany(Student::class, 'admin_id');
     }
 
-    //used to check the school admin belongs to..
-
-    //duplicates: you should make the code below just one single function t
-    //the school admin belongs to
-    public static function AdminSchool()
-    {
-        return  self::where('id', Auth::user()->admin->id)->first()->school;
-    }
 
     //currently logged in admin
     public static  function loggedInAdmin()
     {
-        return  static::where('id', Auth::user()->admin->id)->first();
+        return  self::where('id', Auth::user()->admin->id)->first();
+    }
+
+    //the school admin belongs to
+    public static function AdminSchool()
+    {
+        return  self::loggedInAdmin()->school;
+    }
+    //all the students under this  admin belongs to
+    public static function admin_students()
+    {
+        return  self::AdminSchool()->with('student')->first()->student;
     }
 
 
-    //fetch all students under this same admin
+
+    //fetch all students under this same admin update on 10-11-2022 : this is not true. it is not fetchin gthat 
 
     public function scopeStudents($query, $school_id)
     {

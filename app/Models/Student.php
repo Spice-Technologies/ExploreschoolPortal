@@ -57,6 +57,8 @@ class Student extends Model
         return $this->belongsTo(Admin::class, 'admin_id');
     }
 
+    // fetch all students under this currently logged in admin (with the school the admin is logged in to)
+
     //uisng dynamic scoping
     // used to get the school the student belong to
 
