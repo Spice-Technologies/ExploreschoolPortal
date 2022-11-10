@@ -1,6 +1,24 @@
 @extends('layouts.app')
 @section('content')
     <div class="col-xl-12 border-xl-1 mx-auto">
+        @if (Session::has('error'))
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+                <span class="alert-text">{{ session('error') }}</span>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
+        @if ($warning ?? '')
+            <div class="alert alert-dark alert-dismissible fade show" role="alert">
+                <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+                <span class="alert-text">{{ $warning ?? '' }}</span>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
         @if (session('msg'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 <span class="alert-icon"><i class="ni ni-like-2"></i></span>
@@ -59,9 +77,9 @@
                                     <th scope="col" class="sort" data-sort="status">Status</th>
                                     <th scope="col">Users</th>
                                     <th scope="col" class="sort" data-sort="completion">Class</th>
-                                    <th scope="col" class="sort" data-sort="completion">password</th>
+
                                     <th scope="col" class="sort" data-sort="completion">Year/Session</th>
-                                    <th scope="col"></th>
+                                    <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody class="list">
@@ -118,16 +136,10 @@
                                                     class="completio mr-2">{{ $studentClass->class->class_name ?? 'Graduate' }}</span>
                                             </div>
                                         </td>
+
                                         <td>
                                             <div class="d-flex align-items-center">
-                                                <span
-                                                    class="completio mr-2">{{ $studentClass->studentPwd4AdminView ?? '' }}</span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex align-items-center">
-                                                <span
-                                                    class="completio mr-2">{{ $studentClass->studentPwd4AdminView ?? '' }}</span>
+                                                <span class="completio mr-2">{{ $studentClass->current_session }}</span>
                                             </div>
                                         </td>
                                         <td class="text-right">
@@ -138,13 +150,21 @@
                                                     <i class="fas fa-ellipsis-v"></i>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                                    <form id="my_form" method="post"
+                                                    <form id="my_form{{ $studentClass->class_id }}" method="post"
                                                         action="{{ route('promote.individual.promote') }}">
+                                                        @csrf
+                                                        {{-- using the hidden input stuff is dangerous though  --}}
+
+                                                        <?php $class_to_promote = $defaultKlasses[$studentClass->class_id + 1] ?? 'Graduate'; ?>
+
+                                                        <input type="hidden" name="next_class_id"
+                                                            value="<?php echo $studentClass->class_id + 1; ?>">
                                                         <a class="dropdown-item" href="javascript:{}"
-                                                            onclick="document.getElementById('my_form').submit();">
+                                                            onclick="document.getElementById('my_form{{ $studentClass->class_id }}').submit();">
                                                             Promote
                                                             to
-                                                            {{ $defaultKlasses[$studentClass->class_id + 1] ?? 'Already a Graduate' }}
+
+                                                            {{ $class_to_promote ?? 'Already a Graduate' }}
 
                                                         </a>
                                                     </form>

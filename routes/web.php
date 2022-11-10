@@ -63,6 +63,7 @@ Route::group(['middleware' => ['auth', 'role:Admin']], function () {
 
     //individual Promotion
     Route::get('/promote/class/individual', [App\Http\Controllers\IndividualPromotionController::class, 'index'])->name('promote.individual.index');
+    
     Route::post('/promote/class/individual/submit', [App\Http\Controllers\IndividualPromotionController::class, 'promote'])->name('promote.individual.promote');
 
 

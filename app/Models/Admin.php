@@ -51,6 +51,15 @@ class Admin extends Model
     }
 
 
+    //all students that has not been promoted
+    /** trash !!! */
+    // public function scopeNonAdminPromotedStudents($query)
+    // {
+    //     $currentSession = Session::where('active', 1)->first();
+    //     // return  self::AdminSchool()->with('student', 'student.user')->where('current_session', '!=',$currentSession->id)->first();
+
+    //     return $query->where('school_id', self::AdminSchool()->id)->where('current_session',$currentSession->id)->toSql();
+    // }
 
     //fetch all students under this same admin update on 10-11-2022 : this is not true. it is not fetchin gthat 
 
@@ -98,4 +107,12 @@ class Admin extends Model
             return $query->where('school_id', $school_id);
         }
     */
+
+
+    //current session 
+
+    public static function current_session()
+    {
+        return Session::where('active', 1)->first();
+    }
 }
