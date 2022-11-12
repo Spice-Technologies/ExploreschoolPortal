@@ -70,11 +70,6 @@
                                         Add Class
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('promote.index') }}">
-                                        Promote class
-                                    </a>
-                                </li>
                             </ul>
                         </li>
                         <li class="nav-item nav-with-child">

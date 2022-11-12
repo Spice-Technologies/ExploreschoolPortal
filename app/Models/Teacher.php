@@ -30,6 +30,6 @@ class Teacher extends Model
 
     public function klasses()       
     {                                              //table             // FK class_id  PK teacher_id
-         return $this->belongsToMany(Klass::class, 'teacher_classes', 'class_id', 'teacher_id');
+         return $this->belongsToMany(Klass::class, 'teacher_classes', 'class_id', 'teacher_id')->withTimestamps();
     }
 }
