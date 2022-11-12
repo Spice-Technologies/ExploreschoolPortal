@@ -89,15 +89,15 @@
                             </a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">
+                            <a class="nav-link" href="#" role="button" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
                                 <i class="ni ni-bell-55"></i>
                             </a>
                             <div class="dropdown-menu dropdown-menu-xl  dropdown-menu-right  py-0 overflow-hidden">
                                 <!-- Dropdown header -->
                                 <div class="px-3 py-3">
-                                    <h6 class="text-sm text-muted m-0">You have <strong
-                                            class="text-primary">13</strong> notifications.</h6>
+                                    <h6 class="text-sm text-muted m-0">You have <strong class="text-primary">13</strong>
+                                        notifications.</h6>
                                 </div>
                                 <!-- List group -->
                                 <div class="list-group list-group-flush">
@@ -203,13 +203,14 @@
                                     </a>
                                 </div>
                                 <!-- View all -->
-                                <a href="#!" class="dropdown-item text-center text-primary font-weight-bold py-3">View
+                                <a href="#!"
+                                    class="dropdown-item text-center text-primary font-weight-bold py-3">View
                                     all</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">
+                            <a class="nav-link" href="#" role="button" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
                                 <i class="ni ni-ungroup"></i>
                             </a>
                             <div
@@ -347,6 +348,12 @@
     <script src="{{ asset('/assets/vendor/js-cookie/js.cookie.js') }}"></script>
     <script src=" {{ asset('/assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js') }} "></script>
     <script src=" {{ asset('/assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js') }}"></script>
+
+    <script>
+        $(".alert").delay(4000).slideUp(200, function() {
+            $(this).alert('close');
+        });
+    </script>
 
     <!-- Argon JS -->
 

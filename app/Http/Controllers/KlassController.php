@@ -53,18 +53,20 @@ class KlassController extends Controller
         $school_id = Admin::AdminSchool()->id;
         $formTeacher = Teacher::create([
             'admin_id' => $admin_id,
-            'f_teacher_name' => $request->name,
+            'name' => $request->f_teacher_name,
             'school_id' => $school_id,
         ]);
-        $formTeacher->adm
+
+
+        $formTeacher->klasses()->attach($admin_id);
 
         //this style of inserting to the elated table below works with create()) method but doesnt work with save()..I don't think it is something I want to check now, but we move...
-
-        $klass->subClasses()->create([
-            'subKlass_name' => $request->subclass,
-            'sub_class_description' => 'This subclass was created from ' . $request->class
-        ]);
-        return redirect()->route('class.index');
+        // I should deal with this subclasses later
+        // $klass->subClasses()->create([
+        //     'subKlass_name' => $request->subclass,
+        //     'sub_class_description' => 'This subclass was created from ' . $request->class
+        // ]);
+        return redirect()->route('class.create')->with('msg', "Classes were added successfully 🙂");
     }
 
     /**
