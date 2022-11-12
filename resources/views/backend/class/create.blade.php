@@ -61,12 +61,13 @@
                     <h6 class="heading-small text-muted mb-4">User information</h6>
 
                     <div class="row">
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label class="form-control-label">Class</label>
-                                <input type="text" name="class" class="form-control" placeholder="e.g JSS...">
-
-                            </div>
+                        <div class="form-group col-lg-6">
+                            <label for="exampleFormControlSelect1">Select Sub Class</label>
+                            <select name="class_id" value="0" class="form-control" id="exampleFormControlSelect1">
+                                @foreach ($classes as $class)
+                                    <option value="$class->id">{{ $class->class_name }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
@@ -74,7 +75,15 @@
                                 <input type="text" name="subclass" class="form-control" placeholder="e.g, 1A...">
                             </div>
                         </div>
-                        <div class="form-group col-lg-5">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-control-label">Form Teacher Name</label>
+                                <input type="text" name="f_teacher_name" class="form-control"
+                                    placeholder="e.g, Mrs. Agnes">
+                            </div>
+                        </div>
+
+                        <div class="form-group col-lg-6">
                             <label for="exampleFormControlTextarea1">Class Description</label>
                             <textarea class="form-control" name="class_desc" id="exampleFormControlTextarea1" rows="2"></textarea>
                             {{-- <div class="form-group col-lg-4">

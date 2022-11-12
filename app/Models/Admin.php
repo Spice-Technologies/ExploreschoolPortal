@@ -36,6 +36,8 @@ class Admin extends Model
     //currently logged in admin
     public static  function loggedInAdmin()
     {
+        // this could just be|
+        // return   Auth::user()->admin->id -- refactor!!!
         return  self::where('id', Auth::user()->admin->id)->first();
     }
 

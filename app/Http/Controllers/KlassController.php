@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\Klass;
 use App\Models\Student;
+use App\Models\Teacher;
 use Illuminate\Http\Request;
 
 class KlassController extends Controller
@@ -27,7 +29,8 @@ class KlassController extends Controller
      */
     public function create()
     {
-        return view('backend.class.create');
+        $classes = Klass::all();
+        return view('backend.class.create', compact('classes'));
     }
 
     /**
@@ -39,18 +42,21 @@ class KlassController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'class' => 'required|string|max:255',
+            'class_id' => 'required|string|max:255',
             'subclass'          => 'required|string|max:1',
+            'f_teacher_name' => 'required|string|max:45'
             // 'class_desc'    => 'required|string|max:255'
 
         ]);
 
-
-        $klass = Klass::create([
-            'class_name' => $request->class,
-            'class_description' => $request->class_desc,
-
+        $admin_id = Admin::loggedInAdmin()->id;
+        $school_id = Admin::AdminSchool()->id;
+        $formTeacher = Teacher::create([
+            'admin_id' => $admin_id,
+            'f_teacher_name' => $request->name,
+            'school_id' => $school_id,
         ]);
+        $formTeacher->adm
 
         //this style of inserting to the elated table below works with create()) method but doesnt work with save()..I don't think it is something I want to check now, but we move...
 

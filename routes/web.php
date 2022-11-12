@@ -63,7 +63,7 @@ Route::group(['middleware' => ['auth', 'role:Admin']], function () {
 
     //individual Promotion
     Route::get('/promote/class/individual', [App\Http\Controllers\IndividualPromotionController::class, 'index'])->name('promote.individual.index');
-    
+
     Route::post('/promote/class/individual/submit', [App\Http\Controllers\IndividualPromotionController::class, 'promote'])->name('promote.individual.promote');
 
 
@@ -86,6 +86,10 @@ Route::group(['middleware' => ['auth', 'role:Admin']], function () {
 
     //manage students
     Route::resource('/student', 'App\Http\Controllers\StudentController');
+
+    //graduates
+
+    Route::get('/graduates', [App\Http\Controllers\GraduateController::class, 'index'])->name('graduate');
 
     // manage class
     Route::resource('/class', 'App\Http\Controllers\KlassController');

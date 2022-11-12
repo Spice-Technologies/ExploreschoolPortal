@@ -28,19 +28,11 @@
                     <h6 class="heading-small text-muted mb-4">User information</h6>
 
                     <div class="row">
-                        <div class="form-group col-lg-5">
+                        <div class="form-group col-lg-10">
                             <label for="exampleFormControlSelect1">Select Class</label>
                             <select name="class_id" value="1" class="form-control" id="exampleFormControlSelect1">
-                                @foreach ($classes as $class)
-                                    <option value="{{ $class->id }}"> {{ $class->class_name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group col-lg-5">
-                            <label for="exampleFormControlSelect1">Select Sub Class</label>
-                            <select name="sub_class_id" value="0" class="form-control" id="exampleFormControlSelect1">
-                                @foreach ($classes as $class)
-                                    <option value="1">A</option>
+                                @foreach ($sessions as $session)
+                                    <option value="{{ $session->id }}">{{ $session->session }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -56,7 +48,7 @@
                                 <tr>
                                     <th scope="col" class="sort" data-sort="name">Name</th>
                                     <th scope="col" class="sort" data-sort="budget">Reg Number</th>
-                                    <th scope="col" class="sort" data-sort="status">Status</th>
+
                                     <th scope="col">Users</th>
                                     <th scope="col" class="sort" data-sort="completion">Class</th>
                                     <th scope="col" class="sort" data-sort="completion">password</th>
@@ -67,7 +59,7 @@
                             <tbody class="list">
 
 
-                                @foreach ($studentsClass as $studentClass)
+                                @foreach ($graduates as $graduate)
                                     <tr>
                                         <th scope="row">
                                             <div class="media align-items-center">
@@ -75,20 +67,12 @@
                                                     <img alt="Image placeholder" src="../../assets/img/theme/bootstrap.jpg">
                                                 </a>
                                                 <div class="media-body">
-                                                    <span
-                                                        class="name mb-0 text-sm">{{ $studentClass->user->name ?? '' }}</span>
+                                                    <span class="name mb-0 text-sm">{{ $graduate->user->name ?? '' }}</span>
                                                 </div>
                                             </div>
                                         </th>
                                         <td class="budget">
-                                            {{ $studentClass->reg_num }}
-                                        </td>
-                                        <td>
-                                            <span class="badge badge-dot mr-4">
-                                                <i class="bg-warning"></i>
-                                                <a href="{{ route('student.edit', $studentClass->id) }}"> <span
-                                                        class="status">edit</span> </a>
-                                            </span>
+                                            {{ $graduate->reg_num }}
                                         </td>
                                         <td>
                                             <div class="avatar-group">
@@ -115,26 +99,24 @@
                                         <td>
                                             <div class="d-flex align-items-center">
                                                 <span
-                                                    class="completio mr-2">{{ $studentClass->class->class_name ?? '' }}</span>
+                                                    class="completio mr-2">{{ $graduate->class->class_name ?? 'graduate' }}</span>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="d-flex align-items-center">
                                                 <span
-                                                    class="completio mr-2">{{ $studentClass->studentPwd4AdminView ?? '' }}</span>
+                                                    class="completio mr-2">{{ $graduate->studentPwd4AdminView ?? '' }}</span>
                                             </div>
                                         </td>
-                                                                                <td>
+                                        <td>
                                             <div class="d-flex align-items-center">
-                                                <span
-                                                    class="completio mr-2">{{ $studentClass->studentPwd4AdminView ?? '' }}</span>
+                                                <span class="completio mr-2">{{ $graduate->current_session }}</span>
                                             </div>
                                         </td>
                                         <td class="text-right">
                                             <div class="dropdown">
-                                                <a class="btn btn-sm btn-icon-only text-light" href="#"
-                                                    role="button" data-toggle="dropdown" aria-haspopup="true"
-                                                    aria-expanded="false">
+                                                <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
+                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     <i class="fas fa-ellipsis-v"></i>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">

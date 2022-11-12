@@ -16,7 +16,8 @@ class Klass extends Model
     protected $fillable  = [
         'class_name',
         'teacher_id', //I think we should not have this here but less see first 
-        'class_description'
+        'class_description',
+
 
         //use the same method you used for insereting stuff in student table via user model
         // find the jss class like JSS1 then attach the A, B, 1 
@@ -44,7 +45,10 @@ class Klass extends Model
     }
     // get graduates 
 
-
+    public function teacher()
+    {
+        return $this->belongsToMany(Teacher::class);
+    }
 
     // get all classes; both the class that has been promoted and the one that has not been promoted 
     public static function getClass($currentSession, $currently_logged_admin_id)

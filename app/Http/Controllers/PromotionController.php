@@ -51,7 +51,7 @@ class PromotionController extends Controller
                 ]);
         });
 
-
+        
         return redirect()->route('promote.individual.index')->with('msg', 'Students promoted successfully');
     }
 }

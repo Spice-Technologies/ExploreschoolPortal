@@ -116,7 +116,7 @@
                                         <td>
                                             <div class="d-flex align-items-center">
                                                 <span
-                                                    class="completio mr-2">{{ $studentClass->class->class_name ?? '' }}</span>
+                                                    class="completio mr-2">{{ $studentClass->class->class_name ?? 'Graduated' }}</span>
                                             </div>
                                         </td>
                                         <td>
