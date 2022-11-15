@@ -56,9 +56,9 @@ class KlassController extends Controller
             'name' => $request->f_teacher_name,
             'school_id' => $school_id,
         ]);
+       
 
-
-        $formTeacher->klasses()->attach($admin_id);
+        $formTeacher->klasses()->attach([$request->class_id, '0']);
 
         //this style of inserting to the elated table below works with create()) method but doesnt work with save()..I don't think it is something I want to check now, but we move...
         // I should deal with this subclasses later

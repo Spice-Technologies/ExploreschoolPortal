@@ -63,11 +63,18 @@ class adminSingleResult extends Controller
         //the query is suppose to have the admin  and the school it is trying to get
         //when the admin wants to upload to the db, the admin need to check for it too
         //improve this code (N + 1) queries
+
+        // handle alot of data
         $fetchStudent = Result::where('class_id', $r->class)->where('term_id', $r->term)->where('session_id', $r->session)->where('student_id', $r->student)->first();
+        //lets get the report card name details using the student model
+
+        $student_info = Student::with('class.teacher', 'user')->find($fetchStudent->student_id);
+    
+
 
         $finaleSingleCourseResult = $rus->get_single_result($r->class, $r->term, $r->session, $fetchStudent->student_id);
 
-        return view('backend.result.pdfsing', compact('fetchStudent', 'finaleSingleCourseResult'));
+        return view('backend.result.pdfsing', compact('fetchStudent', 'finaleSingleCourseResult', 'student_info'));
 
         // return $pdf->download('Single result.pdf');
     }

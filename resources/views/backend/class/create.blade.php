@@ -32,10 +32,10 @@
 
                     <div class="row">
                         <div class="form-group col-lg-6">
-                            <label for="exampleFormControlSelect1">Select Sub Class</label>
+                            <label for="exampleFormControlSelect1">Select Class</label>
                             <select name="class_id" value="0" class="form-control" id="exampleFormControlSelect1">
                                 @foreach ($classes as $class)
-                                    <option value="$class->id">{{ $class->class_name }}</option>
+                                    <option value="{{$class->id}}">{{ $class->class_name }}</option>
                                 @endforeach
                             </select>
                         </div>

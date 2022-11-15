@@ -43,11 +43,11 @@ class Klass extends Model
 
         return $this->hasMany(Result::class, 'class_id');
     }
-    // get graduates 
+
 
     public function teacher()
     {
-        return $this->belongsToMany(Teacher::class);
+        return $this->belongsToMany(Teacher::class, 'teacher_classes', 'class_id', 'teacher_id');
     }
 
     // get all classes; both the class that has been promoted and the one that has not been promoted 

@@ -14,8 +14,15 @@ class Session extends Model
     ];
 
 
-    public function pin() {
-        
+    public function pin()
+    {
+
         return $this->hasOne(Pin::class);
+    }
+
+    public function result()
+    {
+
+        return $this->hasMany(Result::class);
     }
 }

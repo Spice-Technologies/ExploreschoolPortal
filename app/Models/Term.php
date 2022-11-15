@@ -12,4 +12,8 @@ class Term extends Model
     protected $fillable = [
         'Term'
     ];
+
+    public function result(){
+        return $this->hasMany(Result::class);
+    }
 }

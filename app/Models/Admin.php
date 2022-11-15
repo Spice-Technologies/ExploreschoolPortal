@@ -109,9 +109,8 @@ class Admin extends Model
             return $query->where('school_id', $school_id);
         }
     */
+//teacher
 
-
-    //current session 
 
     public static function current_session()
     {

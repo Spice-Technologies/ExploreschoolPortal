@@ -37,10 +37,11 @@ class Result extends Model
     {
         return $this->hasOne(Klass::class);
     }
-
+    // result should not be related by one session
+    //sessions can have many results--refactor!
     public function session()
     {
-        return $this->hasOne(Session::class);
+        return $this->belongsTo(Session::class);
     }
 
 
@@ -52,12 +53,14 @@ class Result extends Model
 
     public function term()
     {
-        return $this->hasOne(Term::class);
+        return $this->belongsTo(Term::class);
     }
     public function subject()
     {
         return $this->belongsTo(Subject::class, 'subject_id');
     }
+
+
 
 
     public function getAllResult($session, $class, $term, $school)
@@ -175,10 +178,11 @@ class Result extends Model
     /*  This is the main SINGLE RESULT CALCULATOR */
     public function get_single_result($class, $term, $session, $student)
     {
-
+        // how am I making sure that this result is printed by the specific admin attached with this school ?
         //get all students --> basically orderBy subject name
-        $groupedSubPerSt =  $this->where('class_id', $class)->where('term_id', $term)->where('session_id', $session)->orderBy('total_score', 'DESC')->get()->groupBy('subject')->toArray();
+        $groupedSubPerSt =  $this->with('session', 'term')->where('class_id', $class)->where('term_id', $term)->where('session_id', $session)->orderBy('total_score', 'DESC')->get()->groupBy('subject')->toArray();
         // -----    
+
 
         foreach ($groupedSubPerSt as $key => $V) {
             //get total std per subject 
@@ -233,7 +237,7 @@ class Result extends Model
             }
         }
         // get single result...the main one getting the single result specifically
-        $finaleSingleCourseResult = []; 
+        $finaleSingleCourseResult = [];
         foreach ($groupedSubPerSt as $key => $value) {
             foreach ($value as $k => $v) {
                 //use isset to eliminate not set or integer error
@@ -243,9 +247,9 @@ class Result extends Model
                     $finaleSingleCourseResult[] = $v;
             }
         }
+        // dd($finaleSingleCourseResult);
 
         return $finaleSingleCourseResult;
     }
-
     /* End of the main SINGLE RESULT CALCULATOR */
 }
