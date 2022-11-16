@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link
 
 <style>
         /*!
@@ -22,6 +23,27 @@
 <body>
 
 <div class="container">
+
+    <div class="row justify-content-center">
+<div class="col-3">
+    <span>Name: </span>  Chidiebere 
+</div>
+<div class="col-3">
+    <span>Name: </span>  Chidiebere 
+</div><div class="co-3l">
+    <span>Name: </span>  Chidiebere 
+</div><div class="col">
+    <span>Name: </span>  Chidiebere 
+</div><div class="col">
+    <span>Name: </span>  Chidiebere 
+</div><div class="col">
+    <span>Name: </span>  Chidiebere 
+</div><div class="col">
+    <span>Name: </span>  Chidiebere 
+</div><div class="col">
+    <span>Name: </span>  Chidiebere 
+</div>
+    </div>
     <h2>Bordered Table</h2>
     <p>The .table-bordered class adds borders on all sides of the table and the cells:</p>            
     <table class="table table-bordered">
