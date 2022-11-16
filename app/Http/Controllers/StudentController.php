@@ -67,6 +67,7 @@ class StudentController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'class_id'          => 'required|numeric',
+            // add that checking if the 
         ]);
 
         //dd($request->all());

@@ -69,14 +69,15 @@ class adminSingleResult extends Controller
         //lets get the report card name details using the student model
 
         $student_info = Student::with('class.teacher', 'user')->find($fetchStudent->student_id);
-    
+
 
 
         $finaleSingleCourseResult = $rus->get_single_result($r->class, $r->term, $r->session, $fetchStudent->student_id);
+        // return view('backend.result.pdfsing', compact('fetchStudent', 'finaleSingleCourseResult', 'student_info'));
+        $pdf = PDF::loadView('backend.result.pdfsing', compact('fetchStudent', 'finaleSingleCourseResult', 'student_info'));
 
-        return view('backend.result.pdfsing', compact('fetchStudent', 'finaleSingleCourseResult', 'student_info'));
+        return $pdf->download('Single result.pdf');
 
-        // return $pdf->download('Single result.pdf');
     }
 
     public function store(Request $request)

@@ -28,10 +28,10 @@
 
     <script src="{{ asset('js/app.js') }}"></script>
 
-
+{{-- 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
         integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
 
 
 </head>
@@ -350,7 +350,7 @@
     <script src=" {{ asset('/assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js') }}"></script>
 
     <script>
-        $(".alert").delay(4000).slideUp(200, function() {
+        $(".alert").delay(200000).slideUp(200, function() {
             $(this).alert('close');
         });
     </script>
