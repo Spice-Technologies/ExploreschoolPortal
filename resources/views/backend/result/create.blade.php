@@ -17,6 +17,7 @@
             @elseif(session('success'))
                 <div class="alert alert-success">{{ session('success') }}</div>
             @endif
+            
             <form action="{{ route('Mresult.store') }}" method="POST">
                 @csrf
                 <h4> Select Session </h4>
