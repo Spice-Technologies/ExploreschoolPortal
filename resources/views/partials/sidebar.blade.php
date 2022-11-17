@@ -122,6 +122,18 @@
 
                             </ul>
                         </li>
+                        <li class="nav-item nav-with-child">
+                            <a class="nav-link ">
+                                <i class="ni ni-align-left-2 "></i> Settings
+                            </a>
+                            <ul class="nav-item-child">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('settings') }}">
+                                        School Info
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
                     @endrole
                 </ul>
             </div>

@@ -93,6 +93,9 @@ Route::group(['middleware' => ['auth', 'role:Admin']], function () {
 
     // manage class
     Route::resource('/class', 'App\Http\Controllers\KlassController');
+
+    // settings 
+    Route::get('/settings', [App\Http\Controllers\SettingsController::class, 'index'])->name('settings');
 });
 
 Route::group(['middleware' => ['auth', 'role:Student']], function () {
