@@ -70,31 +70,31 @@
                             </div>
                             <div class="form-group col-lg-3" style="border-right: 3px solid blue ">
                                 <label class="form-control-label" for="input-username">Phone Number</label>
-                                <input type="text" id="lname" value="{{ old('jss1Tel') }}" name="number[]"
+                                <input type="text" id="lname" value="{{ old('jss1Tel') }}" name="tel[]"
                                     class="form-control" placeholder="phone number ">
                             </div>
                             <div class="form-group col-lg-3">
 
                                 <label class="form-control-label" for="input-username"> Form Teacher</label>
-                                <input type="text" id="lname" value="{{ old('jss2') }}" name="name[]"
+                                <input type="text" id="lname" value="{{ old('jss2Name') }}" name="name[]"
                                     class="form-control" placeholder="jss 2 form teacher name ">
                             </div>
                             <div class="form-group col-lg-3">
 
                                 <label class="form-control-label" for="input-username">Phone Number</label>
-                                <input type="text" id="lname" value="{{ old('jss2') }}" name="number[]"
+                                <input type="text" id="lname" value="{{ old('jss2Tel') }}" name="tel[]"
                                     class="form-control" placeholder="phone number ">
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-lg-3">
                                 <label class="form-control-label" for="input-username">JSS 3</label>
-                                <input type="text" id="lname" value="{{ old('jss3') }}" name="name[]"
+                                <input type="text" id="lname" value="{{ old('jss3Name') }}" name="name[]"
                                     class="form-control" placeholder="jss 3 form teacher name ">
                             </div>
                             <div class="form-group col-lg-3" style="border-right: 3px solid blue ">
                                 <label class="form-control-label" for="input-username">JSS 3</label>
-                                <input type="text" id="lname" value="{{ old('jss3Tel') }}" name="number[]"
+                                <input type="text" id="lname" value="{{ old('jss3Tel') }}" name="tel[]"
                                     class="form-control" placeholder="phone number">
                             </div>
                             <div class="form-group col-lg-3">
@@ -106,7 +106,7 @@
                             <div class="form-group col-lg-3">
 
                                 <label class="form-control-label" for="input-username">SSS 1</label>
-                                <input type="text" id="lname" value="{{ old('ss1Tel') }}" name="number[]"
+                                <input type="text" id="lname" value="{{ old('ss1Tel') }}" name="tel[]"
                                     class="form-control" placeholder="phone number">
                             </div>
                         </div>
@@ -118,7 +118,7 @@
                             </div>
                             <div class="form-group col-lg-3"  style="border-right: 3px solid blue ">
                                 <label class="form-control-label" for="input-username">SSS 2</label>
-                                <input type="text" id="lname" value="{{ old('ss2Tel') }}" name="number[]"
+                                <input type="text" id="lname" value="{{ old('ss2Tel') }}" name="tel[]"
                                     class="form-control" placeholder="phone number ">
                             </div>
                             <div class="form-group col-lg-3">
@@ -129,7 +129,7 @@
                             <div class="form-group col-lg-3">
 
                                 <label class="form-control-label" for="input-username">SSS 3</label>
-                                <input type="number" id="lname" value="{{ old('ss3Tel') }}" name="number[]"
+                                <input type="number" id="lname" value="{{ old('ss3Tel') }}" name="tel[]"
                                     class="form-control" placeholder="phone number ">
                             </div>
                         </div>

@@ -57,7 +57,7 @@ class KlassController extends Controller
             'school_id' => $school_id,
         ]);
        
-
+        
         $formTeacher->klasses()->attach([$request->class_id, '0']);
 
         //this style of inserting to the elated table below works with create()) method but doesnt work with save()..I don't think it is something I want to check now, but we move...
