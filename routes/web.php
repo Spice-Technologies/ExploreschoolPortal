@@ -98,6 +98,9 @@ Route::group(['middleware' => ['auth', 'role:Admin']], function () {
     Route::get('/settings', [App\Http\Controllers\SettingsController::class, 'index'])->name('settings');
 
     Route::post('/settings/store', [App\Http\Controllers\SettingsController::class, 'store'])->name('settings.store');
+
+    // demotion
+    Route::post('/demote/action', [App\Http\Controllers\DemotionController::class, 'demote'])->name('demote.action');
 });
 
 Route::group(['middleware' => ['auth', 'role:Student']], function () {
