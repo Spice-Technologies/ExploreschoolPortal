@@ -96,6 +96,8 @@ Route::group(['middleware' => ['auth', 'role:Admin']], function () {
 
     // settings 
     Route::get('/settings', [App\Http\Controllers\SettingsController::class, 'index'])->name('settings');
+
+    Route::post('/settings/store', [App\Http\Controllers\SettingsController::class, 'store'])->name('settings.store');
 });
 
 Route::group(['middleware' => ['auth', 'role:Student']], function () {

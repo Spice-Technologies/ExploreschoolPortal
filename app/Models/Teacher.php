@@ -14,6 +14,7 @@ class Teacher extends Model
         'name',
         'admin_id',
         'school_id',
+        'number'
     ];
 
 
