@@ -96,6 +96,23 @@
                         </li>
                         <li class="nav-item nav-with-child">
                             <a class="nav-link ">
+                                <i class="ni ni-align-left-2 "></i> Demote
+                            </a>
+                            <ul class="nav-item-child">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('action.demote') }}">
+                                        Demoted Students
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('action.repromote') }}">
+                                        Repromote Students
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item nav-with-child">
+                            <a class="nav-link ">
                                 <i class="ni ni-align-left-2 "></i> Results
                             </a>
                             <ul class="nav-item-child">

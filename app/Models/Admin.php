@@ -111,7 +111,7 @@ class Admin extends Model
     */
 //teacher
 
-    public static function getcurrent_session()
+    public static function current_session()
     {
         return Session::where('active', 1)->first();
     }

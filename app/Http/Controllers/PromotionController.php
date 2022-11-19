@@ -29,7 +29,7 @@ class PromotionController extends Controller
         $adminOwnStudents = $Student->SchoolId(Admin::AdminSchool()->id)->get();
         //fetch all the students in the class but based on the admin and school he belongs to before promoting 
 
-        $massPromote = DB::table('students')->where('school_id', Admin::AdminSchool()->id)->where('session_id', '!=',  $currentSession->id)->where('class_id', '<=', 6)->lazyById();
+        $massPromote = DB::table('students')->where('school_id', Admin::AdminSchool()->id)->where('session_id', '!=',  $currentSession->id)->where('class_id', '<=', 6)->where('demote_status', 0)->lazyById();
         // this is approach is better otherway, I  could have use get() to get all the students first before updating them again to the DB--I believe it is not perfomance wise enough. 
         //th place where I had to use   $query->class_id = $query->class_id + 1; is what saved me.
         //when you want to think about it, assume that i used mass update ->update([]) method

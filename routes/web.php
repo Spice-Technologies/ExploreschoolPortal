@@ -99,8 +99,12 @@ Route::group(['middleware' => ['auth', 'role:Admin']], function () {
 
     Route::post('/settings/store', [App\Http\Controllers\SettingsController::class, 'store'])->name('settings.store');
 
-    // demotion
-    Route::post('/demote/action', [App\Http\Controllers\DemotionController::class, 'demote'])->name('demote.action');
+    // demote
+    Route::get('/action/demote', [App\Http\Controllers\DemotionController::class, 'demoteIndex'])->name('action.demote');
+    //repromote
+    Route::get('/action/repromote', [App\Http\Controllers\DemotionController::class, 'repromoteIndex'])->name('action.repromote');
+
+    Route::post('/demote/action', [App\Http\Controllers\DemotionController::class, 'action'])->name('demote.action');
 });
 
 Route::group(['middleware' => ['auth', 'role:Student']], function () {
