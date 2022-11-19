@@ -2,7 +2,7 @@
 @section('content')
     <div class="col-xl-12 border-xl-1 mx-auto">
         @if (session('msg'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <div class="alert alert-dark alert-dismissible fade show" role="alert">
                 <span class="alert-icon"><i class="ni ni-like-2"></i></span>
                 <span class="alert-text">{{ session('msg') }}</span>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
