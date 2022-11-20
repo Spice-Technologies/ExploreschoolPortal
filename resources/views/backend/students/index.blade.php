@@ -68,10 +68,6 @@
                                     </tr>
                                 </thead>
                                 <tbody class="list">
-
-                                    <div class="col-2 ">
-                                        <button type="submit" class="btn btn-primary mt-md-4">Fetch Result</button>
-                                    </div>
                                     @foreach ($studentsClass as $studentClass)
                                         <tr>
                                             <th scope="row">

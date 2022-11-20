@@ -14,9 +14,9 @@
                             <div class="alert alert-danger">{{ session('msg') }}</div>
                         @elseif(session('success'))
                             <div class="alert alert-success">{{ session('success') }}</div>
-                            @en
+                        @endif
 
-                            <h3 class="mb-0">Create Student Details </h3>
+                        <h3 class="mb-0">Create Student Details </h3>
                     </div>
                     <div class="col-4 text-right">
                         <a href="#!" class="btn btn-sm btn-primary">Upload Excel File</a>
