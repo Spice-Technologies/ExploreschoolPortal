@@ -20,6 +20,7 @@ class StudentImport implements ToModel, WithHeadingRow
             'class_id' =>  $row['class_id'],
             'SubKlass_id' => $row['subclass_id'],
             'school_id' =>  1,
+            
             'admin_id' =>  1,
             'gender' => $row['gender'],
             'dateofbirth' => $row['dateofbirth'],
