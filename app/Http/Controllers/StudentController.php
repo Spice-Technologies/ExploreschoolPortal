@@ -29,7 +29,7 @@ class StudentController extends Controller
      */
     public function index(Request $req)
     {
-      
+
         if ($req->has('class_id')) {
             // dd($req->all());
             //if you use get(), you may not always have your errors thrown but try to be more specific with something like first() as away to debug your code
@@ -119,6 +119,10 @@ class StudentController extends Controller
             'permanent_address' => $request->permanent_address,
             'school_id' => Admin::AdminSchool()->id, //check the admin model to see how this is working 
             'studentPwd4AdminView' => $stPwd[0],
+            'admin_id' => Admin::loggedInAdmin()->id,
+            'graduate_status' => 0,
+            'session_id' => Admin::current_session()->id,
+            'current_session' => Admin::current_session()->session
         ]);
 
         $user->assignRole('Student');

@@ -19,7 +19,7 @@
                         <h3 class="mb-0">Create Student Details </h3>
                     </div>
                     <div class="col-4 text-right">
-                        <a href="#!" class="btn btn-sm btn-primary">Upload Excel File</a>
+                        <a href="{{ route('student.csv.index') }}" class="btn btn-sm btn-primary">Upload Excel File</a>
                     </div>
                 </div>
             </div>

@@ -18,6 +18,7 @@ class ResultsImport implements ToCollection
 
     private $studentInfor = [];
 
+
     public function __construct($class, $term, $session, $school)
     {
         $this->class = $class;

@@ -1,9 +1,10 @@
 <?php
+
 namespace App\Functions;
 
 class Functions
 {
-    function secure_random_string($length)
+    public  function secure_random_string($length)
     {
         $random_string = '';
         for ($i = 0; $i < $length; $i++) {
@@ -11,9 +12,7 @@ class Functions
             $character = base_convert($number, 10, 36);
             $random_string .= $character;
         }
-    
+
         return $random_string;
     }
-    
-
 }
