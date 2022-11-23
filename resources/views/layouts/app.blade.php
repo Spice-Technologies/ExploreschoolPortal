@@ -34,7 +34,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
 
     <style>
-    
+
     </style>
 
 </head>
@@ -362,6 +362,19 @@
 
     {{-- <script type="text/javascript" src="html2canvas.js"></script> --}}
     <script src="{{ asset('/assets/js/argon.js?v=1.2.0') }}"></script>
+
+    <script type="text/javascript">
+        $('[data-hidden-value] ').on('click', function() {
+
+            var
+                $wrapper = $(this),
+                $display = $wrapper.find('.display'),
+                revealed = $wrapper.data('revealed'),
+                hiddenValue = String($wrapper.data('hidden-value'));
+            $display.html(revealed ? hiddenValue.replace(/./g, '*') : hiddenValue);
+            $wrapper.data('revealed', !revealed);
+        });
+    </script>
 
 </body>
 

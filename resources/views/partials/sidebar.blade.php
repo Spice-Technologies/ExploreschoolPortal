@@ -101,7 +101,7 @@
                             <ul class="nav-item-child">
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('action.demote') }}">
-                                        Demoted Students
+                                        Demote Students
                                     </a>
                                 </li>
                                 <li class="nav-item">

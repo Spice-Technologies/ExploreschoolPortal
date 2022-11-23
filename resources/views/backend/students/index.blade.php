@@ -127,7 +127,10 @@
                                             <td>
                                                 <div class="d-flex align-items-center">
                                                     <span
-                                                        class="completio mr-2">{{ $studentClass->studentPwd4AdminView ?? '' }}</span>
+                                                        data-hidden-value="{{ $studentClass->studentPwd4AdminView ?? '' }}">
+                                                        <span class="display completio mr-2" style="cursor: pointer">********</span>
+                                                    </span>
+
                                                 </div>
                                             </td>
                                             <td class="text-right">
