@@ -75,10 +75,10 @@ class StudentController extends Controller
         //dd($request->all());
         // $request->email = "admin@explore.com"; 
 
-        function secure_random_string($length)
+        function secure_random_string()
         {
             $random_string = '';
-            for ($i = 0; $i < $length; $i++) {
+            for ($i = 0; $i < 5; $i++) {
                 $number = random_int(0, 36);
                 $character = base_convert($number, 10, 36);
                 $random_string .= $character;
@@ -88,11 +88,12 @@ class StudentController extends Controller
         }
 
         //echo secure_random_string(5);
-        $stPwd = [secure_random_string(5)];
+        $stPwd = secure_random_string();
+        
         $user = User::create([
             'name' => $request->name,
 
-            'password' => $request->password = Hash::make($stPwd[0]),
+            'password' => $request->password = Hash::make($stPwd), // whats the use of $request->pasword again ? 
         ]);
         // this is how the user_id value in the students model is being inserted  
 
@@ -108,7 +109,7 @@ class StudentController extends Controller
         // refactor this code with the fill() method, chidi 
         $user->student()->create([
             'class_id' => $request->class_id,
-            'parent_id' => 1,
+            // 'parent_id' => 1,
             'SubKlass_id' => $request->Sub_Class_id,
             'gender' => $request->gender,
             'dateofbirth' => $request->dateofbirth,
@@ -118,7 +119,7 @@ class StudentController extends Controller
             'current_address' => $request->current_address,
             'permanent_address' => $request->permanent_address,
             'school_id' => Admin::AdminSchool()->id, //check the admin model to see how this is working 
-            'studentPwd4AdminView' => $stPwd[0],
+            'studentP$this->randomStringForPasswordwd4AdminView' => $stPwd,
             'admin_id' => Admin::loggedInAdmin()->id,
             'graduate_status' => 0,
             'session_id' => Admin::current_session()->id,
@@ -127,9 +128,9 @@ class StudentController extends Controller
 
         $user->assignRole('Student');
         $user->student->reg_num = reg_number($user->student->id);
-        $user->student->save();
+        $user->student->save(); // why am I double savig? asking myself this question after about 7 months later ?
         $user->email = reg_number($user->student->id);
-        $user->save();
+        $user->save(); // ? nwhy ?chidi  ? 
         return redirect()->route('student.index');
     }
     //so cards can be used to login but validates depending on the number of times used...if the students buys new card, the card login will be changed

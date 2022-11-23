@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Traits\HasRoles;
 
 class Student extends Model
 {
-    use HasFactory;
+    use HasFactory, HasRoles;
 
     protected $fillable = [
         'user_id',
@@ -30,6 +31,8 @@ class Student extends Model
         'admin_id',
         'studentPwd4AdminView'
     ];
+
+    protected $dates = ['dateofbirth'];
 
     public function user()
     {

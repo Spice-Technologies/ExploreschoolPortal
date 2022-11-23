@@ -86,7 +86,7 @@ Route::group(['middleware' => ['auth', 'role:Admin']], function () {
 
     //manage students
     Route::resource('/student', 'App\Http\Controllers\StudentController');
-    Route::post('/students/add/csv', [App\Http\Controllers\CsvStudentController::class, 'save'])->name('student.add.csv');
+    Route::post('/students/add/csv', [App\Http\Controllers\CsvStudentController::class, 'store'])->name('student.add.csv');
 
     Route::get('/students/csv', [App\Http\Controllers\CsvStudentController::class, 'index'])->name('student.csv.index');
     //graduates

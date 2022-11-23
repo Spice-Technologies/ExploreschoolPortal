@@ -27,6 +27,7 @@ class ResultController extends Controller
 
     public function importResult(Request $request)
     {
+
         $class = $request->class_id;
         $session = $request->session_id;
         $term =  $request->term_id;
