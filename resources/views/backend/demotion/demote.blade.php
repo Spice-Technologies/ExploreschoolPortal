@@ -45,7 +45,7 @@
                                         <th scope="col" class="sort" data-sort="name">Name</th>
                                         <th scope="col" class="sort" data-sort="budget">Reg Number</th>
                                         <th scope="col" class="sort" data-sort="status">Status</th>
-                                        <th scope="col">Users</th>
+                                        {{-- <th scope="col">Users</th> --}}
                                         <th scope="col" class="sort" data-sort="completion">Class</th>
                                         <th scope="col" class="sort" data-sort="completion">password</th>
 
@@ -81,31 +81,7 @@
                                                             class="status">edit</span> </a>
                                                 </span>
                                             </td>
-                                            <td>
-                                                <div class="avatar-group">
-                                                    <a href="#" class="avatar avatar-sm rounded-circle"
-                                                        data-toggle="tooltip" data-original-title="Ryan Tompson">
-                                                        <img alt="Image placeholder"
-                                                            src="../../assets/img/theme/team-1.jpg">
-                                                    </a>
-                                                    <a href="#" class="avatar avatar-sm rounded-circle"
-                                                        data-toggle="tooltip" data-original-title="Romina Hadid">
-                                                        <img alt="Image placeholder"
-                                                            src="../../assets/img/theme/team-2.jpg">
-                                                    </a>
-                                                    <a href="#" class="avatar avatar-sm rounded-circle"
-                                                        data-toggle="tooltip" data-original-title="Alexander Smith">
-                                                        <img alt="Image placeholder"
-                                                            src="../../assets/img/theme/team-3.jpg">
-                                                    </a>
-                                                    <a href="#" class="avatar avatar-sm rounded-circle"
-                                                        data-toggle="tooltip" data-original-title="Jessica Doe">
-                                                        <img alt="Image placeholder"
-                                                            src="{{ asset('assets/img/theme/team-4.jpg') }}">
-                                                    </a>
-                                                </div>
-
-                                            </td>
+                                         
                                             <td>
                                                 <div class="d-flex align-items-center">
                                                     <span

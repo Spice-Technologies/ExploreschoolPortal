@@ -18,7 +18,7 @@ class IndividualPromotionController extends Controller
         $defaultKlasses = [1 => 'Jss 1', 2 => "Jss 2", 3 => 'Jss 3', 4 => 'SSS 1', 5 => 'SSS 2', 6 => 'SSS 3'];
         $currentSession = Admin::current_session();
 
-        $students = Admin::admin_students()->where('session_id', '!=', $currentSession->id)->where('class_id', '!=', 7)->orWhereExist('demote_status', 0);
+        $students = Admin::admin_students()->where('session_id', '!=', $currentSession->id)->where('class_id', '!=', 7);
 
         if (count($students) < 1) {
 

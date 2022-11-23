@@ -60,7 +60,7 @@
                                         <th scope="col" class="sort" data-sort="name">Name</th>
                                         <th scope="col" class="sort" data-sort="budget">Reg Number</th>
                                         <th scope="col" class="sort" data-sort="status">Status</th>
-                                        <th scope="col">Users</th>
+                                        {{-- <th scope="col">Users</th> --}}
                                         <th scope="col" class="sort" data-sort="completion">Class</th>
                                         <th scope="col" class="sort" data-sort="completion">password</th>
 
@@ -72,11 +72,11 @@
                                         <tr>
                                             <th scope="row">
                                                 <div class="media align-items-center">
-                                                    <label class="custom-toggle mr-4">
+                                                    {{-- <label class="custom-toggle mr-4">
                                                         <input type="checkbox" name="chekId[]" value="{{$studentClass->id}}">
                                                         <span class="custom-toggle-slider rounded-circle" data-label-off=""
                                                             data-label-on=""></span>
-                                                    </label>
+                                                    </label> --}}
                                                     <div class="media-body">
                                                         <span
                                                             class="name mb-0 text-sm">{{ $studentClass->user->name ?? '' }}</span>
@@ -93,7 +93,7 @@
                                                             class="status">edit</span> </a>
                                                 </span>
                                             </td>
-                                            <td>
+                                            {{-- <td>
                                                 <div class="avatar-group">
                                                     <a href="#" class="avatar avatar-sm rounded-circle"
                                                         data-toggle="tooltip" data-original-title="Ryan Tompson">
@@ -117,7 +117,7 @@
                                                     </a>
                                                 </div>
 
-                                            </td>
+                                            </td> --}}
                                             <td>
                                                 <div class="d-flex align-items-center">
                                                     <span
