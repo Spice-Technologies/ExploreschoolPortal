@@ -32,7 +32,7 @@
                
                         <div class="col-5 mx-auto">
 
-                            <button type="submit" class="btn btn-danger mt-md-4" style="width: inherit;">Demote Selected Students</button>
+                            <button type="submit" class="btn btn-danger mt-md-4" style="width: inherit;" onclick="return confirm('👋 Warning.. You are about to demote the following students. Are you sure about this ?')">Demote Selected Students</button>
                             <input type="hidden" name="demote" value="demote">
 
                         </div>
@@ -47,7 +47,7 @@
                                         <th scope="col" class="sort" data-sort="status">Status</th>
                                         {{-- <th scope="col">Users</th> --}}
                                         <th scope="col" class="sort" data-sort="completion">Class</th>
-                                        <th scope="col" class="sort" data-sort="completion">password</th>
+                                      
 
                                         <th scope="col"></th>
                                     </tr>
@@ -88,12 +88,7 @@
                                                         class="completio mr-2">{{ $studentClass->class->class_name ?? 'Graduated' }}</span>
                                                 </div>
                                             </td>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <span
-                                                        class="completio mr-2">{{ $studentClass->studentPwd4AdminView ?? '' }}</span>
-                                                </div>
-                                            </td>
+                                            
                                             <td class="text-right">
                                                 <div class="dropdown">
                                                     <a class="btn btn-sm btn-icon-only text-light" href="#"

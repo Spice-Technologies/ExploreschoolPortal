@@ -35,7 +35,9 @@
                     <label class="custom-file-label" for="customFileLang">Select file</label>
                 </div>
                 <div class="text-left mt-4">
-                    <button type="submit" class="btn btn-primary">Import Result</button>
+                    <button type="submit" class="btn btn-primary"
+                        onclick="return confirm('Warning! Please ensure that the class you selected is the 👇👇👇 actual class you want to import students from ?  ');">Import
+                        Result</button>
                 </div>
             </form>
         </div>
