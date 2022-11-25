@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 use PhpOffice\PhpSpreadsheet\Calculation\Statistical\Averages;
 use Prophecy\Promise\ReturnPromise;
 use Symfony\Component\CssSelector\Node\FunctionNode;
@@ -214,7 +215,7 @@ class Result extends Model
                     return $remarks[$grade][$keys];
                 };
 
-                // calculate the grade 
+                // determine the grade 
                 $totalScore = $v['total_score'];
                 switch ($totalScore) {
 
@@ -252,4 +253,16 @@ class Result extends Model
         return $finaleSingleCourseResult;
     }
     /* End of the main SINGLE RESULT CALCULATOR */
+
+
+    public function yearlyResult($term = 1, $session = 1, $class = 1)
+    {
+        //group by session 
+        // because student can't have more than 3 result per session...so yearl basically means 1st term, 2nd term, 3rd term for, e.g, 2021/2022 session
+        //query: select all from students table where class = class, session == session, student_id == student group by term 
+
+        $student = DB::table('results')->where('term_id', $term)->where('class_id', $class)->session('session_id', $session)->where('school_id', Admin::AdminSchool()->id)->toSql();
+
+        return $student;
+    }
 }

@@ -89,6 +89,7 @@ class StudentController extends Controller
 
         //echo secure_random_string(5);
         $stPwd = secure_random_string();
+        // dd($stPwd);
         
         $user = User::create([
             'name' => $request->name,
@@ -119,7 +120,7 @@ class StudentController extends Controller
             'current_address' => $request->current_address,
             'permanent_address' => $request->permanent_address,
             'school_id' => Admin::AdminSchool()->id, //check the admin model to see how this is working 
-            'studentP$this->randomStringForPasswordwd4AdminView' => $stPwd,
+            'studentPwd4AdminView' => $stPwd,
             'admin_id' => Admin::loggedInAdmin()->id,
             'graduate_status' => 0,
             'session_id' => Admin::current_session()->id,

@@ -80,8 +80,15 @@ Route::group(['middleware' => ['auth', 'role:Admin']], function () {
     Route::resource('/admin/master/Mresult', 'App\Http\Controllers\AdminResultController');
 
     // admin prinitng of single sheet result 
-    Route::resource('/admin/master/Sresult', 'App\Http\Controllers\adminSingleResult');
-    Route::get('/admin/result/Sresult', [App\Http\Controllers\adminSingleResult::class, 'showResult'])->name('result.singleResult');
+    Route::resource('/admin/master/Sresult', 'App\Http\Controllers\adminSingleResultController');
+    Route::get('/admin/result/Sresult', [App\Http\Controllers\adminSingleResultController::class, 'showResult'])->name('result.singleResult');
+
+    // yearly termly result 
+
+    Route::get('/admin/result/yearly', [App\Http\Controllers\YearlyResultController::class, 'index'])->name('result.yearly');
+
+    Route::post('/admin/result/yearly/print', [App\Http\Controllers\YearlyResultController::class, 'print'])->name('result.yearly.print');
+
     // end print result 
 
     //manage students

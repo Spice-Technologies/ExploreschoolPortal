@@ -11,7 +11,7 @@ use App\Models\Term;
 use Illuminate\Http\Request;
 use PDF;
 
-class adminSingleResult extends Controller
+class adminSingleResultController extends Controller
 {
     /**
      * Display a listing of the resource.
