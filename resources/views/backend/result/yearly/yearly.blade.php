@@ -19,7 +19,8 @@
             @endif
 
             <a href="{{ route('Sresult.index') }}"> Print Yearly Result </a>
-            <form action="{{ route('result.yearly.print') }}" method="GET">
+            <form action="{{ route('result.yearly.print') }}" method="POST">
+                @csrf
 
                 <h4> Select Session </h4>
                 <div class="form-group">

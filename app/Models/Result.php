@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use PhpOffice\PhpSpreadsheet\Calculation\Statistical\Averages;
 use Prophecy\Promise\ReturnPromise;
@@ -199,9 +200,10 @@ class Result extends Model
 
                 // position
                 // how did I calcualte this position ???---- asked on 18-10-2022 --- ???
-                // it is from the 'order_by() method. I ordered the array by total_score..cos in reality, the higher the total score, the hire the average. So by default, the avergae is detected already but I just have to use the key ($vkey + 1) then append the position
+                // it is from the 'order_by() method. I ordered the array by total_score..cos in reality, the higher the total score, the higher the average. So by default, the avergae is detected already but I just have to use the key ($vkey + 1) then append the position
                 $groupedSubPerSt[$key][$vkey]['position'] =  $vkey + 1;
-                //named function that i can use within this function so as to avoid the use of $this->getGradeRemark
+
+                //named function that i can use within this function so as to avoid the use of $this->getGradeRemark 👇👇👇
 
                 $getGradeRemark = function (string $grade) {
                     $remarks =
@@ -237,7 +239,9 @@ class Result extends Model
                 }
             }
         }
-        // get single result...the main one getting the single result specifically
+        // we needed to fetch all students so we can determine the average, position in class etc, to properly calculate for a single student 
+        // so this below  👇 will get single result...the main one getting the single result specifically
+
         $finaleSingleCourseResult = [];
         foreach ($groupedSubPerSt as $key => $value) {
             foreach ($value as $k => $v) {
@@ -254,15 +258,54 @@ class Result extends Model
     }
     /* End of the main SINGLE RESULT CALCULATOR */
 
-
-    public function yearlyResult($term = 1, $session = 1, $class = 1)
+    public function yearlyResult($session = 1, $class = 1, $student_id = 1)
     {
         //group by session 
         // because student can't have more than 3 result per session...so yearl basically means 1st term, 2nd term, 3rd term for, e.g, 2021/2022 session
         //query: select all from students table where class = class, session == session, student_id == student group by term 
+        //select * from `results` where `term_id` = 
 
-        $student = DB::table('results')->where('term_id', $term)->where('class_id', $class)->session('session_id', $session)->where('school_id', Admin::AdminSchool()->id)->toSql();
 
-        return $student;
+        $finalYearlResult = [];
+        $student = DB::table('results')->where('class_id', $class)->where('session_id', $session)->where('school_id', Admin::AdminSchool()->id)->where('student_id', $student_id)->get()->groupBy(['term_id']);
+        // dump($student);
+        $noOfTerms = count($student);
+        $terms = [1, 2, 3];
+        //how do I know when I'm working with a particular term ?
+        foreach ($student as $term => $value) {
+            //  dump($value->groupBy('subject'));
+            $val = $value->toArray();
+
+            foreach ($val as $k => $v) {
+
+                if ($c = collect($val[$k])->contains($val[$k]->subject)) {
+                    dump($val[$k]->subject);
+                }
+            }
+            // $valueActualNumber = count($value) - 1;
+
+
+
+            // dd($student[$term][0]);
+            //  dd( $value->groupBy('subject')->toArray() );
+            //             for ($i = 0; $i <  $valueActualNumber; $i++) {
+            //                 foreach ($loop = $value->groupBy('subject')->toArray() as $k => $v) {
+            //                     //consider the term right here 
+            // dump($loop);
+            //                     $student[$term][$k] = $student[$term][$valueActualNumber] ?? '';
+            //                     unset( $student[$term][$valueActualNumber]);
+
+            //                     dump($student[$term]);
+            //                     break;
+            //                 }
+            //             }
+
+            //loop the above 
+            // I will need to target the term
+            // I will also need to target the particular subject
+            // then calucluate the total bearing in mind their respective terms
+
+            //i will loop , then attach base on key (i.e subject) 
+        }
     }
 }
