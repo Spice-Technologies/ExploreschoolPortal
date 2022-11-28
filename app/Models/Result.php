@@ -267,45 +267,52 @@ class Result extends Model
 
 
         $finalYearlResult = [];
-        $student = DB::table('results')->where('class_id', $class)->where('session_id', $session)->where('school_id', Admin::AdminSchool()->id)->where('student_id', $student_id)->get()->groupBy(['term_id']);
+        $student = DB::table('results')->where('class_id', $class)->where('session_id', $session)->where('school_id', Admin::AdminSchool()->id)->where('student_id', $student_id)->get()->groupBy(['term_id'])->toArray();
+
         // dump($student);
         $noOfTerms = count($student);
         $terms = [1, 2, 3];
         //how do I know when I'm working with a particular term ?
+        $bob = [];
+        $stud = '';
+        $firstTotal = '';
         foreach ($student as $term => $value) {
-            //  dump($value->groupBy('subject'));
-            $val = $value->toArray();
+            // sinc I know the number of terms i'm expecting, why not just be abit loose witht the logic ?
+            foreach ($value as $key => $subjects) {
+                $bob[$subjects->subject]['total'] = $subjects->total_score + ($bob[$subjects->subject]['total'] ?? 0);
+                $bob[$subjects->subject]['term'][] = $subjects->term_id;
+                $bob[$subjects->subject]['average'] = $bob[$subjects->subject]['total'] / count($bob[$subjects->subject]['term']);
 
-            foreach ($val as $k => $v) {
+                $totalScore =  $bob[$subjects->subject]['average'];
+                switch ($totalScore) {
 
-                if ($c = collect($val[$k])->contains($val[$k]->subject)) {
-                    dump($val[$k]->subject);
+                    case  $totalScore >= 70 and  $totalScore <= 100:
+                        $bob[$subjects->subject]['grade'] = 'A';
+                        // $groupedSubPerSt[$key][$vkey]['gradeRemark'] = $getGradeRemark('A');
+                        break;
+                    case  $totalScore >= 60 and  $totalScore <= 69:
+                        $bob[$subjects->subject]['grade'] = 'B';
+                        // $groupedSubPerSt[$key][$vkey]['gradeRemark'] = $getGradeRemark('B');
+                        break;
+                    case  $totalScore >= 59 and  $totalScore <= 50:
+                        $bob[$subjects->subject]['grade'] = 'C';
+                        // $groupedSubPerSt[$key][$vkey]['gradeRemark'] = $getGradeRemark('C');
+                        break;
+                    case  $totalScore >= 50 and  $totalScore <= 49:
+                        $bob[$subjects->subject]['grade'] = 'C';
+                        // $groupedSubPerSt[$key][$vkey]['gradeRemark'] = $getGradeRemark('C');
+                        break;
+                    default:
+                        $bob[$subjects->subject]['grade'] = 'F';
+                        // $groupedSubPerSt[$key][$vkey]['gradeRemark'] = $getGradeRemark('P');
                 }
+
+                $bob['__totalmarks'][] = $bob[$subjects->subject]['total'];
             }
-            // $valueActualNumber = count($value) - 1;
-
-
-
-            // dd($student[$term][0]);
-            //  dd( $value->groupBy('subject')->toArray() );
-            //             for ($i = 0; $i <  $valueActualNumber; $i++) {
-            //                 foreach ($loop = $value->groupBy('subject')->toArray() as $k => $v) {
-            //                     //consider the term right here 
-            // dump($loop);
-            //                     $student[$term][$k] = $student[$term][$valueActualNumber] ?? '';
-            //                     unset( $student[$term][$valueActualNumber]);
-
-            //                     dump($student[$term]);
-            //                     break;
-            //                 }
-            //             }
-
-            //loop the above 
-            // I will need to target the term
-            // I will also need to target the particular subject
-            // then calucluate the total bearing in mind their respective terms
-
-            //i will loop , then attach base on key (i.e subject) 
         }
+        array_shift($bob['__totalmarks']);
+        $bob['__totalmarks'] = array_sum($bob['__totalmarks']);
+
+        dump($bob);
     }
 }
