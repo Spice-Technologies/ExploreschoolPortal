@@ -306,13 +306,13 @@ class Result extends Model
                         $bob[$subjects->subject]['grade'] = 'F';
                         // $groupedSubPerSt[$key][$vkey]['gradeRemark'] = $getGradeRemark('P');
                 }
-                /// My intention here is to properly calculate the total...the total adds the extra score we started with thats why I'm minusing it below. For further clarification, dd( $bob[$subjects->subject]['__totalmarks'] )
-                $bob['__totalmarks'] = $bob[$subjects->subject]['total'] +  ($bob['__totalmarks'] ?? 0 - $subjects->total_score ); // really need to minus the initial total_score from the first iteration as this was used as a delimieter else the calculation will add it up
+                    // get all total score 
+                $bob['__totalmarks'] = $subjects->total_score +  ($bob['__totalmarks'] ?? 0);
 
-                dump( $bob[$subjects->subject]['total']);
+                // dump($bob[$subjects->subject]['total']);
             }
         }
-         
-;
+
+        dump($bob);
     }
 }
