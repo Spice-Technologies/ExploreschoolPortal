@@ -321,8 +321,8 @@ class Result extends Model
             }
         }
         $bob['__totalNoOfSubjects'] = $totalNoOfSubjects;
-        //avearge is calculated by total/no_of_terms/total_number_of_subjects
-        $bob['__totalAvg'] = $bob['__totalmarks'] / count($bob[$subjects->subject]['term']) /  $bob['__totalNoOfSubjects'];
+        //avearge is calculated by total/total_no_of_terms/total_number_of_subjects/ then approximate using round 
+        $bob['__totalAvg'] = round($bob['__totalmarks'] / count($bob[$subjects->subject]['term']) /  $bob['__totalNoOfSubjects']);
 
         dump($bob);
     }
