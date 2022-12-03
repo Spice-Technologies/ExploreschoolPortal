@@ -306,12 +306,23 @@ class Result extends Model
                         $bob[$subjects->subject]['grade'] = 'F';
                         // $groupedSubPerSt[$key][$vkey]['gradeRemark'] = $getGradeRemark('P');
                 }
-                    // get all total score 
+                // get all total score 
                 $bob['__totalmarks'] = $subjects->total_score +  ($bob['__totalmarks'] ?? 0);
 
                 // dump($bob[$subjects->subject]['total']);
+
             }
         }
+
+        $totalNoOfSubjects = 0;
+        foreach ($bob as $key => $value) {
+            if (!str_starts_with($key, '__')) {
+                $totalNoOfSubjects++;
+            }
+        }
+        $bob['__totalNoOfSubjects'] = $totalNoOfSubjects;
+        //avearge is calculated by total/no_of_terms/total_number_of_subjects
+        $bob['__totalAvg'] = $bob['__totalmarks'] / count($bob[$subjects->subject]['term']) /  $bob['__totalNoOfSubjects'];
 
         dump($bob);
     }
