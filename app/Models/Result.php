@@ -267,7 +267,11 @@ class Result extends Model
 
 
         $finalYearlResult = [];
-        $student = DB::table('results')->where('class_id', $class)->where('session_id', $session)->where('school_id', Admin::AdminSchool()->id)->where('student_id', $student_id)->get()->groupBy(['term_id'])->toArray();
+        $student = DB::table('results')->where('class_id', $class)->where('session_id', $session)->where('school_id', Admin::AdminSchool()->id)->where('student_id', $student_id)->get()->groupBy(['term_id', function ($item) {
+            return $item->RegNum; // multuple grouping criteria
+        }], preserveKeys: true)->toArray();
+
+        // dd($student);
 
         // dump($student);
         $noOfTerms = count($student);
