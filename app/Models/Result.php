@@ -267,7 +267,7 @@ class Result extends Model
 
 
         $finalYearlResult = [];
-        $student = DB::table('results')->where('class_id', $class)->where('session_id', $session)->where('school_id', Admin::AdminSchool()->id)->where('student_id', $student_id)->get()->groupBy(['term_id', function ($item) {
+        $student = DB::table('results')->where('class_id', $class)->where('session_id', $session)->where('school_id', Admin::AdminSchool()->id)->get()->groupBy(['term_id', function ($item) {
             return $item->RegNum; // multuple grouping criteria
         }], preserveKeys: true)->toArray();
 
@@ -282,52 +282,58 @@ class Result extends Model
         $firstTotal = '';
         foreach ($student as $term => $value) {
             // sinc I know the number of terms i'm expecting, why not just be abit loose witht the logic ?
-            foreach ($value as $key => $subjects) {
-                $bob[$subjects->subject]['total'] = $subjects->total_score + ($bob[$subjects->subject]['total'] ?? 0);
-                $bob[$subjects->subject]['term'][] = $subjects->term_id;
-                $bob[$subjects->subject]['average'] = $bob[$subjects->subject]['total'] / count($bob[$subjects->subject]['term']);
 
-                $totalScore =  $bob[$subjects->subject]['average'];
-                switch ($totalScore) {
+            foreach ($value as $regnumber => $details) {
+                // $bob[$key][] = ;
 
-                    case  $totalScore >= 70 and  $totalScore <= 100:
-                        $bob[$subjects->subject]['grade'] = 'A';
-                        // $groupedSubPerSt[$key][$vkey]['gradeRemark'] = $getGradeRemark('A');
-                        break;
-                    case  $totalScore >= 60 and  $totalScore <= 69:
-                        $bob[$subjects->subject]['grade'] = 'B';
-                        // $groupedSubPerSt[$key][$vkey]['gradeRemark'] = $getGradeRemark('B');
-                        break;
-                    case  $totalScore >= 59 and  $totalScore <= 50:
-                        $bob[$subjects->subject]['grade'] = 'C';
-                        // $groupedSubPerSt[$key][$vkey]['gradeRemark'] = $getGradeRemark('C');
-                        break;
-                    case  $totalScore >= 50 and  $totalScore <= 49:
-                        $bob[$subjects->subject]['grade'] = 'C';
-                        // $groupedSubPerSt[$key][$vkey]['gradeRemark'] = $getGradeRemark('C');
-                        break;
-                    default:
-                        $bob[$subjects->subject]['grade'] = 'F';
-                        // $groupedSubPerSt[$key][$vkey]['gradeRemark'] = $getGradeRemark('P');
+                foreach ($details as $k => $v) {
+                    $bob[$regnumber][$v->subject]['total'] = $v->total_score + ($bob[$v->subject]['total'] ?? 0);;
+
+                    $bob[$regnumber][$v->subject]['term'][] = $v->term_id;
+                    $bob[$regnumber][$v->subject]['average'] = $bob[$regnumber][$v->subject]['total'] / count($bob[$regnumber][$v->subject]['term']);
+
+                    $totalScore =  $bob[$regnumber][$v->subject]['average'];
+                    switch ($totalScore) {
+
+                        case  $totalScore >= 70 and  $totalScore <= 100:
+                            $bob[$regnumber][$v->subject]['grade'] = 'A';
+                            // $groupedSubPerSt[$key][$vkey]['gradeRemark'] = $getGradeRemark('A');
+                            break;
+                        case  $totalScore >= 60 and  $totalScore <= 69:
+                            $bob[$regnumber][$v->subject]['grade'] = 'B';
+                            // $groupedSubPerSt[$key][$vkey]['gradeRemark'] = $getGradeRemark('B');
+                            break;
+                        case  $totalScore >= 59 and  $totalScore <= 50:
+                            $bob[$regnumber][$v->subject]['grade'] = 'C';
+                            // $groupedSubPerSt[$key][$vkey]['gradeRemark'] = $getGradeRemark('C');
+                            break;
+                        case  $totalScore >= 50 and  $totalScore <= 49:
+                            $bob[$regnumber][$v->subject]['grade'] = 'C';
+                            // $groupedSubPerSt[$key][$vkey]['gradeRemark'] = $getGradeRemark('C');
+                            break;
+                        default:
+                            $bob[$regnumber][$v->subject]['grade'] = 'F';
+                            // $groupedSubPerSt[$key][$vkey]['gradeRemark'] = $getGradeRemark('P');
+                    }
+                    // get all total score 
+                    $bob[$regnumber]['__totalmarks'] = $v->total_score +  ($bob[$regnumber]['__totalmarks'] ?? 0);
+
+                    // dump($bob[$subjects->subject]['total']);
                 }
-                // get all total score 
-                $bob['__totalmarks'] = $subjects->total_score +  ($bob['__totalmarks'] ?? 0);
-
-                // dump($bob[$subjects->subject]['total']);
-
             }
         }
+        // total number of subjects the class is suppose to write
+        $totalNoOfSubjects = [];
 
-        $totalNoOfSubjects = 0;
-        foreach ($bob as $key => $value) {
-            if (!str_starts_with($key, '__')) {
-                $totalNoOfSubjects++;
+        $count = 0;
+        foreach ($bob as $regnumber => $value) {
+
+            foreach ($value as $k => $v) {
+                if (!str_starts_with($k, '__')) {
+                    $bob[$regnumber]['totalSubjects'] = 1 + ($bob[$regnumber]['totalSubjects'] ?? 0);
+                }
             }
         }
-        $bob['__totalNoOfSubjects'] = $totalNoOfSubjects;
-        //avearge is calculated by total/total_no_of_terms/total_number_of_subjects/ then approximate using round 
-        $bob['__totalAvg'] = round($bob['__totalmarks'] / count($bob[$subjects->subject]['term']) /  $bob['__totalNoOfSubjects']);
-
         dump($bob);
     }
 }
