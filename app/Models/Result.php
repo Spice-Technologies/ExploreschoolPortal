@@ -290,7 +290,8 @@ class Result extends Model
                     $bob[$regnumber][$v->subject]['total'] = $v->total_score + ($bob[$v->subject]['total'] ?? 0);;
 
                     $bob[$regnumber][$v->subject]['term'][] = $v->term_id;
-                    $bob[$regnumber][$v->subject]['average'] = $bob[$regnumber][$v->subject]['total'] / count($bob[$regnumber][$v->subject]['term']);
+                    $bob[$regnumber][$v->subject]['noOfTerm'] = count($bob[$regnumber][$v->subject]['term']);
+                    $bob[$regnumber][$v->subject]['average'] = $bob[$regnumber][$v->subject]['total'] /  $bob[$regnumber][$v->subject]['noOfTerm'];
 
                     $totalScore =  $bob[$regnumber][$v->subject]['average'];
                     switch ($totalScore) {
@@ -323,17 +324,22 @@ class Result extends Model
             }
         }
         // total number of subjects the class is suppose to write
-        $totalNoOfSubjects = [];
-
-        $count = 0;
         foreach ($bob as $regnumber => $value) {
-
-            foreach ($value as $k => $v) {
+            foreach ($value as $k => $ve) {
                 if (!str_starts_with($k, '__')) {
-                    $bob[$regnumber]['totalSubjects'] = 1 + ($bob[$regnumber]['totalSubjects'] ?? 0);
+                    $bob[$regnumber]['__totalNoOfSubjects'] = 1 + ($bob[$regnumber]['__totalNoOfSubjects'] ?? 0);
                 }
             }
+        };
+        //avearge is calculated by totalMarks obtained /total_no_of_terms/total_number_of_subjects/ then approximate using round 
+
+        foreach ($bob as $kiga => $vr) {
+            foreach ($vr as $o => $p) {
+                    
+                $bob[$kiga]['__totalAvg'] = round($bob[$kiga]['__totalmarks']  /  $bob[$kiga][$o]['noOfTerm'] / $bob[$kiga]['__totalNoOfSubjects']);
+            }
         }
-        dump($bob);
+
+        dd($bob);
     }
 }
