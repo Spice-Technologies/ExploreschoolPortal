@@ -335,7 +335,6 @@ class Result extends Model
 
         foreach ($bob as $kiga => $vr) {
             foreach ($vr as $o => $p) {
-                    
                 $bob[$kiga]['__totalAvg'] = round($bob[$kiga]['__totalmarks']  /  $bob[$kiga][$o]['noOfTerm'] / $bob[$kiga]['__totalNoOfSubjects']);
             }
         }
