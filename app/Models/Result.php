@@ -10,6 +10,8 @@ use PhpOffice\PhpSpreadsheet\Calculation\Statistical\Averages;
 use Prophecy\Promise\ReturnPromise;
 use Symfony\Component\CssSelector\Node\FunctionNode;
 
+use function Psy\debug;
+
 class Result extends Model
 {
     use HasFactory;
@@ -332,10 +334,13 @@ class Result extends Model
             }
         };
         //avearge is calculated by totalMarks obtained /total_no_of_terms/total_number_of_subjects/ then approximate using round 
-
+        // dd($bob);
         foreach ($bob as $kiga => $vr) {
+
             foreach ($vr as $o => $p) {
-                $bob[$kiga]['__totalAvg'] = round($bob[$kiga]['__totalmarks']  /  $bob[$kiga][$o]['noOfTerm'] / $bob[$kiga]['__totalNoOfSubjects']);
+                if (!str_starts_with($o, '__')) {
+                    $bob[$kiga]['__totalAvg'] = round($bob[$kiga]['__totalmarks']  /  $bob[$kiga][$o]['noOfTerm'] / $bob[$kiga]['__totalNoOfSubjects']);
+                }
             }
         }
 
