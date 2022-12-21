@@ -15,17 +15,14 @@ class SettingsController extends Controller
 {
     public function index()
     {
-        // $info = Teacher::get(['name', 'number']);
+        $info = Teacher::get(['name', 'number']);
         //how do you properly pull the students and the ones related with their teachers
-        return view('backend.settings.index');
-    }
 
+    }
 
     public function store(Request $req)
     {
-        // dd($req->all());
-        // dd(empty($req->only('number')));
-        // dd([...$req->only('number')]['number']);
+
         $req->validate(
 
             [

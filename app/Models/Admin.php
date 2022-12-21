@@ -75,7 +75,7 @@ class Admin extends Model
     //fetch all students under this same admin (same thing below)
     public function adminStudents()
     {
-        return Auth::user()->admin->school->with('student', 'student.user')->get();
+        return Auth::user()->admin->school->with('student', 'student.user')->first();
 
         //what I did to avoid n + 1 queries. I used eager loading:
         //1. I used toSql() to detect that the following query is basically saying 'select * from schools',

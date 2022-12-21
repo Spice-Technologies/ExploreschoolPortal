@@ -12,13 +12,23 @@
                 {!! implode('', $errors->all('<div class="alert alert-danger">:message</div>')) !!}
             @endif
 
+            @if (Session::has('error'))
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+                    <span class="alert-text">{{ session('error') }}</span>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
+
             @if (session('msg'))
                 <div class="alert alert-danger">{{ session('msg') }}</div>
             @elseif(session('success'))
                 <div class="alert alert-success">{{ session('success') }}</div>
             @endif
 
-            <a href="{{ route('Sresult.index') }}"> Print Yearly Result </a>
+            {{-- <a href="{{ route('Sresult.index') }}"> Print Yearly Result </a> --}}
             <form action="{{ route('result.yearly.print') }}" method="POST">
                 @csrf
 
@@ -27,14 +37,6 @@
                     <select class="form-control" name="session">
                         @foreach ($sessions as $session)
                             <option value="{{ $session->id }}">{{ $session->session }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <h4> Select Term </h4>
-                <div class="form-group">
-                    <select class="form-control" name="term">
-                        @foreach ($terms as $term)
-                            <option value="{{ $term->id }}">{{ $term->Term }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -52,8 +54,9 @@
                     <div class="form-group">
                         <select class="form-control" name="student">
                             @foreach ($students as $key => $student)
-                                <option value="{{ $student->student[$key]->id }}">({{ $student->student[$key]->reg_num }})
-                                    {{ $student->student[$key]->user->name }}</option>
+                                <option value="{{ $student->reg_num }}">
+                                    ({{ $student->reg_num }})
+                                    {{ $student->user->name }}</option>
                             @endforeach
                         </select>
                     </div>

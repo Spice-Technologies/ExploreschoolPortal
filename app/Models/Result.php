@@ -260,17 +260,11 @@ class Result extends Model
     }
     /* End of the main SINGLE RESULT CALCULATOR */
 
-    public function yearlyResult($session = 1, $class = 1, $student_id = 1)
+    public function yearlyResult($session, $class)
     {
-        //group by session 
-        // because student can't have more than 3 result per session...so yearl basically means 1st term, 2nd term, 3rd term for, e.g, 2021/2022 session
-        //query: select all from students table where class = class, session == session, student_id == student group by term 
-        //select * from `results` where `term_id` = 
-
-
         $finalYearlResult = [];
-        $student = DB::table('results')->where('class_id', $class)->where('session_id', $session)->where('school_id', Admin::AdminSchool()->id)->get()->groupBy(['term_id', function ($item) {
-            return $item->RegNum; // multuple grouping criteria
+        $student = DB::table('results')->where('class_id', $class)->where('session_id', $session)->where('school_id', Admin::AdminSchool()->id)->get()->groupBy(['RegNum', function ($item) {
+            return $item->term_id; // multuple grouping criteria
         }], preserveKeys: true)->toArray();
 
         // dd($student);
@@ -284,66 +278,78 @@ class Result extends Model
         $firstTotal = '';
         foreach ($student as $term => $value) {
             // sinc I know the number of terms i'm expecting, why not just be abit loose witht the logic ?
-
+            // dd($student);
+            // dd($value);
             foreach ($value as $regnumber => $details) {
                 // $bob[$key][] = ;
 
                 foreach ($details as $k => $v) {
-                    $bob[$regnumber][$v->subject]['total'] = $v->total_score + ($bob[$v->subject]['total'] ?? 0);;
+                    $bob[$term][$regnumber][$v->subject]['total'] = $v->total_score + ($bob[$v->subject]['total'] ?? 0);;
 
-                    $bob[$regnumber][$v->subject]['term'][] = $v->term_id;
-                    $bob[$regnumber][$v->subject]['noOfTerm'] = count($bob[$regnumber][$v->subject]['term']);
-                    $bob[$regnumber][$v->subject]['average'] = $bob[$regnumber][$v->subject]['total'] /  $bob[$regnumber][$v->subject]['noOfTerm'];
+                    $bob[$term][$regnumber][$v->subject]['term'][] = $v->term_id;
+                    $bob[$term][$regnumber][$v->subject]['noOfTerm'] = count($bob[$term][$regnumber][$v->subject]['term']);
+                    $bob[$term][$regnumber][$v->subject]['average'] = $bob[$term][$regnumber][$v->subject]['total'] /  $bob[$term][$regnumber][$v->subject]['noOfTerm'];
 
-                    $totalScore =  $bob[$regnumber][$v->subject]['average'];
+                    $totalScore =  $bob[$term][$regnumber][$v->subject]['average'];
                     switch ($totalScore) {
 
                         case  $totalScore >= 70 and  $totalScore <= 100:
-                            $bob[$regnumber][$v->subject]['grade'] = 'A';
+                            $bob[$term][$regnumber][$v->subject]['grade'] = 'A';
                             // $groupedSubPerSt[$key][$vkey]['gradeRemark'] = $getGradeRemark('A');
                             break;
                         case  $totalScore >= 60 and  $totalScore <= 69:
-                            $bob[$regnumber][$v->subject]['grade'] = 'B';
+                            $bob[$term][$regnumber][$v->subject]['grade'] = 'B';
                             // $groupedSubPerSt[$key][$vkey]['gradeRemark'] = $getGradeRemark('B');
                             break;
                         case  $totalScore >= 59 and  $totalScore <= 50:
-                            $bob[$regnumber][$v->subject]['grade'] = 'C';
+                            $bob[$term][$regnumber][$v->subject]['grade'] = 'C';
                             // $groupedSubPerSt[$key][$vkey]['gradeRemark'] = $getGradeRemark('C');
                             break;
                         case  $totalScore >= 50 and  $totalScore <= 49:
-                            $bob[$regnumber][$v->subject]['grade'] = 'C';
+                            $bob[$term][$regnumber][$v->subject]['grade'] = 'C';
                             // $groupedSubPerSt[$key][$vkey]['gradeRemark'] = $getGradeRemark('C');
                             break;
                         default:
-                            $bob[$regnumber][$v->subject]['grade'] = 'F';
+                            $bob[$term][$regnumber][$v->subject]['grade'] = 'F';
                             // $groupedSubPerSt[$key][$vkey]['gradeRemark'] = $getGradeRemark('P');
                     }
                     // get all total score 
-                    $bob[$regnumber]['__totalmarks'] = $v->total_score +  ($bob[$regnumber]['__totalmarks'] ?? 0);
+                    $bob[$term][$regnumber]['__totalmarks'] = $v->total_score +  ($bob[$term][$regnumber]['__totalmarks'] ?? 0);
 
                     // dump($bob[$subjects->subject]['total']);
                 }
             }
         }
+
+
         // total number of subjects the class is suppose to write
         foreach ($bob as $regnumber => $value) {
+
             foreach ($value as $k => $ve) {
-                if (!str_starts_with($k, '__')) {
+                if (!str_starts_with($k, '__')) { // what did i do here ? 👇👇-- 🤔 🤔 🤔 --?? 🤣
                     $bob[$regnumber]['__totalNoOfSubjects'] = 1 + ($bob[$regnumber]['__totalNoOfSubjects'] ?? 0);
                 }
             }
         };
         //avearge is calculated by totalMarks obtained /total_no_of_terms/total_number_of_subjects/ then approximate using round 
-        // dd($bob);
-        foreach ($bob as $kiga => $vr) {
 
-            foreach ($vr as $o => $p) {
-                if (!str_starts_with($o, '__')) {
-                    $bob[$kiga]['__totalAvg'] = round($bob[$kiga]['__totalmarks']  /  $bob[$kiga][$o]['noOfTerm'] / $bob[$kiga]['__totalNoOfSubjects']);
+        foreach ($bob as $regnum => $vr) {
+
+            foreach ($vr as $te => $px) {
+
+                if (!str_starts_with($te, '__')) {
+                    foreach ($px as $subb => $tx)
+                        if (!str_starts_with($subb, '__')) {
+                         
+                            $bob[$regnum]['__totalAvg'] =
+                                round($px['__totalmarks']  /
+                                    $tx['noOfTerm'] /
+                                    $bob[$regnum]['__totalNoOfSubjects']);
+                        }
                 }
             }
         }
-
         dd($bob);
+        return $bob; // I should change the variable from $bob to something else
     }
 }

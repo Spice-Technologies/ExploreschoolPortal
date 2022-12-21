@@ -18,19 +18,41 @@ class YearlyResultController extends Controller
 
         $sessions = Session::get(['session', 'id']);
         $admin = new Admin();
-        $students =  $admin->adminStudents();
-
-
+        $students =  $admin->adminStudents()->student;
+        
         //get the current logged in admin that use that to get all other details you may be needing
 
         return view('backend.result.yearly.yearly', compact('terms', 'sessions', 'klasses', 'students'));
     }
 
-
-    public function print()
+    public function print(Request $r)
     {
+        $r->validate([
+            'session' => 'required',
+            'class' => 'required',
+            'student' => 'required',
+        ]);
         $result = new Result();
 
-        return $result->yearlyResult();
+        $result = $result->yearlyResult($r->session, $r->class);
+        // dd($r->student);
+
+        if ($result) {
+            $result = $result["Mob/22/0002"];
+
+            dd($result);
+
+            // foreach ($result as $o => $value) {
+            //     if (!str_starts_with($o, '__')) {
+            //         dump($result[$o]);
+            //     }  
+            // }
+                   return view('backend.result.yearly.pdfyearly', compact('result'));
+            // $pdf = PDF::loadView('backend.result.pdfsing', compact('fetchStudent', 'finaleSingleCourseResult'));
+
+            // return $pdf->download('Single result.pdf');
+        } else {
+            return redirect()->route('result.yearly')->with('error', 'You have no result for this class yet');
+        }
     }
 }
