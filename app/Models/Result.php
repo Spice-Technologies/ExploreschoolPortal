@@ -260,7 +260,7 @@ class Result extends Model
     }
     /* End of the main SINGLE RESULT CALCULATOR */
 
-    public function yearlyResult($session, $class)
+    public function yearlyResult($session, $class, $studentRegnumber)
     {
         $finalYearlResult = [];
         $student = DB::table('results')->where('class_id', $class)->where('session_id', $session)->where('school_id', Admin::AdminSchool()->id)->get()->groupBy(['RegNum', function ($item) {
@@ -346,7 +346,7 @@ class Result extends Model
                 }
             }
         }
-        dd($bob);
-        return $bob; // I should change the variable from $bob to something else
+
+        return $bob[$studentRegnumber]; // I should change the variable from $bob to something else 
     }
 }

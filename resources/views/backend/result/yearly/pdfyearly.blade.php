@@ -70,22 +70,35 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($result as $k => $r)
+
+            <?php $tableRow = [1, 2, 3]; ?>
+            @foreach ($tableRow as $term => $value)
                 <tr>
-                    @if (!str_starts_with($k, '__'))
-                        <td colspan="4"> {{ $k}} </td>
-                 
-                    <td> {{$r['total']}} </td>
-                    <td> 200</td>
-                    <td> 300 </td>
-                    <td> 400 </td>
-                    <td> 60</td>
-                    <td> B </td>
-                    <td> Keep it up </td>
+                    @foreach ($result as $term => $r)
+                        @if (!str_starts_with($term, '__'))
+                            @if (in_array($k, $tableRow))
+                                <td colspan="4"> {{ $r[$k] }} </td>
+                                <td> {{ 'hghgh' }} </td>
+                            @else
+                                <td> -- </td>
+                            @endif
+                        @endif
 
                     @endif
+                    <?php dd($r); ?>
+            @endforeach
+            {{-- @if (!str_starts_with($term, '__'))
+                        @foreach ($result as $k => $r)
+                            @if (in_array($k, $tableRow))
+                                <td colspan="4"> {{ $r[$k] }} </td>
+                                <td> {{ 'hghgh' }} </td>
+                            @else
+                                <td> -- </td>
+                            @endif
+                        @endforeach
+                    @endif --}}
 
-                </tr>
+            </tr>
             @endforeach
         </tbody>
         <tfoot>
