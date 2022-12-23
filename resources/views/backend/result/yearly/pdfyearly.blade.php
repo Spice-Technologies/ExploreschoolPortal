@@ -72,33 +72,21 @@
         <tbody>
 
             <?php $tableRow = [1, 2, 3]; ?>
-            @foreach ($tableRow as $term => $value)
+
+
+            @foreach ($result as $term => $r)
                 <tr>
-                    @foreach ($result as $term => $r)
-                        @if (!str_starts_with($term, '__'))
-                            @if (in_array($k, $tableRow))
-                                <td colspan="4"> {{ $r[$k] }} </td>
-                                <td> {{ 'hghgh' }} </td>
-                            @else
-                                <td> -- </td>
-                            @endif
+
+                    @if (!str_starts_with($term, '__'))
+                        @if (in_array($term, $tableRow))
+                            @foreach ($r as $subject => $rr)
+                                @if (!str_starts_with($subject, '__'))
+                                    <td colspan="4"> {{ $subject }} </td>
+                                @endif
+                            @endforeach
                         @endif
-
                     @endif
-                    <?php dd($r); ?>
-            @endforeach
-            {{-- @if (!str_starts_with($term, '__'))
-                        @foreach ($result as $k => $r)
-                            @if (in_array($k, $tableRow))
-                                <td colspan="4"> {{ $r[$k] }} </td>
-                                <td> {{ 'hghgh' }} </td>
-                            @else
-                                <td> -- </td>
-                            @endif
-                        @endforeach
-                    @endif --}}
-
-            </tr>
+                </tr>
             @endforeach
         </tbody>
         <tfoot>
