@@ -314,6 +314,7 @@ class Result extends Model
                             // $groupedSubPerSt[$key][$vkey]['gradeRemark'] = $getGradeRemark('P');
                     }
                     // get all total score 
+                
                     $bob[$term][$regnumber]['__totalmarks'] = $v->total_score +  ($bob[$term][$regnumber]['__totalmarks'] ?? 0);
 
                     // dump($bob[$subjects->subject]['total']);

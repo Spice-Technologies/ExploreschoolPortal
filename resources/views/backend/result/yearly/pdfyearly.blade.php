@@ -79,11 +79,15 @@
                     @foreach ($result as $t => $r)
                         @if (!str_starts_with($t, '__') && isset($r[$sub]['term'][0]) && in_array($r[$sub]['term'][0], $tableRow))
                             <td> {{ $r[$sub]['total'] }}</td>
+                            <td> {{ $r['__totalmarks']}}</td>
+
+                        
                         @else
+           
                             <td> {{ '--' }}</td>
                         @endif
+                        
                     @endforeach
-
 
 
                 </tr>
