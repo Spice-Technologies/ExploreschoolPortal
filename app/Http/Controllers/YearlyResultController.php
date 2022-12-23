@@ -42,9 +42,20 @@ class YearlyResultController extends Controller
         $subjects = array_column($subjects, 'subject');
         // sort($result);
         // dd($result);
+        //liat al subjects
+        $subs = [];
+        foreach ($result as $subkey => $value) {
+            if (!str_starts_with($subkey, '__'))
+                foreach ($value as $k => $v) {
+                    if (!str_starts_with($k, '__') && !in_array($k, $subs))
+                        $subs[] = $k;
+                }
+        }
+   arsort($result);
+   
         if ($result) {
 
-            return view('backend.result.yearly.pdfyearly', compact('result', 'subjects'));
+            return view('backend.result.yearly.pdfyearly', compact('result', 'subs'));
         } else {
             return redirect()->route('result.yearly')->with('error', 'You have no result for this class yet');
         }

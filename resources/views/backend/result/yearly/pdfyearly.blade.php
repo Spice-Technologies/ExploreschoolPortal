@@ -73,21 +73,29 @@
 
             <?php $tableRow = [1, 2, 3]; ?>
 
-
-            @foreach ($result as $term => $r)
+            @foreach ($subs as $sub)
                 <tr>
-
-                    @if (!str_starts_with($term, '__'))
-                        @if (in_array($term, $tableRow))
-                            @foreach ($r as $subject => $rr)
-                                @if (!str_starts_with($subject, '__'))
-                                    <td colspan="4"> {{ $subject }} </td>
-                                @endif
-                            @endforeach
+                    <td colspan="4"> {{ $sub }}</td>
+                    {{-- //if term is = 1, do stuff else skip --}}
+                    @foreach ($result as $t => $r)
+                     
+                        @if (!str_starts_with($t, '__') )
+                        {{-- @dump($r[$sub]['term'][0]) --}}
+                            <td> {{ '1' }}</td>
+                        @else
+                            <td> {{ '--' }}</td>
                         @endif
-                    @endif
+                    @endforeach
+
+
+
                 </tr>
             @endforeach
+
+
+
+
+
         </tbody>
         <tfoot>
             <tr>
