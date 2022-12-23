@@ -51,8 +51,8 @@ class YearlyResultController extends Controller
                         $subs[] = $k;
                 }
         }
-   arsort($result);
-   
+        arsort($result);
+        // dd($result);
         if ($result) {
 
             return view('backend.result.yearly.pdfyearly', compact('result', 'subs'));

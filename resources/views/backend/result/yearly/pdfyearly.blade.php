@@ -76,12 +76,9 @@
             @foreach ($subs as $sub)
                 <tr>
                     <td colspan="4"> {{ $sub }}</td>
-                    {{-- //if term is = 1, do stuff else skip --}}
                     @foreach ($result as $t => $r)
-                     
-                        @if (!str_starts_with($t, '__') )
-                        {{-- @dump($r[$sub]['term'][0]) --}}
-                            <td> {{ '1' }}</td>
+                        @if (!str_starts_with($t, '__') && isset($r[$sub]['term'][0]) && in_array($r[$sub]['term'][0], $tableRow))
+                            <td> {{ $r[$sub]['total'] }}</td>
                         @else
                             <td> {{ '--' }}</td>
                         @endif
