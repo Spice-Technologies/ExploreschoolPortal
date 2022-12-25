@@ -315,21 +315,11 @@ class Result extends Model
                     }
                     // get all total score 
 
-                    // $bob[$term][$regnumber]['__totalmarks'] =   $bob[$term][$regnumber][$v->subject]['total'] +  ($bob[$term][$regnumber]['__totalmarks'] ?? 0);
-                    // dump($bob[$subjects->subject]['total']);
+                    $bob[$term][$regnumber]['__totalmarks'] = $v->total_score +  ($bob[$term][$regnumber]['__totalmarks'] ?? 0);
                 }
             }
         }
-        //get total
 
-        // foreach ($bob as $reg => $value) {
-        //     foreach ($value as $term => $v) {
-        //         foreach ($v as $subject => $p) {
-
-        //             $bob[$reg][$term][$subject]['total_marks'] = $bob[$reg][$term][$subject]['total'];
-        //         }
-        //     }
-        // }
 
         $subjectTotals = [];
 
@@ -363,22 +353,22 @@ class Result extends Model
                 }
             }
         };
-        //avearge is calculated by totalMarks obtained /total_no_of_terms/total_number_of_subjects/ then approximate using round 
+        // avearge is calculated by totalMarks obtained /total_no_of_terms/total_number_of_subjects/ then approximate using round 
 
-        // foreach ($bob as $regnum => $vr) {
-        //     foreach ($vr as $te => $px) {
-        //         if (!str_starts_with($te, '__')) {
-        //             foreach ($px as $subb => $tx)
-        //                 if (!str_starts_with($subb, '__')) {
-        //                     $bob[$regnum]['__totalAvg'] =
-        //                         round($px['__totalmarks']  /
-        //                             $tx['noOfTerm'] /
-        //                             $bob[$regnum]['__totalNoOfSubjects']);
-        //                 }
-        //         }
-        //     }
-        // }
-
+        foreach ($bob as $regnum => $vr) {
+            foreach ($vr as $te => $px) {
+                if (!str_starts_with($te, '__')) {
+                    foreach ($px as $subb => $tx)
+                        if (!str_starts_with($subb, '__')) {
+                            $bob[$regnum]['__totalAvg'] =
+                                round($px['__totalmarks']  /
+                                    $tx['noOfTerm'] /
+                                    $bob[$regnum]['__totalNoOfSubjects']);
+                        }
+                }
+            }
+        }
+dd($bob);
         return $bob[$studentRegnumber]; // I should change the variable from $bob to something else 
     }
 }
