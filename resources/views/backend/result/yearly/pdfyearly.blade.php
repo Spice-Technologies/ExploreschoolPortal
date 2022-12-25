@@ -74,21 +74,19 @@
             <?php
             $tableRow = [1, 2, 3];
             ?>
-
-
             @foreach ($subs as $skey => $sub)
                 <tr>
                     <td colspan="4"> {{ $sub }}</td>
                     @foreach ($tableRow as $f => $v)
                         @if (isset($result[$v][$sub]))
                             <td> {{ $result[$v][$sub]['total'] }}</td>
-                            <td > {{ 'ff' }}</td>
+                           
                         @else
                             <td> {{ '--' }}</td>
                         @endif
                     @endforeach
 
-                   
+                    <td> {{$result['__subjectTotals'][$sub] }}</td>
             @endforeach
 
             </tr>

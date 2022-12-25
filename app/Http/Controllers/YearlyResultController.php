@@ -54,9 +54,26 @@ class YearlyResultController extends Controller
 
 
 
-        dd($result);
+
+        $subjectTotals = [];
+
+
+        foreach ($result as $valK => $mark) {
+
+            if (!str_starts_with($valK, '__'))
+                foreach ($mark as $subject => $details) {
+
+
+                    if (!str_starts_with($subject, '__'))
+                        $subjectTotals[$subject] =
+                            ($subjectTotals[$subject]  ?? 0) +
+                            $details['total'];
+                }
+        }
+
 
         arsort($result);
+        $result['__subjectTotals'] = $subjectTotals;
         // dd($result);
         if ($result) {
 
