@@ -82,12 +82,13 @@
                     @foreach ($tableRow as $f => $v)
                         @if (isset($result[$v][$sub]))
                             <td> {{ $result[$v][$sub]['total'] }}</td>
+                            <td > {{ 'ff' }}</td>
                         @else
                             <td> {{ '--' }}</td>
                         @endif
                     @endforeach
 
-                    <td > {{ $result[$v][$sub][''] }}</td>
+                   
             @endforeach
 
             </tr>

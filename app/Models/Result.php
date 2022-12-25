@@ -314,16 +314,29 @@ class Result extends Model
                             // $groupedSubPerSt[$key][$vkey]['gradeRemark'] = $getGradeRemark('P');
                     }
                     // get all total score 
-                
-                    $bob[$term][$regnumber]['__totalmarks'] = $v->total_score +  ($bob[$term][$regnumber]['__totalmarks'] ?? 0);
 
+                    // $bob[$term][$regnumber]['__totalmarks'] =   $bob[$term][$regnumber][$v->subject]['total'] +  ($bob[$term][$regnumber]['__totalmarks'] ?? 0);
                     // dump($bob[$subjects->subject]['total']);
                 }
             }
         }
+        //get total
+
+        // foreach ($bob as $reg => $value) {
+        //     foreach ($value as $term => $v) {
+        //         foreach ($v as $subject => $p) {
+
+        //             $bob[$reg][$term][$subject]['total_marks'] = $bob[$reg][$term][$subject]['total'];
+        //         }
+        //     }
+        // }
+
+    
 
 
+        // dd($bob);
         // total number of subjects the class is suppose to write
+
         foreach ($bob as $regnumber => $value) {
 
             foreach ($value as $k => $ve) {
@@ -334,20 +347,20 @@ class Result extends Model
         };
         //avearge is calculated by totalMarks obtained /total_no_of_terms/total_number_of_subjects/ then approximate using round 
 
-        foreach ($bob as $regnum => $vr) {
-            foreach ($vr as $te => $px) {
-                if (!str_starts_with($te, '__')) {
-                    foreach ($px as $subb => $tx)
-                        if (!str_starts_with($subb, '__')) {
-                            $bob[$regnum]['__totalAvg'] =
-                                round($px['__totalmarks']  /
-                                    $tx['noOfTerm'] /
-                                    $bob[$regnum]['__totalNoOfSubjects']);
-                        }
-                }
-            }
-        }
-
-        return $bob[$studentRegnumber]; // I should change the variable from $bob to something else 
+        // foreach ($bob as $regnum => $vr) {
+        //     foreach ($vr as $te => $px) {
+        //         if (!str_starts_with($te, '__')) {
+        //             foreach ($px as $subb => $tx)
+        //                 if (!str_starts_with($subb, '__')) {
+        //                     $bob[$regnum]['__totalAvg'] =
+        //                         round($px['__totalmarks']  /
+        //                             $tx['noOfTerm'] /
+        //                             $bob[$regnum]['__totalNoOfSubjects']);
+        //                 }
+        //         }
+        //     }
+        // }
+      
+     return $bob[$studentRegnumber]; // I should change the variable from $bob to something else 
     }
 }
