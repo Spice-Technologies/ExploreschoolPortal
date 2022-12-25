@@ -71,31 +71,26 @@
         </thead>
         <tbody>
 
-            <?php $tableRow = [1, 2, 3]; ?>
+            <?php
+            $tableRow = [1, 2, 3];
+            ?>
 
-            @foreach ($subs as $sub)
+
+            @foreach ($subs as $skey => $sub)
                 <tr>
                     <td colspan="4"> {{ $sub }}</td>
-                    @foreach ($result as $t => $r)
-                        @if (!str_starts_with($t, '__') && isset($r[$sub]['term'][0]) && in_array($r[$sub]['term'][0], $tableRow))
-                            <td> {{ $r[$sub]['total'] }}</td>
-                            <td> {{ $r['__totalmarks']}}</td>
-
-                        
+                    @foreach ($tableRow as $f => $v)
+                        @if (isset($result[$v][$sub]))
+                            <td> {{ $result[$v][$sub]['total'] }}</td>
                         @else
-           
                             <td> {{ '--' }}</td>
                         @endif
-                        
                     @endforeach
 
-
-                </tr>
+                    <td > {{ $result[$v][$sub][''] }}</td>
             @endforeach
 
-
-
-
+            </tr>
 
         </tbody>
         <tfoot>
