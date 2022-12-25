@@ -52,20 +52,10 @@ class YearlyResultController extends Controller
                 }
         }
 
-        foreach ($result as $term => $value) {
-            if (!str_starts_with($term, '__'))
-            foreach ($value as $subj => $v) {
 
-                foreach ($subs as $l => $c) {
-                    if ($subj == $c)
-                    // dd( $result[$term][$subj]['total']);
-                        $result[$term]['total_marks'][$subj] =  $result[$term][$subj]['total'] + 
-                        $result[$term][$c]['total'];
-                    // $result[$reg][$term][$subject]['total_marks'] = $result[$reg][$term][$subject]['total'];
-                }
-            }
-        }
+
         dd($result);
+
         arsort($result);
         // dd($result);
         if ($result) {

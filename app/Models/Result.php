@@ -331,10 +331,28 @@ class Result extends Model
         //     }
         // }
 
-    
+        $subjectTotals = [];
+
+        foreach ($bob as $regnum => $value) {
+            foreach ($value as $valK => $mark) {
+              
+                if (!str_starts_with($valK, '__'))
+                    foreach ($mark as $subject => $details) {
+                       
+                        $subjectTotals[$subject] =
+                            ($subjectTotals[$subject]  ?? 0) +
+                            $details['total'];
+                        $bob[$regnum][$valK]['subjectTotals'] =  $subjectTotals;
+
+                    }
+            }
+        }
 
 
-        // dd($bob);
+
+
+
+        dd($bob);
         // total number of subjects the class is suppose to write
 
         foreach ($bob as $regnumber => $value) {
@@ -360,7 +378,7 @@ class Result extends Model
         //         }
         //     }
         // }
-      
-     return $bob[$studentRegnumber]; // I should change the variable from $bob to something else 
+
+        return $bob[$studentRegnumber]; // I should change the variable from $bob to something else 
     }
 }
