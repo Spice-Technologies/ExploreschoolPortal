@@ -77,6 +77,7 @@
             @foreach ($subs as $skey => $sub)
                 <tr>
                     <td colspan="4"> {{ $sub }}</td>
+
                     @foreach ($tableRow as $f => $v)
                         @if (isset($result[$v][$sub]))
                             <td> {{ $result[$v][$sub]['total'] }}</td>
@@ -86,7 +87,8 @@
                         @endif
                     @endforeach
 
-                    <td> {{$result['__subjectTotals'][$sub] }}</td>
+                    <td> {{$result['__subjectTotals'][$sub]['total'] }}</td>
+                    <td> {{$result['__subjectTotals'][$sub]['avg']}}</td>
             @endforeach
 
             </tr>

@@ -51,23 +51,25 @@ class YearlyResultController extends Controller
                         $subs[] = $k;
                 }
         }
-
-
-
-
         $subjectTotals = [];
-
-
         foreach ($result as $valK => $mark) {
-
             if (!str_starts_with($valK, '__'))
                 foreach ($mark as $subject => $details) {
 
+                    if (!str_starts_with($subject, '__')) {
+                        $subjectTotals[$subject]['total'] =
 
-                    if (!str_starts_with($subject, '__'))
-                        $subjectTotals[$subject] =
-                            ($subjectTotals[$subject]  ?? 0) +
+                            ($subjectTotals[$subject]['total']  ?? 0) +
                             $details['total'];
+                        //implemeted to check for total number of terms a particular subject was written per term //question is that how was I able to do it ?like how did i know how to include the no of times stuff was set 
+                        $subjectTotals[$subject]['noOfTerm'] =
+                            ($subjectTotals[$subject]['noOfTerm']   ?? 0) + 1;
+
+                        // now set average
+
+                        $subjectTotals[$subject]['avg'] =
+                            $subjectTotals[$subject]['total'] /  $subjectTotals[$subject]['noOfTerm'];
+                    }
                 }
         }
 
