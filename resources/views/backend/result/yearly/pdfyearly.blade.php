@@ -81,14 +81,15 @@
                     @foreach ($tableRow as $f => $v)
                         @if (isset($result[$v][$sub]))
                             <td> {{ $result[$v][$sub]['total'] }}</td>
-                           
                         @else
                             <td> {{ '--' }}</td>
                         @endif
                     @endforeach
 
-                    <td> {{$result['__subjectTotals'][$sub]['total'] }}</td>
-                    <td> {{$result['__subjectTotals'][$sub]['avg']}}</td>
+                    <td> {{ $result['__subjectTotals'][$sub]['total'] }}</td>
+                    <td> {{ $result['__subjectTotals'][$sub]['avg'] }}</td>
+                    <td> {{ $result['__subjectTotals'][$sub]['grade'] }}</td>
+                    <td> {{ $result['__subjectTotals'][$sub]['gradeRemark'] }}</td>
             @endforeach
 
             </tr>

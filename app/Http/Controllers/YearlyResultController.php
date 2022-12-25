@@ -69,6 +69,46 @@ class YearlyResultController extends Controller
 
                         $subjectTotals[$subject]['avg'] =
                             $subjectTotals[$subject]['total'] /  $subjectTotals[$subject]['noOfTerm'];
+
+                        //teacher remarks
+
+
+                        $getGradeRemark = function (string $grade) {
+                            $remarks =
+                                [
+                                    'A' => ['you have done noble', 'Good job keep it up', 'You are the champion'],
+                                    'B' => ['You scored B, Keep trying harder', 'B you are not far from greatness', 'B thats awesome'],
+                                    'C' => ['C You for try pass like this shaa', 'C you are almost there', 'C means cheap but you are not. Are you the one that is cheep or the questions ?'],
+                                    'P' => ['P odogwu, wetin manU play, you too dy watch movie', 'BBnaija star..rich boi..see as you score low', 'P you are not a failure, so dont be one']
+                                ];
+                            $keys = array_rand($remarks[$grade]);
+                            return $remarks[$grade][$keys];
+                        };
+
+                        //set grade
+                        $totalScore =  $subjectTotals[$subject]['avg'];
+                        switch ($totalScore) {
+
+                            case  $totalScore >= 70 and  $totalScore <= 100:
+                                $subjectTotals[$subject]['grade'] = 'A';
+                                $subjectTotals[$subject]['gradeRemark'] = $getGradeRemark('A');
+                                break;
+                            case  $totalScore >= 60 and  $totalScore <= 69:
+                                $subjectTotals[$subject]['grade'] = 'B';
+                                $subjectTotals[$subject]['gradeRemark'] = $getGradeRemark('B');
+                                break;
+                            case  $totalScore >= 59 and  $totalScore <= 50:
+                                $subjectTotals[$subject]['grade'] = 'C';
+                                $subjectTotals[$subject]['gradeRemark'] = $getGradeRemark('C');
+                                break;
+                            case  $totalScore >= 50 and  $totalScore <= 49:
+                                $subjectTotals[$subject]['grade'] = 'C';
+                                $subjectTotals[$subject]['gradeRemark'] = $getGradeRemark('C');
+                                break;
+                            default:
+                                $subjectTotals[$subject]['grade'] = 'F';
+                                $subjectTotals[$subject]['gradeRemark'] = $getGradeRemark('P');
+                        }
                     }
                 }
         }
