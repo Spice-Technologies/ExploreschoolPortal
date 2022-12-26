@@ -50,7 +50,7 @@
         <tr>
             <th>Total Marks Obtainable: 3,600 </th>
 
-            <th>Total Marks Obtained : 779</th>
+            <th>Total Marks Obtained :  {{ $result['__totalmain']}}</th>
             <th>Average: 33.5 </th>
             <th>Percentage: 47th </th>
         </tr>
