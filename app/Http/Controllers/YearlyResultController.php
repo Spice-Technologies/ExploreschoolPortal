@@ -63,7 +63,7 @@ class YearlyResultController extends Controller
 
                             ($subjectTotals[$subject]['total']  ?? 0) +
                             $details['total'];
-                        //implemeted to check for total number of terms a particular subject was written per term //question is that how was I able to do it ?like how did i know how to include the no of times stuff was set 
+                        //implemeted to check for total number of terms a particular subject was written per term //question is that how was I able to do it ?like how did i know how to include the no of times stuff was set . the number of times you hit igbo language for example is recursive ! thhats how I got the igbo language. so at the begining it is not set so it is set to 0
                         $subjectTotals[$subject]['noOfTerm'] =
                             ($subjectTotals[$subject]['noOfTerm']   ?? 0) + 1;
 
@@ -73,7 +73,6 @@ class YearlyResultController extends Controller
                             $subjectTotals[$subject]['total'] /  $subjectTotals[$subject]['noOfTerm'];
 
                         //teacher remarks
-
 
                         $getGradeRemark = function (string $grade) {
                             $remarks =

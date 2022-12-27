@@ -365,7 +365,22 @@ class Result extends Model
                     $vr['__noOfTerms'] /
                     $bob[$regnum]['__totalNoOfSubjects']);
         }
+        /// calculate position
+        foreach ($bob as $regnum => $vr) {
+            $bob[$regnum]['__totalAvg'] =
+                round($vr['__totalmain']  /
+                    $vr['__noOfTerms'] /
+                    $bob[$regnum]['__totalNoOfSubjects']);
+        }
 
+        // get the position
+
+        $sort = uasort($bob, function ($a, $b) {
+
+            return $a['__totalAvg'] < $b['__totalAvg'];
+        });
+        $studentPosition = array_search('Mob/22/0002', $bob);
+        dd($studentPosition);
         return $bob[$studentRegnumber]; // I should change the variable from $bob to something else 
     }
 }
