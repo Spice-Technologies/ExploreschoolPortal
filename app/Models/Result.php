@@ -415,6 +415,9 @@ class Result extends Model
      * 
      * Also, the position, I almost felt like the teachers should hardcode that but alas, (I found a way through the help of God). Using php native function like uarsort to reindex array base on the general average (because psoition is decided base on avaegae) then use array_search in combo with array_keys to get the position then listed in the students'regnumber array carrier
      * 
+     * ------note the following to refactor ---
+     * 
+     * Consider refectoring the code that generates the the no of subjects taken in total. I don't think it is perfect or accurate 
      * 
      */
 }
