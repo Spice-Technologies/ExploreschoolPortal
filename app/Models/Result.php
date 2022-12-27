@@ -379,8 +379,27 @@ class Result extends Model
 
             return $a['__totalAvg'] < $b['__totalAvg'];
         });
-        $studentPosition = array_search('Mob/22/0002', $bob);
-        dd($studentPosition);
+        // search for the student number position using the array keys of $bob (i.e oga that holds informarion after sorting )
+        $studentPosition = array_search($studentRegnumber, array_keys($bob));
+
+        $studentPosition  += 1; // add extra one because counts start with zeros (this is phenomenom in computer science... 😉)
+
+
+        // i should move this to global functions diretory but later ! 😉
+        // this function helps to genereate the respective th or nd or st of position
+        function position($number)
+        {
+            //ordinal
+            $ends = ['th', 'st', 'nd', 'rd', 'th', 'th', 'th', 'th', 'th', 'th'];
+            if ($number % 100 >= 11 && $number % 100 <= 13) {
+                return $number . 'th';
+            } else {
+                return $number . $ends[$number % 10];
+            }
+        } // i need to study this function
+
+        // append the position as '__position' to the regnumber we are checking for 
+        $bob[$studentRegnumber]['__position'] =   position($studentPosition);
         return $bob[$studentRegnumber]; // I should change the variable from $bob to something else 
     }
 }

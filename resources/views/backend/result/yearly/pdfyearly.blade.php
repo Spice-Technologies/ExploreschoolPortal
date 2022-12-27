@@ -52,7 +52,7 @@
 
             <th>Total Marks Obtained :  {{ $result['__totalmain']}}</th>
             <th>Average:  {{ $result['__totalAvg']}} </th>
-            <th>Percentage: 47th </th>
+            <th>Percentage: {{$result['__position']}} </th>
         </tr>
     </table>
     <table>
