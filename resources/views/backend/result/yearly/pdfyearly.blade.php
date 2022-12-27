@@ -51,14 +51,13 @@
             <th>Total Marks Obtainable: 3,600 </th>
 
             <th>Total Marks Obtained :  {{ $result['__totalmain']}}</th>
-            <th>Average: 33.5 </th>
+            <th>Average:  {{ $result['__totalAvg']}} </th>
             <th>Percentage: 47th </th>
         </tr>
     </table>
     <table>
         <thead>
             <tr>
-
                 <td colspan="4"> Subject </td>
                 <td colspan=""> First Term Score </td>
                 <td colspan=""> 2nd Term Score </td>

@@ -277,11 +277,15 @@ class Result extends Model
         $stud = '';
         $firstTotal = '';   // term here refers to regnumber 
         foreach ($student as $term => $value) {
+            $bob[$term]['__noOfTerms'] = count($value);
             // sinc I know the number of terms i'm expecting, why not just be abit loose witht the logic ?
             // dd($student);
             // dd($value);      /// regnumber here refers to term ( i was lazy to change it all ndo 😥)
             foreach ($value as $regnumber => $details) {
                 // $bob[$key][] = ;
+
+                // no of terms
+
 
                 foreach ($details as $k => $v) {
                     $bob[$term][$regnumber][$v->subject]['total'] = $v->total_score + ($bob[$v->subject]['total'] ?? 0);;
@@ -341,13 +345,13 @@ class Result extends Model
 
 
 
-  
+
         // total number of subjects the class is suppose to write ? ? this is wrong ! 
 
         foreach ($bob as $regnumber => $value) {
 
             foreach ($value as $k => $ve) {
-            
+
                 if (!str_starts_with($k, '__')) { // what did i do here ? 👇👇-- 🤔 🤔 🤔 --?? 🤣
                     $bob[$regnumber]['__totalNoOfSubjects'] = 1 + ($bob[$regnumber]['__totalNoOfSubjects'] ?? 0);
                 }
@@ -355,19 +359,12 @@ class Result extends Model
         };
         // avearge is calculated by totalMarks obtained /total_no_of_terms/total_number_of_subjects/ then approximate using round 
 
-        // foreach ($bob as $regnum => $vr) {
-        //     foreach ($vr as $te => $px) {
-        //         if (!str_starts_with($te, '__')) {
-        //             foreach ($px as $subb => $tx)
-        //                 if (!str_starts_with($subb, '__')) {
-        //                     $bob[$regnum]['__totalAvg'] =
-        //                         round($px['__totalmarks']  /
-        //                             $tx['noOfTerm'] /
-        //                             $bob[$regnum]['__totalNoOfSubjects']);
-        //                 }
-        //         }
-        //     }
-        // }
+        foreach ($bob as $regnum => $vr) {
+            $bob[$regnum]['__totalAvg'] =
+                round($vr['__totalmain']  /
+                    $vr['__noOfTerms'] /
+                    $bob[$regnum]['__totalNoOfSubjects']);
+        }
 
         return $bob[$studentRegnumber]; // I should change the variable from $bob to something else 
     }

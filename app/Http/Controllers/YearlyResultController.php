@@ -56,7 +56,7 @@ class YearlyResultController extends Controller
             if (!str_starts_with($valK, '__'))
                 foreach ($mark as $subject => $details) {
 
-                    if (!str_starts_with($subject, '__')) {
+                    if (!str_starts_with($subject, '__')) { 
                         // you can calcuate total subjects from here  but we are not calculating from here 
 
                         $subjectTotals[$subject]['total'] =
@@ -115,12 +115,9 @@ class YearlyResultController extends Controller
                 }
         }
 
-
         arsort($result);
         $result['__subjectTotals'] = $subjectTotals;
-    
-
-
+        // dd($result);
         if ($result) {
 
             return view('backend.result.yearly.pdfyearly', compact('result', 'subs'));
