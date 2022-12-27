@@ -402,4 +402,19 @@ class Result extends Model
         $bob[$studentRegnumber]['__position'] =   position($studentPosition);
         return $bob[$studentRegnumber]; // I should change the variable from $bob to something else 
     }
+    // quick sides notes
+
+    /** Quick side notes:
+     * some difiicult aspect of this project for me are:
+     * getting to reorganised the details from db and group them in a way that suits the output i'm expecting
+     * one of them is getting to list the number of subjects taken so even if subject like french was taken 3 times, they are listed as one!
+     * 
+     * Also, making sure that the results of the different subjects appear depending on the number of terms and not exceed the terms asin wiht loops..
+     * 
+     * Also, is making sure that the average of a specific subject is divided by the number of terms it was taken so the system identifies the number of terms each subject was taken, note that this info wasn't stored in database. it has to be logically or programmatically calculated.
+     * 
+     * Also, the position, I almost felt like the teachers should hardcode that but alas, (I found a way through the help of God). Using php native function like uarsort to reindex array base on the general average (because psoition is decided base on avaegae) then use array_search in combo with array_keys to get the position then listed in the students'regnumber array carrier
+     * 
+     * 
+     */
 }

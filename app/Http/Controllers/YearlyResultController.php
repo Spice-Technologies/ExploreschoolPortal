@@ -119,7 +119,7 @@ class YearlyResultController extends Controller
         // dd($result);
         if ($result) {
 
-            return view('backend.result.yearly.pdfyearly', compact('result', 'subs'));
+            return view('backend.result.yearly.pdfyearly', compact('result', 'subs', ));
         } else {
             return redirect()->route('result.yearly')->with('error', 'You have no result for this class yet');
         }
