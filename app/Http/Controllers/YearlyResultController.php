@@ -6,6 +6,7 @@ use App\Models\Admin;
 use App\Models\Klass;
 use App\Models\Result;
 use App\Models\Session;
+use App\Models\Student;
 use App\Models\Subject;
 use App\Models\Term;
 use Illuminate\Http\Request;
@@ -33,6 +34,14 @@ class YearlyResultController extends Controller
             'class' => 'required',
             'student' => 'required',
         ]);
+
+        $session =  Session::first('session', $r->session)->session;
+        $class =  Klass::first('class_name', $r->class)->class_name;
+        $studentReg = $r->student;
+        $name = Student::where('reg_num', $r->student)->first()->user->name;
+     
+
+        
         $result = new Result();
 
         $result = $result->yearlyResult($r->session, $r->class, 'Mob/22/0002');
@@ -56,7 +65,7 @@ class YearlyResultController extends Controller
             if (!str_starts_with($valK, '__'))
                 foreach ($mark as $subject => $details) {
 
-                    if (!str_starts_with($subject, '__')) { 
+                    if (!str_starts_with($subject, '__')) {
                         // you can calcuate total subjects from here  but we are not calculating from here 
 
                         $subjectTotals[$subject]['total'] =
@@ -119,7 +128,7 @@ class YearlyResultController extends Controller
         // dd($result);
         if ($result) {
 
-            return view('backend.result.yearly.pdfyearly', compact('result', 'subs', ));
+            return view('backend.result.yearly.pdfyearly', compact('result', 'subs', 'session', 'class', 'studentReg', 'name'));
         } else {
             return redirect()->route('result.yearly')->with('error', 'You have no result for this class yet');
         }

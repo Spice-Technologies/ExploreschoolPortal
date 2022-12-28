@@ -36,16 +36,16 @@
 <body>
     <table>
         <tr>
-            <th colspan="2">Name: Chidiebere Chukwudi</th>
-            <th>Age: 23</th>
-            <th>Class: SS 1</th>
+            <th colspan="2">Name:  {{$name}}</th>
+            <th>Age: --</th>
+            <th>Class: {{$class}}</th>
         </tr>
         <tr>
-            <th>Number In Class: 34</th>
+            <th colspan="2">Number In Class: {{$result['__totalNoInClass']}}</th>
 
-            <th>Admission No: 45 </th>
-            <th>Term: 2nd Term</th>
-            <th>Session: 2021/2022 </th>
+            <th>Admission No: {{$studentReg}} </th>
+            
+            <th>Session: {{$session}}</th>
         </tr>
         <tr>
             <th>Total Marks Obtainable: 3,600 </th>

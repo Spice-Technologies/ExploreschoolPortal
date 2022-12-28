@@ -262,6 +262,7 @@ class Result extends Model
 
     public function yearlyResult($session, $class, $studentRegnumber)
     {
+   
         $finalYearlResult = [];
         $student = DB::table('results')->where('class_id', $class)->where('session_id', $session)->where('school_id', Admin::AdminSchool()->id)->get()->groupBy(['RegNum', function ($item) {
             return $item->term_id; // multuple grouping criteria
@@ -282,9 +283,7 @@ class Result extends Model
             // dd($student);
             // dd($value);      /// regnumber here refers to term ( i was lazy to change it all ndo 😥)
             foreach ($value as $regnumber => $details) {
-                // $bob[$key][] = ;
-
-                // no of terms
+           
 
 
                 foreach ($details as $k => $v) {
@@ -325,26 +324,6 @@ class Result extends Model
         }
 
 
-        // $subjectTotals = [];
-
-        // foreach ($bob as $regnum => $value) {
-        //     foreach ($value as $valK => $mark) {
-
-        //         if (!str_starts_with($valK, '__'))
-        //             foreach ($mark as $subject => $details) {
-
-        //                 if (!str_starts_with($subject, '__'))
-        //                     $subjectTotals[$subject] =
-        //                         ($subjectTotals[$subject]  ?? 0) +
-        //                         $details['total'];
-        //             }
-        //     }
-        // }
-
-
-
-
-
 
         // total number of subjects the class is suppose to write ? ? this is wrong ! 
 
@@ -373,7 +352,7 @@ class Result extends Model
                     $bob[$regnum]['__totalNoOfSubjects']);
         }
 
-        // get the position
+        // getting the position
 
         $sort = uasort($bob, function ($a, $b) {
 
@@ -400,8 +379,16 @@ class Result extends Model
 
         // append the position as '__position' to the regnumber we are checking for 
         $bob[$studentRegnumber]['__position'] =   position($studentPosition);
+
+            // no of people in class
+            $bob[$studentRegnumber]['__totalNoInClass']  = count($bob);
+            // dd($bob);
+   
         return $bob[$studentRegnumber]; // I should change the variable from $bob to something else 
     }
+
+
+
     // quick sides notes
 
     /** Quick side notes:
@@ -411,13 +398,17 @@ class Result extends Model
      * 
      * Also, making sure that the results of the different subjects appear depending on the number of terms and not exceed the terms asin wiht loops..
      * 
+     * 
      * Also, is making sure that the average of a specific subject is divided by the number of terms it was taken so the system identifies the number of terms each subject was taken, note that this info wasn't stored in database. it has to be logically or programmatically calculated.
+     * 
      * 
      * Also, the position, I almost felt like the teachers should hardcode that but alas, (I found a way through the help of God). Using php native function like uarsort to reindex array base on the general average (because psoition is decided base on avaegae) then use array_search in combo with array_keys to get the position then listed in the students'regnumber array carrier
      * 
      * ------note the following to refactor ---
      * 
-     * Consider refectoring the code that generates the the no of subjects taken in total. I don't think it is perfect or accurate 
+     * Consider refectoring the code that generates the the no of subjects taken in total. I don't think it is perfect or accurate
+     * 
+     * 
      * 
      */
 }
