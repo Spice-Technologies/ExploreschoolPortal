@@ -50,7 +50,8 @@
                 <div class="form-group">
                     <select class="form-control" name="student">
                         @foreach ($students as $key => $student)
-                            <option value="{{ $student->student[$key]->id }}">({{$student->student[$key]->reg_num  }})  {{ $student->student[$key]->user->name }}</option>
+             
+                            <option value="{{ $student->id }}">({{$student->reg_num  }})  {{ $student->user->name }}</option>
                         @endforeach
                     </select>
                 </div>

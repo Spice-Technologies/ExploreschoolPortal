@@ -11,6 +11,8 @@ use App\Models\Subject;
 use App\Models\Term;
 use Illuminate\Http\Request;
 
+use PDF;
+
 class YearlyResultController extends Controller
 {
     public  function index()
@@ -39,9 +41,9 @@ class YearlyResultController extends Controller
         $class =  Klass::first('class_name', $r->class)->class_name;
         $studentReg = $r->student;
         $name = Student::where('reg_num', $r->student)->first()->user->name;
-     
 
-        
+
+
         $result = new Result();
 
         $result = $result->yearlyResult($r->session, $r->class, 'Mob/22/0002');
@@ -128,6 +130,9 @@ class YearlyResultController extends Controller
         // dd($result);
         if ($result) {
 
+            // $pdf = PDF::loadView('backend.result.yearly.pdfyearly', compact('result', 'subs', 'session', 'class', 'studentReg', 'name'))->setPaper('A4','orientation');;
+
+            // return $pdf->download($studentReg . 'Yearly-result.pdf');
             return view('backend.result.yearly.pdfyearly', compact('result', 'subs', 'session', 'class', 'studentReg', 'name'));
         } else {
             return redirect()->route('result.yearly')->with('error', 'You have no result for this class yet');

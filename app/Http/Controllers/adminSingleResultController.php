@@ -35,9 +35,9 @@ class adminSingleResultController extends Controller
 
         $sessions = Session::get(['session', 'id']);
         $admin = new Admin();
-        $students =  $admin->adminStudents();
+        $students =  $admin->adminStudents()->student;
         //get the current logged in admin that use that to get all other details you may be needing
-
+        // dump($students);
         return view('backend.result.singleAdminResult', compact('terms', 'sessions', 'klasses', 'students'));
     }
 
