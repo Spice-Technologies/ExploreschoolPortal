@@ -51,6 +51,7 @@ class adminSingleResultController extends Controller
     public function showResult(Request $r)
     {
 
+        // dd($r->all());
         $rus = new Result();
 
         $r->validate([
@@ -65,11 +66,14 @@ class adminSingleResultController extends Controller
         //improve this code (N + 1) queries
 
         // handle alot of data
+
         $fetchStudent = Result::where('class_id', $r->class)->where('term_id', $r->term)->where('session_id', $r->session)->where('student_id', $r->student)->first();
+
         //lets get the report card name details using the student model
 
-        $student_info = Student::with('class.teacher', 'user')->find($fetchStudent->student_id);
 
+
+        $student_info = Student::with('class.teacher', 'user')->find($fetchStudent->student_id);
 
 
         $finaleSingleCourseResult = $rus->get_single_result($r->class, $r->term, $r->session, $fetchStudent->student_id);

@@ -76,9 +76,9 @@ class AdminResultController extends Controller
             $pdf = PDF::loadview(
                 'backend.result.masterPdf',
                 ['results' => $fetchResults, 'subjects' => $subjects, 'school' => $schoolAdmin, 'resultInfo' => $resultInfo],
-                [],
-                ['format' => 'A4-L', 'orientation' => 'L']
+
             );
+            $pdf->setPaper('a4', 'landscape');
             return $pdf->download('laravel-pdfworking.pdf');
         }
     }
@@ -153,9 +153,9 @@ class AdminResultController extends Controller
         $student = Student::studentId();
         $result = new Result();
         $fetchResults = $result->getAllResult($request->session, $request->class_id);
-        
+
         $pin = Pin::where('pin', $request->pin)->first();
-    
+
         if ($pin->use_stats >= 900) return back()->with('msg', 'You have exceeded the number of times meant to use this pin');
 
         //if the pin is 'so fresh' and has never been used before 
@@ -198,6 +198,5 @@ class AdminResultController extends Controller
             $pdf = PDF::loadview('backend.result.masterPdf', ['results' => $fetchResults, 'subjects' => $subjects]);
             return $pdf->download('laravel-pdfworking.pdf');
         }
-
     }
 }

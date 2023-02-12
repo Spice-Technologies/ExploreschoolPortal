@@ -269,7 +269,7 @@
                                             src="{{ asset('/assets/img/theme/team-4.jpg') }}">
                                     </span>
                                     <div class="media-body  ml-2  d-none d-lg-block">
-                                        <span class="mb-0 text-sm  font-weight-bold"> {{ Auth::user()->name}} </span>
+                                        <span class="mb-0 text-sm  font-weight-bold"> {{ Auth::user()->name ?? ''}} </span>
 
                                         <form id="logout-form" action="{{ url('logout') }}" method="POST">
                                             {{ csrf_field() }}

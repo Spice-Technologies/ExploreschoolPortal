@@ -90,8 +90,8 @@ class YearlyResultController extends Controller
                                 [
                                     'A' => ['you have done noble', 'Good job keep it up', 'You are the champion'],
                                     'B' => ['You scored B, Keep trying harder', 'B you are not far from greatness', 'B thats awesome'],
-                                    'C' => ['C You for try pass like this shaa', 'C you are almost there', 'C means cheap but you are not. Are you the one that is cheep or the questions ?'],
-                                    'P' => ['P odogwu, wetin manU play, you too dy watch movie', 'BBnaija star..rich boi..see as you score low', 'P you are not a failure, so dont be one']
+                                    'C' => ['Its credit, do better', 'C you are almost there', 'C means cheap but you are not. Are you the one that is cheep or the questions ?'],
+                                    'P' => ['Do better next time', 'You need to concentrate', 'Please pay more attention']
                                 ];
                             $keys = array_rand($remarks[$grade]);
                             return $remarks[$grade][$keys];

@@ -43,7 +43,7 @@
         <tr>
             <th colspan="2">Number In Class: {{$result['__totalNoInClass']}}</th>
 
-            <th>Admission No: {{$studentReg}} </th>
+            <th>Admission No:  </th>
             
             <th>Session: {{$session}}</th>
         </tr>
