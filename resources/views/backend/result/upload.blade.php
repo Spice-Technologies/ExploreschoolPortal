@@ -15,8 +15,7 @@
                 @csrf
               
                     <span class="text-danger font-italic ">kindly note that you will need to <span
-                            class="font-bold">select</span> the <span class="font-bold"> right class</span> and term for
-                        this </span>
+                            class="font-bold">select</span> the <span class="font-bold"> right class</span> and term to get the right output </span>
 
                     <br>
                     <br>

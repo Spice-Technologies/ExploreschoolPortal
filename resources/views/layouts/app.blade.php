@@ -13,7 +13,7 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <!-- Favicon -->
-    <link href="{{ asset('/assets/img/brand/favicon.png') }}" rel="icon" type="image/png">
+    <link href="{{ asset('/assets/img/brand/mainfavicon.png') }}" rel="icon" type="image/png">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">

@@ -18,7 +18,7 @@
                 <div class="alert alert-success">{{ session('success') }}</div>
             @endif
 
-            <a href="{{ route('Sresult.index') }}"> check sample pdf for single result </a>
+            {{-- <a href="{{ route('Sresult.index') }}"> check sample pdf for single result </a> --}}
             <form action="{{ route('result.singleResult') }}" method="GET">
                 
                 <h4> Select Session </h4>
