@@ -187,6 +187,7 @@ class StudentController extends Controller
             'name' => $request->name
         ]);
 
+        //check this later
         $student->update([
             'class_id'          => $request->class_id,
             'gender'            => $request->gender,
