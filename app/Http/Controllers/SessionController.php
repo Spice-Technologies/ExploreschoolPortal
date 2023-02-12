@@ -39,13 +39,13 @@ class SessionController extends Controller
         $request->validate([
             'session' => 'required|unique:sessions,session'
         ]);
-    
+
         $session = new Session();
         $session->session = $request->session;
+        $session->active = 1;
         $session->save();
 
         return redirect()->route('session.index');
-
     }
 
     /**
