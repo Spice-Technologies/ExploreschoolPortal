@@ -22,7 +22,7 @@ class IndividualPromotionController extends Controller
 
         if (count($students) < 1) {
 
-            $warning = "Hi 👋, no student here ! All students have  been promoted successfully 😇";
+            $warning = "Hi 👋, no student here! Seems you just started a new session or all students has been promoted successfullly 😇";
             return view('backend.promotion.individual.index', compact('students', 'defaultKlasses', 'warning'));
         }
         // return every student in the school that the admin belongs to  
@@ -31,8 +31,6 @@ class IndividualPromotionController extends Controller
 
     public function promote(Request $req)
     {
-
-
         $req->validate([
             'next_class_id' => 'required',
         ]);

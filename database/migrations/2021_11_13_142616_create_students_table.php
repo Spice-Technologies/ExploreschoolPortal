@@ -33,6 +33,8 @@ class CreateStudentsTable extends Migration
             $table->string('studentPwd4AdminView');
             $table->unsignedBigInteger('session_id');
             $table->unsignedBigInteger('current_session');
+            $table->string('demote_status')->default(0);
+
             $table->timestamps();
         });
     }

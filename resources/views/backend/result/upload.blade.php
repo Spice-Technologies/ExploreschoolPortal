@@ -35,7 +35,7 @@
                                     class="text-danger">*</span> Select Term</label>
                             <select name="term_id"  class="form-control" id="exampleFormControlSelect1">
                                 @foreach ($terms as $term)
-                                    <option value=" {{$term->id}}"> {{ $term->Term }} </option>
+                                    <option value=" {{$term->id}}"> {{ $term->term }} </option>
                                 @endforeach
 
                             </select>
