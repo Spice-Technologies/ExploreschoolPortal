@@ -30,6 +30,7 @@ class adminSingleResultController extends Controller
      */
     public function create()
     {
+    
         $terms = Term::all();
         $klasses = Klass::get(['id', 'class_name']);
 
@@ -38,6 +39,9 @@ class adminSingleResultController extends Controller
         $students =  $admin->adminStudents()->student;
         //get the current logged in admin that use that to get all other details you may be needing
         // dump($students);
+
+
+
         return view('backend.result.singleAdminResult', compact('terms', 'sessions', 'klasses', 'students'));
     }
 
@@ -68,9 +72,12 @@ class adminSingleResultController extends Controller
         // handle alot of data
 
         $fetchStudent = Result::where('class_id', $r->class)->where('term_id', $r->term)->where('session_id', $r->session)->where('student_id', $r->student)->first();
+      
 
         //lets get the report card name details using the student model
-
+        if (is_null($fetchStudent)) {
+            return redirect()->route('result.singleResult')->with('msg', 'Students promoted successfully');
+        }
 
 
         $student_info = Student::with('class.teacher', 'user')->find($fetchStudent->student_id);
