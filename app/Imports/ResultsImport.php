@@ -35,6 +35,13 @@ class ResultsImport implements ToCollection
 
 
         foreach ($t as $key => $row) {
+          
+            if (!array_filter($row)) {
+                return null;
+            }
+
+            $School_id = Student::where('reg_num', $row[2])->first()->id;
+
             Result::updateOrCreate(
                 ['RegNum' => $row[2]],
                 [
@@ -48,6 +55,7 @@ class ResultsImport implements ToCollection
                     'session_id' =>  $this->session,
                     'term_id' => $this->term,
                     'subject' => $row[9],
+                    'student_id' =>  $School_id,
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]

@@ -32,7 +32,9 @@ class ResultController extends Controller
         $session = $request->session_id;
         $term =  $request->term_id;
         $school = Admin::AdminSchool()->id;
+        
         $file = $request->file('file');
+       
         Excel::import(new ResultsImport($class, $term, $session, $school), $file);
         if (1) {
             return back()->with('msg', 'Import Upload was successful');
