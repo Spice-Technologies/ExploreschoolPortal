@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 //everyone should have access to this but stuff will only be accessible if they are logged in
 
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 //Route::domain('admin.'.env('SITE_URL'))->group(function () {
 Route::group(['middleware' => ['auth', 'role:SuperAdmin']], function () {
     // dashboard/ or home
