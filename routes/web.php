@@ -17,9 +17,9 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-// Route::get('/register', function () {
-//     return redirect('/');
-// });
+Route::get('/register', function () {
+    return redirect('/');
+});
 //everyone should have access to this but stuff will only be accessible if they are logged in
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
