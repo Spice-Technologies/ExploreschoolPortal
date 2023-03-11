@@ -17,9 +17,9 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/register', function () {
-    return redirect('/');
-});
+// Route::get('/register', function () {
+//     return redirect('/');
+// });
 //everyone should have access to this but stuff will only be accessible if they are logged in
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -85,17 +85,17 @@ Route::group(['middleware' => ['auth', 'role:Admin']], function () {
     //master result sheet printing
     Route::resource('/admin/master/Mresult', 'App\Http\Controllers\AdminResultController');
 
-    // admin prinitng of single sheet result 
+    // admin prinitng of single sheet result
     Route::resource('/admin/master/Sresult', 'App\Http\Controllers\adminSingleResultController');
     Route::get('/admin/result/Sresult', [App\Http\Controllers\adminSingleResultController::class, 'showResult'])->name('result.singleResult');
 
-    // yearly termly result 
+    // yearly termly result
 
     Route::get('/admin/result/yearly', [App\Http\Controllers\YearlyResultController::class, 'index'])->name('result.yearly');
 
     Route::post('/admin/result/yearly/print', [App\Http\Controllers\YearlyResultController::class, 'print'])->name('result.yearly.print');
 
-    // end print result 
+    // end print result
 
     //manage students
     Route::resource('/student', 'App\Http\Controllers\StudentController');
@@ -109,7 +109,7 @@ Route::group(['middleware' => ['auth', 'role:Admin']], function () {
     // manage class
     Route::resource('/class', 'App\Http\Controllers\KlassController');
 
-    // settings 
+    // settings
     Route::get('/settings', [App\Http\Controllers\SettingsController::class, 'index'])->name('settings');
 
     Route::post('/settings/store', [App\Http\Controllers\SettingsController::class, 'store'])->name('settings.store');
